@@ -1,0 +1,115 @@
+﻿@using System.Web.UI.WebControls
+@using IQMStarterKit.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fullscreen Video</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/video/login.css" rel="stylesheet" />
+    
+  
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <script>
+        var vid = document.getElementById("iqmvideo");
+        
+        function setPlaySpeed() {
+            vid.playbackRate = 0.1;
+        }
+
+        function DrawGrayscale(object) {
+            var width = object.width;
+            var height = object.height;
+            var canvas = document.getElementById("iqmvideo");
+            //canvas.setAttribute('width', width);
+            //canvas.setAttribute('height', height);
+            if (canvas.getContext) {
+                var context = canvas.getContext('2d');
+                context.drawImage(object, 0, 0, width, height);
+                imgDataNormal = context.getImageData(0, 0, width, height);
+                var imgData = context.createImageData(width, height);
+
+                for (i = 0; i < imgData.width * imgData.height * 4; i += 4) {
+                    var gray = 0.2126 * imgDataNormal.data[i + 0] + 0.7152 * imgDataNormal.data[i + 1] + 0.0722 * imgDataNormal.data[i + 2];
+                    //var gray = (imgDataNormal.data[i + 0] + imgDataNormal.data[i + 1] + imgDataNormal.data[i + 2]) / 3;
+                    imgData.data[i + 0] = imgData.data[i + 1] = imgData.data[i + 2] = gray;
+                    imgData.data[i + 3] = imgDataNormal.data[i + 3];
+                }
+                context.putImageData(imgData, 0, 0);
+            }
+        }
+
+    </script>
+
+</head>
+<body onload="setPlaySpeed();">
+
+<div class="fullscreen-bg">
+    <video id="iqmvideo" loop muted autoplay poster="img/videoframe.jpg" class="fullscreen-bg__video" >
+        <source src="~/Content/video/6181958.mp4" type="video/mp4">
+    </video>
+</div>
+   
+    
+<div class="content" style="width: 35%; opacity: .8; border-radius: 25px; background: url('../Content/img/bg_transp.png') repeat scroll 0 0 rgba(0, 0, 0, 0);">
+    <div style="padding: 10px; ">
+        <img src="~/Content/img/aspire_logo_small2.png" style="border-radius: 10px;" />
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+
+                @*<h4>IQM Login</h4>*@
+                <hr/>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control", @PlaceHolder = "admin@aspire2.ac.nz" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new {@class = "form-control", @PlaceHolder = "Test@123" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default"/>
+                    </div>
+                </div>
+                @*<p>
+                    @Html.ActionLink("Register as a new user", "Register")
+                </p>*@
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>*@
+            }
+        </section>
+    </div>
+   
+</div>
+
+</body>
+</html>

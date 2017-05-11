@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<IQMStarterKit.Models.UserExtended>
+
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+@{
+    ViewBag.Title = "UserRole Management";
+}
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Edit Roles", "ManageRole", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to Home", "../", "Home", null, new { @class = "btn btn-default" })
+</p>
+<br/>
+@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+{
+    <div class="form-group">
+        Search:&nbsp; @Html.TextBox("searchKeyword", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </div>
+}
+<br/>
+<table class="table">
+    <tr>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Locked Out</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.Email)</td>
+            <td>@Html.DisplayFor(m => item.LockoutEndDateUtc)&nbsp;</td>
+       
+            <td>
+                @Html.ActionLink("Edit", "EditUser", new { UserName = item.Username }) |
+                @if ((item.Username.ToLower() != this.User.Identity.Name.ToLower()))
+                {
+                    @Html.ActionLink("Delete", "DeleteUser", new { UserName = item.Username },
+                    new { onclick = "return confirm('Are you sure you want to remove this user?');" })
+
+                }
+            </td>
+
+        </tr>
+    }
+</table>
