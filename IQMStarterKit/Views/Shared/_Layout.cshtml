@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,7 +26,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,7 +39,8 @@
     <br/>
     @RenderBody()
     <hr/>
-    <footer>
+
+    <footer style="text-align: center">
         <div class="footer-bottom">
             <a title="Terms and conditions" href="https://www.aspire2international.ac.nz/terms-conditions/">Terms and conditions</a> /
             <a title="Privacy policy" href="https://www.aspire2international.ac.nz/privacy-policy/">Privacy policy</a>

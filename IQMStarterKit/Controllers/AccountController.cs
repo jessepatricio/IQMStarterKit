@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data.Entity;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +6,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IQMStarterKit.Models;
+using System.Configuration;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IQMStarterKit.Controllers
 {
@@ -58,6 +56,9 @@ namespace IQMStarterKit.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            //enable to create initial admin user
+            //CreateInitialAdminAccount();
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -482,6 +483,59 @@ namespace IQMStarterKit.Controllers
                     properties.Dictionary[XsrfKey] = UserId;
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+            }
+        }
+        #endregion
+
+
+
+        //Utility
+       
+        // Add RoleManager
+        #region public ApplicationRoleManager RoleManager
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? 
+                    HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationRoleManager>();
+
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+        #endregion
+
+        // Add CreateAdminIfNeeded
+        #region CreateInitialAdminAccount()
+        private void CreateInitialAdminAccount()
+        {
+            // Get Admin Account
+            string adminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+            string adminPassword = ConfigurationManager.AppSettings["AdminPassword"];
+
+            // See if Admin exists
+            var objAdminUser = UserManager.FindByEmail(adminUserName);
+
+            if (objAdminUser == null)
+            {
+                //See if the Admin role exists
+                if (!RoleManager.RoleExists("Administrator"))
+                {
+                    // Create the Admin Role (if needed)
+                    IdentityRole objAdminRole = new IdentityRole("Administrator");
+                    RoleManager.Create(objAdminRole);
+                }
+
+                // Create Admin user
+                var objNewAdminUser = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
+                UserManager.Create(objNewAdminUser, adminPassword);
+                // Put user in Admin role
+                UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
             }
         }
         #endregion

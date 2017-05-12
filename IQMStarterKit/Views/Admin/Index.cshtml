@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<IQMStarterKit.Models.UserExtended>
+﻿@model PagedList.IPagedList<IQMStarterKit.Models.ExtendedUserCustom>
 
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
@@ -34,10 +34,10 @@
             <td>@Html.DisplayFor(m => item.LockoutEndDateUtc)&nbsp;</td>
        
             <td>
-                @Html.ActionLink("Edit", "EditUser", new { UserName = item.Username }) |
-                @if ((item.Username.ToLower() != this.User.Identity.Name.ToLower()))
+                @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }) |
+                @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
                 {
-                    @Html.ActionLink("Delete", "DeleteUser", new { UserName = item.Username },
+                    @Html.ActionLink("Delete", "DeleteUser", new { UserName = item.UserName },
                     new { onclick = "return confirm('Are you sure you want to remove this user?');" })
 
                 }

@@ -1,0 +1,52 @@
+﻿@model IQMStarterKit.Models.UserAndRolesCustom
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br />
+    @Html.ValidationSummary(true,
+        "",
+        new { @class = "text-danger" })
+    <div style="position: relative">
+        @Html.ActionLink("Back",
+            "EditUser",
+            new { UserName = Model.UserName },
+            new { @class = "btn btn-default" })
+        <input type="submit" value="Add Role" class="btn btn-default" />
+        @Html.DropDownList("AddRole", null, new { @class = "form-control"}) 
+    </div>
+    <br />
+
+    <table class="table">
+        <tr>
+            <th>
+                Existing Roles:
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.colUserRole)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @if (!((Model.UserName.ToLower() ==
+                            this.User.Identity.Name.ToLower()) &&
+                           item.RoleName == "Administrator") &&
+                         item.RoleName != "No Roles Found")
+                    {
+                        @Html.ActionLink("Delete", "DeleteRole",
+                            new { UserName = item.UserName, RoleName = item.RoleName },
+                            new
+                            {
+                                onclick =
+                                    "return confirm('Are you sure you wish to delete this role?');"
+                            })
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

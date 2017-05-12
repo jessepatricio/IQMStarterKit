@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201705100256401_Initial.Designer.cs">
       <DependentUpon>201705100256401_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705121036576_AddFullName.cs" />
+    <Compile Include="Migrations\201705121036576_AddFullName.Designer.cs">
+      <DependentUpon>201705121036576_AddFullName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -286,6 +290,10 @@
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\ManageRole.cshtml" />
+    <Content Include="Views\Admin\AddRole.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\EditRoles.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,6 +316,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705100256401_Initial.resx">
       <DependentUpon>201705100256401_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705121036576_AddFullName.resx">
+      <DependentUpon>201705121036576_AddFullName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
