@@ -20,29 +20,93 @@
     </div>
 }
 <br/>
-<table class="table">
+<table id="user" class="table">
     <tr>
+        <th>Student Name</th>
         <th>Email</th>
-        <th>Role</th>
-        <th>Locked Out</th>
         <th></th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
+            <td>@Html.DisplayFor(m => item.FullName)</td>
             <td>@Html.DisplayFor(m => item.Email)</td>
-            <td>@Html.DisplayFor(m => item.LockoutEndDateUtc)&nbsp;</td>
-       
             <td>
-                @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }) |
-                @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
+                @Html.ActionLink("Edit", "EditUser", new {Email = item.Email}) |
+                @if ((item.Email.ToLower() != this.User.Identity.Name.ToLower()))
                 {
-                    @Html.ActionLink("Delete", "DeleteUser", new { UserName = item.UserName },
-                    new { onclick = "return confirm('Are you sure you want to remove this user?');" })
+                    @*@Html.ActionLink("Delete", "DeleteUser", new { email = item.Email},
+                        new {onclick = "return confirm('Are you sure you want to remove this user?');"})*@
 
+                    <a href="#" data-href="@Request.Url.AbsoluteUri/DeleteUser?email=@item.Email" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                 
+                 
                 }
             </td>
 
         </tr>
     }
+    
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model,
+    page => Url.Action("Index",
+        new { page,
+            searchStringUserNameOrEmail = ViewBag.searchStringUserNameOrEmail,
+            currentFilter = ViewBag.CurrentFilter }))
+<hr />
+
+@section scripts{
+    <script>
+        //$(document).ready(function() {
+        //    $("#user .js-delete").on("click",
+        //        function() {
+        //            var button = $(this);
+        //            bootbox.confirm("This is the default confirm!", function (result) {
+        //                alert('test');
+        //                $.ajax({
+        //                        url: "Admin/DeleteUser/" + button.attr("data-user-id"),
+        //                        method: "DELETE",
+        //                        success: function() {
+        //                            button.parents("tr").remove();
+        //                        }
+        //                    });
+                         
+        //            });
+                 
+        //        });
+        //});
+
+      
+            $('#confirm-delete').on('show.bs.modal', function(e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+                $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+            });
+   
+    </script>
+}

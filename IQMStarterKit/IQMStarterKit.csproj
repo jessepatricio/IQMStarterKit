@@ -196,6 +196,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Core\TempActivitiesController.cs" />
+    <Compile Include="Controllers\Core\TempModulesController.cs" />
+    <Compile Include="Controllers\Core\TempWorkbooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
@@ -210,10 +213,65 @@
     <Compile Include="Migrations\201705121036576_AddFullName.Designer.cs">
       <DependentUpon>201705121036576_AddFullName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705140021128_NewFilterForFullName.cs" />
+    <Compile Include="Migrations\201705140021128_NewFilterForFullName.Designer.cs">
+      <DependentUpon>201705140021128_NewFilterForFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190029418_CreateWorkbook.cs" />
+    <Compile Include="Migrations\201705190029418_CreateWorkbook.Designer.cs">
+      <DependentUpon>201705190029418_CreateWorkbook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190140104_CreateTempModule.cs" />
+    <Compile Include="Migrations\201705190140104_CreateTempModule.Designer.cs">
+      <DependentUpon>201705190140104_CreateTempModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190149088_AddFKToTempModule.cs" />
+    <Compile Include="Migrations\201705190149088_AddFKToTempModule.Designer.cs">
+      <DependentUpon>201705190149088_AddFKToTempModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190201148_AddConstructor.cs" />
+    <Compile Include="Migrations\201705190201148_AddConstructor.Designer.cs">
+      <DependentUpon>201705190201148_AddConstructor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190216306_ChangeCreatedAndModifiedByToString.cs" />
+    <Compile Include="Migrations\201705190216306_ChangeCreatedAndModifiedByToString.Designer.cs">
+      <DependentUpon>201705190216306_ChangeCreatedAndModifiedByToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190326469_updatedb.cs" />
+    <Compile Include="Migrations\201705190326469_updatedb.Designer.cs">
+      <DependentUpon>201705190326469_updatedb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190330459_seedworkbook.cs" />
+    <Compile Include="Migrations\201705190330459_seedworkbook.Designer.cs">
+      <DependentUpon>201705190330459_seedworkbook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190346570_newupdate_ver1.cs" />
+    <Compile Include="Migrations\201705190346570_newupdate_ver1.Designer.cs">
+      <DependentUpon>201705190346570_newupdate_ver1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190351167_create_activities_table.cs" />
+    <Compile Include="Migrations\201705190351167_create_activities_table.Designer.cs">
+      <DependentUpon>201705190351167_create_activities_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705190435039_update_temp_tables.cs" />
+    <Compile Include="Migrations\201705190435039_update_temp_tables.Designer.cs">
+      <DependentUpon>201705190435039_update_temp_tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705200610449_updateOrderByField.cs" />
+    <Compile Include="Migrations\201705200610449_updateOrderByField.Designer.cs">
+      <DependentUpon>201705200610449_updateOrderByField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705200648446_addPageNameToActivities.cs" />
+    <Compile Include="Migrations\201705200648446_addPageNameToActivities.Designer.cs">
+      <DependentUpon>201705200648446_addPageNameToActivities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Core\TempActivity.cs" />
+    <Compile Include="Models\Core\TempModule.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Core\TempWorkbook.cs" />
     <Compile Include="Models\UserRoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -225,6 +283,7 @@
     <Content Include="Content\img\aspire_logo_small.png" />
     <Content Include="Content\img\aspire_logo_small2.png" />
     <Content Include="Content\img\bg_transp.png" />
+    <Content Include="Content\img\iqm_start.jpg" />
     <Content Include="Content\img\logo.svg" />
     <Content Include="Content\img\ntec_logo.png" />
     <Content Include="Content\img\queens_logo.png" />
@@ -235,6 +294,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -251,7 +312,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -294,6 +357,24 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\EditRoles.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Home\_AdminLandingPage.cshtml" />
+    <Content Include="Views\Home\_NewRegUserLandingPage.cshtml" />
+    <Content Include="Views\TempWorkbooks\Create.cshtml" />
+    <Content Include="Views\TempWorkbooks\Delete.cshtml" />
+    <Content Include="Views\TempWorkbooks\Details.cshtml" />
+    <Content Include="Views\TempWorkbooks\Edit.cshtml" />
+    <Content Include="Views\TempWorkbooks\Index.cshtml" />
+    <Content Include="Views\TempModules\Create.cshtml" />
+    <Content Include="Views\TempModules\Delete.cshtml" />
+    <Content Include="Views\TempModules\Details.cshtml" />
+    <Content Include="Views\TempModules\Edit.cshtml" />
+    <Content Include="Views\TempModules\Index.cshtml" />
+    <Content Include="Views\TempActivities\Create.cshtml" />
+    <Content Include="Views\TempActivities\Delete.cshtml" />
+    <Content Include="Views\TempActivities\Details.cshtml" />
+    <Content Include="Views\TempActivities\Edit.cshtml" />
+    <Content Include="Views\TempActivities\Index.cshtml" />
+    <Content Include="Views\Home\_StudentLandingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +400,45 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705121036576_AddFullName.resx">
       <DependentUpon>201705121036576_AddFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705140021128_NewFilterForFullName.resx">
+      <DependentUpon>201705140021128_NewFilterForFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190029418_CreateWorkbook.resx">
+      <DependentUpon>201705190029418_CreateWorkbook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190140104_CreateTempModule.resx">
+      <DependentUpon>201705190140104_CreateTempModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190149088_AddFKToTempModule.resx">
+      <DependentUpon>201705190149088_AddFKToTempModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190201148_AddConstructor.resx">
+      <DependentUpon>201705190201148_AddConstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190216306_ChangeCreatedAndModifiedByToString.resx">
+      <DependentUpon>201705190216306_ChangeCreatedAndModifiedByToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190326469_updatedb.resx">
+      <DependentUpon>201705190326469_updatedb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190330459_seedworkbook.resx">
+      <DependentUpon>201705190330459_seedworkbook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190346570_newupdate_ver1.resx">
+      <DependentUpon>201705190346570_newupdate_ver1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190351167_create_activities_table.resx">
+      <DependentUpon>201705190351167_create_activities_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705190435039_update_temp_tables.resx">
+      <DependentUpon>201705190435039_update_temp_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705200610449_updateOrderByField.resx">
+      <DependentUpon>201705200610449_updateOrderByField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705200648446_addPageNameToActivities.resx">
+      <DependentUpon>201705200648446_addPageNameToActivities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

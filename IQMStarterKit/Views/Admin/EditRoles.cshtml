@@ -10,7 +10,7 @@
     <div style="position: relative">
         @Html.ActionLink("Back",
             "EditUser",
-            new { UserName = Model.UserName },
+            new { Email = Model.Email },
             new { @class = "btn btn-default" })
         <input type="submit" value="Add Role" class="btn btn-default" />
         @Html.DropDownList("AddRole", null, new { @class = "form-control"}) 
@@ -32,13 +32,13 @@
                     @Html.DisplayFor(modelItem => item.RoleName)
                 </td>
                 <td>
-                    @if (!((Model.UserName.ToLower() ==
+                    @if (!((Model.Email.ToLower() ==
                             this.User.Identity.Name.ToLower()) &&
                            item.RoleName == "Administrator") &&
                          item.RoleName != "No Roles Found")
                     {
                         @Html.ActionLink("Delete", "DeleteRole",
-                            new { UserName = item.UserName, RoleName = item.RoleName },
+                            new { Email = item.Email, RoleName = item.RoleName },
                             new
                             {
                                 onclick =
