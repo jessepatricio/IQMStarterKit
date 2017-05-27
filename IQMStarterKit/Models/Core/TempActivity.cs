@@ -8,7 +8,8 @@ using System.Web;
 
 namespace IQMStarterKit.Models.Core
 {
-    public class TempActivity
+    
+    public class TempActivity 
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte TempActivityId { get; set; }
@@ -19,6 +20,7 @@ namespace IQMStarterKit.Models.Core
         
 
         [StringLength(1000)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [StringLength(255)]
@@ -26,9 +28,13 @@ namespace IQMStarterKit.Models.Core
 
         [Required]
         public int SortOrder { get; set; }
-
-
+        
+        [Display(Name = "Module Name")]
         public byte TempModuleId { get; set; }
+
+        public int ProgressValue { get; set; }
+
+        public string Context { get; set; }
 
         //system fields
         [Required]

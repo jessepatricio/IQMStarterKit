@@ -10,19 +10,16 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace IQMStarterKit.Controllers.Core
 {
-    [Authorize]
-    public class TempWorkbooksController : Controller
+    [Authorize(Roles = "Administrator")]
+    public class TempWorkbooksController : CommonController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        private ApplicationUserManager _userManager;
-        private ApplicationRoleManager _roleManager;
-
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+       
 
         // GET: TempWorkbooks
         public ActionResult Index()
         {
-            return View(db.TempWorkbooks.Where(m=>m.IsRemoved==false).ToList());
+            return View(_context.TempWorkbooks.Where(m=>m.IsRemoved==false).ToList());
         }
 
         // GET: TempWorkbooks/Details/5
@@ -32,7 +29,7 @@ namespace IQMStarterKit.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempWorkbook tempWorkbook = db.TempWorkbooks.Find(id);
+            TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
 
 
             if (tempWorkbook == null)
@@ -72,8 +69,8 @@ namespace IQMStarterKit.Controllers.Core
 
                 tempWorkbook.IsRemoved = false;
 
-                db.TempWorkbooks.Add(tempWorkbook);
-                db.SaveChanges();
+                _context.TempWorkbooks.Add(tempWorkbook);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -87,7 +84,7 @@ namespace IQMStarterKit.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempWorkbook tempWorkbook = db.TempWorkbooks.Find(id);
+            TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
             if (tempWorkbook == null)
             {
                 return HttpNotFound();
@@ -100,33 +97,35 @@ namespace IQMStarterKit.Controllers.Core
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TempWorkbookId,Title,Description,Version,CreatedBy,CreatedDateTime,ModifiedBy,ModifiedDateTime,IsDeleted")] TempWorkbook tempWorkbook)
+        //public ActionResult Edit([Bind(Include = "TempWorkbookId,Title,Description,Version,CreatedBy,CreatedDateTime,ModifiedBy,ModifiedDateTime,IsDeleted")] TempWorkbook tempWorkbook)
+        public ActionResult Edit(int id)
         {
            
             //get the original records from db
             var tmpWrkBook = new TempWorkbook();
-            tmpWrkBook = db.TempWorkbooks.Find(tempWorkbook.TempWorkbookId);
+            tmpWrkBook = _context.TempWorkbooks.Find(id);
 
-            //update the record
+            //update the class record
+            UpdateModel<ITempWorkbook>(tmpWrkBook) ;
+
+            
             if (tmpWrkBook != null)
             {
-                tmpWrkBook.Title = tempWorkbook.Title;
-                tmpWrkBook.Version = tempWorkbook.Version;
-                tmpWrkBook.Description = tempWorkbook.Description;
-           
+                //update record stamp
                 tmpWrkBook.ModifiedDateTime = DateTime.Now;
                 tmpWrkBook.ModifiedBy = GetSessionUserId();
 
 
                 if (ModelState.IsValid)
                 {
-                    db.Entry(tmpWrkBook).State = EntityState.Modified;
-                    db.SaveChanges();
+                    //save changes
+                    _context.Entry(tmpWrkBook).State = EntityState.Modified;
+                    _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
 
-            return View(tempWorkbook);
+            return View(tmpWrkBook);
         }
 
         // GET: TempWorkbooks/Delete/5
@@ -136,7 +135,7 @@ namespace IQMStarterKit.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempWorkbook tempWorkbook = db.TempWorkbooks.Find(id);
+            TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
             if (tempWorkbook == null)
             {
                 return HttpNotFound();
@@ -153,10 +152,11 @@ namespace IQMStarterKit.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(byte id)
         {
-            TempWorkbook tempWorkbook = db.TempWorkbooks.Find(id);
+            TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
             if (tempWorkbook != null) tempWorkbook.IsRemoved = true; //soft delete
+            _context.Entry(tempWorkbook).State = EntityState.Modified;
             //db.TempWorkbooks.Remove(tempWorkbook);
-            db.SaveChanges();
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -164,36 +164,10 @@ namespace IQMStarterKit.Controllers.Core
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }
-
-
-        //Utility
-
-        #region ApplicationUserManager
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ??
-                       HttpContext.GetOwinContext()
-                           .GetUserManager<ApplicationUserManager>();
-            }
-
-            private set { _userManager = value; }
-        }
-        #endregion
-
-        public string GetSessionUserId()
-        {
-            return UserManager.FindByEmail(User.Identity.Name).Id.ToString();
-        }
-
-        public string GetFullName(string userId)
-        {
-            return UserManager.FindById(userId).FullName.ToString();
-        }
+        
     }
 }

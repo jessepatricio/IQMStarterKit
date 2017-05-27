@@ -17,12 +17,11 @@ using PagedList;
 
 namespace IQMStarterKit.Controllers
 {
-    [Authorize(Roles = "Administrator")]
-    public class AdminController : Controller
+    [Authorize]
+    public class AdminController : CommonController
     {
-        private ApplicationUserManager _userManager;
-        private ApplicationRoleManager _roleManager;
-
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        
         // GET: Admin
         
         #region MainList Index
@@ -73,11 +72,15 @@ namespace IQMStarterKit.Controllers
                     {
                      
                         Email = item.Email,
-                        FullName =  item.FullName
+                        FullName =  item.FullName,
+                        GroupId = item.GroupId
                         
                     };
                     colUsers.Add(user);
                 }
+
+                ViewBag.Groups = _context.GroupModels.Where(m => m.IsRemoved == false)
+                    .OrderByDescending(m => m.CreatedDateTime).ToList();
                 
               
                 //set the number of pages
@@ -109,6 +112,7 @@ namespace IQMStarterKit.Controllers
         {
             var objUserExtended = new ExtendedUserCustom();
             ViewBag.Roles = GetAllRolesAsSelectList();
+          
             return View(objUserExtended);
         }
         #endregion
@@ -161,8 +165,15 @@ namespace IQMStarterKit.Controllers
             if (email == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
           
             var objExtUserCustom = GetUser(email);
+            var userroles = GetUserAndRoles(email);
+            
+            var role = userroles.colUserRole.FirstOrDefault(m => m.RoleName == "Student");
+            ViewBag.IsStudent = (role != null) ? true : false;
 
-            if (objExtUserCustom == null) return HttpNotFound();
+            objExtUserCustom.Groups = _context.GroupModels.Where(m => m.IsRemoved == false)
+                .OrderByDescending(m => m.CreatedBy).ToList();
+
+           
 
             return View(objExtUserCustom);
         }
@@ -479,34 +490,43 @@ namespace IQMStarterKit.Controllers
         #endregion
         
 
+        // Tutor's administration
+        public ActionResult ListStudents()
+        {
+            var colUsers = new List<ExtendedUserCustom>();
+            var random = new Random();
+
+            var users = UserManager.Users.ToList();
+
+            foreach (var item in users)
+            {
+                int randomNumber = random.Next(0, 100);
+
+                var user = new ExtendedUserCustom
+                {
+
+                    Email = item.Email,
+                    FullName = item.FullName,
+                    GroupId = item.GroupId,
+                    ProgressValue = randomNumber
+
+                };
+                colUsers.Add(user);
+            }
+
+
+            ViewBag.Groups = _context.GroupModels.Where(m => m.IsRemoved == false)
+                .OrderByDescending(m => m.CreatedDateTime).ToList();
+
+            return View(colUsers);
+
+        }
+
 
 
         //Utility
-
-        #region ApplicationUserManager
-        public ApplicationUserManager UserManager
-        {
-            get { return _userManager ??
-                    HttpContext.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>(); }
-
-            private set { _userManager = value; }
-        }
-        #endregion
-
-        #region ApplicationRoleManager
-        public ApplicationRoleManager RoleManager
-        {
-            get
-            {
-                return _roleManager ??
-                       HttpContext.GetOwinContext()
-                           .GetUserManager<ApplicationRoleManager>();
-            }
-
-            private set { _roleManager = value; }
-        }
-        #endregion
+    
+       
 
         #region GetAllRolesAsSelectList
         private List<SelectListItem> GetAllRolesAsSelectList()
@@ -534,7 +554,7 @@ namespace IQMStarterKit.Controllers
             return SelectRoleListItems;
         }
         #endregion
-
+        
         #region GetUser
         private ExtendedUserCustom GetUser(string email)
         {
@@ -562,7 +582,7 @@ namespace IQMStarterKit.Controllers
 
             result.Email = extUser.Email;
             result.FullName = extUser.FullName;
-
+            result.GroupId = extUser.GroupId;
             //is account locked? unlock it
             if (UserManager.IsLockedOut(result.Id)) UserManager.ResetAccessFailedCount(result.Id);
 
@@ -622,11 +642,11 @@ namespace IQMStarterKit.Controllers
 
             if (!colUserRoleDTO.Any())
             {
-                colUserRoleDTO.Add(new UserRoleCustom{ RoleName = "No Roles Found" });
+                colUserRoleDTO.Add(new UserRoleCustom { RoleName = "No Roles Found" });
             }
 
             ViewBag.AddRole = new SelectList(RolesUserIsNotIn(email));
-            
+
             // Create UserRolesAndPermissionsDTO
             UserAndRolesCustom objUserAndRolesDTO =
                 new UserAndRolesCustom
@@ -639,28 +659,7 @@ namespace IQMStarterKit.Controllers
         }
         #endregion
 
-        #region RolesUserIsNotIn
-        private List<string> RolesUserIsNotIn(string email)
-        {
-            // Get roles the user is not in
-            var colAllRoles = RoleManager.Roles.Select(x => x.Name).ToList();
-            // Go get the roles for an individual
-            ApplicationUser user = UserManager.FindByEmail(email);
-            // If we could not find the user, throw an exception
-            if (user == null)
-            {
-                throw new Exception("Could not find the User");
-            }
-            var colRolesForUser = UserManager.GetRoles(user.Id).ToList();
-            var colRolesUserInNotIn = (from objRole in colAllRoles
-                where !colRolesForUser.Contains(objRole)
-                select objRole).ToList();
-            if (colRolesUserInNotIn.Count() == 0)
-            {
-                colRolesUserInNotIn.Add("No Roles Found");
-            }
-            return colRolesUserInNotIn;
-        }
-        #endregion
+
+
     }
 }

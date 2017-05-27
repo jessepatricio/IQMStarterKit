@@ -7,9 +7,21 @@ using System.Linq;
 using System.Web;
 using IQMStarterKit.Models.Core;
 
-namespace IQMStarterKit.Models
+namespace IQMStarterKit.Models    
 {
-    public class TempWorkbook
+    public interface ITempWorkbook
+    {
+         byte TempWorkbookId { get; set; }
+
+         string Title { get; set; }
+       
+         string Description { get; set; }
+        
+         string Version { get; set; }
+
+    }
+
+    public class TempWorkbook : ITempWorkbook
     {
         
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,6 +32,7 @@ namespace IQMStarterKit.Models
         public string Title { get; set; }
 
         [StringLength(1000)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [StringLength(100)]

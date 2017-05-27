@@ -1,23 +1,32 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web.Management;
 using System.Web.Mvc;
 using IQMStarterKit.Models;
 using IQMStarterKit.Models.Core;
 
 namespace IQMStarterKit.Controllers.Core
 {
-    public class TempModulesController : Controller
+    [Authorize(Roles = "Administrator")]
+    public class TempModulesController : CommonController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        private ApplicationUserManager _userManager;
-        private ApplicationRoleManager _roleManager;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        
 
         // GET: TempModules
         public ActionResult Index()
         {
-            return View(db.TempModules.Where(m=>m.IsRemoved==false).ToList());
+            var tempModule = _context.TempModules.Where(m => m.IsRemoved == false).ToList();
+            foreach (var item in tempModule)
+            {
+                //get all module activities
+                item.TempActivities = _context.TempActivities.Where(m => m.TempModuleId == item.TempModuleId).ToList();
+            }
+            
+            return View(tempModule);
         }
 
         // GET: TempModules/Details/5
@@ -27,18 +36,26 @@ namespace IQMStarterKit.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempModule tempModule = db.TempModules.Find(id);
+            TempModule tempModule = _context.TempModules.Find(id);
             if (tempModule == null)
             {
                 return HttpNotFound();
             }
+
+            //get user fullname
+            tempModule.CreatedBy = GetFullName(tempModule.CreatedBy);
+            tempModule.ModifiedBy = GetFullName(tempModule.ModifiedBy);
+
             return View(tempModule);
         }
 
         // GET: TempModules/Create
         public ActionResult Create()
         {
-            return View();
+            TempModuleViewModels tempModule = new TempModuleViewModels();
+            tempModule.TempWorkbooks = _context.TempWorkbooks.Where(m=>m.IsRemoved==false).ToList();
+            
+            return View(tempModule);
         }
 
         // POST: TempModules/Create
@@ -46,12 +63,27 @@ namespace IQMStarterKit.Controllers.Core
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TempModuleId,Title,Description,SortOrder,TempWorkbookId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempModule tempModule)
+        public ActionResult Create([Bind(Include = "TempModuleId,Title,Description,SortOrder,TempWorkbookId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempModuleViewModels tempModule)
         {
+
+            var module = new TempModule();
+
+            module.Title = tempModule.Title;
+            module.Description = tempModule.Description;
+            module.SortOrder = tempModule.SortOrder;
+            module.TempWorkbookId = tempModule.TempWorkbookId;
+            
             if (ModelState.IsValid)
             {
-                db.TempModules.Add(tempModule);
-                db.SaveChanges();
+                //assign system fields
+                module.CreatedDateTime = DateTime.Now;
+                module.CreatedBy = GetSessionUserId();
+
+                module.ModifiedDateTime = DateTime.Now;
+                module.ModifiedBy = GetSessionUserId();
+
+                _context.TempModules.Add(module);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +97,7 @@ namespace IQMStarterKit.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempModule tempModule = db.TempModules.Find(id);
+            TempModule tempModule = _context.TempModules.Find(id);
             if (tempModule == null)
             {
                 return HttpNotFound();
@@ -80,13 +112,28 @@ namespace IQMStarterKit.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TempModuleId,Title,Description,SortOrder,TempWorkbookId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempModule tempModule)
         {
+            var recModule = _context.TempModules.Find(tempModule.TempModuleId);
+            
             if (ModelState.IsValid)
             {
-                db.Entry(tempModule).State = EntityState.Modified;
-                db.SaveChanges();
+                if (recModule != null)
+                {
+                    recModule.Title = tempModule.Title;
+                    recModule.Description = tempModule.Description;
+                    recModule.SortOrder = tempModule.SortOrder;
+                    recModule.TempWorkbookId = tempModule.TempWorkbookId;
+                    recModule.CreatedBy = tempModule.CreatedBy;
+                    recModule.CreatedDateTime = tempModule.CreatedDateTime;
+                    //update date stamp
+                    recModule.ModifiedDateTime = DateTime.Now;
+                    recModule.ModifiedBy = GetSessionUserId();
+
+                    _context.Entry(recModule).State = EntityState.Modified;
+                }
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tempModule);
+            return View(recModule);
         }
 
         // GET: TempModules/Delete/5
@@ -96,7 +143,7 @@ namespace IQMStarterKit.Controllers.Core
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TempModule tempModule = db.TempModules.Find(id);
+            TempModule tempModule = _context.TempModules.Find(id);
             if (tempModule == null)
             {
                 return HttpNotFound();
@@ -109,9 +156,9 @@ namespace IQMStarterKit.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(byte id)
         {
-            TempModule tempModule = db.TempModules.Find(id);
-            db.TempModules.Remove(tempModule);
-            db.SaveChanges();
+            TempModule tempModule = _context.TempModules.Find(id);
+            _context.TempModules.Remove(tempModule);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +166,7 @@ namespace IQMStarterKit.Controllers.Core
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

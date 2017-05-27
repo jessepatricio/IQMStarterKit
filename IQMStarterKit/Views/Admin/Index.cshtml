@@ -1,29 +1,40 @@
 ﻿@model PagedList.IPagedList<IQMStarterKit.Models.ExtendedUserCustom>
 
+@using IQMStarterKit.Models
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
 @{
     ViewBag.Title = "UserRole Management";
 }
 <br />
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Edit Roles", "ManageRole", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Back to Home", "../", "Home", null, new { @class = "btn btn-default" })
-</p>
+<div class="form-inline">
+    @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="form-group">
+            @Html.ActionLink("Edit Roles", "ManageRole", null, new { @class = "btn btn-default" })
+        </div>
+        <div class="form-group">
+            @Html.ActionLink("Back to Home", "/", "Home", null, new { @class = "btn btn-default" })
+        </div>
+        <div class="form-group">
+            @Html.TextBox("searchKeyword", ViewBag.CurrentFilter as string, new {@class = "form-control", @placeholder = "Search"})   
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-default" />           
+        </div>
+
+        
+    }
+</div>
 <br/>
-@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
-{
-    <div class="form-group">
-        Search:&nbsp; @Html.TextBox("searchKeyword", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
-    </div>
-}
-<br/>
-<table id="user" class="table">
+<table id="user" class="table table-hover">
     <tr>
         <th>Student Name</th>
         <th>Email</th>
+        <th>Group Name</th>
         <th></th>
     </tr>
     @foreach (var item in Model)
@@ -31,6 +42,18 @@
         <tr>
             <td>@Html.DisplayFor(m => item.FullName)</td>
             <td>@Html.DisplayFor(m => item.Email)</td>
+            <td>@if (item.GroupId == 0)
+                {
+                    <text>Not assigned</text>
+                }
+                else
+                {
+                    IEnumerable<GroupModel> grouplist = ViewBag.Groups;
+                    var groupname = grouplist.FirstOrDefault(m => m.GroupId == item.GroupId);
+                    
+                    <text>@groupname.GroupName</text>
+}
+            </td>
             <td>
                 @Html.ActionLink("Edit", "EditUser", new {Email = item.Email}) |
                 @if ((item.Email.ToLower() != this.User.Identity.Name.ToLower()))
@@ -39,29 +62,29 @@
                         new {onclick = "return confirm('Are you sure you want to remove this user?');"})*@
 
                     <a href="#" data-href="@Request.Url.AbsoluteUri/DeleteUser?email=@item.Email" data-toggle="modal" data-target="#confirm-delete">Delete</a>
-                 
-                 
+
+
                 }
             </td>
 
         </tr>
     }
-    
+
     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
                 </div>
-            
+
                 <div class="modal-body">
                     <p>You are about to delete one track, this procedure is irreversible.</p>
                     <p>Do you want to proceed?</p>
                     <p class="debug-url"></p>
                 </div>
-                
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-danger btn-ok">Delete</a>
@@ -82,31 +105,12 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @section scripts{
     <script>
-        //$(document).ready(function() {
-        //    $("#user .js-delete").on("click",
-        //        function() {
-        //            var button = $(this);
-        //            bootbox.confirm("This is the default confirm!", function (result) {
-        //                alert('test');
-        //                $.ajax({
-        //                        url: "Admin/DeleteUser/" + button.attr("data-user-id"),
-        //                        method: "DELETE",
-        //                        success: function() {
-        //                            button.parents("tr").remove();
-        //                        }
-        //                    });
-                         
-        //            });
-                 
-        //        });
-        //});
 
-      
             $('#confirm-delete').on('show.bs.modal', function(e) {
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            
+
                 $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
             });
-   
+
     </script>
 }

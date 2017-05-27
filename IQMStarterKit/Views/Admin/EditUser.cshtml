@@ -33,7 +33,19 @@
                     new { @class = "text-danger" })
             </div>
         </div>
+        
+        @if (ViewBag.IsStudent)
+        {
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.GroupId,
+                    htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.GroupId, new SelectList(Model.Groups, "GroupId", "GroupName"), "Select Group", new {@class = "form-control", @id="GroupId"})
+                </div>
+            </div>
+
+        }
         <div class="form-group">
             @Html.LabelFor(model => model.Password,
                 htmlAttributes: new { @class = "control-label col-md-2" })

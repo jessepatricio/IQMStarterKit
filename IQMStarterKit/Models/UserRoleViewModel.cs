@@ -17,10 +17,16 @@ namespace IQMStarterKit.Models
         [Required]
         public string Email  { get; set; }
 
+        public byte GroupId { get; set; }
+
         [Required]
         public string Password { get; set; }
-        
+
+        public int ProgressValue { get; set; }
+
         public IEnumerable<UserRolesCustom> Roles { get; set; }
+
+        public IEnumerable<GroupModel> Groups { get; set; }
     }
 
     public class UserRolesCustom

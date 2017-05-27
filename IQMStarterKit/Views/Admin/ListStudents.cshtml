@@ -1,0 +1,31 @@
+﻿@model IEnumerable<IQMStarterKit.Models.ExtendedUserCustom>
+@using IQMStarterKit.Models
+<br />
+<table id="user" class="table table-hover">
+    <tr>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Group</th>
+        <th>IQM Progress</th>
+        
+    </tr>
+    @{ var random = new Random();} 
+    @foreach (var item in Model)
+    {
+        int randomNumber = random.Next(0, 100);
+        if (item.GroupId > 0)
+        {
+            IEnumerable<GroupModel> grouplist = ViewBag.Groups;
+            var groupname = grouplist.FirstOrDefault(m => m.GroupId == item.GroupId);
+
+            
+            <tr>
+            <td>@Html.DisplayFor(m => item.FullName)</td>
+            <td>@Html.ActionLink(item.Email, "ViewStudentActivities", "Module", new { @email = item.Email },null)</td>
+            <td><text>@groupname.GroupName</text></td>
+            <td><span class="progress-bar" role="progressbar" aria-valuenow="@randomNumber" aria-valuemin="0" aria-valuemax="100" style="width: @randomNumber%">@randomNumber%</span>
+            </td>
+            </tr>
+            }
+        }
+</table>

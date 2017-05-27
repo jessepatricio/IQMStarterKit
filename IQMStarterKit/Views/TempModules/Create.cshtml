@@ -1,4 +1,4 @@
-﻿@model IQMStarterKit.Models.Core.TempModule
+﻿@model IQMStarterKit.Models.TempModuleViewModels
 
 @{
     ViewBag.Title = "Create";
@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TempModule</h4>
+        <h4>Module</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -41,52 +41,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TempWorkbookId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TempWorkbookId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TempWorkbookId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.TempWorkbookId, new SelectList(Model.TempWorkbooks, "TempWorkbookId", "Title"), "Select Workbook", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TempWorkbookId, "", new {@class = "text-danger"})
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDateTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ModifiedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ModifiedDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ModifiedDateTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsRemoved, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsRemoved)
-                    @Html.ValidationMessageFor(model => model.IsRemoved, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+       
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

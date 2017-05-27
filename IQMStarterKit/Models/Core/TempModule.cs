@@ -20,14 +20,16 @@ namespace IQMStarterKit.Models.Core
         public string Title { get; set; }
 
         [StringLength(1000)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required]
         public int SortOrder { get; set; }
         
+        [Display(Name = "Workbook")]
         public byte TempWorkbookId { get; set; }
-
-        public ICollection<TempActivity> TempActivities { get; set; }
+        
+        public IEnumerable<TempActivity> TempActivities { get; set; }
 
 
 

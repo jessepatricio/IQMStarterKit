@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IQMStarterKit.Models.GroupModel>
+@using IQMStarterKit.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Group List";
+}
+
+<h2>Group List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary"})
+</p>
+<div class="table-responsive">          
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+           Tutor
+        </th>
+      
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @{
+                    //UserManager<>
+                }
+                @Html.DisplayFor(modelItem => item.TutorId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.GroupId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.GroupId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.GroupId })
+            </td>
+        </tr>
+    }
+
+</table>
+</div>

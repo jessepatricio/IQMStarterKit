@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<IQMStarterKit.Models.Core.TempActivity>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Activity";
 }
 
-<h2>Index</h2>
+<h2>Activity List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,27 +18,16 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.PageName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SortOrder)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TempModuleId)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsRemoved)
-        </th>
-        <th></th>
+       
+       <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -50,26 +39,15 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.PageName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.SortOrder)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TempModuleId)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsRemoved)
-        </td>
+      
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TempActivityId }) |
             @Html.ActionLink("Details", "Details", new { id=item.TempActivityId }) |

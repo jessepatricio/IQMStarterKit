@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using Newtonsoft.Json;
 
 namespace IQMStarterKit.Controllers
 {
@@ -12,8 +13,6 @@ namespace IQMStarterKit.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.IsPostBack = true;
-
             return View();
         }
 
@@ -29,6 +28,11 @@ namespace IQMStarterKit.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Start()
+        {
+            return RedirectToAction("Index", "Module");
         }
     }
 }

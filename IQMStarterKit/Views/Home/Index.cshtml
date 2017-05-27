@@ -1,18 +1,24 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<!-- display partial page based on current user role -->
 @if (User.IsInRole("Administrator"))
 {
+    // administrator's default page
     @Html.Partial("_AdminLandingPage")
-    
 }
 else if (User.IsInRole("Student"))
 {
+    // student's default page
     @Html.Partial("_StudentLandingPage")
-
+}
+else if (User.IsInRole("Tutor"))
+{
+    // student's default page
+    @Html.Partial("_TutorLandingPage")
 }
 else
 {
+    // new registered user default page
     @Html.Partial("_NewRegUserLandingPage")
 }

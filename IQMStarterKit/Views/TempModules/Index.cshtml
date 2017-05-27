@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<IQMStarterKit.Models.Core.TempModule>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Modules";
 }
 
 <h2>Module List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { @class = "form-control" })
 </p>
 <table class="table">
     <tr>
@@ -17,7 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-       
+        <th><text>Total No. of Activities</text></th>
         <th></th>
     </tr>
 
@@ -28,6 +28,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @item.TempActivities.Count()
         </td>
        
         <td>

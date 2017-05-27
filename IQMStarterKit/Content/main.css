@@ -1,0 +1,118 @@
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+	font-weight:bold;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+button.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: "\2212";
+}
+
+div.panel {
+    /*padding: 0 18px;*/
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+a.activityLink{
+	margin-left:30px;
+	text-align:left;
+
+}
+
+.progress-bar{
+	height:initial;
+	border-radius: 5px;
+}
+
+.panel{
+	margin-bottom:0px;
+	border:none;
+}
+
+.col-sm-5, .col-sm-2{
+	padding:5px;
+	text-align:left;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+#moduleList h1{ 
+	text-align:center;
+}
+
+#moduleList{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	
+	min-width:400px;
+	width: auto !important;
+	width:100%;
+
+}
+
+.row{
+	display:inline;
+}
+
+.row div{
+	display: inline-block;
+}
+
+
+@media (max-width: 500px) {
+    /* some CSS for small resolution */
+	#moduleList{
+		max-width:100%;
+		
+	}
+}
+
+@media (min-width: 800px) {
+    /* some CSS for large resolution */
+	#moduleList{
+		max-width:60%;
+	}
+}
+
+#myBtn {
+	background-color: #cccccc;
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#myBtn:hover {
+	background-color: #a6a6a6;
+}
+
