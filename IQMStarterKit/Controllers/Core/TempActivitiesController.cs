@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using IQMStarterKit.Models;
 using IQMStarterKit.Models.Core;
@@ -14,7 +11,7 @@ namespace IQMStarterKit.Controllers.Core
     [Authorize(Roles = "Administrator")]
     public class TempActivitiesController : CommonController
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private ApplicationDbContext _context = new ApplicationDbContext();
 
         // GET: TempActivities
         public ActionResult Index()
@@ -105,9 +102,12 @@ namespace IQMStarterKit.Controllers.Core
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,TempModuleId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivity tempActivity)
+        public ActionResult Edit([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,ProgressValue,Context,TempModuleId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivity tempActivity)
         {
-            var recActivity = _context.TempActivities.Find(tempActivity.TempActivityId);
+            var recActivity = _context.TempActivities.FirstOrDefault(m => m.TempActivityId == tempActivity.TempActivityId);
+
+            ModelState.Remove("CreatedBy");
+            ModelState.Remove("ModifiedBy");
             
             if (ModelState.IsValid)
             {
@@ -116,10 +116,11 @@ namespace IQMStarterKit.Controllers.Core
                     recActivity.Title = tempActivity.Title;
                     recActivity.Description = tempActivity.Description;
                     recActivity.PageName = tempActivity.PageName;
+                    recActivity.ProgressValue = 0;
+                    recActivity.Context = string.Empty;
                     recActivity.SortOrder = tempActivity.SortOrder;
                     recActivity.TempModuleId = tempActivity.TempModuleId;
-                    recActivity.CreatedDateTime = tempActivity.CreatedDateTime;
-                    recActivity.CreatedBy = GetSessionUserId();
+                  
                     //update date stamp
                     recActivity.ModifiedDateTime = DateTime.Now;
                     recActivity.ModifiedBy = GetSessionUserId();

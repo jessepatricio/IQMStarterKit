@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Page13";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1 class="heading">You may be interested...</h1>
+    <p class="p13"><u>Short Courses</u></p>
+    <ul class="p13List">
+        <li>Barista Skills</li>
+        <li>License Controller Qualification (LCQ)</li>
+        <li>Creating Classic Coctails</li>
+        <li>Introduction to Wine and Beer</li>
+    </ul>
+    <p class="p13"><strong>For more information, see Torika of the International Team (Ground Floor)</strong></p>
+
+    @Html.ActionLink("Previous Page", "Page12") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page14")
+</div>
+}

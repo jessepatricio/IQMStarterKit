@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Page17";
+}
+
+@using (Html.BeginForm())
+{
+<div class="container1">
+
+    <img id="p17aboutMe" src="~/Content/img/AboutMe.png" alt="About Me Graphic">
+
+    <input id="p17Name" class="p17txtbox form-control" type="text" name="name" />
+    <input id="p17Place" class="p17txtbox form-control" type="text" name="place" />
+    <textarea id="p17Hobby" class="p17txtarea form-control" name="hobby"></textarea>
+    <input id="p17Movie" class="p17txtbox form-control" type="text" name="movie" />
+    <input id="p17Important" class="p17txtbox form-control" type="text" name="important" />
+    <input id="p17Model" class="p17txtbox form-control" type="text" name="model" />
+    <input id="p17Happy" class="p17txtbox form-control" type="text" name="happy" />
+    <input id="p17Dislike" class="p17txtbox form-control" type="text" name="dislike" />
+    <input id="p17Famous" class="p17txtbox form-control" type="text" name="famous" />
+    
+    
+</div>
+    <div style="text-align: center;" class="form-group`">
+       <button type="submit" class="form-control btn btn-primary">Save</button>
+    </div>
+}
+
+
+<div align="center">
+    @Html.ActionLink("Previous Page", "Page16") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page18")
+</div>
+
+

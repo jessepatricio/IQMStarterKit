@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Page48";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1><strong><u>What's Your Conflict Management Style</u></strong></h1>
+    <p style="text-align:left;"><strong>Instructions:</strong>Listed below are 15 statements.  Each statement provides a possible strategy for dealing with a conflict.</p>
+    <p style="text-align:left;">
+        Give each a numerical score as follow:<br />
+        1=rarely, 	2=not often, 		3=sometimes, 	4=very often, 		5=always
+    </p>
+
+    <p style="text-align:left;">Do not answer as you think you should, answer as you actually behave.</p>
+
+    <table style="text-align:left;">
+        <tr>
+            <td style="padding:5px;"></td>
+            <td>Statement</td>
+            <td>Score</td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">A</td>
+            <td>I argue my case with peers, colleagues and co-worked to demonstrate the merits of the position I take.</td>
+            <td><input class="p48txtbox" name="ConflictStyleA" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">B</td>
+            <td>I try to reach compromises through negotiation.</td>
+            <td><input class="p48txtbox" name="ConflictStyleB" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">C</td>
+            <td>I attempt to meet the expectations of others.</td>
+            <td><input class="p48txtbox" name="ConflictStyleC" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">D</td>
+            <td>I seek to investigate issues with others in order to find solutions that are mutually acceptable.</td>
+            <td><input class="p48txtbox" name="ConflictStyleD" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">E</td>
+            <td>I am firm in resolve when it comes to defending my side of the issue.</td>
+            <td><input class="p48txtbox" name="ConflictStyleE" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">F</td>
+            <td>I try to avoid being singled out, keeping conflict with others to myself.</td>
+            <td><input class="p48txtbox" name="ConflictStyleF" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">G</td>
+            <td>I uphold my solutions to problems.</td>
+            <td><input class="p48txtbox" name="ConflictStyleG" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">H</td>
+            <td>I compromise in order to reach solutions.</td>
+            <td><input class="p48txtbox" name="ConflictStyleH" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;"> I</td>
+            <td>I trade important information with others so that problems can be solved together.</td>
+            <td><input class="p48txtbox" name="ConflictStyleI" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">J</td>
+            <td>I avoid discussing my differences with others.</td>
+            <td><input class="p48txtbox" name="ConflictStyleJ" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">K</td>
+            <td>I try to accommodate the wishes of my peers and colleagues.</td>
+            <td><input class="p48txtbox" name="ConflictStyleK" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">L</td>
+            <td>I seek to bring everyone’s concerns out into the open in order to resolve disputes in the best possible way.Statement</td>
+            <td><input class="p48txtbox" name="ConflictStyleL" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">M</td>
+            <td>I put forward middles positions in efforts to break deadlocks.</td>
+            <td><input class="p48txtbox" name="ConflictStyleM" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">N</td>
+            <td>I accept the recommendations of colleagues, peers, and co-workers.</td>
+            <td><input class="p48txtbox" name="ConflictStyleN" /></td>
+        </tr>
+        <tr>
+            <td style="padding:5px;">O</td>
+            <td>StatementI avoid hard feelings by keeping my disagreements with others to myself.</td>
+            <td><input class="p48txtbox" name="ConflictStyleO" /></td>
+        </tr>
+    </table>
+
+    @Html.ActionLink("Previous Page", "Page47") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page49")
+</div>
+
+}

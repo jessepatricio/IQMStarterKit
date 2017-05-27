@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Page4";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <p id="p4preMind">Is yours a 'prepared mind?'</p>
+    <p id="p4preMind2">How or what did you do to prepare your Mind?</p>
+    <p id="p4preMind3">What do you need to be prepared for?</p>
+
+    <div id="p4worldAskimg">
+        <img src="~/Content/img/worldAsk.png" alt="World with Question Mark">
+    </div>
+    @Html.ActionLink("Previous Page", "Page3") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page5")
+</div>
+}

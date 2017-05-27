@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Page32";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1 id="heading"><u>Who Moved My Cheese?</u></h1>
+    <h2> By Dr. Spencer Johnson</h2>
+    <form id="p32cheese">
+       <ol>
+           <li>List and describe the four characters in the story:
+               <br />
+               <textarea class="p32textarea1" rows="5" cols="60" maxlength="200" name="answer" form="p32cheese"></textarea>
+           </li>
+           <li>The four characters who live in a "Maze" and look for "Cheese" to nourish them and make them happy
+               <ol>
+                   <li style="list-style-type:lower-alpha;"> What does the "Cheese" represent?
+                       <br/>
+                       <input class="p32txtbox" type="text" name="p32ans2a">
+                   </li>
+                   <li style="list-style-type:lower-alpha;"> What does the "Maze" represent?
+                       <br />
+                       <input class="p32txtbox" type="text" name="p32ans2b">
+                   </li>
+                </ol>
+           </li>
+           <li>One day, the four characters discovered that the cheese at Station C disappeared. How did each of them
+               <br />
+               <textarea class="p32textarea3" rows="5" cols="150" name="answer" form="p32cheese"></textarea>
+           </li>
+
+           <br/>
+           <content><strong><u>My Cheese</u></strong></content>
+           <br />
+           <br />
+           <li>
+               What is your "Cheese"? <br />
+               <input class="p32txtbox1" type="text" name="p32ans2a">
+           </li>
+           <li>
+               Did you have an old "Cheese"? If yes, what was it?<br />
+               <input class="p32txtbox1" type="text" name="p32ans2a">
+           </li>
+           <li>
+               Was your old "Cheese" moved? How did you react? Which of the characters can you best relate to? Why?
+               <br />
+               <textarea class="p32textarea3" rows="5" cols="150" name="answer" form="p32cheese"></textarea>
+           </li>
+
+       </ol>
+    </form>
+
+    @Html.ActionLink("Previous Page", "Page31") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page33")
+</div>
+
+}

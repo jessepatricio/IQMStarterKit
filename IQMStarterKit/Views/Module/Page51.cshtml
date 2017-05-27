@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Page51";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1><strong><u>Refelction Journaling</u></strong></h1>
+
+    <ul style="text-align:left; font-size:1.5em;">
+        <li> Reflection journaling means to write about what you have seen, felt and experienced </li>
+        <li> It requires you to think deeply/critically about your experiences. </li>
+        <li> It is a useful learning tool that encourages expression of emotions, understanding and conclusions as well as lessons learned or action plans to take. </li>
+    </ul>
+
+    <h1><strong><u>Journaling Tips:</u></strong></h1>
+
+    <ul style="text-align:left; font-size:1.5em;">
+        <li>Write about what happened; give a summary of events that took place.</li>
+        <li>Write with honesty; write down exactly how you feel; candid self-expression. Do not try to ‘sugarcoat’ your feeling and reactions. </li>
+        <li>Write freely; do not worry about grammar rules, spelling, etc.…</li>
+        <li>Analyse your reactions.</li>
+    </ul>
+
+    @Html.ActionLink("Previous Page", "Page50") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page52")
+
+</div>
+}

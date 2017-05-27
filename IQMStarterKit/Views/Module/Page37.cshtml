@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Page37";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1 id="heading"><u>Personal Leadership Plan</u></h1>
+    <form id="p37LeadershipPlan">
+        <table id="p37LeadershipPlanTable" >
+            <tr >
+                <th style="text-align:center;">Area</th>
+                <th style="text-align:center;">(SMART)Goals</th>
+                <th style="text-align:center;">Action Plan</th>
+            </tr>
+                <tr>
+                    <td>Learning moe about self</td>
+                    <td>
+                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p37textarea" rows="4" cols="50" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Acquiring knowledge and wisdom</td>
+                    <td>
+                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Practicing new skills</td>
+                    <td>
+                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+            <tr>
+                <td>Developing personal potential</td>
+                <td>
+                    <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                </td>
+                <td>
+                    <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    @Html.ActionLink("Previous Page", "Page36") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page38")
+</div>
+
+}

@@ -32,8 +32,10 @@ namespace IQMStarterKit.Models.Core
         [Display(Name = "Module Name")]
         public byte TempModuleId { get; set; }
 
+        [NotMapped]
         public int ProgressValue { get; set; }
 
+        [NotMapped]
         public string Context { get; set; }
 
         //system fields

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Page7";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1 class="heading">Attendance Issues</h1>
+
+    <ul class="p7List">
+        <li> Attendance must be 100%, with absence supported by a medical certificate. <br />(We are not in a position to grant leave.)</li>
+        <li> Late for 15 minutes and more can be marked absent for an entire hour; you may not be allowed into class until break time. Leaving the class early is considered absent.</li>
+        <li> As an act of courtesy, contact the Student Service Team if you are going to be late or absent.</li>
+    </ul>
+    @Html.ActionLink("Previous Page", "Page6") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page8")
+
+</div>
+}

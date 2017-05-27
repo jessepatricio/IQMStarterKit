@@ -76,8 +76,8 @@
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -309,6 +309,10 @@
     <Compile Include="Migrations\201705270437072_addFieldsToTempActivity.Designer.cs">
       <DependentUpon>201705270437072_addFieldsToTempActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705271117030_fieldchangesonActivity.cs" />
+    <Compile Include="Migrations\201705271117030_fieldchangesonActivity.Designer.cs">
+      <DependentUpon>201705271117030_fieldchangesonActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -331,16 +335,50 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\AboutMe.png" />
     <Content Include="Content\img\aspire_logo_big.jpg" />
     <Content Include="Content\img\aspire_logo_small.png" />
     <Content Include="Content\img\aspire_logo_small2.png" />
     <Content Include="Content\img\bg_transp.png" />
+    <Content Include="Content\img\Brainstorming.jpg" />
+    <Content Include="Content\img\cake.jpg" />
+    <Content Include="Content\img\check1.png" />
+    <Content Include="Content\img\checklist.png" />
+    <Content Include="Content\img\Coat of Arms.jpg" />
+    <Content Include="Content\img\Contract.png" />
+    <Content Include="Content\img\dart.jpg" />
+    <Content Include="Content\img\dart.png" />
+    <Content Include="Content\img\dots.jpg" />
+    <Content Include="Content\img\Great-Impression.jpg" />
+    <Content Include="Content\img\hands-with-plant.jpg" />
+    <Content Include="Content\img\Human Bingo Activity.png" />
     <Content Include="Content\img\iqm_start.jpg" />
     <Content Include="Content\img\logo.svg" />
+    <Content Include="Content\img\looking-for-a-job.jpg" />
+    <Content Include="Content\img\LostAtSea.png" />
+    <Content Include="Content\img\MindMap.jpg" />
+    <Content Include="Content\img\noPhoneLaptop.png" />
     <Content Include="Content\img\ntec_logo.png" />
+    <Content Include="Content\img\Pasteur.jpg" />
     <Content Include="Content\img\queens_logo.png" />
+    <Content Include="Content\img\scavenger.png" />
+    <Content Include="Content\img\scavenger2.png" />
+    <Content Include="Content\img\ScavengerHunt.jpg" />
+    <Content Include="Content\img\spongebob.png" />
+    <Content Include="Content\img\teacher_presenting.jpg" />
+    <Content Include="Content\img\test1.png" />
+    <Content Include="Content\img\The_7_Habits_of_Highly_Effective_People.jpg" />
+    <Content Include="Content\img\ThumbDown.png" />
+    <Content Include="Content\img\timechart.png" />
+    <Content Include="Content\img\topic.png" />
+    <Content Include="Content\img\videoframe.jpg" />
+    <Content Include="Content\img\worldask.jpg" />
+    <Content Include="Content\img\worldask.png" />
+    <Content Include="Content\img\you1.jpg" />
+    <Content Include="Content\img\you1.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\pages.css" />
     <Content Include="Content\video\6181958.mp4" />
     <Content Include="Content\video\aspire2.mp4" />
     <Content Include="Content\video\dcl7.MOV" />
@@ -438,6 +476,61 @@
     <Content Include="Views\TempActivities\Index.cshtml" />
     <Content Include="Views\Home\_TutorLandingPage.cshtml" />
     <Content Include="Views\Admin\ListStudents.cshtml" />
+    <Content Include="Views\Module\Page10.cshtml" />
+    <Content Include="Views\Module\Page11.cshtml" />
+    <Content Include="Views\Module\Page12.cshtml" />
+    <Content Include="Views\Module\Page13.cshtml" />
+    <Content Include="Views\Module\Page14.cshtml" />
+    <Content Include="Views\Module\Page15.cshtml" />
+    <Content Include="Views\Module\Page16.cshtml" />
+    <Content Include="Views\Module\Page17.cshtml" />
+    <Content Include="Views\Module\Page18.cshtml" />
+    <Content Include="Views\Module\Page19.cshtml" />
+    <Content Include="Views\Module\Page2.cshtml" />
+    <Content Include="Views\Module\Page20.cshtml" />
+    <Content Include="Views\Module\Page21.cshtml" />
+    <Content Include="Views\Module\Page22.cshtml" />
+    <Content Include="Views\Module\Page23.cshtml" />
+    <Content Include="Views\Module\Page24.cshtml" />
+    <Content Include="Views\Module\Page25.cshtml" />
+    <Content Include="Views\Module\Page26.cshtml" />
+    <Content Include="Views\Module\Page27.cshtml" />
+    <Content Include="Views\Module\Page28.cshtml" />
+    <Content Include="Views\Module\Page29.cshtml" />
+    <Content Include="Views\Module\Page3.cshtml" />
+    <Content Include="Views\Module\Page30.cshtml" />
+    <Content Include="Views\Module\Page31.cshtml" />
+    <Content Include="Views\Module\Page32.cshtml" />
+    <Content Include="Views\Module\Page33.cshtml" />
+    <Content Include="Views\Module\Page34.cshtml" />
+    <Content Include="Views\Module\Page35.cshtml" />
+    <Content Include="Views\Module\Page36.cshtml" />
+    <Content Include="Views\Module\Page37.cshtml" />
+    <Content Include="Views\Module\Page38.cshtml" />
+    <Content Include="Views\Module\Page39.cshtml" />
+    <Content Include="Views\Module\Page4.cshtml" />
+    <Content Include="Views\Module\Page40.cshtml" />
+    <Content Include="Views\Module\Page41.cshtml" />
+    <Content Include="Views\Module\Page42.cshtml" />
+    <Content Include="Views\Module\Page43.cshtml" />
+    <Content Include="Views\Module\Page44.cshtml" />
+    <Content Include="Views\Module\Page45.cshtml" />
+    <Content Include="Views\Module\Page46.cshtml" />
+    <Content Include="Views\Module\Page47.cshtml" />
+    <Content Include="Views\Module\Page48.cshtml" />
+    <Content Include="Views\Module\Page49.cshtml" />
+    <Content Include="Views\Module\Page5.cshtml" />
+    <Content Include="Views\Module\Page50.cshtml" />
+    <Content Include="Views\Module\Page51.cshtml" />
+    <Content Include="Views\Module\Page52.cshtml" />
+    <Content Include="Views\Module\Page53.cshtml" />
+    <Content Include="Views\Module\Page54.cshtml" />
+    <Content Include="Views\Module\Page55.cshtml" />
+    <Content Include="Views\Module\Page56.cshtml" />
+    <Content Include="Views\Module\Page6.cshtml" />
+    <Content Include="Views\Module\Page7.cshtml" />
+    <Content Include="Views\Module\Page8.cshtml" />
+    <Content Include="Views\Module\Page9.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -535,6 +628,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705270437072_addFieldsToTempActivity.resx">
       <DependentUpon>201705270437072_addFieldsToTempActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705271117030_fieldchangesonActivity.resx">
+      <DependentUpon>201705271117030_fieldchangesonActivity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

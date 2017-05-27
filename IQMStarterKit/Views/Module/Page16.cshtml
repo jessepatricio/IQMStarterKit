@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Page16";
+}
+@using (Html.BeginForm())
+{
+
+<div class="container1">
+    <img id="p16coatOfArm" src="~/Content/img/Coat of Arms.jpg" alt="Personal Coat of Arms Graphic">
+    <br/><br/>
+    <div>
+        @Html.ActionLink("Previous Page", "Page15") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "Page17")
+    </div>
+</div>
+
+  
+}

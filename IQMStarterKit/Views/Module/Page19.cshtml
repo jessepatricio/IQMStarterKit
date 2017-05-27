@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Page19";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1 class="heading">Classroom Rules</h1>
+    <br/>
+    <p class="p19-21List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Speak English Only</p>
+        <ul class="p19-21List">
+            <li>Students from different parts of the world.</li>
+            <li>Great opportunity to improve English.</li>
+            <li>Good spoken English helps in job search.</li>
+        </ul>
+
+    @Html.ActionLink("Previous Page", "Page18") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page20")
+
+</div>
+
+}

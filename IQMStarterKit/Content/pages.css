@@ -1,0 +1,465 @@
+.container1{
+	text-align:center;
+	width:80%;
+	margin-left: auto;
+	margin-right:auto;
+	font-family:Arial, Helvetica, sans-serif;
+    min-width:1000px;
+}
+
+#p1welcomeAspire{
+	font-size:4em;
+	color:#33cc33;
+	font-weight:bold;
+	
+}
+
+#p1handPlant{
+	width:40%;
+}
+
+ul.p2objList{
+	/*list-style-image: url('img/check1.png'); not working*/
+	list-style-type:none;
+	text-align:left;
+	font-size:2em;
+
+}
+
+
+h1.heading{
+	font-size:4em;
+    text-align:center;
+}
+
+#p2dartimg {
+    text-align: right;
+}
+
+#p3quote{
+	font-size:6em;
+}
+#p3author{
+	font-size:3em;
+}
+#p3pasteurimg img {
+    width: 20%;
+}
+#p3pasteurimg {
+    text-align: right;
+}
+
+
+#p4preMind{
+	font-size:4em;
+	color:#8080ff;
+}
+#p4preMind2{
+	font-size:4em;
+	color:#0000e6;
+}
+#p4preMind3{
+	font-size:4em;
+	color:#000066;
+}
+#p4worldAskimg {
+    text-align:right;
+}
+#p4worldAskimg img {
+    width: 20%;
+}
+
+.p5words{
+	font-size:3em;
+	text-align:left;
+}
+ul.p5words{
+	list-style-type:square;
+}
+
+.p6List{
+	list-style-type:square;
+	text-align:left;
+	font-size:2em;
+	margin-bottom:-20px;
+}
+#p6checklistimg {
+    text-align: right;
+}
+
+.p7List{
+	font-size:2em;
+	text-align:left;
+}
+
+.p8List{
+	font-size:3em;
+	text-align:left;
+}
+
+.p9List{
+	font-size:2em;
+	text-align:left;
+	list-style-type:square;
+}
+#p9img{
+	display:inline-block;
+}
+
+#p9img img{
+    height:280px;
+}
+
+.p10_11List{
+	font-size:25px;
+    text-align:left;
+}
+
+td.p10_11Mod{
+	width:150px;
+
+}
+
+tr.p10_11TabRow{
+	height:60px;
+}
+
+#p10_11topicimg{
+	text-align:right;
+	
+}
+
+#p10_11topicimg img{
+    width:20%;
+}
+
+
+
+.p12List{
+	list-style-type:square;
+	text-align:left;
+	font-size:2em;
+}
+
+#p12img {
+    padding: 10px;
+}
+
+#p12img img{
+    height: 300px;
+    margin-left: 100px;
+}
+
+.p13, .p13List{
+	list-style-type:square;
+	text-align:left;
+	font-size:3em;
+}
+
+.p14List{
+	text-align:left;
+	font-size:2em;
+}
+
+.p15{
+	font-size:4em;
+}
+
+#p16coatOfArm{
+	height:500px;
+}
+
+#p17aboutMe {
+    z-index: -1;
+}
+.p17txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    max-width: 900px;
+}
+#p17Name {
+    position: absolute;
+    top: 235px;
+    left: 518px;
+    width: 270px;
+}
+#p17Place {
+    position: absolute;
+    top: 350px;
+    left: 765px;
+    width: 125px;
+}
+#p17Hobby {
+    position: absolute;
+    top: 430px;
+    left: 330px;
+    width: 205px;
+    height: 115px;
+    
+}
+#p17Movie {
+    position: absolute;
+    top: 551px;
+    left: 638px;
+    width: 200px;
+}
+#p17Important {
+   
+    position: absolute;
+    top: 693px;
+    left: 420px;
+    width: 410px;
+}
+#p17Model {
+    position: absolute;
+    top: 840px;
+    left: 330px;
+    width: 201px;
+}
+#p17Happy {
+    position: absolute;
+    top: 905px;
+    left: 600px;
+    width: 300px;
+}
+#p17Dislike {
+   
+    position: absolute;
+    top: 1035px;
+    left: 320px;
+    width: 210px;
+}
+#p17Famous {
+    
+    position: absolute;
+    top: 1080px;
+    left: 650px;
+    width: 248px;
+}
+.p18List {
+    list-style-type: square;
+    text-align: left;
+    font-size: 3em;
+}
+
+.p19-21List {
+    font-size: 3em;
+    text-align: left;
+}
+
+.p22-24List {
+    font-size: 3em;
+    text-align: left;
+    list-style-type:none;
+}
+
+#p22-24img{
+    text-align:right;
+}
+
+#p24Cheating{
+    color:darkred;
+    font-size:3em;
+    text-align:left;
+    text-indent:40px;
+}
+
+#p25instruction{
+    margin-top:10px;
+    font-size:20px;
+    text-align:left;
+} 
+#p25VARKTable {
+    border-collapse: collapse;
+    text-align:left;
+}
+#p25VARKTable,td,th {
+    border: 1px solid black;
+    padding:5px;
+}
+.p25VARKHeader {
+    text-align: center;
+}
+
+#p27img1 img{
+    width:30%;
+}
+#p27groupMission {
+    font-size: 2em;
+}
+#p27instruction {
+    text-align: left;
+    font-size: 2em;
+}
+
+#p28-29 {
+    text-align: left;
+    font-size: 1.5em;
+}
+#p28DOPETable td {
+    text-align: left;
+    margin: auto;
+}
+
+.p29DISCHeader{
+    text-align:center;
+}
+#p29DISCTable{
+    font-size: 1.2em;
+    margin:auto;
+}
+
+#p30kiwianaTable {
+    font-size: 1.5em;
+    margin: auto;
+}
+.p30textarea, .p37textarea, .p17txtarea {
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+}
+
+#p32cheese{
+    text-align:left;
+}
+.p32textarea1 {
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+}
+.p32txtbox, .p40txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 850px;
+    max-width: 900px;
+}
+.p32txtbox1 {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 900px;
+    max-width: 900px;
+}
+.p32textarea3 {
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    max-width: 900px;
+}
+
+#p33List{
+    text-align:left;
+    font-size: 2em;
+}
+#p33img{
+    text-align:right;
+}
+#p33img img{
+    width:20%;
+    margin-top:-250px;
+}
+.p33txtarea, .p40txtarea, .p41txtarea, .p43txtarea, .p49txtarea, .p52-55txtarea {
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    max-width: 900px;
+}
+#p33_14HabitTable{
+    margin:auto;
+}
+
+.p34txtbox, .p38txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 900px;
+    max-width: 900px;
+}
+.resize {
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+    resize: both;
+    overflow: hidden;
+    border: 1px solid blue;
+    box-sizing: border-box;
+}
+#p35Table table {
+    margin: auto;
+}
+.p35Button, .p36Button button {
+    color: black;
+    background-color: white;
+    border: none; 
+}
+ .p35Button:hover {
+        color: brown;
+        cursor: pointer;
+} 
+ .p35Button.pressed {
+        color: white;
+        background-color: midnightblue;
+        width: 100%;
+        height: 100%;
+}
+
+#p35values{
+    text-align:left;
+}
+
+#p37LeadershipPlanTable{
+    margin:auto;
+    text-align:left;
+}
+
+.p39txtbox, .p42txtbox, .p48txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 50px;
+    max-width: 900px;
+}
+
+.p41txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 250px;
+    max-width: 900px;
+}
+
+.p49List li{
+    list-style-type:none;
+}
+
+.p49List li:before {
+    content:"-";
+    margin-left:-20px;
+    margin-right:10px;
+}
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.2); /* IE */
+    -moz-transform: scale(1.2); /* FF */
+    -webkit-transform: scale(1.2); /* Safari and Chrome */
+    -o-transform: scale(1.2); /* Opera */
+}

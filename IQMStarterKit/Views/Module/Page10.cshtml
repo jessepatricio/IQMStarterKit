@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Page10";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <h1 class="heading">Topics</h1>
+
+    <table class="p10_11List">
+        <tr class="p10TabRow">
+            <td class="p10_11Mod"> <ul> <li>Module 1 </li></ul></td>
+
+            <td> Introduction/ My Shield/ Class Contract/ VARK/ Photo Scavenger Hunt/ Personal Profiling</td>
+        </tr>
+        <tr class="p10_11TabRow">
+            <td> <ul><li>Module 2 </li></ul></td>
+            <td> Spirit of NZ/ NZ My New Home/ Kiwiana</td>
+        </tr>
+        <tr class="p10_11TabRow">
+            <td>  <ul><li>Module 3 </li></ul></td>
+            <td> 7 Habits Intro/ 90:10 Principle/ Cheese/ Proactive/ Personal Leadership/ Goal Setting</td>
+        </tr>
+        <tr class="p10_11TabRow">
+            <td>  <ul><li>Module 4 </li></ul></td>
+            <td> First Thing First/ Self Mgmt/ Presentation Skills</td>
+        </tr>
+        <tr class="p10_11TabRow">
+            <td><ul><li>Module 5 </li></ul></td>
+            <td> Win Win/ Consensus/ Team Building</td>
+        </tr>
+    </table>
+
+    <div id="p10_11topicimg">
+        <img src="~/Content/img/topic.png" alt="Topic graphic">
+    </div>
+
+    @Html.ActionLink("Previous Page", "Page9") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page11")
+</div>
+}

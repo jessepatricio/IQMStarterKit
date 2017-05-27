@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Page47";
+}
+@using (Html.BeginForm())
+{
+<div class="container1">
+    <img src="~/Content/img/MindMap.jpg" alt="Activity Mind Map" />
+    @Html.ActionLink("Previous Page", "Page46") |
+    @Html.ActionLink("Main", "Index") |
+    @Html.ActionLink("Next Page", "Page48")
+</div>
+}
