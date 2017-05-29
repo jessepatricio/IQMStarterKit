@@ -19,36 +19,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     
-    <script>
-        var vid = document.getElementById("iqmvideo");
-        
-        function setPlaySpeed() {
-            vid.playbackRate = 0.1;
-        }
-
-        function DrawGrayscale(object) {
-            var width = object.width;
-            var height = object.height;
-            var canvas = document.getElementById("iqmvideo");
-            //canvas.setAttribute('width', width);
-            //canvas.setAttribute('height', height);
-            if (canvas.getContext) {
-                var context = canvas.getContext('2d');
-                context.drawImage(object, 0, 0, width, height);
-                imgDataNormal = context.getImageData(0, 0, width, height);
-                var imgData = context.createImageData(width, height);
-
-                for (i = 0; i < imgData.width * imgData.height * 4; i += 4) {
-                    var gray = 0.2126 * imgDataNormal.data[i + 0] + 0.7152 * imgDataNormal.data[i + 1] + 0.0722 * imgDataNormal.data[i + 2];
-                    //var gray = (imgDataNormal.data[i + 0] + imgDataNormal.data[i + 1] + imgDataNormal.data[i + 2]) / 3;
-                    imgData.data[i + 0] = imgData.data[i + 1] = imgData.data[i + 2] = gray;
-                    imgData.data[i + 3] = imgDataNormal.data[i + 3];
-                }
-                context.putImageData(imgData, 0, 0);
-            }
-        }
-
-    </script>
+    
 
 </head>
 <body onload="setPlaySpeed();">
@@ -111,6 +82,39 @@
     </div>
    
 </div>
+
+    <script>
+    var vid = document.getElementById("iqmvideo");
+
+    function setPlaySpeed() {
+        vid.playbackRate = 1;
+    }
+
+    function DrawGrayscale(object) {
+        var width = object.width;
+        var height = object.height;
+        var canvas = document.getElementById("iqmvideo");
+        //canvas.setAttribute('width', width);
+        //canvas.setAttribute('height', height);
+        if (canvas.getContext) {
+            var context = canvas.getContext('2d');
+            context.drawImage(object, 0, 0, width, height);
+            imgDataNormal = context.getImageData(0, 0, width, height);
+            var imgData = context.createImageData(width, height);
+
+            for (i = 0; i < imgData.width * imgData.height * 4; i += 4) {
+                var gray = 0.2126 * imgDataNormal.data[i + 0] + 0.7152 * imgDataNormal.data[i + 1] + 0.0722 * imgDataNormal.data[i + 2];
+                //var gray = (imgDataNormal.data[i + 0] + imgDataNormal.data[i + 1] + imgDataNormal.data[i + 2]) / 3;
+                imgData.data[i + 0] = imgData.data[i + 1] = imgData.data[i + 2] = gray;
+                imgData.data[i + 3] = imgDataNormal.data[i + 3];
+            }
+            context.putImageData(imgData, 0, 0);
+        }
+    }
+
+    </script>
+
+
 
 </body>
 </html>

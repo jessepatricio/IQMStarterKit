@@ -57,6 +57,13 @@ namespace IQMStarterKit.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TempWorkbookId,Title,Description,Version,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempWorkbook tempWorkbook)
         {
+
+            ModelState.Remove("CreatedBy");
+            ModelState.Remove("ModifiedBy");
+            ModelState.Remove("CreatedDateTime");
+            ModelState.Remove("ModifiedDateTime");
+            ModelState.Remove("TempModules");
+
             if (ModelState.IsValid)
             {
                 //update hidden fields

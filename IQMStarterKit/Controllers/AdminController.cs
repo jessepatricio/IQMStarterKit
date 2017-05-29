@@ -229,6 +229,7 @@ namespace IQMStarterKit.Controllers
                     DeleteUser(objExtendedUser);
                 }
 
+                ViewBag.email = "";
                 return Redirect("~/Admin");
             }
             catch (Exception ex)
@@ -424,6 +425,7 @@ namespace IQMStarterKit.Controllers
 
         // DELETE: /Admin/DeleteUserRole
         #region DeleteUserRole
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteUserRole(string roleName)
         {
             try
@@ -445,7 +447,7 @@ namespace IQMStarterKit.Controllers
                 var usersInRole = roleManager.FindByName(roleName).Users.Count();
                 if (usersInRole > 0)
                 {
-                    throw new Exception($"Canot delete {roleName} Role because it still has users.");            
+                    throw new Exception($"Canot delete {roleName} Role because it still has users.");
                 }
 
                 var objRoleToDelete = (from objRole in roleManager.Roles
@@ -623,6 +625,8 @@ namespace IQMStarterKit.Controllers
             UserManager.RemoveFromRoles(user.Id, UserManager.GetRoles(user.Id).ToArray());
             UserManager.Update(user);
             UserManager.Delete(user);
+
+            
         }
         #endregion
 

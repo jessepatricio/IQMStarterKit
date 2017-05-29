@@ -1,13 +1,13 @@
-﻿using System.Linq;
+﻿using IQMStarterKit.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using IQMStarterKit.Models;
-using System.Configuration;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IQMStarterKit.Controllers
 {
@@ -21,7 +21,7 @@ namespace IQMStarterKit.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -33,9 +33,9 @@ namespace IQMStarterKit.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -122,7 +122,7 @@ namespace IQMStarterKit.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -156,11 +156,11 @@ namespace IQMStarterKit.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
-             
+
 
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     //add new user to default role
                     await UserManager.AddToRoleAsync(user.Id, "Student");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -429,7 +429,7 @@ namespace IQMStarterKit.Controllers
             base.Dispose(disposing);
         }
 
-       
+
 
 
         #region Helpers
@@ -494,7 +494,7 @@ namespace IQMStarterKit.Controllers
 
 
         //Utility
-       
+
         // Add RoleManager
         #region public ApplicationRoleManager RoleManager
         private ApplicationRoleManager _roleManager;
@@ -502,7 +502,7 @@ namespace IQMStarterKit.Controllers
         {
             get
             {
-                return _roleManager ?? 
+                return _roleManager ??
                     HttpContext.GetOwinContext()
                     .GetUserManager<ApplicationRoleManager>();
 
@@ -522,26 +522,22 @@ namespace IQMStarterKit.Controllers
             string adminUserName = ConfigurationManager.AppSettings["AdminUserName"];
             string adminPassword = ConfigurationManager.AppSettings["AdminPassword"];
 
-            // See if Admin exists
-            var objAdminUser = UserManager.FindByEmail(adminUserName);
-
-            if (objAdminUser == null)
+            //See if the Admin role exists
+            if (!RoleManager.RoleExists("Administrator"))
             {
-                //See if the Admin role exists
-                if (!RoleManager.RoleExists("Administrator"))
-                {
-                    // Create the Admin Role (if needed)
-                    IdentityRole objAdminRole = new IdentityRole("Administrator");
-                    RoleManager.Create(objAdminRole);
-                }
-
-                // Create Admin user
-                var objNewAdminUser = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
-                UserManager.Create(objNewAdminUser, adminPassword);
-                // Put user in Admin role
-                UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
+                // Create the Admin Role (if needed)
+                IdentityRole objAdminRole = new IdentityRole("Administrator");
+                RoleManager.Create(objAdminRole);
             }
+
+            // Create Admin user
+            var objNewAdminUser = new ApplicationUser { UserName = adminUserName, Email = adminUserName };
+            objNewAdminUser.FullName = "Mr Administrator";
+            UserManager.Create(objNewAdminUser, adminPassword);
+            // Put user in Admin role
+            UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
         }
+
         #endregion
     }
 }

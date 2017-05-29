@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IQMStarterKit.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Web.Security;
-using IQMStarterKit.Models;
-using Microsoft.AspNet.Identity;
 
 namespace IQMStarterKit.Controllers
 {
@@ -18,7 +15,7 @@ namespace IQMStarterKit.Controllers
         // GET: GroupModels
         public ActionResult Index()
         {
-            var grpModels = _context.GroupModels.OrderByDescending(m=>m.GroupName).ToList();
+            var grpModels = _context.GroupModels.Where(m => m.IsRemoved == false).OrderByDescending(m => m.GroupName).ToList();
             foreach (var item in grpModels)
             {
                 item.TutorId = GetFullName(item.TutorId);
@@ -61,7 +58,7 @@ namespace IQMStarterKit.Controllers
         public ActionResult Create(GroupModel grpModel)
         {
 
-            var existGroup = _context.GroupModels.Where(m=>m.GroupName==grpModel.GroupName);
+            var existGroup = _context.GroupModels.Where(m => m.GroupName == grpModel.GroupName);
             if (existGroup.Any())
             {
                 ModelState.AddModelError(String.Empty, @"GroupName already existed!");
@@ -75,7 +72,7 @@ namespace IQMStarterKit.Controllers
             //remove null error field from form to get modelstate to true
             ModelState.Remove("ModifiedBy");
             ModelState.Remove("CreatedBy");
-            
+
             if (ModelState.IsValid)
             {
                 //assign system fields
@@ -105,7 +102,7 @@ namespace IQMStarterKit.Controllers
             }
 
             GroupModel groupModel = _context.GroupModels.Find(id);
-            
+
 
             if (groupModel == null)
             {
@@ -125,12 +122,12 @@ namespace IQMStarterKit.Controllers
         public ActionResult Edit([Bind(Include = "GroupId,GroupName,TutorId,Description,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] GroupModel groupModel)
         {
 
-           
+
             ModelState.Remove("ModifiedBy");
 
             if (ModelState.IsValid)
             {
-                
+
 
                 groupModel.ModifiedDateTime = DateTime.Now;
                 groupModel.ModifiedBy = GetSessionUserId();
@@ -185,8 +182,8 @@ namespace IQMStarterKit.Controllers
         public IQueryable<ApplicationUser> GetUsersInRole(string roleId)
         {
             return from user in _context.Users
-                where user.Roles.Any(r => r.RoleId == roleId)
-                select user;
+                   where user.Roles.Any(r => r.RoleId == roleId)
+                   select user;
         }
     }
 }

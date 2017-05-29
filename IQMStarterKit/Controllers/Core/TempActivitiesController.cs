@@ -1,10 +1,10 @@
-﻿using System;
+﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Core;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using IQMStarterKit.Models;
-using IQMStarterKit.Models.Core;
 
 namespace IQMStarterKit.Controllers.Core
 {
@@ -16,7 +16,9 @@ namespace IQMStarterKit.Controllers.Core
         // GET: TempActivities
         public ActionResult Index()
         {
-            return View(_context.TempActivities.ToList());
+            return View(_context.TempActivities.Where(m => m.IsRemoved == false)
+                .OrderBy(m => m.TempModuleId)
+                .ThenBy(m => m.SortOrder).ToList());
         }
 
         // GET: TempActivities/Details/5
@@ -57,7 +59,7 @@ namespace IQMStarterKit.Controllers.Core
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,TempModuleId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivityViewModels tempActivity)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var modActivity = new TempActivity();
@@ -108,7 +110,7 @@ namespace IQMStarterKit.Controllers.Core
 
             ModelState.Remove("CreatedBy");
             ModelState.Remove("ModifiedBy");
-            
+
             if (ModelState.IsValid)
             {
                 if (recActivity != null)
@@ -120,7 +122,7 @@ namespace IQMStarterKit.Controllers.Core
                     recActivity.Context = string.Empty;
                     recActivity.SortOrder = tempActivity.SortOrder;
                     recActivity.TempModuleId = tempActivity.TempModuleId;
-                  
+
                     //update date stamp
                     recActivity.ModifiedDateTime = DateTime.Now;
                     recActivity.ModifiedBy = GetSessionUserId();
@@ -146,7 +148,7 @@ namespace IQMStarterKit.Controllers.Core
                 return HttpNotFound();
             }
 
-           
+
 
             return View(tempActivity);
         }

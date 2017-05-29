@@ -38,6 +38,7 @@ namespace IQMStarterKit.Models
         [StringLength(100)]
         public string Version { get; set; }
 
+       
         public ICollection<TempModule> TempModules  { get; set; }
 
         //system fields
