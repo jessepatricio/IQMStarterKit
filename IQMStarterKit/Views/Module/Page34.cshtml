@@ -4,26 +4,153 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 id="heading"><strong><u>Think like a CEO. Think BIG</u></strong></h1>
-    <p style="text-align:left;">You are the CEO or Managing Director of a large company.  List any 10 plans, ideas, activities, etc. you will want to implement or carry out to make your company successful.</p>
-    <ol>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-        <li><input class="p34txtbox" type="text" name="p34CEO"></li>
-    </ol>
+    <div class="container1">
+        <h1 class="heading"><u>What's your personal leadership IQ?</u></h1>
+        <p>How are you doing in terms of your personal leadership?  If you’re wondering what personal leadership is, here’s a definition. Personal leadership is the leadership of the self. It is the ability to define a direction for your leadership and life, and to move in that direction with consistency and clarity. </p>
+        <p>When you practice personal leadership, you “lead from the inside out.” The process involves asking yourself, “How do I need to be, act and think in order to be my best?” To do that, you must periodically turn away from the concerns of the day – the people, the problems and the pressure – to explore and discover your inner edge. </p>
+        <p>To practice personal leadership, you apply the principles of leadership that make businesses a success … to yourself. For example, leading in business involves having a compelling vision, developing strategies and inspiring people to use their talents to meet a goal for improved business results. Leading yourself means applying these same principles of leadership to your role as a leader and your life. You, too, need a compelling vision and a strategy for reaching it. You need a team supporting you. You need results, as well as a sense of contribution and purpose. The difference is that personal leadership doesn’t just make for better business; it makes for better leadership. It makes for a better you. </p>
+        <p>When you practice personal leadership, you use every ounce of your potential with inspiration instead of perspiration, synergy instead of sacrifice and wisdom instead of work. Personal leadership is so important, in fact, that management expert Peter Drucker once called it “the only leadership that’s going to matter in the 21st century.” </p>
+        <p>So now, the key question is, “Are you succeeding in leading yourself?” Take the following quiz to find out.</p>
 
-    @Html.ActionLink("Previous Page", "Page33") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page35")
-</div>
+        <p><strong><u>The Personal Leadership Quiz</u></strong></p>
+
+        <p>Answer each of the following questions with a “yes,” “sometimes” or “no” response. </p>
+
+        <table style="margin:auto">
+            <tr>
+                <td>1) I am clear on what I want and know how to get it – for the big things and the small.</td>
+                <td><input type="radio" name="Leader1" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader1" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader1" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>2) I practice a strategic, reflective approach to leadership.</td>
+                <td><input type="radio" name="Leader2" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader2" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader2" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>3) I know where to focus my attention on a daily basis.</td>
+                <td><input type="radio" name="Leader3" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader3" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader3" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>4) I am able to maintain peak performance at all times.</td>
+                <td><input type="radio" name="Leader4" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader4" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader4" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>5) I maintain my sense of stability and equilibrium in times of change.</td>
+                <td><input type="radio" name="Leader5" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader5" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader5" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>6) I have identified my talents, strengths, skills, and weaknesses.</td>
+                <td><input type="radio" name="Leader6" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader6" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader6" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>7) I know how to maximize and leverage my unique talents and abilities.</td>
+                <td><input type="radio" name="Leader7" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader7" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader7" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>8) I am delighted with my quality of life both on and off the job.</td>
+                <td><input type="radio" name="Leader8" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader8" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader8" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>9) I feel very little stress and overwhelm in my life.</td>
+                <td><input type="radio" name="Leader9" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader9" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader9" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>10) I make a meaningful contribution every day.</td>
+                <td><input type="radio" name="Leader10" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader10" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader10" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>11) I have plenty of time for people, activities and events that are most important to me.</td>
+                <td><input type="radio" name="Leader11" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader11" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader11" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>12) I take regular action toward my most important goals – not just what’s most pressing.</td>
+                <td><input type="radio" name="Leader12" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader12" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader12" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>13) I have a wide network of people who support me, and whom I support in return.</td>
+                <td><input type="radio" name="Leader13" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader13" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader13" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>14) I am constantly learning and improving myself.</td>
+                <td><input type="radio" name="Leader14" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader14" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader14" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>15) I intuitively recognize and take opportunities.</td>
+                <td><input type="radio" name="Leader15" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader15" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader15" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>16) I am often astounded by the way the opportunities I want and the solutions I need present themselves at just the right moment.</td>
+                <td><input type="radio" name="Leader16" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader16" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader16" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>17) I achieve a sense of renewal and restoration on a daily basis.</td>
+                <td><input type="radio" name="Leader17" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader17" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader17" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>18) I am proud of my ability to maintain my values and the essence of who I am, even when life gets hectic and/or as I get more and more responsibility.</td>
+                <td><input type="radio" name="Leader18" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader18" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader18" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>19) I have achieved “success” as I define it.</td>
+                <td><input type="radio" name="Leader19" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader19" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader19" value="0" style="margin-right:3px;">No</td>
+            </tr>
+            <tr>
+                <td>20) I can say with confidence that every day I am at my very best.</td>
+                <td><input type="radio" name="Leader20" value="2" style="margin-right:3px;">Yes</td>
+                <td><input type="radio" name="Leader20" value="1" style="margin-right:3px;">Sometimes</td>
+                <td><input type="radio" name="Leader20" value="0" style="margin-right:3px;">No</td>
+            </tr>
+        </table>
+
+        <br />
+        <p>
+            <strong><i>Take Leadership Personally</i></strong>    <br />
+            The bottom line is that as a leader, you must learn to lead yourself to stay effective. And just as the way you lead helps shape your life, the life you live will help you lead. So when you become a better leader, you also lead a better life. Ultimately, personal leadership offers you the chance to create true prosperity – the kind of happiness that comes not just from financial gain, but also from the richness of life.
+        </p>
+
+        <p>
+            <strong><u>About the author:</u></strong> <br />
+            Joelle K. Jay, Ph.D., is president of the leadership development practice Pillar Consulting. As an executive coach, author and speaker, Joelle helps leaders achieve top performance and business results. Her clients include presidents, vice presidents and C-level executives in Fortune 500 companies. She is the author of “The Inner Edge: The 10 Practices of Personal Leadership.” For more information, e-mail <a href="mailto:joelle@pillar-consulting.com">joelle@pillar-consulting.com</a> or visit <a href="www.Pillar-consulting.com">www.Pillar-consulting.com</a>.
+        </p>
+        <p><strong>Taken from <a href="http://www.reliableplant.com/read/22142">http://www.reliableplant.com/read/22142</a></strong></p>
+    </div>
 }
 
 

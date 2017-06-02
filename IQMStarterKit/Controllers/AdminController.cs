@@ -3,14 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using IQMStarterKit.Models;
-using Microsoft.Ajax.Utilities;
-using PagedList;
 
 #endregion Includes
 
@@ -29,76 +25,34 @@ namespace IQMStarterKit.Controllers
         {
             try
             {
-                int intPage = 1;
-                int intPageSize = 5;
-                int intTotalPageCount = 0;
-
-                if (searchKeyword != null)
-                {
-                    intPage = 1;
-                }
-                else
-                {
-                    if (currentFilter != null)
-                    {
-                        searchKeyword = currentFilter;
-                        intPage = page ?? 1;
-                    }
-                    else
-                    {
-                        searchKeyword = "";
-                        intPage = page ?? 1;
-                    }
-                }
-
-
-                ViewBag.CurrentFilter = searchKeyword;
-
                 var colUsers = new List<ExtendedUserCustom>();
-                int intSkip = (intPage - 1) * intPageSize;
-                intTotalPageCount = UserManager.Users
-                    .Count(u => u.UserName.Contains(searchKeyword));
-
+                
                 var result = UserManager.Users
-                    .Where(c => c.UserName.Contains(searchKeyword))
-                    .OrderBy(c => c.UserName)
-                    .Skip(intSkip)
-                    .Take(intPageSize)
+                    .OrderBy(c => c.FullName)
                     .ToList();
 
                 foreach (var item in result)
                 {
                     var user = new ExtendedUserCustom
                     {
-                     
                         Email = item.Email,
                         FullName =  item.FullName,
                         GroupId = item.GroupId
-                        
                     };
                     colUsers.Add(user);
                 }
 
+                //get group list for dropdown
                 ViewBag.Groups = _context.GroupModels.Where(m => m.IsRemoved == false)
                     .OrderByDescending(m => m.CreatedDateTime).ToList();
-                
-              
-                //set the number of pages
-                var userAsIPagedList = new StaticPagedList<ExtendedUserCustom>(
-                    
-                    colUsers, intPage, intPageSize, intTotalPageCount
-                    
-                    );
 
-                return View(userAsIPagedList);
+                return View(colUsers);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Error: " + ex.Message);
                 var colUserExtendeds = new List<ExtendedUserCustom>();
-
-                return View(colUserExtendeds.ToPagedList(1, 5));
-                
+                return View(colUserExtendeds);
             }
         }
 
@@ -516,7 +470,7 @@ namespace IQMStarterKit.Controllers
                 colUsers.Add(user);
             }
 
-
+            //get group list for dropdownlist
             ViewBag.Groups = _context.GroupModels.Where(m => m.IsRemoved == false)
                 .OrderByDescending(m => m.CreatedDateTime).ToList();
 
@@ -528,8 +482,6 @@ namespace IQMStarterKit.Controllers
 
         //Utility
     
-       
-
         #region GetAllRolesAsSelectList
         private List<SelectListItem> GetAllRolesAsSelectList()
         {

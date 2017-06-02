@@ -2,164 +2,55 @@
 @{
     ViewBag.Title = "Page35";
 }
-@section Scripts{
-    <script type="text/javascript">
-          $('button').click(function () {
-             $(this).toggleClass('pressed');
-          });
-    </script>
-}
-
 @using (Html.BeginForm())
 {
-  @Html.ValidationSummary(false)
-
-<div class="container1">
-    <h1 id="heading"><strong><u>Personal Values</u></strong></h1>
-    <p style="text-align:left;">The words below represent what most people identify as important aspects of their lives.</p>
-    <p style="text-align:left;">They can range from tangible subjects, issues and topics.  If the list does not include what is important to you, do add them in the empty boxes below before commencing on the exercise.</p>
-    <div id="p35Table">
-        <table>
-            <tr>
-                <td><button class="p35Button">Assertiveness</button></td>
-                <td><button class="p35Button">Security</button></td>
-                <td><button class="p35Button">Education</button></td>
-                <td><button class="p35Button">Creativity</button></td>
-                <td><button class="p35Button">Equality</button></td>
-                <td><button class="p35Button">Conforming</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Respect for others</button></td>
-                <td><button class="p35Button">Appearance</button></td>
-                <td><button class="p35Button">Happiness</button></td>
-                <td><button class="p35Button">Competition</button></td>
-                <td><button class="p35Button">Health</button></td>
-                <td><button class="p35Button">Hope</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Social Recognition</button></td>
-                <td><button class="p35Button">Authority</button></td>
-                <td><button class="p35Button">Religion</button></td>
-                <td><button class="p35Button">Relationships</button></td>
-                <td><button class="p35Button">Trust</button></td>
-                <td><button class="p35Button">Perfectionism</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Participation</button></td>
-                <td><button class="p35Button">Honesty</button></td>
-                <td><button class="p35Button">Pleasure</button></td>
-                <td><button class="p35Button">Peace</button></td>
-                <td><button class="p35Button">Loyalty</button></td>
-                <td><button class="p35Button">Tolerance</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Caring for others</button></td>
-                <td><button class="p35Button">Wealth</button></td>
-                <td><button class="p35Button">Caring</button></td>
-                <td><button class="p35Button">Forgiveness</button></td>
-                <td><button class="p35Button">Courage</button></td>
-                <td><button class="p35Button">Kindness</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Spirituality</button></td>
-                <td><button class="p35Button">Unity</button></td>
-                <td><button class="p35Button">Integrity</button></td>
-                <td><button class="p35Button">Power</button></td>
-                <td><button class="p35Button">Joy</button></td>
-                <td><button class="p35Button">Influence</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Friendship</button></td>
-                <td><button class="p35Button">Love</button></td>
-                <td><button class="p35Button">Justice</button></td>
-                <td><button class="p35Button">Success</button></td>
-                <td><button class="p35Button">Family</button></td>
-                <td><button class="p35Button">Career</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Authencity</button></td>
-                <td><button class="p35Button">Fame</button></td>
-                <td><button class="p35Button">Truth</button></td>
-                <td><button class="p35Button">Status</button></td>
-                <td><button class="p35Button">Wisdom</button></td>
-                <td><button class="p35Button">Acceptance</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Enthuasiasm</button></td>
-                <td><button class="p35Button">Health</button></td>
-                <td><button class="p35Button">Passion</button></td>
-                <td><button class="p35Button">Risk</button></td>
-                <td><button class="p35Button">Optimism</button></td>
-                <td><button class="p35Button">Caring</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Compassion</button></td>
-                <td><button class="p35Button">Excellence</button></td>
-                <td><button class="p35Button">Innovation</button></td>
-                <td><button class="p35Button">Balance</button></td>
-                <td><button class="p35Button">Teamwork</button></td>
-                <td><button class="p35Button">Fun</button></td>
-            </tr>
-            <tr>
-                <td><button class="p35Button">Open-mindedness</button></td>
-                <td><button class="p35Button">Pride</button></td>
-                <td><button class="p35Button">Results</button></td>
-                <td><button class="p35Button">Achievement</button></td>
-                <td><button class="p35Button">Fairness</button></td>
-                <td><button class="p35Button">Decisiveness</button></td>
-            </tr>
-        </table>
-
-  </div>
-
-    <hr />
-    <h1 id="heading"><strong><u>Personal ValuesPersonal or Core Values</u></strong></h1>
-    <ol id="p35values">
-        <li>This exercise is designed to identify your core values.  Your core values are what drive you; it is that which determines that course of actions you take each day.  Value words are packed with meaning.  You likely went through a process of “bundling”-embedding one value in another and counting two or more values as one.  This is a natural process.  By narrowing your list, you did not throw away any values; rather, you clarified what you mean by these words. Your two core values are easy to remember.  Imagine putting them in your pocket when you leave home each day.  These two values represent your larger set of values.</li>
-        <li>What are core values? Core values:
-            <ol>
-                <li style="list-style-type:lower-alpha;">Clarify your understanding of who you are.</li>
-                <li style="list-style-type:lower-alpha;">Require no justification to others.</li>
-                <li style="list-style-type:lower-alpha;">Guide you in making decisions and choices.</li>
-                <li style="list-style-type:lower-alpha;">Run all your relationships.</li>
-            </ol>        
-        </li>
-        <li>Values are a persons driving force and influence their actions and reactions.  Saying, “He’s a courageus man” or “She’s a generous woman” reflects a person’s deepest priorities in life.  A brave man speaks out, even when it’s dangerous to do so.  A generous woman selflessly gives money or her time to helps others.  Your values are made up of everything that has happened to you in your life and include influences from:
-            <ol>
-                <li style="list-style-type:lower-alpha;">Your Parents and family</li>
-                <li style="list-style-type:lower-alpha;">Your religious affiliation</li>
-                <li style="list-style-type:lower-alpha;">Your friends and peers</li>
-                <li style="list-style-type:lower-alpha;">Your education</li>
-                <li style="list-style-type:lower-alpha;">Your reading, and more.</li>
-            </ol> 
-        </li>
-        <li>Whether you realise it or not, they influence everything you do or don’t do.  They are expressed everywhere in your everyday life, although are beneath your usual awareness.  just like the biggest part of an iceberg is beneath the water and determines where it goes, your values determine your journey throughout your whole life.  Mostly invisible to others, your values may remain unknown to you too – if you don’t deliberately take time to define them.  And when you don’t know them, life seems senseless race to fulfill one seemingly important goal or another, leaving you increasingly, unfulfilled, drained and out of control.</li>
-        <li>How do you define your personal core values? Well, think about this:
-            <ol>
-                <li style="list-style-type:lower-alpha;">What shapes your behaviour?</li>
-                <li style="list-style-type:lower-alpha;">What are you passionate about?</li>
-                <li style="list-style-type:lower-alpha;">What do you absolutely love to do?</li>
-                <li style="list-style-type:lower-alpha;">What motivates your achievements?</li>
-            </ol> 
-        </li>
-        <li>Your personal core values are standards that greatly influence your attitude and character.  They are deeply etched into your emotional and mental make-up, and are not easily changed.  Think of your values as a GPS – when you wander off the path or lose direction, they bring you back on track.  When you are fully clear on these values, you attract to you people of like mind who share the same desire to lead a purposeful, authentic life.
-        </li>
-        <li>Effective people recognise these environmental influences and identify and develop a clear, concise, and meaningful set of values/beliefs, and priorities.  Once defined, values impact every aspect of your life.
-        </li>
-    </ol>
-    <br/>
-    <p><strong>Taken from:</strong></p>
-    <a href="http://www.change-management-coach.com/support-files/personal-values-worksheet.pdf">http://www.change-management-coach.com/support-files/personal-values-worksheet.pdf</a>
-    <br/>
-    <a href="http://www.sagepub.com/northouseintro2e/study/resources/questionnaires/89527 11q.pdf">http://www.sagepub.com/northouseintro2e/study/resources/questionnaires/89527 11q.pdf</a>
-    <br />
-    <a href="http://www.living-on-purpose.net/personal-core-values.html">http://www.living-on-purpose.net/personal-core-values.html</a>
-    <br />
-    <a href="http://www.best-of-the-time-mangement.com/values.htm">http://www.best-of-the-time-mangement.com/values.htm</a>
-   
-    @Html.ActionLink("Previous Page", "Page34") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page36")
-</div>
+    <div class="container1">
+        <h1 class="heading"><u>Personal Leadership Plan</u></h1>
+        <form id="p35LeadershipPlan">
+            <table id="p35LeadershipPlanTable">
+                <tr>
+                    <th style="text-align:center;">Area</th>
+                    <th style="text-align:center;">(SMART)Goals</th>
+                    <th style="text-align:center;">Action Plan</th>
+                </tr>
+                <tr>
+                    <td>Learning more about self</td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Acquiring knowledge and wisdom</td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Practicing new skills</td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Developing personal potential</td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                    <td>
+                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 }

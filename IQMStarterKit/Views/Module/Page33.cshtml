@@ -2,143 +2,168 @@
 @{
     ViewBag.Title = "Page33";
 }
+@section Scripts{
+    <script type="text/javascript">
+          $('button').click(function () {
+             $(this).toggleClass('pressed');
+          });
+    </script>
+}
+
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 id="heading"><strong><u>7 Habits of Highly Effective People</u></strong></h1>
-    <ol id="p33List">
-        <li>Be Proactive</li>
-        <li>Begin with the End in Mind</li>
-        <li>Put First Things First</li>
-        <li>Think Win Win</li>
-        <li>Seek First to Understand, Then to be Understood</li>
-        <li>Synergise</li>
-        <li>Sharpen the Saw</li>
-    </ol>
-    <div id="p33img">
-        <img src="~/Content/img/The_7_Habits_of_Highly_Effective_People.jpg" alt="7 Habits Book Graphic" />
-    </div>
-    <hr />
-    <h1 id="heading"><strong><u>My 14 Habits of a More Effective Me</u></strong></h1>
-    <p style="text-align:left;">Explain how you can adopt Stephen Covey’s Seven Habits of Highly Effective People in your life by giving two examples for each habit. Your examples may be based on different settings for example in school, at work, with friends / family members.</p>
-    <table id="p33_14HabitTable">
-        <tr>
-            <td>
-                <strong><u>Be Proactive</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br/>
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong><u>Begin with the End in Mind</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br />
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong><u>Put First Things First</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br />
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong><u>Think Win Win</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br />
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong><u>Seek First to Understand, then to be Understand</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br />
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong><u>Synergise</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br />
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong><u>Sharpen the Saw</u></strong>
-                <table>
-                    <tr>
-                        <td>
-                            1)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                            <br />
-                            2)
-                            <textarea class="p33txtarea" row="5" cols="130"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+    @Html.ValidationSummary(false)
 
-    @Html.ActionLink("Previous Page", "Page32") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page34")
-</div>
+    <div class="container1">
+        <h1 class="heading"><strong><u>Personal Values</u></strong></h1>
+        <p>The words below represent what most people identify as important aspects of their lives.</p>
+        <p>They can range from tangible subjects, issues and topics.  If the list does not include what is important to you, do add them in the empty boxes below before commencing on the exercise.</p>
+        <div id="p33Table">
+            <table>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Assertiveness" style="margin:5px;">Assertiveness</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Security" style="margin:5px;">Security</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Education" style="margin:5px;">Education</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Creativity" style="margin:5px;">Creativity</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Equality" style="margin:5px;">Equality</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Conforming" style="margin:5px;">Conforming</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Respect for others" style="margin:5px;">Respect for others</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Apperance" style="margin:5px;">Appearance</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Happiness" style="margin:5px;">Happiness</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Competition" style="margin:5px;">Competition</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Health" style="margin:5px;">Health</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Hope" style="margin:5px;">Hope</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Social Recognition" style="margin:5px;">Social Recognition</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Authority" style="margin:5px;">Authority</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Religion" style="margin:5px;">Religion</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Relationships" style="margin:5px;">Relationships</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Trust" style="margin:5px;">Trust</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Perfectionism" style="margin:5px;">Perfectionism</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Participation" style="margin:5px;">Participation</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Honesty" style="margin:5px;">Honesty</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Pleasure" style="margin:5px;">Pleasure</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Peace" style="margin:5px;">Peace</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Loyalty" style="margin:5px;">Loyalty</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Tolerance" style="margin:5px;">Tolerance</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Caring for others" style="margin:5px;">Caring for others</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Wealth" style="margin:5px;">Wealth</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Caring" style="margin:5px;">Caring</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Forgiveness" style="margin:5px;">Forgiveness</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Courage" style="margin:5px;">Courage</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Kindness" style="margin:5px;">Kindness</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Spirituality" style="margin:5px;">Spirituality</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Unity" style="margin:5px;">Unity</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Integrity" style="margin:5px;">Integrity</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Power" style="margin:5px;">Power</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Joy" style="margin:5px;">Joy</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Influence" style="margin:5px;">Influence</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Friendship" style="margin:5px;">Friendship</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Love" style="margin:5px;">Love</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Justice" style="margin:5px;">Justice</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Success" style="margin:5px;">Success</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Family" style="margin:5px;">Family</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Career" style="margin:5px;">Career</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Authencity" style="margin:5px;">Authencity</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Fame" style="margin:5px;">Fame</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Truth" style="margin:5px;">Truth</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Status" style="margin:5px;">Status</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Wisdom" style="margin:5px;">Wisdom</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Acceptance" style="margin:5px;">Acceptance</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Enthuasiasm" style="margin:5px;">Enthuasiasm</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Health" style="margin:5px;">Health</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Passion" style="margin:5px;">Passion</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Risk" style="margin:5px;">Risk</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Optimism" style="margin:5px;">Optimism</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Caring" style="margin:5px;">Caring</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Compassion" style="margin:5px;">Compassion</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Excellence" style="margin:5px;">Excellence</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Innovation" style="margin:5px;">Innovation</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Balance" style="margin:5px;">Balance</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Teamwork" style="margin:5px;">Teamwork</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Fun" style="margin:5px;">Fun</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="PersonalValues" value="Open-mindedness" style="margin:5px;">Open-mindedness</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Pride" style="margin:5px;">Pride</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Results" style="margin:5px;">Results</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Achievement" style="margin:5px;">Achievement</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Fairness" style="margin:5px;">Fairness</td>
+                    <td><input type="checkbox" name="PersonalValues" value="Decisiveness" style="margin:5px;">Decisiveness</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <hr />
+        <h1 class="heading"><strong><u>Personal or Core Values</u></strong></h1>
+        <ol id="p33values">
+            <li>This exercise is designed to identify your core values.  Your core values are what drive you; it is that which determines that course of actions you take each day.  Value words are packed with meaning.  You likely went through a process of “bundling”-embedding one value in another and counting two or more values as one.  This is a natural process.  By narrowing your list, you did not throw away any values; rather, you clarified what you mean by these words. Your two core values are easy to remember.  Imagine putting them in your pocket when you leave home each day.  These two values represent your larger set of values.</li>
+            <li>
+                What are core values? Core values:
+                <ol>
+                    <li style="list-style-type:lower-alpha;">Clarify your understanding of who you are.</li>
+                    <li style="list-style-type:lower-alpha;">Require no justification to others.</li>
+                    <li style="list-style-type:lower-alpha;">Guide you in making decisions and choices.</li>
+                    <li style="list-style-type:lower-alpha;">Run all your relationships.</li>
+                </ol>
+            </li>
+            <li>
+                Values are a persons driving force and influence their actions and reactions.  Saying, “He’s a courageus man” or “She’s a generous woman” reflects a person’s deepest priorities in life.  A brave man speaks out, even when it’s dangerous to do so.  A generous woman selflessly gives money or her time to helps others.  Your values are made up of everything that has happened to you in your life and include influences from:
+                <ol>
+                    <li style="list-style-type:lower-alpha;">Your Parents and family</li>
+                    <li style="list-style-type:lower-alpha;">Your religious affiliation</li>
+                    <li style="list-style-type:lower-alpha;">Your friends and peers</li>
+                    <li style="list-style-type:lower-alpha;">Your education</li>
+                    <li style="list-style-type:lower-alpha;">Your reading, and more.</li>
+                </ol>
+            </li>
+            <li>Whether you realise it or not, they influence everything you do or don’t do.  They are expressed everywhere in your everyday life, although are beneath your usual awareness.  just like the biggest part of an iceberg is beneath the water and determines where it goes, your values determine your journey throughout your whole life.  Mostly invisible to others, your values may remain unknown to you too – if you don’t deliberately take time to define them.  And when you don’t know them, life seems senseless race to fulfill one seemingly important goal or another, leaving you increasingly, unfulfilled, drained and out of control.</li>
+            <li>
+                How do you define your personal core values? Well, think about this:
+                <ol>
+                    <li style="list-style-type:lower-alpha;">What shapes your behaviour?</li>
+                    <li style="list-style-type:lower-alpha;">What are you passionate about?</li>
+                    <li style="list-style-type:lower-alpha;">What do you absolutely love to do?</li>
+                    <li style="list-style-type:lower-alpha;">What motivates your achievements?</li>
+                </ol>
+            </li>
+            <li>
+                Your personal core values are standards that greatly influence your attitude and character.  They are deeply etched into your emotional and mental make-up, and are not easily changed.  Think of your values as a GPS – when you wander off the path or lose direction, they bring you back on track.  When you are fully clear on these values, you attract to you people of like mind who share the same desire to lead a purposeful, authentic life.
+            </li>
+            <li>
+                Effective people recognise these environmental influences and identify and develop a clear, concise, and meaningful set of values/beliefs, and priorities.  Once defined, values impact every aspect of your life.
+            </li>
+        </ol>
+        <br />
+        <p><strong>Taken from:</strong></p>
+        <a href="http://www.change-management-coach.com/support-files/personal-values-worksheet.pdf">http://www.change-management-coach.com/support-files/personal-values-worksheet.pdf</a>
+        <br />
+        <a href="http://www.sagepub.com/northouseintro2e/study/resources/questionnaires/89527 11q.pdf">http://www.sagepub.com/northouseintro2e/study/resources/questionnaires/89527 11q.pdf</a>
+        <br />
+        <a href="http://www.living-on-purpose.net/personal-core-values.html">http://www.living-on-purpose.net/personal-core-values.html</a>
+        <br />
+        <a href="http://www.best-of-the-time-mangement.com/values.htm">http://www.best-of-the-time-mangement.com/values.htm</a>
+
+
+    </div>
+
 }
 

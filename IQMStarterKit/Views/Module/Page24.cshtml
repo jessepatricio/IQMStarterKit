@@ -4,21 +4,17 @@
 }
 @using (Html.BeginForm())
 {
+    <div class="container1">
+        <div style="text-align:center;">
+            <img src="~/Content/img/Human Bingo Activity.png" alt="Human Bingo Activity Chart">
+        </div>
 
-<div class="container1">
-    <h1 class="heading">Classroom Rules</h1>
-    <br />
-    <ul class="p22-24List">
-        <li><span class="glyphicon glyphicon-ok"></span> &nbsp; The activities and exercises are <strong>NOT</strong> about winning, it’s the learning that’s more important.</li>
-    </ul>
-    <p id="p24Cheating"> Cheating is not allowed.</p>
-    <div id="p22-24img">
-        <img src="~/Content/img/ThumbDown.png" alt="Thumbs Down graphic">
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "Page23") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "Page25")
+        </div>
     </div>
-    @Html.ActionLink("Previous Page", "Page23") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page25")
-</div>
 }
 
 

@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<IQMStarterKit.Models.Core.TempActivity>
 
 @{
-    ViewBag.Title = "Activity";
+    ViewBag.Title = "Activities";
 }
 
 @section scripts{ 
     <script>
      $(document).ready(function () {
          //$('#activityTable').DataTable({
-         //   // "bLengthChange": false
+         //    "bLengthChange": false,
+         //    "bFilter": false,
+         //    "bSort": false
          //});
         });
     </script>
-
 }
 <style>
     .dataTables_wrapper .dataTables_length {
@@ -32,7 +33,7 @@
 </p>
 
 
-<table width="100" class="table table-striped table-bordered" id="activityTable" cellspacing="0">
+<table width="100%" class="table table-striped table-bordered" id="activityTable" cellspacing="0">
     <thead>
         <tr>
             <th>

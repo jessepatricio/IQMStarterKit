@@ -1,16 +1,18 @@
-﻿using System;
+﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Core;
+using IQMStarterKit.Models.Forms;
+using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
-using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Web.Mvc;
-using IQMStarterKit.Models;
-using IQMStarterKit.Models.Core;
-using Microsoft.AspNet.Identity;
 
 namespace IQMStarterKit.Controllers
 {
+    [Authorize]
     public class ModuleController : CommonController
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
@@ -18,7 +20,6 @@ namespace IQMStarterKit.Controllers
         public ActionResult Index()
         {
             return RedirectToAction("ViewStudentActivities", "Module");
-            
         }
 
         public ActionResult ViewStudentActivities(string email)
@@ -31,7 +32,7 @@ namespace IQMStarterKit.Controllers
             };
 
             if (string.IsNullOrEmpty(email)) email = User.Identity.Name;
-                
+
             var student = UserManager.FindByEmail(email);
             ViewBag.StudentName = student.FullName;
 
@@ -60,7 +61,7 @@ namespace IQMStarterKit.Controllers
 
                     actView.Add(act);
                 }
-                
+
                 item.TempActivities = actView;
 
             }
@@ -128,15 +129,16 @@ namespace IQMStarterKit.Controllers
         public ActionResult Page14()
         {
             if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
-            else {
+            else
+            {
                 if (Session["Page13Completed"] != null)
                 {
                     try
                     {
                         //save introduction as completed
-                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Introduction");
-                        
                         //validate if record already existed
+                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Introduction");
+
                         var owner = GetSessionUserId();
                         var stdAct =
                             _context.StudentActivities.Where(m => m.TempActivityId == tempAct.TempActivityId &&
@@ -165,7 +167,7 @@ namespace IQMStarterKit.Controllers
                         studentActivity.DopeResult = string.Empty;
                         studentActivity.DiscResult = string.Empty;
                         studentActivity.Top3PersonalValues = string.Empty;
-                       
+
                         Session["Page13Completed"] = null;
                         // exclude fields not to be saved
 
@@ -182,18 +184,125 @@ namespace IQMStarterKit.Controllers
 
             return View();
         }
+
+
+
+
+
+
         public ActionResult Page15()
         {
-            return View();
+            var aboutme = new AboutMeClass();
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("About Me");
+
+            // get Current User
+            var user = GetSessionUserId();
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                aboutme = JsonConvert.DeserializeObject<AboutMeClass>(rec.Context);
+                aboutme.StudentActivity = rec;
+            }
+            return View(aboutme);
         }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page15(FormCollection fc)
+        {
+            var aboutMe = new AboutMeClass();
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("About Me");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+
+            try
+            {
+                //generate context string from form collection
+
+                aboutMe.Name = fc.Get("name").ToString();
+                aboutMe.Place = fc.Get("place").ToString();
+                aboutMe.Hobby = fc.Get("hobby").ToString();
+                aboutMe.Movie = fc.Get("movie").ToString();
+                aboutMe.Important = fc.Get("important").ToString();
+                aboutMe.Model = fc.Get("model").ToString();
+                aboutMe.Happy = fc.Get("happy").ToString();
+                aboutMe.Dislike = fc.Get("dislike").ToString();
+                aboutMe.Famous = fc.Get("famous").ToString();
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(aboutMe);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId);
+
+                if (studentRecord == null)
+                {
+                    //insert record
+
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    _context.StudentActivities.Add(newRecord);
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ProgressValue = 100;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+                    //modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                    //save record
+                    _context.SaveChanges();
+
+                    TempData["notice"] = "Record Saved.";
+                    TempData["alert"] = "alert alert-success fade in";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["notice"] = ex.Message;
+                TempData["alert"] = "alert alert-danger fade in";
+            }
+
+            return View(aboutMe);
+        }
+
         public ActionResult Page16()
         {
+
             return View();
         }
+
         public ActionResult Page17()
         {
+
             return View();
         }
+
+
         public ActionResult Page18()
         {
             return View();
@@ -342,13 +451,19 @@ namespace IQMStarterKit.Controllers
         {
             return View();
         }
-        public ActionResult Page55()
+
+
+
+        //Utility
+
+        private byte GetTempActivityID(string v)
         {
-            return View();
+            return _context.TempActivities.FirstOrDefault(m => m.Title == v).TempActivityId;
         }
-        public ActionResult Page56()
+
+        private byte GetTempModuleIdByActivityID(byte Id)
         {
-            return View();
+            return _context.TempActivities.FirstOrDefault(m => m.TempActivityId == Id).TempModuleId;
         }
     }
 }

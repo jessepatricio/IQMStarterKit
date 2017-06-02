@@ -1,11 +1,22 @@
-﻿@model PagedList.IPagedList<IQMStarterKit.Models.ExtendedUserCustom>
+﻿@model IEnumerable<IQMStarterKit.Models.ExtendedUserCustom>
 
 @using IQMStarterKit.Models
-@using PagedList.Mvc;
+
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
 @{
     ViewBag.Title = "UserRole Management";
 }
+
+<style>
+    .dataTables_wrapper .dataTables_length {
+        float: right;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+        text-align: right;
+    }
+</style>
 <br />
 <div class="form-inline">
     @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
@@ -19,57 +30,58 @@
         <div class="form-group">
             @Html.ActionLink("Back to Home", "/", "Home", null, new { @class = "btn btn-default" })
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.TextBox("searchKeyword", ViewBag.CurrentFilter as string, new {@class = "form-control", @placeholder = "Search"})   
-        </div>
-        <div class="form-group">
+        </div>*@
+        @*<div class="form-group">
             <input type="submit" value="Search" class="btn btn-default" />           
-        </div>
+        </div>*@
 
-        
     }
 </div>
 <br/>
-<table id="user" class="table table-hover">
-    <tr>
-        <th>Student Name</th>
-        <th>Email</th>
-        <th>Group Name</th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<table id="user"  width="100%" class="table table-striped table-bordered" cellspacing="0">
+    <thead>
         <tr>
-            <td>@Html.DisplayFor(m => item.FullName)</td>
-            <td>@Html.DisplayFor(m => item.Email)</td>
-            <td>
-                @if (item.GroupId == 0)
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Group Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => item.FullName)</td>
+                <td>@Html.DisplayFor(m => item.Email)</td>
+                <td>
+                    @if (item.GroupId == 0)
                 {
-                <text>Not assigned</text>
-            }
-            else
-            {
-                IEnumerable<GroupModel> grouplist = ViewBag.Groups;
-                var groupname = grouplist.FirstOrDefault(m => m.GroupId == item.GroupId);
+                        <text>Not assigned</text>
+                    }
+                    else
+                    {
+                        IEnumerable<GroupModel> grouplist = ViewBag.Groups;
+                        var groupname = grouplist.FirstOrDefault(m => m.GroupId == item.GroupId);
 
-                <text>@groupname.GroupName</text>
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditUser", new { Email = item.Email }) |
-            @if ((item.Email.ToLower() != this.User.Identity.Name.ToLower()))
+                        <text>@groupname.GroupName</text>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { Email = item.Email }) |
+                    @if ((item.Email.ToLower() != this.User.Identity.Name.ToLower()))
                 {
-                @*@Html.ActionLink("Delete", "DeleteUser", new { email = item.Email},
-                    new {onclick = "return confirm('Are you sure you want to remove this user?');"})*@
+                        @*@Html.ActionLink("Delete", "DeleteUser", new { email = item.Email},
+                            new {onclick = "return confirm('Are you sure you want to remove this user?');"})*@
 
-                <a href="#" data-href="@Request.Url.AbsoluteUri/DeleteUser?email=@item.Email" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                        <a href="#" data-href="@Request.Url.AbsoluteUri/DeleteUser?email=@item.Email" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                    }
+                </td>
 
-
-            }
-        </td>
-
-    </tr>
-    }
+            </tr>
+        }
+    </tbody>
 </table>
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -82,8 +94,7 @@
             </div>
 
             <div class="modal-body">
-                <p>You are about to delete one track, this procedure is irreversible.</p>
-                <p>Do you want to proceed?</p>
+                <p>You are about to delete this user. Do you want to proceed?</p>
                 <p class="debug-url"></p>
             </div>
 
@@ -95,18 +106,17 @@
     </div>
 </div>
 
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model,
-    page => Url.Action("Index",
-        new { page,
-            searchStringUserNameOrEmail = ViewBag.searchStringUserNameOrEmail,
-            currentFilter = ViewBag.CurrentFilter }))
 <hr />
 
 @section scripts{
     <script>
+
+            $(document).ready(function () {
+                $('#user').DataTable({
+                    "bLengthChange": false,
+                    "bFilter": true
+                });
+            });
 
             $('#confirm-delete').on('show.bs.modal', function(e) {
                 $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));

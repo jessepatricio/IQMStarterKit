@@ -4,45 +4,69 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 id="heading"><strong><u>Winning the Lottery EVERYDAY!!!</u></strong></h1>
+    <div class="container1">
+        <div>
+            <h1 class="heading"><strong><u>Habit #3 : Put First Things First</u></strong></h1>
+            <h2 style="text-align:center;">Self-Management</h2>
+            <p> Below, list all the things or activies you have to do in the next 7 days.</p>
+            <textarea class="p38txtarea" rows="15" cols="150" name="activities"></textarea>
+        </div>
+        <hr />
+        <div>
+            <img style="width:100%;" src="~/Content/img/timechart.png" alt="Time Table Chart" />
+        </div>
+        <hr />
+        <div>
+            <h1 class="heading"><strong>The Important / Urgent Matrix</strong></h1>
+            <table style="margin:auto;">
+                <tr>
+                    <td></td>
+                    <td style="text-align:center;">Urgent</td>
+                    <td style="text-align:center;">Not Urgent</td>
+                </tr>
+                <tr>
+                    <td style="transform: rotate(270deg);">Important</td>
+                    <td style="text-align:center;">
+                        I<br />
+                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                    </td>
+                    <td style="text-align:center;">
+                        II<br />
+                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="transform: rotate(270deg);"> Not Important</td>
+                    <td style="text-align:center;">
+                        III<br />
+                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                    </td>
+                    <td style="text-align:center;">
+                        IV<br />
+                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        <div>
+            <h1 class="heading"><strong><u>Large Task:</u></strong></h1>
+            <textarea class="p38txtarea" rows="5" cols="150" name="answer"></textarea>
+            <p><strong>Break this down into smaller more manageable tasks:</strong></p>
+            <ol>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
+            </ol>
+        </div>
 
-    <p style="text-align:left;">Congratulations! You have just won $86,400 every day for the rest of your life from your bank!</p>
-    <p style="text-align:left;">Each morning you will have $86,400 deposited into your bank account. However, there are rules that you must apply when accepting this prize:</p>
-
-    <p style="text-align:left;">
-        <strong><u>Rule#1</u></strong>
-        <ul style="text-align:left;">
-            <li>Everything that you didn’t spend by the end of the day would be taken away.</li>
-            <li>You cannot transfer money into another account. You must SPEND the money.</li>
-            <li>Each morning upon awakening, your account with be topped up with another $86,400 for that day.</li>
-        </ul>
-    </p>
-
-    <p style="text-align:left;">
-        <strong><u>Rule#2</u></strong>
-        <ul style="text-align:left;">
-            <li>The top up to your bank account can end anytime without warning.</li>
-        </ul>
-    </p>
-
-    <p style="text-align:left;">In the next 5 minutes, write down how you would spend that amount of money each day</p>
-
-    <ol>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-        <li><input class="p38txtbox" type="text" name="p38Lottery"></li>
-    </ol>
-
-    @Html.ActionLink("Previous Page", "Page37") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page39")
-</div>
+    </div>
 }
+

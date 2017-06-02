@@ -5,17 +5,29 @@
 @using (Html.BeginForm())
 {
 <div class="container1">
-    <h1 class="heading">Personal Coat of Arms</h1>
-    <ul class="p14List">
-        <li>In Medieval Europe, and many other parts of the world, people used pictures and symbols on their shields to identify who they were and tell others about themselves.  You are going to  construct your own &#34;personal shield&#34; and share its meaning with each other </li>
-        <br />
-        <li>See the shield outline for your use</li>
-        <br />
-        <li>In each quadrant use any combination of drawings and pictures to tell others about yourself using only coloured pens/pencils</li>
-    </ul>
+    <div>
+        <h1 class="heading">Personal Coat of Arms</h1>
+        <ul class="p14List">
+            <li>In Medieval Europe, and many other parts of the world, people used pictures and symbols on their shields to identify who they were and tell others about themselves.  You are going to  construct your own &#34;personal shield&#34; and share its meaning with each other </li>
+            <li>See the shield outline for your use</li>
+            <li>In each quadrant use any combination of drawings and pictures to tell others about yourself using only coloured pens/pencils</li>
+        </ul>
+    </div>
+    <hr/>
+    <div>
+        <h1 class="heading">Activity</h1>
+        <h2 style="text-align:center;"> <strong> Using only pictures and symbols</strong></h2>
+        <h2 style="text-align:center;"> <strong> No words, letters or numbers</strong></h2>
 
-    @Html.ActionLink("Previous Page", "Page13") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page15")
+        <div style="text-align:center;">
+            <img id="p14coatOfArm" src="~/Content/img/Coat of Arms.jpg" alt="Personal Coat of Arms Graphic">
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "Page13") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "Page15")
+    </div>
 </div>
 }

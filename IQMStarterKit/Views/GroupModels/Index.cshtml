@@ -6,47 +6,55 @@
 }
 
 <h2>Group List</h2>
+@section scripts{
+    <script>
+     $(document).ready(function () {
+         $('#groupTable').DataTable({
+             "bLengthChange": false,
+             "bFilter": false
+         });
+        });
+    </script>
+}
 
 <p>
     @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary"})
 </p>
 <div class="table-responsive">          
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GroupName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-           Tutor
-        </th>
-      
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model) {
+<table width="100%" class="table table-striped table-bordered" id="groupTable" cellspacing="0">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @{
-                    //UserManager<>
-                }
-                @Html.DisplayFor(modelItem => item.TutorId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.GroupId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.GroupId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.GroupId })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                Tutor
+            </th>
+            <th>&nbsp;</th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GroupId })
+                </td>
+            </tr>                        }
+    </tbody>
 </table>
 </div>

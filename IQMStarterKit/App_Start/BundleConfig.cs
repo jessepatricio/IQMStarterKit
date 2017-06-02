@@ -23,13 +23,16 @@ namespace IQMStarterKit
                       "~/Scripts/bootbox.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/DataTables/jquery.datatables.js",
-                      "~/Scripts/DataTables/datatables.bootstrap.js"));
+                      "~/Scripts/DataTables/datatables.bootstrap.js",
+                      "~/Scripts/toastr.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/pages.css",
-                      "~/Content/DataTables/css/datatable.bootstrap.css"
+                      "~/Content/DataTables/css/datatable.bootstrap.css",
+                      "~/Content/toastr.css"
                       ));
         }
     }

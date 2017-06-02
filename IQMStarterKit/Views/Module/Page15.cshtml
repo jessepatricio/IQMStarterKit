@@ -1,17 +1,86 @@
-﻿
+﻿@model  IQMStarterKit.Models.Forms.AboutMeClass
+
+
 @{
-    ViewBag.Title = "Page15";
+    ViewBag.Title = "About Me";
 }
+
+@if (TempData["notice"] != null)
+{
+    <br/>
+    <div class="@TempData["alert"]">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> @TempData["notice"]
+    </div>
+}
+
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 class="heading">Activity</h1>
-    <p class="p15"> <strong> Using only pictures and symbols</strong></p>
-    <br/>
-    <p class="p15"> <strong> No words, letters or numbers</strong></p>
-    <br/>
+    @Html.AntiForgeryToken()
+    if (Model.StudentActivity.ProgressValue == 100)
+    {
+        ViewBag.ReadOnly = true;
+    } else
+    {
+        ViewBag.ReadOnly = false;
+    }
+
+    <div class="container1">
+       
+        <div class="p15AboutMeContainer">
+            <img id="p15aboutMeImg" src="~/Content/img/AboutMe.png" alt="About Me Graphic">
+
+            @Html.EditorFor(model => model.Name, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Name" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Name" } })
+            @Html.EditorFor(model => model.Place, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Place" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Place" } })
+            @Html.EditorFor(model => model.Hobby, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtarea form-control", id = "p15Hobby" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Hobby" } })
+            @Html.EditorFor(model => model.Movie, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Movie" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Movie" } })
+            @Html.EditorFor(model => model.Important, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Important" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Important" } })
+            @Html.EditorFor(model => model.Model, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Model" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Model" } })
+            @Html.EditorFor(model => model.Happy, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Happy" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Happy" } })
+            @Html.EditorFor(model => model.Dislike, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Dislike" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Dislike" } })
+            @Html.EditorFor(model => model.Famous, ViewBag.Readonly ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p15txtbox form-control", id = "p15Famous" } } : new { htmlAttributes = new { @class = "p15txtbox form-control", id = "p15Famous" } })
+
+
+
+            @if (!ViewBag.ReadOnly)
+            {
+                <div style="text-align: center;" class="form-group`">
+                    <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                </div>
+            }
+
+        </div>
+            
+       
+    </div>
+
+}
+
+
+<div style="text-align:center; margin-top: 20px;">
     @Html.ActionLink("Previous Page", "Page14") |
     @Html.ActionLink("Main", "Index") |
     @Html.ActionLink("Next Page", "Page16")
 </div>
+
+@section Scripts {
+
+ <script type="text/javascript">
+<!--
+
+$(document).ready(function () {
+
+window.setTimeout(function() {
+    $(".alert").fadeTo(1500, 0).slideUp(500, function(){
+        $(this).remove();
+    });
+}, 5000);
+
+});
+//-->
+</script>
+
+
 }
+
+

@@ -4,21 +4,20 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 class="heading">Tutor-Student Contract</h1>
+    <div class="container1">
+        <h1 class="heading">Classroom Rules</h1>
+        <br />
+        <p class="p17-19List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Punctuality</p>
+        <ul class="p17-19List">
+            <li>Is respect for your tutor and your classmates.</li>
+            <li>Shows that you are well disciplined and take what you are doing seriously.</li>
+        </ul>
 
-    <div id="p18img">
-        <img src="~/Content/img/contract.png" alt="Contract graphic">
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "Page17") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "Page19")
+        </div>
+
     </div>
-
-    <ul class="p18List">
-        <li>What students expect from tutors</li>
-        <li>What tutors can expect from students</li>
-    </ul>
-
-    @Html.ActionLink("Previous Page", "Page17") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page19")
-
-</div>
 }

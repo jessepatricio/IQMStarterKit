@@ -4,20 +4,102 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 class="heading">Classroom Rules</h1>
-    <br />
-    <ul class="p22-24List">
-        <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Work with different people.</li>
-        <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Be sensitive and respectful towards others and their culture.</li>
-        <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Interact with others; make new friends.</li>
-    </ul>
-    <div id="p22-24img">
-        <img src="~/Content/img/spongebob.png" alt="Spongebob and Patrick graphic">
+    <div class="container1">
+        <p id="p23instruction">Choose one that is most applicable for you in each situations:</p>
+        <table id="p23VARKTable">
+            <tr>
+                <th style="text-align:center;">Situations</th>
+                <th style="text-align:center;"><strong><u>Visual</u></strong></th>
+                <th style="text-align:center;"><strong><u>Auditory</u></strong></th>
+                <th style="text-align:center;"><strong><u>Reading/ Writing</u></strong></th>
+                <th style="text-align:center;"><strong><u>Kinesthetic</u></strong></th>
+            </tr>
+            <tr>
+                <td>1. You are about to give instructions to a person. She is going to a football match and wants to visit your house by car first. Would you</td>
+                <td><input type="radio" name="VARK1" value="V" style="margin-right:5px;">Draw a map on paper</td>
+                <td><input type="radio" name="VARK1" value="A" style="margin-right:5px;">Tell her directions</td>
+                <td><input type="radio" name="VARK1" value="R" style="margin-right:5px;">Write down the directions (without a map)</td>
+                <td><input type="radio" name="VARK1" value="K" style="margin-right:5px;">Collect her in your car</td>
+            </tr>
+            <tr>
+                <td>2. You are staying in a hotel in Auckland to watch the game and have a rental car. You would like to visit a friend whose address you do not know. Would you like them to</td>
+                <td><input type="radio" name="VARK2" value="V" style="margin-right:5px;">Draw a map</td>
+                <td><input type="radio" name="VARK2" value="A" style="margin-right:5px;">Tell you directions</td>
+                <td><input type="radio" name="VARK2" value="R" style="margin-right:5px;">Write down the directions without a map</td>
+                <td><input type="radio" name="VARK2" value="K" style="margin-right:5px;">Collect you from the hotel in their car</td>
+            </tr>
+            <tr>
+                <td>3. You have just received a copy of your itinerary for a trip to South Africa. This is of interest to your friend. Would you</td>
+                <td><input type="radio" name="VARK3" value="V" style="margin-right:5px;">Show her a map of South Africa</td>
+                <td><input type="radio" name="VARK3" value="A" style="margin-right:5px;">Call her immediately and tell her about it</td>
+                <td><input type="radio" name="VARK3" value="R" style="margin-right:5px;">Send her a copy of the printed itinerary</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>4. You are going to cook a dessert as a special treat for your family. Do you:</td>
+                <td><input type="radio" name="VARK4" value="V" style="margin-right:5px;">Thumb through a cookbook looking for ideas from pictures</td>
+                <td><input type="radio" name="VARK4" value="A" style="margin-right:5px;">Ask for advice from others</td>
+                <td><input type="radio" name="VARK4" value="R" style="margin-right:5px;">Refer to a specific cookbook where there is a good recipe</td>
+                <td><input type="radio" name="VARK4" value="K" style="margin-right:5px;">Cook something familiar without a need for instructions</td>
+            </tr>
+            <tr>
+                <td>5. A group of tourists has been assigned to you to find out about Auckland. Would you</td>
+                <td><input type="radio" name="VARK5" value="V" style="margin-right:5px;">Show them photographs and videos</td>
+                <td><input type="radio" name="VARK5" value="A" style="margin-right:5px;">Give them a talk on Auckland</td>
+                <td><input type="radio" name="VARK5" value="R" style="margin-right:5px;">Give them a book on Auckland</td>
+                <td><input type="radio" name="VARK5" value="K" style="margin-right:5px;">Drive them around Auckland</td>
+            </tr>
+            <tr>
+                <td>6. You are about to purchase a new camera. Other than the price, what would most influence your decision?</td>
+                <td><input type="radio" name="VARK6" value="V" style="margin-right:5px;">Its distinctive appearance</td>
+                <td><input type="radio" name="VARK6" value="A" style="margin-right:5px;">A friend talking about it</td>
+                <td><input type="radio" name="VARK6" value="R" style="margin-right:5px;">Reading the details about it</td>
+                <td><input type="radio" name="VARK6" value="K" style="margin-right:5px;">Trying it out</td>
+            </tr>
+            <tr>
+                <td>7. Recall a time in your life when you learned how to do something like playing a new board game. Try to avoid choosing a very physical skill. How did you learn best? By:</td>
+                <td><input type="radio" name="VARK7" value="V" style="margin-right:5px;">Visual clues such as pictures, diagrams, charts.</td>
+                <td><input type="radio" name="VARK7" value="A" style="margin-right:5px;">Listening to somebody explain it</td>
+                <td><input type="radio" name="VARK7" value="R" style="margin-right:5px;">Written instructions</td>
+                <td><input type="radio" name="VARK7" value="K" style="margin-right:5px;">Doing it</td>
+            </tr>
+            <tr>
+                <td>8. You are about to learn how to use a new programme on a computer. Would you:</td>
+                <td><input type="radio" name="VARK8" value="V" style="margin-right:5px;">Find an on-line video that will explain it.</td>
+                <td><input type="radio" name="VARK8" value="A" style="margin-right:5px;">Telephone a friend and ask questions about it</td>
+                <td><input type="radio" name="VARK8" value="R" style="margin-right:5px;">Read the manual that comes with the programme</td>
+                <td><input type="radio" name="VARK8" value="K" style="margin-right:5px;">Ask a friend to show you</td>
+            </tr>
+            <tr>
+                <td>9. You are not sure whether a word should be spelled “dependent” or “dependant”. Do you:</td>
+                <td><input type="radio" name="VARK9" value="V" style="margin-right:5px;">See the word in your mind and choose the best way it looks</td>
+                <td><input type="radio" name="VARK9" value="A" style="margin-right:5px;">Sound it out</td>
+                <td><input type="radio" name="VARK9" value="R" style="margin-right:5px;">Look it up in a dictionary</td>
+                <td><input type="radio" name="VARK9" value="K" style="margin-right:5px;">Write both versions down</td>
+            </tr>
+            <tr>
+                <td>10. Apart from price, what would most influence your decision to buy a technical book?</td>
+                <td><input type="radio" name="VARK10" value="V" style="margin-right:5px;">It looks ok</td>
+                <td><input type="radio" name="VARK10" value="A" style="margin-right:5px;">A friend talking about it</td>
+                <td><input type="radio" name="VARK10" value="R" style="margin-right:5px;">Skimming through parts of it</td>
+                <td><input type="radio" name="VARK10" value="K" style="margin-right:5px;">Using a friend’s copy</td>
+            </tr>
+            <tr>
+                <td>11. Do you prefer a lecturer or teacher who likes to use:</td>
+                <td><input type="radio" name="VARK11" value="V" style="margin-right:5px;">Flow charts, diagrams, PowerPoints</td>
+                <td><input type="radio" name="VARK11" value="A" style="margin-right:5px;">Discussion and guest speakers</td>
+                <td><input type="radio" name="VARK11" value="R" style="margin-right:5px;">Handouts and / or a textbook</td>
+                <td><input type="radio" name="VARK11" value="K" style="margin-right:5px;">Field trips and practical sessions</td>
+            </tr>
+
+
+        </table>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "Page22") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "Page24")
+        </div>
     </div>
-    @Html.ActionLink("Previous Page", "Page22") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page24")
-</div>
 }
 

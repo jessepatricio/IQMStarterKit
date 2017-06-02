@@ -4,11 +4,230 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <img src="~/Content/img/Brainstorming.jpg" alt="Activity Brainstorming" />
-    @Html.ActionLink("Previous Page", "Page45") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page47")
-</div>
+    <div class="container1">
+        <h1 class="heading"><strong><u>What's Your Conflict Management Style</u></strong></h1>
+        <p><strong>Instructions:</strong>Listed below are 15 statements.  Each statement provides a possible strategy for dealing with a conflict. Select which best applies for you.</p>
+       
+        <p>Do not answer as you think you should, answer as you actually behave.</p>
+
+        <table style="margin:auto;">
+            <tr>
+                <td style="text-align:center;"></td>
+                <td>Statement</td>
+                <td>Score</td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">A</td>
+                <td>I argue my case with peers, colleagues and co-worked to demonstrate the merits of the position I take.</td>
+                <td>
+                    <select name="Shark">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">B</td>
+                <td>I try to reach compromises through negotiation.</td>
+                <td>
+                    <select name="Fox">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">C</td>
+                <td>I attempt to meet the expectations of others.</td>
+                <td>
+                    <select name="Teddy">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">D</td>
+                <td>I seek to investigate issues with others in order to find solutions that are mutually acceptable.</td>
+                <td>
+                    <select name="Owl">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">E</td>
+                <td>I am firm in resolve when it comes to defending my side of the issue.</td>
+                <td>
+                    <select name="Shark">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">F</td>
+                <td>I try to avoid being singled out, keeping conflict with others to myself.</td>
+                <td>
+                    <select name="Turtle">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">G</td>
+                <td>I uphold my solutions to problems.</td>
+                <td>
+                    <select name="Shark">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">H</td>
+                <td>I compromise in order to reach solutions.</td>
+                <td>
+                    <select name="Fox">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"> I</td>
+                <td>I trade important information with others so that problems can be solved together.</td>
+                <td>
+                    <select name="Owl">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">J</td>
+                <td>I avoid discussing my differences with others.</td>
+                <td>
+                    <select name="Turtle">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">K</td>
+                <td>I try to accommodate the wishes of my peers and colleagues.</td>
+                <td>
+                    <select name="Teddy">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">L</td>
+                <td>I seek to bring everyone’s concerns out into the open in order to resolve disputes in the best possible way.</td>
+                <td>
+                    <select name="Owl">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">M</td>
+                <td>I put forward middles positions in efforts to break deadlocks.</td>
+                <td>
+                    <select name="Fox">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">N</td>
+                <td>I accept the recommendations of colleagues, peers, and co-workers.</td>
+                <td>
+                    <select name="Teddy">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">O</td>
+                <td>StatementI avoid hard feelings by keeping my disagreements with others to myself.</td>
+                <td>
+                    <select name="Turtle">
+                        <option value=""> </option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Not Often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="4">Very Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 }
 

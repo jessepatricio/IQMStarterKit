@@ -4,82 +4,46 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 id="heading"><strong><u>Presentation Evaluation Sheet</u></strong></h1>
-    <p style="text-align:left;">
-        Name of Student:
-        <input class="p41txtbox" type="text" name="studentname">
-    </p>
-    <p style="text-align:left;">
-        Topic:
-        <input class="p41txtbox" type="text" name="topic">
-    </p>
-    <table>
-        <tr>
-            <td> </td>
-            <td>Item</td>
-            <td>Observation/Comments</td>
-        </tr>
-        <tr style="text-align:left;">
-            <td style="padding:15px;">1</td>
-            <td><strong>Personal Presentation and Grooming</strong></td>
-            <td><textarea class="p41txtarea" rows="3" cols="95" name="grooming"></textarea></td>
-        </tr>
-        <tr style="text-align:left;">
-            <td style="padding:15px;">2</td>
-            <td><strong>Content</strong><br/>
-            Introduction<br/>
-                <ul><li>Impact</li></ul>
-            Body<br/>
-                <ul>
-                    <li>Organisation/Logical Sequence</li>
-                    <li>ImpactRelevance</li>
-                </ul>
-            Conclusion<br/>
-                <ul><li>Sudden/Abrupt</li></ul>
-            </td>
-            <td><textarea class="p41txtarea" rows="8" cols="95" name="content"></textarea></td>
-        </tr>
-        <tr style="text-align:left;">
-            <td style="padding:15px;">3</td>
-            <td><strong>Delivery</strong><br/>
-                <ul>
-                    <li>Voice</li>
-                    <li>Eye Contact</li>
-                    <li>Facial Expression</li>
-                    <li>Gestures and Movements</li>
-                    <li>Posture</li>
-                    <li>Audience Involvement/Interaction</li>
-                </ul>
-            </td>
-            <td><textarea class="p41txtarea" rows="5" cols="95" name="delivery"></textarea></td>
-        </tr>
-        <tr style="text-align:left;">
-            <td style="padding:15px;">4</td>
-            <td><strong>Visual Aids</strong><br />
-            Power-point or other visual aid used</td>
-            <td><textarea class="p41txtarea" rows="3" cols="95" name="visual"></textarea></td>
-        </tr>
-        <tr style="text-align:left;">
-            <td style="padding:15px;">5</td>
-            <td><strong>Knowledge of subject</strong></td>
-            <td><textarea class="p41txtarea" rows="3" cols="95" name="knowledge"></textarea></td>
-        </tr>
-        <tr style="text-align:left;">
-            <td style="padding:15px;">6</td>
-            <td><strong>Timing - Over or Under Time?</strong></td>
-            <td><textarea class="p41txtarea" rows="3" cols="95" name="time"></textarea></td>
-        </tr>
-    </table>
-    <br/>
-    <p style="text-align:left;">Overall Comments:<br/>
-        <textarea class="p41txtarea" rows="3" cols="195" name="time"></textarea>
-    </p>
-    <p style="text-align:left;">Completed by:<input class="p41txtbox" type="text" name="studentname"></p>
-
-    @Html.ActionLink("Previous Page", "Page40") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page42")
-</div>
-
+    <div class="container1">
+        <h1 class="heading"><u>Reflection Journal</u></h1>
+        <h2 style="text-align:center;"><strong>Lost at Sea</strong></h2>
+        <table style="margin:auto;">
+            <tr>
+                <td>
+                    1.	Did everyone participate in the discussion? Or were there members in the group who dominated the session? <br />
+                    <textarea class="p41txtarea" rows="5" cols="150" name="LS1"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2.  Why do you think some members did not or were not actively involved in the discussion? <br />
+                    <textarea class="p41txtarea" rows="5" cols="150" name="LS2"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3. Were you able to share your ideas/views freely? Did you feel comfortable feel comfortable sharing your views/ideas. Why? <br />
+                    <textarea class="p41txtarea" rows="5" cols="150" name="LS3"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    4.	How did the group agree on the group’s priority list i.e. how was the decision arrived? <br />
+                    <textarea class="p41txtarea" rows="5" cols="150" name="LS4"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    5. Do you think that is the best way to arrive at that decision? Why? <br />
+                    <textarea class="p41txtarea" rows="5" cols="150" name="LS5"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    6.  How will this experience change the way you think or act in the event of situation that   involves group decision-making? <br />
+                    <textarea class="p41txtarea" rows="5" cols="150" name="LS6"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
 }

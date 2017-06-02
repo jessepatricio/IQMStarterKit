@@ -1,19 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "Page16";
+    ViewBag.Title = "Class Contract";
 }
 @using (Html.BeginForm())
 {
+    <div class="container1">
+        <div style="text-align:center;">
+            <h1 class="heading">Tutor-Student Contract</h1>
 
-<div class="container1">
-    <img id="p16coatOfArm" src="~/Content/img/Coat of Arms.jpg" alt="Personal Coat of Arms Graphic">
-    <br/><br/>
-    <div>
-        @Html.ActionLink("Previous Page", "Page15") |
-        @Html.ActionLink("Main", "Index") |
-        @Html.ActionLink("Next Page", "Page17")
+            <div id="p16img">
+                <img src="~/Content/img/contract.png" alt="Contract graphic">
+            </div>
+
+            <ul class="p16List">
+                <li>What students expect from tutors</li>
+                <li>What tutors can expect from students</li>
+            </ul>
+
+        </div>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "Page15") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "Page17")
+        </div>
+
     </div>
-</div>
-
-  
 }

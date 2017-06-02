@@ -4,20 +4,21 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 class="heading">Classroom Rules</h1>
-    <br/>
-    <p class="p19-21List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Speak English Only</p>
-        <ul class="p19-21List">
-            <li>Students from different parts of the world.</li>
-            <li>Great opportunity to improve English.</li>
-            <li>Good spoken English helps in job search.</li>
+    <div class="container1">
+        <h1 class="heading">Classroom Rules</h1>
+        <br />
+        <p class="p17-19List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Talking while the tutor is teaching or while your classmates are presenting shows:</p>
+        <ul class="p17-19List">
+            <li>Disrespect</li>
+            <li>Disinterest</li>
+            <li>Disruptiveness</li>
         </ul>
 
-    @Html.ActionLink("Previous Page", "Page18") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page20")
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "Page18") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "Page20")
+        </div>
 
-</div>
-
+    </div>
 }

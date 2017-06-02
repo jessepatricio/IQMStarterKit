@@ -4,57 +4,306 @@
 }
 @using (Html.BeginForm())
 {
-<div class="container1">
-    <h1 id="heading"><u>Personal Leadership Plan</u></h1>
-    <form id="p37LeadershipPlan">
-        <table id="p37LeadershipPlanTable" >
-            <tr >
-                <th style="text-align:center;">Area</th>
-                <th style="text-align:center;">(SMART)Goals</th>
-                <th style="text-align:center;">Action Plan</th>
-            </tr>
-                <tr>
-                    <td>Learning moe about self</td>
-                    <td>
-                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
-                    </td>
-                    <td>
-                        <textarea class="p37textarea" rows="4" cols="50" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Acquiring knowledge and wisdom</td>
-                    <td>
-                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
-                    </td>
-                    <td>
-                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Practicing new skills</td>
-                    <td>
-                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
-                    </td>
-                    <td>
-                        <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
-                    </td>
-                </tr>
+    <div class="container1">
+        <h1 class="heading"><strong><u>How Good Are You at Self-Managing</u></strong></h1>
+        <p style="text-align:center;">For each of the following statements, select which applies to you best that indicates how often you do each activity.</p>
+        <!--<p style="text-align:center;">0= never &emsp; 1= seldom &emsp; 2= sometimes &emsp; 3= usually &emsp; 4= always</p>-->
+
+        <table style="margin:auto;">
             <tr>
-                <td>Developing personal potential</td>
                 <td>
-                    <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    &nbsp; I read selectively, skimming the material until I find what is important, then I highlight it.
                 </td>
                 <td>
-                    <textarea class="p37textarea" rows="4" cols="70" maxlength="70" name="answer" form="p37LeadershipPlan"></textarea>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I make a list of tasks to accomplish each day / week.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I keep everything in its proper place at home and at work.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I organise the tasks I have to do according to their importance and urgency.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I concentrate on only one important task at a time, but I do multiple trivial tasks at once.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I make a list of short 5-10 minute tasks to do.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I divide large projects into smaller, separate stages.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I identify which 20% of my tasks will produce 80% of the results.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    &nbsp; I do the most important tasks at my best time during the day.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    &nbsp; I have some time during each day when I can work uninterrupted.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    &nbsp; I don’t procrastinate.  I do today what needs to be done.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    &nbsp; I keep track of the use of my time with devices such as a time log or a detailed diary (either paper or on my phone).
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    &nbsp; I set deadlines for myself.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I do something productive whenever I am waiting.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I do routine work at one set time during the day.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I finish at least one thing every day.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    &nbsp; I schedule some time during the day for personal time alone – for planning, meditation, exercise, etc.).
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I allow myself to worry about things only at one particular time during the day, not all the time.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I have clearly defined long-term goals that I am working towards.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp; I continually try to find little ways to use my time more efficiently.
+                </td>
+                <td>
+                    <select>
+                        <option value=""> </option>
+                        <option value="0">Never</option>
+                        <option value="1">Seldom</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Usually</option>
+                        <option value="4">Always</option>
+                    </select>
                 </td>
             </tr>
         </table>
-    </form>
-
-    @Html.ActionLink("Previous Page", "Page36") |
-    @Html.ActionLink("Main", "Index") |
-    @Html.ActionLink("Next Page", "Page38")
-</div>
-
+    </div>
 }
