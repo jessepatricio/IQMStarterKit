@@ -1,4 +1,5 @@
 ﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
 using IQMStarterKit.Models.Core;
 using System;
 using System.Data.Entity;
@@ -16,6 +17,8 @@ namespace IQMStarterKit.Controllers.Core
         // GET: TempActivities
         public ActionResult Index()
         {
+            ViewBag.TempModules = _context.TempModules;
+
             return View(_context.TempActivities.Where(m => m.IsRemoved == false)
                 .OrderBy(m => m.TempModuleId)
                 .ThenBy(m => m.SortOrder).ToList());
@@ -78,7 +81,7 @@ namespace IQMStarterKit.Controllers.Core
 
                 _context.TempActivities.Add(modActivity);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index").WithSuccess("Activity created successfully!");
             }
 
             return View(tempActivity);
@@ -130,7 +133,7 @@ namespace IQMStarterKit.Controllers.Core
                     _context.Entry(recActivity).State = EntityState.Modified;
                 }
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index").WithSuccess("Activity updated successfully!");
             }
             return View(recActivity);
         }
@@ -159,9 +162,12 @@ namespace IQMStarterKit.Controllers.Core
         public ActionResult DeleteConfirmed(byte id)
         {
             TempActivity tempActivity = _context.TempActivities.Find(id);
-            _context.TempActivities.Remove(tempActivity);
+            tempActivity.IsRemoved = true;
+            _context.Entry(tempActivity).State = EntityState.Modified;
+
+            //_context.TempActivities.Remove(tempActivity);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index").WithSuccess("Activity deleted successfully!");
         }
 
         protected override void Dispose(bool disposing)

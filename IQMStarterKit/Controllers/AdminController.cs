@@ -1,12 +1,13 @@
 ﻿#region Includes
+using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using IQMStarterKit.Models;
 
 #endregion Includes
 
@@ -17,16 +18,16 @@ namespace IQMStarterKit.Controllers
     public class AdminController : CommonController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
-        
+
         // GET: Admin
-        
+
         #region MainList Index
         public ActionResult Index(string searchKeyword, string currentFilter, int? page)
         {
             try
             {
                 var colUsers = new List<ExtendedUserCustom>();
-                
+
                 var result = UserManager.Users
                     .OrderBy(c => c.FullName)
                     .ToList();
@@ -36,7 +37,7 @@ namespace IQMStarterKit.Controllers
                     var user = new ExtendedUserCustom
                     {
                         Email = item.Email,
-                        FullName =  item.FullName,
+                        FullName = item.FullName,
                         GroupId = item.GroupId
                     };
                     colUsers.Add(user);
@@ -66,7 +67,7 @@ namespace IQMStarterKit.Controllers
         {
             var objUserExtended = new ExtendedUserCustom();
             ViewBag.Roles = GetAllRolesAsSelectList();
-          
+
             return View(objUserExtended);
         }
         #endregion
@@ -80,7 +81,7 @@ namespace IQMStarterKit.Controllers
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
             try
             {
-                
+
                 var adminUserCreateResult = UserManager.Create(user, model.Password);
 
                 if (adminUserCreateResult.Succeeded == true)
@@ -92,15 +93,15 @@ namespace IQMStarterKit.Controllers
                         UserManager.AddToRole(user.Id, strNewRole);
                     }
 
-                    return Redirect("~/Admin");
+                    return Redirect("~/Admin").WithSuccess("User created successfully!");
                 }
                 else
                 {
                     ViewBag.Roles = GetAllRolesAsSelectList();
-                    ModelState.AddModelError(string.Empty, @"Error: Failed to create user. Check Role constraints.");
-                    return View(model);
+                    //ModelState.AddModelError(string.Empty, @"Error: Failed to create user. Check Role constraints.");
+                    return View(model).WithError("Failed to create user. Check role contrainsts.");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -117,17 +118,17 @@ namespace IQMStarterKit.Controllers
         public ActionResult EditUser(string email)
         {
             if (email == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-          
+
             var objExtUserCustom = GetUser(email);
             var userroles = GetUserAndRoles(email);
-            
+
             var role = userroles.colUserRole.FirstOrDefault(m => m.RoleName == "Student");
             ViewBag.IsStudent = (role != null) ? true : false;
 
             objExtUserCustom.Groups = _context.GroupModels.Where(m => m.IsRemoved == false)
                 .OrderByDescending(m => m.CreatedBy).ToList();
 
-           
+
 
             return View(objExtUserCustom);
         }
@@ -145,7 +146,7 @@ namespace IQMStarterKit.Controllers
                 var objExtendedUser = UpdateUser(extUser);
                 if (objExtendedUser == null) return HttpNotFound();
 
-                return Redirect("~/Admin");
+                return Redirect("~/Admin").WithSuccess("User updated successfully!");
             }
             catch (Exception ex)
             {
@@ -157,13 +158,13 @@ namespace IQMStarterKit.Controllers
 
         // DELETE: /Admin/DeleteUser
         #region DeleteUser
-       
+
         public ActionResult DeleteUser(string email)
         {
             try
             {
                 if (email == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-              
+
                 if (email.ToLower() == this.User.Identity.Name.ToLower())
                 {
                     ModelState.AddModelError(
@@ -315,18 +316,18 @@ namespace IQMStarterKit.Controllers
         #region ManageRole
         public ActionResult ManageRole()
         {
-            var roleManager = 
+            var roleManager =
                 new RoleManager<IdentityRole>
                 (
                     new RoleStore<IdentityRole>(new ApplicationDbContext())
                     );
 
             List<RoleCustom> colRole = (from objRole in roleManager.Roles
-                select new RoleCustom
-                {
-                    Id = objRole.Id,
-                    RoleName = objRole.Name
-                }).ToList();
+                                        select new RoleCustom
+                                        {
+                                            Id = objRole.Id,
+                                            RoleName = objRole.Name
+                                        }).ToList();
 
             return View(colRole);
         }
@@ -350,7 +351,7 @@ namespace IQMStarterKit.Controllers
             try
             {
                 if (role == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-               
+
                 var roleName = role.RoleName.Trim();
 
                 if (roleName == "")
@@ -366,8 +367,8 @@ namespace IQMStarterKit.Controllers
                          );
 
                 if (!roleManager.RoleExists(roleName)) roleManager.Create(new IdentityRole(roleName));
-               
-                return Redirect("~/Admin/ManageRole");
+
+                return Redirect("~/Admin/ManageRole").WithSuccess("Role added successfully!");
             }
             catch (Exception ex)
             {
@@ -405,8 +406,8 @@ namespace IQMStarterKit.Controllers
                 }
 
                 var objRoleToDelete = (from objRole in roleManager.Roles
-                    where objRole.Name == roleName
-                    select objRole).FirstOrDefault();
+                                       where objRole.Name == roleName
+                                       select objRole).FirstOrDefault();
                 if (objRoleToDelete != null)
                 {
                     roleManager.Delete(objRoleToDelete);
@@ -417,13 +418,13 @@ namespace IQMStarterKit.Controllers
                 }
 
                 var colRoleDto = (from objRole in roleManager.Roles
-                    select new RoleCustom
-                    {
-                        Id = objRole.Id,
-                        RoleName = objRole.Name
-                    }).ToList();
+                                  select new RoleCustom
+                                  {
+                                      Id = objRole.Id,
+                                      RoleName = objRole.Name
+                                  }).ToList();
 
-                return View("ManageRole", colRoleDto);
+                return View("ManageRole", colRoleDto).WithSuccess("Role deleted successfully!");
             }
             catch (Exception ex)
             {
@@ -434,17 +435,17 @@ namespace IQMStarterKit.Controllers
                         new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
                 List<RoleCustom> colRole = (from objRole in roleManager.Roles
-                    select new RoleCustom
-                    {
-                        Id = objRole.Id,
-                        RoleName = objRole.Name
-                    }).ToList();
+                                            select new RoleCustom
+                                            {
+                                                Id = objRole.Id,
+                                                RoleName = objRole.Name
+                                            }).ToList();
 
                 return View("ManageRole", colRole);
             }
         }
         #endregion
-        
+
 
         // Tutor's administration
         public ActionResult ListStudents()
@@ -481,7 +482,7 @@ namespace IQMStarterKit.Controllers
 
 
         //Utility
-    
+
         #region GetAllRolesAsSelectList
         private List<SelectListItem> GetAllRolesAsSelectList()
         {
@@ -508,7 +509,7 @@ namespace IQMStarterKit.Controllers
             return SelectRoleListItems;
         }
         #endregion
-        
+
         #region GetUser
         private ExtendedUserCustom GetUser(string email)
         {
@@ -532,7 +533,7 @@ namespace IQMStarterKit.Controllers
             var result = UserManager.FindByEmail(extUser.Email);
 
             //not found
-            if (result == null) throw  new Exception("User not found.");
+            if (result == null) throw new Exception("User not found.");
 
             result.Email = extUser.Email;
             result.FullName = extUser.FullName;
@@ -557,7 +558,7 @@ namespace IQMStarterKit.Controllers
 
                     if (AddPassword.Errors.Count() > 0)
                     {
-                       throw  new Exception(AddPassword.Errors.FirstOrDefault());
+                        throw new Exception(AddPassword.Errors.FirstOrDefault());
                     }
                 }
             }
@@ -570,7 +571,7 @@ namespace IQMStarterKit.Controllers
         private void DeleteUser(ExtendedUserCustom extUser)
         {
             var user = UserManager.FindByEmail(extUser.Email);
-            
+
             //not found?
             if (user == null) throw new Exception("User not found.");
 
@@ -578,7 +579,7 @@ namespace IQMStarterKit.Controllers
             UserManager.Update(user);
             UserManager.Delete(user);
 
-            
+
         }
         #endregion
 
@@ -590,11 +591,11 @@ namespace IQMStarterKit.Controllers
 
             List<UserRoleCustom> colUserRoleDTO =
             (from objRole in UserManager.GetRoles(user.Id)
-                select new UserRoleCustom
-                {
-                    RoleName = objRole,
-                    Email = user.Email
-                }).ToList();
+             select new UserRoleCustom
+             {
+                 RoleName = objRole,
+                 Email = user.Email
+             }).ToList();
 
             if (!colUserRoleDTO.Any())
             {

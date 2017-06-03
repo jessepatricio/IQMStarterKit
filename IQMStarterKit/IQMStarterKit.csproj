@@ -333,6 +333,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Models\Alert\Alert.cs" />
+    <Compile Include="Models\Alert\AlertDecoratorResult.cs" />
+    <Compile Include="Models\Alert\AlertExtensions.cs" />
     <Compile Include="Models\Core\StudentActivity.cs" />
     <Compile Include="Models\Core\TempActivity.cs" />
     <Compile Include="Models\Core\TempModule.cs" />
@@ -806,6 +809,7 @@
     <Content Include="Views\Module\Page9.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Shared\_Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

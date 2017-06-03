@@ -1,9 +1,11 @@
 ﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+
 
 namespace IQMStarterKit.Controllers
 {
@@ -61,9 +63,9 @@ namespace IQMStarterKit.Controllers
             var existGroup = _context.GroupModels.Where(m => m.GroupName == grpModel.GroupName);
             if (existGroup.Any())
             {
-                ModelState.AddModelError(String.Empty, @"GroupName already existed!");
+                //ModelState.AddModelError(String.Empty, @"GroupName already existe!");
                 ViewBag.Tutors = GetUsersInRole(TutorId);
-                return View();
+                return RedirectToAction("Create").WithError("Group already existed!");
             }
 
 
@@ -87,7 +89,8 @@ namespace IQMStarterKit.Controllers
 
                 _context.GroupModels.Add(groupModel);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index").WithSuccess("Group Added Successfullly!");
             }
 
             return View(groupModel);
@@ -134,9 +137,16 @@ namespace IQMStarterKit.Controllers
 
                 _context.Entry(groupModel).State = EntityState.Modified;
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index").WithSuccess("Updated successfully!");
             }
-            return View(groupModel);
+            else
+            {
+                return View(groupModel).WithError("Invalid Update!");
+            }
+
+
+
         }
 
         // GET: GroupModels/Delete/5
@@ -167,7 +177,8 @@ namespace IQMStarterKit.Controllers
             _context.Entry(groupModel).State = EntityState.Modified;
             //db.GroupModels.Remove(groupModel);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index").WithSuccess("Deleted successfully!");
         }
 
         protected override void Dispose(bool disposing)

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
+using IQMStarterKit.Models.Core;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web.Management;
 using System.Web.Mvc;
-using IQMStarterKit.Models;
-using IQMStarterKit.Models.Core;
 
 namespace IQMStarterKit.Controllers.Core
 {
@@ -14,7 +13,7 @@ namespace IQMStarterKit.Controllers.Core
     public class TempModulesController : CommonController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
-        
+
 
         // GET: TempModules
         public ActionResult Index()
@@ -25,7 +24,7 @@ namespace IQMStarterKit.Controllers.Core
                 //get all module activities
                 item.TempActivities = _context.TempActivities.Where(m => m.TempModuleId == item.TempModuleId).ToList();
             }
-            
+
             return View(tempModule);
         }
 
@@ -53,8 +52,8 @@ namespace IQMStarterKit.Controllers.Core
         public ActionResult Create()
         {
             TempModuleViewModels tempModule = new TempModuleViewModels();
-            tempModule.TempWorkbooks = _context.TempWorkbooks.Where(m=>m.IsRemoved==false).ToList();
-            
+            tempModule.TempWorkbooks = _context.TempWorkbooks.Where(m => m.IsRemoved == false).ToList();
+
             return View(tempModule);
         }
 
@@ -72,7 +71,7 @@ namespace IQMStarterKit.Controllers.Core
             module.Description = tempModule.Description;
             module.SortOrder = tempModule.SortOrder;
             module.TempWorkbookId = tempModule.TempWorkbookId;
-            
+
             if (ModelState.IsValid)
             {
                 //assign system fields
@@ -84,7 +83,7 @@ namespace IQMStarterKit.Controllers.Core
 
                 _context.TempModules.Add(module);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index").WithSuccess("Module created successfully!");
             }
 
             return View(tempModule);
@@ -113,7 +112,7 @@ namespace IQMStarterKit.Controllers.Core
         public ActionResult Edit([Bind(Include = "TempModuleId,Title,Description,SortOrder,TempWorkbookId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempModule tempModule)
         {
             var recModule = _context.TempModules.Find(tempModule.TempModuleId);
-            
+
             if (ModelState.IsValid)
             {
                 if (recModule != null)
@@ -131,7 +130,7 @@ namespace IQMStarterKit.Controllers.Core
                     _context.Entry(recModule).State = EntityState.Modified;
                 }
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index").WithSuccess("Module updated successfully!");
             }
             return View(recModule);
         }
@@ -157,9 +156,15 @@ namespace IQMStarterKit.Controllers.Core
         public ActionResult DeleteConfirmed(byte id)
         {
             TempModule tempModule = _context.TempModules.Find(id);
-            _context.TempModules.Remove(tempModule);
+
+            tempModule.IsRemoved = true;
+
+
+            _context.Entry(tempModule).State = EntityState.Modified;
+
+            //_context.TempModules.Remove(tempModule);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index").WithSuccess("Module successfully deleted!");
         }
 
         protected override void Dispose(bool disposing)

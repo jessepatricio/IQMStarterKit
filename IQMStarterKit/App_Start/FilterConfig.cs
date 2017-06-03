@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿
+using System.Web.Mvc;
 
 namespace IQMStarterKit
 {
@@ -6,9 +7,11 @@ namespace IQMStarterKit
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+
             filters.Add(new HandleErrorAttribute());
             filters.Add(new AuthorizeAttribute());
             filters.Add(new RequireHttpsAttribute());
+
         }
     }
 }

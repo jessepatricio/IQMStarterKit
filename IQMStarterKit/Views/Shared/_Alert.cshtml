@@ -1,0 +1,33 @@
+﻿@using IQMStarterKit.Models.Alert
+
+@if (TempData.GetAlerts().Any())
+
+{
+
+    <script type="text/javascript">
+
+        $(function() {
+
+            // use toastr to display the alerts
+
+            @foreach (var alert in TempData.GetAlerts())
+
+            {
+
+                <text>
+
+                var command = "@alert.Command";
+
+                var message = "@alert.Message.Replace("'", "\\'")";
+
+                toastr[command](message);
+
+                </text>
+
+            }
+
+        });
+
+    </script>
+
+}

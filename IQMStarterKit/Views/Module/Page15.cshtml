@@ -5,14 +5,6 @@
     ViewBag.Title = "About Me";
 }
 
-@if (TempData["notice"] != null)
-{
-    <br/>
-    <div class="@TempData["alert"]">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Success!</strong> @TempData["notice"]
-    </div>
-}
 
 @using (Html.BeginForm())
 {

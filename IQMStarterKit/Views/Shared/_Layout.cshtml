@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -18,8 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img src="~/Content/img/aspire_logo_big.jpg" style="width: 150px; height: 70px;" onclick="/" />
-                @*@Html.ActionLink("IQM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <img src="~/Content/img/aspire_logo_big.jpg" style="width: 150px; height: 70px;" />
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -29,7 +29,7 @@
 
                     @if (User.IsInRole("Administrator"))
                     {
-                        @*<li>@Html.ActionLink("User Management", "Index", "Admin")</li>*@
+                        
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
@@ -60,6 +60,7 @@
 
                 </ul>
                 @Html.Partial("_LoginPartial")
+               
             </div>
         </div>
     </div>
@@ -80,6 +81,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Html.Partial("_Alert")
     @RenderSection("scripts", required: false)
 </body>
 </html>

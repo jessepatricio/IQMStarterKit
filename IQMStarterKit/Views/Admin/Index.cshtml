@@ -40,7 +40,7 @@
     }
 </div>
 <br/>
-<table id="user"  width="100%" class="table table-striped table-bordered" cellspacing="0">
+<table id="user"  style="width:100%" class="table table-striped table-bordered" cellspacing="0">
     <thead>
         <tr>
             <th>Student Name</th>
@@ -57,15 +57,19 @@
                 <td>@Html.DisplayFor(m => item.Email)</td>
                 <td>
                     @if (item.GroupId == 0)
-                {
+                    {
                         <text>Not assigned</text>
                     }
+                    @*else if (item.GroupId == 0 && User.IsInRole("Administrator, Tutor"))
+                    {
+                        <text></text>
+                    }*@
                     else
                     {
                         IEnumerable<GroupModel> grouplist = ViewBag.Groups;
                         var groupname = grouplist.FirstOrDefault(m => m.GroupId == item.GroupId);
 
-                        <text>@groupname.GroupName</text>
+                       <text>@groupname.GroupName</text>
                     }
                 </td>
                 <td>

@@ -1,4 +1,5 @@
 ﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
 using IQMStarterKit.Models.Core;
 using IQMStarterKit.Models.Forms;
 using Microsoft.AspNet.Identity;
@@ -173,6 +174,8 @@ namespace IQMStarterKit.Controllers
 
                         _context.StudentActivities.Add(studentActivity);
                         _context.SaveChanges();
+
+                        return View().WithInfo("Congratulation! You have completed the introduction activity!");
                     }
                     catch (EntityException e)
                     {
@@ -276,18 +279,18 @@ namespace IQMStarterKit.Controllers
                     //save record
                     _context.SaveChanges();
 
-                    TempData["notice"] = "Record Saved.";
-                    TempData["alert"] = "alert alert-success fade in";
+
 
                 }
+
+                return View(aboutMe).WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
-                TempData["notice"] = ex.Message;
-                TempData["alert"] = "alert alert-danger fade in";
+                return View(aboutMe).WithError(ex.Message);
             }
 
-            return View(aboutMe);
+
         }
 
         public ActionResult Page16()
