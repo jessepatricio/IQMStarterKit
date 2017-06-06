@@ -2,8 +2,9 @@
 @{
     ViewBag.Title = "Page25";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Page25UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken();
     <div class="container1">
         <div style="text-align:center;">
             <h1 class="heading">Photo Scavenger Hunt</h1>
@@ -25,11 +26,46 @@
             </div>
         </div>
 
-        <div style="text-align:center; margin-top: 20px;">
-            @Html.ActionLink("Previous Page", "Page24") |
-            @Html.ActionLink("Main", "Index") |
-            @Html.ActionLink("Next Page", "Page26")
-        </div>
+      
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    @if (Model.FileName != null)
+                    {
+                        <div class="col-md-3"></div>
+                        <div class="col-md-8 form-inline">
+                            @Html.ActionLink("Download File", "Page25DownloadFile", "Module",
+                                  new { id = Model.StudentActivityId },
+                                  new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8 form-inline">
+                            @Html.Label("Photo Scavenger Hunt", new { @class = "label label-default" })
+                            <input type="file" id="Shield" name="file" class="form-control" style="width:300px;" />
+                            <input type="submit" value="Upload" class="btn btn-primary" />
+                        </div>
+
+
+                    }
+                </div>
+            </div>
+
+            <br />
+
+                <div style="text-align:center; margin-top: 30px;width:100%;">
+                    @Html.ActionLink("Previous Page", "Page24") |
+                    @Html.ActionLink("Main", "Index") |
+                    @Html.ActionLink("Next Page", "Page26")
+                </div>
+
+
+        
+
+    
     </div>
 
 }

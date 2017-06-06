@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace IQMStarterKit.Models.Core
 {
@@ -12,7 +9,7 @@ namespace IQMStarterKit.Models.Core
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte StudentActivityId { get; set; }
-        
+
         [Required]
         public byte TempModuleId { get; set; }
 
@@ -21,7 +18,7 @@ namespace IQMStarterKit.Models.Core
 
         [StringLength(255)]
         public string VarkResult { get; set; }
-    
+
         [StringLength(255)]
         public string DopeResult { get; set; }
 
@@ -29,11 +26,11 @@ namespace IQMStarterKit.Models.Core
         public string DiscResult { get; set; }
 
         public int NoMatchedWords { get; set; }
-        
+
         [StringLength(255)]
         public string Top3PersonalValues { get; set; }
-        
-        public int PersonalLeaderShipScore{ get; set; }
+
+        public int PersonalLeaderShipScore { get; set; }
 
         public int SelfManagementScore { get; set; }
 
@@ -43,14 +40,16 @@ namespace IQMStarterKit.Models.Core
         public string CFDominantFirst { get; set; }
 
         [StringLength(255)]
-        public string CFDominantSecond{ get; set; }
+        public string CFDominantSecond { get; set; }
 
         public int ReviewQuizScore { get; set; }
 
-        public int ProgressValue{ get; set; }
+        public int ProgressValue { get; set; }
 
         [StringLength(5000)]
         public string Context { get; set; }
+
+        public FilePath FilePath { get; set; }
 
 
         //system fields

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using IQMStarterKit.Models.Core;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using IQMStarterKit.Models.Core;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IQMStarterKit.Models
 {
@@ -16,8 +15,9 @@ namespace IQMStarterKit.Models
         [StringLength(100)]
         [Required]
         public string FullName { get; set; }
-       
+
         public byte GroupId { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -30,7 +30,7 @@ namespace IQMStarterKit.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-     
+
 
         public DbSet<TempWorkbook> TempWorkbooks { get; set; }
         public DbSet<TempModule> TempModules { get; set; }
@@ -40,10 +40,12 @@ namespace IQMStarterKit.Models
 
         public DbSet<StudentActivity> StudentActivities { get; set; }
 
+        public DbSet<FilePath> FilePaths { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-           
+
         }
 
         public static ApplicationDbContext Create()

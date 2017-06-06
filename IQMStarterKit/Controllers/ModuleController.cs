@@ -129,6 +129,8 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page14()
         {
+
+            ////////////  this code is for page 13 /////////////////
             if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
             else
             {
@@ -184,13 +186,136 @@ namespace IQMStarterKit.Controllers
 
                 }
             }
+            //////////// for page 13 code //////////////////////////
 
-            return View();
+            FilePath filePath = new FilePath();
+
+            //get id in tempActivity
+            var activityID = GetTempActivityID("My Shield");
+            //validate in studentActivity
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID);
+
+            if (stdAct2 != null)
+            {
+                filePath = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdAct2.StudentActivityId);
+            }
+
+            return View(filePath);
+        }
+
+        public FileResult Page14DownloadFile(string Id)
+        {
+            var stdId = byte.Parse(Id);
+
+            var fileToRetrieve = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdId);
+            return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page14UploadFile(FilePath filepath, UploadFileModel fileModel)
+        {
+
+            var studentActivity = new StudentActivity();
+            try
+            {
 
 
+                if (fileModel.File != null && fileModel.File.ContentLength > 0)
+                {
+                    // extract the file content to byte array
+                    var content = new byte[fileModel.File.ContentLength];
+                    // reads the content from stream
+                    fileModel.File.InputStream.Read(content, 0, fileModel.File.ContentLength);
+
+                    var newImage = new FilePath
+                    {
+                        FileName = System.IO.Path.GetFileName(fileModel.File.FileName),
+                        FileType = FileType.Photo,
+                        ContentType = fileModel.File.ContentType,
+                        Content = content
+
+                    };
+
+
+
+
+                    //get temp activity id by title
+                    //note: title should be the same with the search keyword when using lamda expression
+                    byte activityId = GetTempActivityID("My Shield");
+                    //get module id
+                    var moduleId = GetTempModuleIdByActivityID(activityId);
+                    //get current user
+                    var owner = GetSessionUserId();
+                    //check if record existed
+                    StudentActivity oldRec =
+                        _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId &&
+                                                              m.CreatedBy == owner);
+                    if (oldRec != null)
+                    {
+                        //update
+                        oldRec.ModifiedBy = GetSessionUserId();
+                        oldRec.ModifiedDateTime = DateTime.Now;
+                        //update studentActivity table
+                        _context.Entry(oldRec).State = EntityState.Modified;
+
+                        //since there are studentactivity record there should be a file
+                        var oldFile = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == oldRec.StudentActivityId);
+
+                        //update new content
+                        oldFile.Content = newImage.Content;
+                        _context.Entry(oldFile).State = EntityState.Modified;
+                        //save all changes
+                        _context.SaveChanges();
+
+
+                    }
+                    else
+                    {
+                        //create
+                        studentActivity.TempActivityId = activityId;
+                        studentActivity.TempModuleId = moduleId;
+
+                        studentActivity.CreatedDateTime = DateTime.Now;
+                        studentActivity.CreatedBy = GetSessionUserId();
+
+                        studentActivity.ProgressValue = 100;
+                        studentActivity.ModifiedBy = GetSessionUserId();
+                        studentActivity.ModifiedDateTime = DateTime.Now;
+
+                        studentActivity.Context = string.Empty;
+                        studentActivity.CFDominantFirst = string.Empty;
+                        studentActivity.CFDominantSecond = string.Empty;
+                        studentActivity.VarkResult = string.Empty;
+                        studentActivity.DopeResult = string.Empty;
+                        studentActivity.DiscResult = string.Empty;
+                        studentActivity.Top3PersonalValues = string.Empty;
+
+
+                        _context.StudentActivities.Add(studentActivity);
+
+                        _context.SaveChanges();
+
+                        //studentActivityId should have unique id after saving
+                        newImage.StudentActivityId = studentActivity.StudentActivityId;
+
+                        _context.FilePaths.Add(newImage);
+
+                        _context.SaveChanges();
+
+
+                    }
+
+                }
+                return RedirectToAction("Page14").WithSuccess("File uploaded successfully!");
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Page14").WithError("File upload failed!" + ex.Message);
+            }
+        }
 
 
         public ActionResult Page15()
@@ -228,6 +353,8 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("About Me");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
 
             try
             {
@@ -247,12 +374,10 @@ namespace IQMStarterKit.Controllers
                 string context = JsonConvert.SerializeObject(aboutMe);
 
                 //validate if record already existed
-                var studentRecord = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId);
+                var studentRecord = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
                 if (studentRecord == null)
                 {
-                    //insert record
-
                     var newRecord = new StudentActivity();
                     newRecord.TempActivityId = activityId;
                     newRecord.TempModuleId = moduleId;
@@ -265,23 +390,22 @@ namespace IQMStarterKit.Controllers
                     newRecord.ModifiedBy = GetSessionUserId();
                     newRecord.ModifiedDateTime = DateTime.Now;
 
+                    //insert record
                     _context.StudentActivities.Add(newRecord);
                 }
                 else
                 {
                     studentRecord.Context = context;
-                    studentRecord.ProgressValue = 100;
                     studentRecord.ModifiedBy = GetSessionUserId();
                     studentRecord.ModifiedDateTime = DateTime.Now;
+
                     //modify record
                     _context.Entry(studentRecord).State = EntityState.Modified;
 
-                    //save record
-                    _context.SaveChanges();
-
-
-
                 }
+
+                //save record
+                _context.SaveChanges();
 
                 return View(aboutMe).WithSuccess("Saved successfully!");
             }
@@ -324,20 +448,496 @@ namespace IQMStarterKit.Controllers
         }
         public ActionResult Page22()
         {
+            Session["Page22Completed"] = true;
             return View();
         }
+
+
         public ActionResult Page23()
         {
+
+            #region for Page22
+            ////////////  this code is for page 22 /////////////////
+            if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
+            else
+            {
+                if (Session["Page22Completed"] != null)
+                {
+                    try
+                    {
+                        //save class contract as completed
+                        //validate if record already existed
+                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Class Contract");
+
+                        var owner = GetSessionUserId();
+                        var stdAct =
+                            _context.StudentActivities.Where(m => m.TempActivityId == tempAct.TempActivityId &&
+                                                                  m.CreatedBy == owner);
+                        //go directly to view
+                        if (stdAct.Any()) return View();
+
+                        var studentActivity = new StudentActivity();
+                        studentActivity.CreatedDateTime = DateTime.Now;
+                        studentActivity.CreatedBy = GetSessionUserId();
+
+                        studentActivity.ProgressValue = 100;
+                        studentActivity.ModifiedBy = GetSessionUserId();
+                        studentActivity.ModifiedDateTime = DateTime.Now;
+
+                        if (tempAct != null)
+                        {
+                            studentActivity.TempActivityId = tempAct.TempActivityId;
+                            studentActivity.TempModuleId = tempAct.TempModuleId;
+                        }
+
+                        studentActivity.Context = string.Empty;
+                        studentActivity.CFDominantFirst = string.Empty;
+                        studentActivity.CFDominantSecond = string.Empty;
+                        studentActivity.VarkResult = string.Empty;
+                        studentActivity.DopeResult = string.Empty;
+                        studentActivity.DiscResult = string.Empty;
+                        studentActivity.Top3PersonalValues = string.Empty;
+
+                        Session["Page22Completed"] = null;
+                        // exclude fields not to be saved
+
+                        _context.StudentActivities.Add(studentActivity);
+                        _context.SaveChanges();
+
+                        return View().WithInfo("Congratulation! You have completed the class contract activity!");
+                    }
+                    catch (EntityException e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+
+                }
+            }
+            //////////// for page 22 code //////////////////////////
+            #endregion
+
+
+            var vark = new List<Vark>();
+            ViewBag.ActDone = false;
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("VARK");
+
+            // get Current User
+            var user = GetSessionUserId();
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                //vark = JsonConvert.DeserializeObject<List<Vark>>(rec.Context);
+
+                ViewBag.ActDone = true;
+                ViewBag.Vark = rec.VarkResult;
+
+            }
+
             return View();
+
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page23(FormCollection fc)
+        {
+            int rows = 11;
+            int cur_row = 0;
+            var varkList = new List<Vark>();
+
+            for (int i = 0; i < rows; i++)
+            {
+                cur_row = i + 1;
+                var row = fc.Get("VARK" + cur_row);
+
+                if (row == null)
+                {
+                    break;
+                }
+
+                var vark = new Vark();
+                switch (row.ToString())
+                {
+                    case "V":
+                        vark.Visual = true;
+                        break;
+                    case "A":
+                        vark.Auditory = true;
+                        break;
+                    case "R":
+                        vark.ReadingWriting = true;
+                        break;
+                    case "K":
+                        vark.Kinesthetic = true;
+                        break;
+                }
+
+                varkList.Add(vark);
+            }
+
+            //check count
+            var keyValPair = new Dictionary<string, int>();
+
+            keyValPair.Add("Visual", varkList.Count(m => m.Visual == true));
+            keyValPair.Add("Auditory", varkList.Count(m => m.Auditory == true));
+            keyValPair.Add("Reading/Writing", varkList.Count(m => m.ReadingWriting == true));
+            keyValPair.Add("Kinesthetic", varkList.Count(m => m.Kinesthetic == true));
+
+            keyValPair.OrderByDescending(x => x.Value);
+
+
+            //get the value of highest key
+            int biggest = 0;
+            string yourVark = string.Empty;
+
+            foreach (var item in keyValPair)
+            {
+
+                if (item.Value > biggest)
+                {
+                    biggest = item.Value;
+                    yourVark = item.Key;
+                }
+                else if (item.Value == biggest)
+                {
+                    yourVark += "," + item.Key;
+                }
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("VARK");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+
+            try
+            {
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(varkList);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+
+                if (studentRecord == null)
+                {
+                    //insert record
+
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.VarkResult = yourVark;
+                    newRecord.ProgressValue = 100;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    _context.StudentActivities.Add(newRecord);
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.VarkResult = yourVark;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+                    //modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+
+
+                }
+
+                //save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page23").WithSuccess("Saved successfully! " + $"You are {yourVark}");
+            }
+            catch (Exception ex)
+            {
+
+                return View("Page23").WithError(ex.Message);
+            }
+
+        }
+
+
         public ActionResult Page24()
         {
-            return View();
+            FilePath filePath = new FilePath();
+
+            //get id in tempActivity
+            var activityID = GetTempActivityID("Human Bingo - Activity");
+            //validate in studentActivity
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID);
+
+            if (stdAct2 != null)
+            {
+                filePath = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdAct2.StudentActivityId);
+            }
+
+            return View(filePath);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page24UploadFile(FilePath filepath, UploadFileModel fileModel)
+        {
+
+            var studentActivity = new StudentActivity();
+            try
+            {
+
+
+                if (fileModel.File != null && fileModel.File.ContentLength > 0)
+                {
+                    // extract the file content to byte array
+                    var content = new byte[fileModel.File.ContentLength];
+                    // reads the content from stream
+                    fileModel.File.InputStream.Read(content, 0, fileModel.File.ContentLength);
+
+                    var newImage = new FilePath
+                    {
+                        FileName = System.IO.Path.GetFileName(fileModel.File.FileName),
+                        FileType = FileType.Photo,
+                        ContentType = fileModel.File.ContentType,
+                        Content = content
+
+                    };
+
+
+
+                    //get temp activity id by title
+                    //note: title should be the same with the search keyword when using lamda expression
+                    byte activityId = GetTempActivityID("Human Bingo - Activity");
+                    //get module id
+                    var moduleId = GetTempModuleIdByActivityID(activityId);
+                    //get current user
+                    var owner = GetSessionUserId();
+                    //check if record existed
+                    StudentActivity oldRec =
+                        _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId &&
+                                                              m.CreatedBy == owner);
+                    if (oldRec != null)
+                    {
+                        //update
+                        oldRec.ModifiedBy = GetSessionUserId();
+                        oldRec.ModifiedDateTime = DateTime.Now;
+                        //update studentActivity table
+                        _context.Entry(oldRec).State = EntityState.Modified;
+
+                        //since there are studentactivity record there should be a file
+                        var oldFile = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == oldRec.StudentActivityId);
+
+                        //update new content
+                        oldFile.Content = newImage.Content;
+                        _context.Entry(oldFile).State = EntityState.Modified;
+                        //save all changes
+                        _context.SaveChanges();
+
+
+                    }
+                    else
+                    {
+                        //create
+                        studentActivity.TempActivityId = activityId;
+                        studentActivity.TempModuleId = moduleId;
+
+                        studentActivity.CreatedDateTime = DateTime.Now;
+                        studentActivity.CreatedBy = GetSessionUserId();
+
+                        studentActivity.ProgressValue = 100;
+                        studentActivity.ModifiedBy = GetSessionUserId();
+                        studentActivity.ModifiedDateTime = DateTime.Now;
+
+                        studentActivity.Context = string.Empty;
+                        studentActivity.CFDominantFirst = string.Empty;
+                        studentActivity.CFDominantSecond = string.Empty;
+                        studentActivity.VarkResult = string.Empty;
+                        studentActivity.DopeResult = string.Empty;
+                        studentActivity.DiscResult = string.Empty;
+                        studentActivity.Top3PersonalValues = string.Empty;
+
+
+                        _context.StudentActivities.Add(studentActivity);
+
+                        _context.SaveChanges();
+
+                        //studentActivityId should have unique id after saving
+                        newImage.StudentActivityId = studentActivity.StudentActivityId;
+
+                        _context.FilePaths.Add(newImage);
+
+                        _context.SaveChanges();
+
+
+                    }
+
+                }
+                return RedirectToAction("Page24").WithSuccess("File uploaded successfully!");
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Page24").WithError("File upload failed!" + ex.Message);
+            }
+        }
+
+        public FileResult Page24DownloadFile(string Id)
+        {
+            var stdId = byte.Parse(Id);
+
+            var fileToRetrieve = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdId);
+            return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
+        }
+
         public ActionResult Page25()
         {
-            return View();
+            FilePath filePath = new FilePath();
+
+            //get id in tempActivity
+            var activityID = GetTempActivityID("Photo Scavenger Hunt");
+            //validate in studentActivity
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID);
+
+            if (stdAct2 != null)
+            {
+                filePath = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdAct2.StudentActivityId);
+            }
+
+            return View(filePath);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page25UploadFile(FilePath filepath, UploadFileModel fileModel)
+        {
+
+            var studentActivity = new StudentActivity();
+            try
+            {
+
+
+                if (fileModel.File != null && fileModel.File.ContentLength > 0)
+                {
+                    // extract the file content to byte array
+                    var content = new byte[fileModel.File.ContentLength];
+                    // reads the content from stream
+                    fileModel.File.InputStream.Read(content, 0, fileModel.File.ContentLength);
+
+                    var newImage = new FilePath
+                    {
+                        FileName = System.IO.Path.GetFileName(fileModel.File.FileName),
+                        FileType = FileType.Photo,
+                        ContentType = fileModel.File.ContentType,
+                        Content = content
+
+                    };
+
+
+
+                    //get temp activity id by title
+                    //note: title should be the same with the search keyword when using lamda expression
+                    byte activityId = GetTempActivityID("Photo Scavenger Hunt");
+                    //get module id
+                    var moduleId = GetTempModuleIdByActivityID(activityId);
+                    //get current user
+                    var owner = GetSessionUserId();
+                    //check if record existed
+                    StudentActivity oldRec =
+                        _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId &&
+                                                              m.CreatedBy == owner);
+                    if (oldRec != null)
+                    {
+                        //update
+                        oldRec.ModifiedBy = GetSessionUserId();
+                        oldRec.ModifiedDateTime = DateTime.Now;
+                        //update studentActivity table
+                        _context.Entry(oldRec).State = EntityState.Modified;
+
+                        //since there are studentactivity record there should be a file
+                        var oldFile = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == oldRec.StudentActivityId);
+
+                        //update new content
+                        oldFile.Content = newImage.Content;
+                        _context.Entry(oldFile).State = EntityState.Modified;
+                        //save all changes
+                        _context.SaveChanges();
+
+
+                    }
+                    else
+                    {
+                        //create
+                        studentActivity.TempActivityId = activityId;
+                        studentActivity.TempModuleId = moduleId;
+
+                        studentActivity.CreatedDateTime = DateTime.Now;
+                        studentActivity.CreatedBy = GetSessionUserId();
+
+                        studentActivity.ProgressValue = 100;
+                        studentActivity.ModifiedBy = GetSessionUserId();
+                        studentActivity.ModifiedDateTime = DateTime.Now;
+
+                        studentActivity.Context = string.Empty;
+                        studentActivity.CFDominantFirst = string.Empty;
+                        studentActivity.CFDominantSecond = string.Empty;
+                        studentActivity.VarkResult = string.Empty;
+                        studentActivity.DopeResult = string.Empty;
+                        studentActivity.DiscResult = string.Empty;
+                        studentActivity.Top3PersonalValues = string.Empty;
+
+
+                        _context.StudentActivities.Add(studentActivity);
+
+                        _context.SaveChanges();
+
+                        //studentActivityId should have unique id after saving
+                        newImage.StudentActivityId = studentActivity.StudentActivityId;
+
+                        _context.FilePaths.Add(newImage);
+
+                        _context.SaveChanges();
+
+
+                    }
+
+                }
+                return RedirectToAction("Page25").WithSuccess("File uploaded successfully!");
+
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Page25").WithError("File upload failed!" + ex.Message);
+            }
+        }
+
+        public FileResult Page25DownloadFile(string Id)
+        {
+            var stdId = byte.Parse(Id);
+
+            var fileToRetrieve = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdId);
+            return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
+        }
+
+
+
+
         public ActionResult Page26()
         {
             return View();
