@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IQMStarterKit.Models
@@ -27,6 +28,14 @@ namespace IQMStarterKit.Models
         public byte[] Content { get; set; }
 
         public byte StudentActivityId { get; set; }
+
+        //system fields
+        [Required]
+        public DateTime CreatedDateTime { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string CreatedBy { get; set; }
 
 
     }

@@ -25,6 +25,9 @@ namespace IQMStarterKit.Models.Core
         [StringLength(255)]
         public string DiscResult { get; set; }
 
+        [StringLength(255)]
+        public string Type { get; set; }
+
         public int NoMatchedWords { get; set; }
 
         [StringLength(255)]

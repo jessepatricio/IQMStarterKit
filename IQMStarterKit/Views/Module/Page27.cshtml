@@ -1,125 +1,170 @@
 ﻿
 @{
-    ViewBag.Title = "Page27";
+    ViewBag.Title = "DISC";
 }
-@using (Html.BeginForm())
+
+
+@using (Html.BeginForm("Page27", "Module", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
         <h1 class="heading"><u>DISC Personality Profiling</u></h1>
 
-        <p id="p26-27">
-            For each row, select the personality trait that describes you best.  For each column, count the number of circles in the column and put the total score at the bottom of the column.
-        </p>
+    @if (ViewBag.ActDone)
+    {
+        var explanation = string.Empty;
 
-        <table id="p27DISCTable">
-            <tr>
-                <td style="text-align:center;">1</td>
-                <td><input type="radio" name="DISC1" value="D" style="margin-right:5px;">Strong-Willed</td>
-                <td><input type="radio" name="DISC1" value="I" style="margin-right:5px;">Persuasive</td>
-                <td><input type="radio" name="DISC1" value="S" style="margin-right:5px;">Kind</td>
-                <td><input type="radio" name="DISC1" value="C" style="margin-right:5px;">Humble</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">2</td>
-                <td><input type="radio" name="DISC2" value="D" style="margin-right:5px;">Independent</td>
-                <td><input type="radio" name="DISC2" value="I" style="margin-right:5px;">Sociable</td>
-                <td><input type="radio" name="DISC2" value="S" style="margin-right:5px;">Pleasant</td>
-                <td><input type="radio" name="DISC2" value="C" style="margin-right:5px;">Cooperative</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">3</td>
-                <td><input type="radio" name="DISC3" value="D" style="margin-right:5px;">Bold</td>
-                <td><input type="radio" name="DISC3" value="I" style="margin-right:5px;">Lively</td>
-                <td><input type="radio" name="DISC3" value="S" style="margin-right:5px;">Loyal</td>
-                <td><input type="radio" name="DISC3" value="C" style="margin-right:5px;">Passive</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">4</td>
-                <td><input type="radio" name="DISC4" value="D" style="margin-right:5px;">Competitive</td>
-                <td><input type="radio" name="DISC4" value="I" style="margin-right:5px;">Cheerful</td>
-                <td><input type="radio" name="DISC4" value="S" style="margin-right:5px;">Obliging</td>
-                <td><input type="radio" name="DISC4" value="C" style="margin-right:5px;">Open-Minded</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">5</td>
-                <td><input type="radio" name="DISC5" value="D" style="margin-right:5px;">Daring</td>
-                <td><input type="radio" name="DISC5" value="I" style="margin-right:5px;">Humorous</td>
-                <td><input type="radio" name="DISC5" value="S" style="margin-right:5px;">Calm</td>
-                <td><input type="radio" name="DISC5" value="C" style="margin-right:5px;">Precise</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">6</td>
-                <td><input type="radio" name="DISC6" value="D" style="margin-right:5px;">Pioneering</td>
-                <td><input type="radio" name="DISC6" value="I" style="margin-right:5px;">Trusting</td>
-                <td><input type="radio" name="DISC6" value="S" style="margin-right:5px;">Lenient</td>
-                <td><input type="radio" name="DISC6" value="C" style="margin-right:5px;">Tolerant</td>
+        if (ViewBag.Disc == "Dominant")
+        {
+            explanation = "The D Personality Style tends to be direct and decisive, sometimes described as dominant. They would prefer to lead than follow, and tend towards leadership and management positions. They tend to have high self-confidence and are risk takers and problem solvers, which enables others to look to them for decisions and direction. They tend to be self-starters.";
+        }
+        else if (ViewBag.Disc == "Influential")
+        {
+            explanation = "The I Personality Style is not afraid to be the center of attention. They are enthusiastic, optimistic, talkative, persuasive, impulsive and emotional. This Personality Type will trust others naturally, truly enjoys being around others, and functions best when around people and working in teams.";
+        }
+        else if (ViewBag.Disc == "Steady")
+        {
+            explanation = "The S Personality Typeis known for being steady, stable, and predictable. They are even-tempered, friendly, sympathetic with others, and very generous with loved ones. The S is understanding and listens well. Preferring close, personal relationships, the S is very opened with loved ones, but can also be possessive at times and hold them close.";
+        }
+        else if (ViewBag.Disc == "Conscientious")
+        {
+            explanation = "The C DISC Styles are accurate, precise, detail-oriented, and conscientious. They think very analytically and systematically and make decisions carefully with plenty of research and information to back it up. The C has very high standards for both themselves and others. Because they focus on the details and see what many other styles do not, they tend to be good problem solvers and very creative people.";
+        }
+        <br /><br />
+        <div class="col-md-offset-0 col-md-12">
 
-            </tr>
-            <tr>
-                <td style="text-align:center;">7</td>
-                <td><input type="radio" name="DISC7" value="D" style="margin-right:5px;">Persistent</td>
-                <td><input type="radio" name="DISC7" value="I" style="margin-right:5px;">Entertaining</td>
-                <td><input type="radio" name="DISC7" value="S" style="margin-right:5px;">Obedient</td>
-                <td><input type="radio" name="DISC7" value="C" style="margin-right:5px;">Neat</td>
+            <div class="panel panel-info">
+                <div class="panel-heading">Your DISC Result: <strong>@ViewBag.Disc</strong></div>
+                <div class="panel-body">@explanation</div>
+            </div>
 
-            </tr>
-            <tr>
-                <td style="text-align:center;">8</td>
-                <td><input type="radio" name="DISC8" value="D" style="margin-right:5px;">Energetic</td>
-                <td><input type="radio" name="DISC8" value="I" style="margin-right:5px;">Sociable</td>
-                <td><input type="radio" name="DISC8" value="S" style="margin-right:5px;">Lenient</td>
-                <td><input type="radio" name="DISC8" value="C" style="margin-right:5px;">Peaceful</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">9</td>
-                <td><input type="radio" name="DISC9" value="D" style="margin-right:5px;">Risk Taker</td>
-                <td><input type="radio" name="DISC9" value="I" style="margin-right:5px;">Good-Mixer</td>
-                <td><input type="radio" name="DISC9" value="S" style="margin-right:5px;">Patient</td>
-                <td><input type="radio" name="DISC9" value="C" style="margin-right:5px;">Precise</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">10</td>
-                <td><input type="radio" name="DISC10" value="D" style="margin-right:5px;">Determined</td>
-                <td><input type="radio" name="DISC10" value="I" style="margin-right:5px;">Energetic</td>
-                <td><input type="radio" name="DISC10" value="S" style="margin-right:5px;">Self-Controlled</td>
-                <td><input type="radio" name="DISC10" value="C" style="margin-right:5px;">Systematic</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">11</td>
-                <td><input type="radio" name="DISC11" value="D" style="margin-right:5px;">Aggressive</td>
-                <td><input type="radio" name="DISC11" value="I" style="margin-right:5px;">Charismatic</td>
-                <td><input type="radio" name="DISC11" value="S" style="margin-right:5px;">Good-Natured</td>
-                <td><input type="radio" name="DISC11" value="C" style="margin-right:5px;">Careful</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">12</td>
-                <td><input type="radio" name="DISC12" value="D" style="margin-right:5px;">Restless</td>
-                <td><input type="radio" name="DISC12" value="I" style="margin-right:5px;">Talkative</td>
-                <td><input type="radio" name="DISC12" value="S" style="margin-right:5px;">Controlled</td>
-                <td><input type="radio" name="DISC12" value="C" style="margin-right:5px;">Conventional</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">13</td>
-                <td><input type="radio" name="DISC13" value="D" style="margin-right:5px;">Decisive</td>
-                <td><input type="radio" name="DISC13" value="I" style="margin-right:5px;">Popular</td>
-                <td><input type="radio" name="DISC13" value="S" style="margin-right:5px;">Neighbourly</td>
-                <td><input type="radio" name="DISC13" value="C" style="margin-right:5px;">Organized</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">14</td>
-                <td><input type="radio" name="DISC14" value="D" style="margin-right:5px;">Adventurous</td>
-                <td><input type="radio" name="DISC14" value="I" style="margin-right:5px;">Friendly</td>
-                <td><input type="radio" name="DISC14" value="S" style="margin-right:5px;">Moderate</td>
-                <td><input type="radio" name="DISC14" value="C" style="margin-right:5px;">Receptive</td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">15</td>
-                <td><input type="radio" name="DISC15" value="D" style="margin-right:5px;">Brave</td>
-                <td><input type="radio" name="DISC15" value="I" style="margin-right:5px;">Inspiring</td>
-                <td><input type="radio" name="DISC15" value="S" style="margin-right:5px;">Submissive</td>
-                <td><input type="radio" name="DISC15" value="C" style="margin-right:5px;">Shy</td>
-            </tr>
-        </table>
+        </div>
+
+
+    }
+    else
+    {
+
+            <p id="p26-27">
+                For each row, select the personality trait that describes you best.  
+            </p>
+
+            <table id="p27DISCTable">
+                <tr>
+                    <td style="text-align:center;">1</td>
+                    <td><input type="radio" name="DISC1" value="D" style="margin-right:5px;">Strong-Willed</td>
+                    <td><input type="radio" name="DISC1" value="I" style="margin-right:5px;">Persuasive</td>
+                    <td><input type="radio" name="DISC1" value="S" style="margin-right:5px;">Kind</td>
+                    <td><input type="radio" name="DISC1" value="C" style="margin-right:5px;">Humble</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">2</td>
+                    <td><input type="radio" name="DISC2" value="D" style="margin-right:5px;">Independent</td>
+                    <td><input type="radio" name="DISC2" value="I" style="margin-right:5px;">Sociable</td>
+                    <td><input type="radio" name="DISC2" value="S" style="margin-right:5px;">Pleasant</td>
+                    <td><input type="radio" name="DISC2" value="C" style="margin-right:5px;">Cooperative</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">3</td>
+                    <td><input type="radio" name="DISC3" value="D" style="margin-right:5px;">Bold</td>
+                    <td><input type="radio" name="DISC3" value="I" style="margin-right:5px;">Lively</td>
+                    <td><input type="radio" name="DISC3" value="S" style="margin-right:5px;">Loyal</td>
+                    <td><input type="radio" name="DISC3" value="C" style="margin-right:5px;">Passive</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">4</td>
+                    <td><input type="radio" name="DISC4" value="D" style="margin-right:5px;">Competitive</td>
+                    <td><input type="radio" name="DISC4" value="I" style="margin-right:5px;">Cheerful</td>
+                    <td><input type="radio" name="DISC4" value="S" style="margin-right:5px;">Obliging</td>
+                    <td><input type="radio" name="DISC4" value="C" style="margin-right:5px;">Open-Minded</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">5</td>
+                    <td><input type="radio" name="DISC5" value="D" style="margin-right:5px;">Daring</td>
+                    <td><input type="radio" name="DISC5" value="I" style="margin-right:5px;">Humorous</td>
+                    <td><input type="radio" name="DISC5" value="S" style="margin-right:5px;">Calm</td>
+                    <td><input type="radio" name="DISC5" value="C" style="margin-right:5px;">Precise</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">6</td>
+                    <td><input type="radio" name="DISC6" value="D" style="margin-right:5px;">Pioneering</td>
+                    <td><input type="radio" name="DISC6" value="I" style="margin-right:5px;">Trusting</td>
+                    <td><input type="radio" name="DISC6" value="S" style="margin-right:5px;">Lenient</td>
+                    <td><input type="radio" name="DISC6" value="C" style="margin-right:5px;">Tolerant</td>
+
+                </tr>
+                <tr>
+                    <td style="text-align:center;">7</td>
+                    <td><input type="radio" name="DISC7" value="D" style="margin-right:5px;">Persistent</td>
+                    <td><input type="radio" name="DISC7" value="I" style="margin-right:5px;">Entertaining</td>
+                    <td><input type="radio" name="DISC7" value="S" style="margin-right:5px;">Obedient</td>
+                    <td><input type="radio" name="DISC7" value="C" style="margin-right:5px;">Neat</td>
+
+                </tr>
+                <tr>
+                    <td style="text-align:center;">8</td>
+                    <td><input type="radio" name="DISC8" value="D" style="margin-right:5px;">Energetic</td>
+                    <td><input type="radio" name="DISC8" value="I" style="margin-right:5px;">Sociable</td>
+                    <td><input type="radio" name="DISC8" value="S" style="margin-right:5px;">Lenient</td>
+                    <td><input type="radio" name="DISC8" value="C" style="margin-right:5px;">Peaceful</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">9</td>
+                    <td><input type="radio" name="DISC9" value="D" style="margin-right:5px;">Risk Taker</td>
+                    <td><input type="radio" name="DISC9" value="I" style="margin-right:5px;">Good-Mixer</td>
+                    <td><input type="radio" name="DISC9" value="S" style="margin-right:5px;">Patient</td>
+                    <td><input type="radio" name="DISC9" value="C" style="margin-right:5px;">Precise</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">10</td>
+                    <td><input type="radio" name="DISC10" value="D" style="margin-right:5px;">Determined</td>
+                    <td><input type="radio" name="DISC10" value="I" style="margin-right:5px;">Energetic</td>
+                    <td><input type="radio" name="DISC10" value="S" style="margin-right:5px;">Self-Controlled</td>
+                    <td><input type="radio" name="DISC10" value="C" style="margin-right:5px;">Systematic</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">11</td>
+                    <td><input type="radio" name="DISC11" value="D" style="margin-right:5px;">Aggressive</td>
+                    <td><input type="radio" name="DISC11" value="I" style="margin-right:5px;">Charismatic</td>
+                    <td><input type="radio" name="DISC11" value="S" style="margin-right:5px;">Good-Natured</td>
+                    <td><input type="radio" name="DISC11" value="C" style="margin-right:5px;">Careful</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">12</td>
+                    <td><input type="radio" name="DISC12" value="D" style="margin-right:5px;">Restless</td>
+                    <td><input type="radio" name="DISC12" value="I" style="margin-right:5px;">Talkative</td>
+                    <td><input type="radio" name="DISC12" value="S" style="margin-right:5px;">Controlled</td>
+                    <td><input type="radio" name="DISC12" value="C" style="margin-right:5px;">Conventional</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">13</td>
+                    <td><input type="radio" name="DISC13" value="D" style="margin-right:5px;">Decisive</td>
+                    <td><input type="radio" name="DISC13" value="I" style="margin-right:5px;">Popular</td>
+                    <td><input type="radio" name="DISC13" value="S" style="margin-right:5px;">Neighbourly</td>
+                    <td><input type="radio" name="DISC13" value="C" style="margin-right:5px;">Organized</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">14</td>
+                    <td><input type="radio" name="DISC14" value="D" style="margin-right:5px;">Adventurous</td>
+                    <td><input type="radio" name="DISC14" value="I" style="margin-right:5px;">Friendly</td>
+                    <td><input type="radio" name="DISC14" value="S" style="margin-right:5px;">Moderate</td>
+                    <td><input type="radio" name="DISC14" value="C" style="margin-right:5px;">Receptive</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">15</td>
+                    <td><input type="radio" name="DISC15" value="D" style="margin-right:5px;">Brave</td>
+                    <td><input type="radio" name="DISC15" value="I" style="margin-right:5px;">Inspiring</td>
+                    <td><input type="radio" name="DISC15" value="S" style="margin-right:5px;">Submissive</td>
+                    <td><input type="radio" name="DISC15" value="C" style="margin-right:5px;">Shy</td>
+                </tr>
+            </table>
+
+            <div class="form-group;" style="text-align:center; margin-top:20px;">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+    }
 
         <div style="text-align:center; margin-top: 20px;">
             @Html.ActionLink("Previous Page", "Page26") |
@@ -127,4 +172,35 @@
             @Html.ActionLink("Next Page", "Page28")
         </div>
     </div>
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function CheckValue() {
+
+
+            for (var i = 1; i < 16; i++) {
+
+                //alert(i.toString());
+                var chx = document.getElementsByName("DISC" + i);
+                for (var j = 0; j < chx.length; j++) {
+                    if (chx[j].type == 'radio' && chx[j].checked) {
+                        //alert('yes found');
+                        return true;
+                    }
+                }
+            }
+
+            //no selection
+            toastr.warning('You need to select any options.');
+            return false;
+
+        }
+
+        $("input[type=submit]").on("click", CheckValue);
+
+
+    </script>
 }

@@ -1,49 +1,47 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.Vark
 @{
-    ViewBag.Title = "Page23";
+    ViewBag.Title = "VARK";
 }
 
-@section Scripts{
 
-<script type="text/javascript">
-    toastr.info('hello fucker!');
-
-    function CheckValue() {
-    
-        for (var i = 1; i < 12; i++) {
-            var radioValue = $("input[name='VARK" + i + "']:checked").val();
-            if (radioValue == null) {
-                toastr.warning('not all rows were selected!');
-                return false;
-            }
-        }
-       
-    }
-   
-    $("input[type=submit]").on("click", CheckValue );
-
-
-</script>
-}
 
 @using (Html.BeginForm("Page23", "Module", FormMethod.Post))
 {
-    @Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
+
     <div class="container1">
 
         <div class="form-group">
-            <div class="form-group">
+           
                 <h1>VARK</h1>
 
                @if (ViewBag.ActDone)
                {
+                    <div class="alert alert-success"> Your VARK Result: <strong>@ViewBag.Vark</strong></div>
+                        <div class="col-md-offset-0 col-md-12">
 
-                    <div class="alert alert-info">
-                        <strong>Your VARK Result: @ViewBag.Vark</strong>
+                        <div class="panel panel-info">
+                            <div class="panel-heading"><strong>Visual</strong></div>
+                            <div class="panel-body">This preference includes the depiction of information in maps, spider diagrams, charts, graphs, flow charts, labelled diagrams, and all the symbolic arrows, circles, hierarchies and other devices, that people use to represent what could have been presented in words. This mode could have been called Graphic (G) as that better explains what it covers. It does NOT include still pictures or photographs of reality, movies, videos or PowerPoint. It does include designs, whitespace, patterns, shapes and the different formats that are used to highlight and convey information. When a whiteboard is used to draw a diagram with meaningful symbols for the relationship between different things that will be helpful for those with a Visual preference. It must be more than mere words in boxes that would be helpful to those who have a Read/write preference.</div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading"><strong>Aural / Auditory</strong></div>
+                            <div class="panel-body">This perceptual mode describes a preference for information that is “heard or spoken.” Learners who have this as their main preference report that they learn best from lectures, group discussion, radio, email, using mobile phones, speaking, web-chat and talking things through. Email is included here because; although it is text and could be included in the Read/write category (below), it is often written in chat-style with abbreviations, colloquial terms, slang and non-formal language. The Aural preference includes talking out loud as well as talking to oneself. Often people with this preference want to sort things out by speaking first, rather than sorting out their ideas and then speaking. They may say again what has already been said, or ask an obvious and previously answered question. They have need to say it themselves and they learn through saying it – their way.</div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading"><strong>Read/write</strong></div>
+                            <div class="panel-body">This preference is for information displayed as words. Not surprisingly, many teachers and students have a strong preference for this mode. Being able to write well and read widely are attributes sought by employers of graduates. This preference emphasizes text-based input and output – reading and writing in all its forms but especially manuals, reports, essays and assignments. People who prefer this modality are often addicted to PowerPoint, the Internet, lists, diaries, dictionaries, thesauri, quotations and words, words, words… Note that most PowerPoint presentations and the Internet, GOOGLE and Wikipedia are essentially suited to those with this preference as there is seldom an auditory channel or a presentation that uses Visual symbols.</div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading"><strong>Kinesthetic</strong></div>
+                            <div class="panel-body">By definition, this modality refers to the “perceptual preference related to the use of experience and practice (simulated or real).” Although such an experience may invoke other modalities, the key is that people who prefer this mode are connected to reality, “either through concrete personal experiences, examples, practice or simulation” [See Fleming & Mills, 1992, pp. 140-141]. It includes demonstrations, simulations, videos and movies of “real” things, as well as case studies, practice and applications. The key is the reality or concrete nature of the example. If it can be grasped, held, tasted, or felt it will probably be included. People with this as a strong preference learn from the experience of doing something and they value their own background of experiences and less so, the experiences of others. It is possible to write or speak Kinesthetically if the topic is strongly based in reality. An assignment that requires the details of who will do what and when, is suited to those with this preference, as is a case study or a working example of what is intended or proposed.</div>
+                        </div>
+
                     </div>
 
-               
-                }
+
+               } else {
+
                 <p id="p23instruction">Choose one that is most applicable for you in each situations:</p>
                 <table id="p23VARKTable">
                     <tr>
@@ -133,13 +131,12 @@
 
 
                 </table>
-            </div>
-            @if (!ViewBag.ActDone)
-            {
-                <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+
+
+                <div class="form-group;" style="text-align:center; margin-top:20px;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
-            }
+               }
           
         </div>
 
@@ -151,3 +148,23 @@
     </div>
 }
 
+@section Scripts{
+
+    <script type="text/javascript">
+    function CheckValue() {
+
+        for (var i = 1; i < 12; i++) {
+            var radioValue = $("input[name='VARK" + i + "']:checked").val();
+            if (radioValue == null) {
+                toastr.warning('not all rows were selected!');
+                return false;
+            }
+        }
+
+    }
+
+    $("input[type=submit]").on("click", CheckValue );
+
+
+    </script>
+}

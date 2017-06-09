@@ -43,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -205,6 +206,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityCategory.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -366,6 +368,14 @@
     <Compile Include="Migrations\201706030724168_addFileInStudentActivity.Designer.cs">
       <DependentUpon>201706030724168_addFileInStudentActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706070208485_AddSystemfieldFilePathClass.cs" />
+    <Compile Include="Migrations\201706070208485_AddSystemfieldFilePathClass.Designer.cs">
+      <DependentUpon>201706070208485_AddSystemfieldFilePathClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706082342334_AddTypeInStudentActivity.cs" />
+    <Compile Include="Migrations\201706082342334_AddTypeInStudentActivity.Designer.cs">
+      <DependentUpon>201706082342334_AddTypeInStudentActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -378,6 +388,7 @@
     <Compile Include="Models\Core\TempActivity.cs" />
     <Compile Include="Models\Core\TempModule.cs" />
     <Compile Include="Models\FilePath.cs" />
+    <Compile Include="Models\Forms\kiwiana.cs" />
     <Compile Include="Models\Forms\aboutme.cs" />
     <Compile Include="Models\Forms\vark.cs" />
     <Compile Include="Models\GroupModel.cs" />
@@ -601,10 +612,7 @@
     <Content Include="Content\pages.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
-    <Content Include="Content\video\6181958.mp4" />
     <Content Include="Content\video\aspire2.mp4" />
-    <Content Include="Content\video\dcl7.MOV" />
-    <Content Include="Content\video\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -627,6 +635,7 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -842,8 +851,6 @@
     <Content Include="Views\Module\Page52.cshtml" />
     <Content Include="Views\Module\Page53.cshtml" />
     <Content Include="Views\Module\Page54.cshtml" />
-    <Content Include="Views\Module\Page55.cshtml" />
-    <Content Include="Views\Module\Page56.cshtml" />
     <Content Include="Views\Module\Page6.cshtml" />
     <Content Include="Views\Module\Page7.cshtml" />
     <Content Include="Views\Module\Page8.cshtml" />
@@ -970,6 +977,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706030724168_addFileInStudentActivity.resx">
       <DependentUpon>201706030724168_addFileInStudentActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706070208485_AddSystemfieldFilePathClass.resx">
+      <DependentUpon>201706070208485_AddSystemfieldFilePathClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706082342334_AddTypeInStudentActivity.resx">
+      <DependentUpon>201706082342334_AddTypeInStudentActivity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

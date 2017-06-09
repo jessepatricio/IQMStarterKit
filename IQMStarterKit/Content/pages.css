@@ -306,7 +306,7 @@ tr.p10_11TabRow{
 	border: 1px solid #bfbfbf;
 	border-radius: 2px;
 	font-size: 1em;
-	margin: 5px;
+	margin: 2px;
 	max-width: 900px;
 }
 
@@ -506,3 +506,4 @@ input[type=checkbox] {
 	margin: 5px;
 	max-width: 900px;
 }
+
