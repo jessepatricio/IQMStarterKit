@@ -35,6 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <IncludeIisSettings>true</IncludeIisSettings>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -225,6 +226,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="DAL\DataLayer.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -383,6 +386,8 @@
     <Compile Include="Models\Alert\Alert.cs" />
     <Compile Include="Models\Alert\AlertDecoratorResult.cs" />
     <Compile Include="Models\Alert\AlertExtensions.cs" />
+    <Compile Include="Models\Report\DiscViewModel.cs" />
+    <Compile Include="Models\Report\DopeViewModel.cs" />
     <Compile Include="Models\FileTypesAttribute.cs" />
     <Compile Include="Models\FileSizeAttribute.cs" />
     <Compile Include="Models\Core\StudentActivity.cs" />
@@ -391,18 +396,21 @@
     <Compile Include="Models\FilePath.cs" />
     <Compile Include="Models\Forms\kiwiana.cs" />
     <Compile Include="Models\Forms\aboutme.cs" />
+    <Compile Include="Models\Forms\slangClass.cs" />
     <Compile Include="Models\Forms\vark.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\GroupViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Core\TempWorkbook.cs" />
+    <Compile Include="Models\Report\StudentActivityPercentage.cs" />
     <Compile Include="Models\TOCViewModels.cs" />
     <Compile Include="Models\TempActivityViewModels.cs" />
     <Compile Include="Models\TempModuleViewModels.cs" />
     <Compile Include="Models\UploadFileModel.cs" />
     <Compile Include="Models\UserRoleViewModel.cs" />
     <Compile Include="Models\TempWorkbookViewModels.cs" />
+    <Compile Include="Models\Report\VarkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -865,6 +873,10 @@
     <Content Include="Views\FilePaths\Details.cshtml" />
     <Content Include="Views\FilePaths\Edit.cshtml" />
     <Content Include="Views\FilePaths\Index.cshtml" />
+    <Content Include="Views\Report\VARK.cshtml" />
+    <Content Include="Views\Report\DOPE.cshtml" />
+    <Content Include="Views\Report\DISC.cshtml" />
+    <Content Include="Views\Report\StudentActivityPercentage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

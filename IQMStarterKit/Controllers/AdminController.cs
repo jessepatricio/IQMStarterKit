@@ -78,7 +78,7 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ExtendedUserCustom model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+            var user = new ApplicationUser { UserName = model.Email.Trim(), Email = model.Email.Trim(), FullName = model.FullName.Trim() };
             try
             {
 
@@ -521,6 +521,7 @@ namespace IQMStarterKit.Controllers
 
             objExtUser.Email = result.Email;
             objExtUser.FullName = result.FullName;
+            objExtUser.GroupId = result.GroupId;
 
             return objExtUser;
 
@@ -535,8 +536,8 @@ namespace IQMStarterKit.Controllers
             //not found
             if (result == null) throw new Exception("User not found.");
 
-            result.Email = extUser.Email;
-            result.FullName = extUser.FullName;
+            result.Email = extUser.Email.Trim();
+            result.FullName = extUser.FullName.Trim();
             result.GroupId = extUser.GroupId;
             //is account locked? unlock it
             if (UserManager.IsLockedOut(result.Id)) UserManager.ResetAccessFailedCount(result.Id);

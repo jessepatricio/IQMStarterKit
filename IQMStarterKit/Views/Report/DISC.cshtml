@@ -1,0 +1,59 @@
+﻿@model  IEnumerable<IQMStarterKit.Models.DiscViewModel>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container1">
+
+        <div class="page-header"><h2>DISC Report <small>(Dominant, Influential, Steady, and Conscientious)</small></h2></div>
+
+        @*<div class="col-md-12">
+                @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
+            </div>*@
+
+        <table id="activity" style="width:100%" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>DOPE Result</th>
+                    <th>Group Name</th>
+                    <th>DateTime Taken</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.FullName)</td>
+                        <td>@Html.DisplayFor(m => item.DiscResult)</td>
+                        <td>@Html.DisplayFor(m => item.GroupName)</td>
+                        <td>@Html.DisplayFor(m => item.CreatedDateTime)</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#activity').DataTable({
+                "bLengthChange": false,
+                "bFilter": true
+
+            });
+
+        });
+    </script>
+
+}
+
+
+
+

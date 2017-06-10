@@ -315,8 +315,15 @@ tr.p10_11TabRow{
 	border-radius: 2px;
 	font-size: 1em;
 	margin: 5px;
-	width: 50px;
+	width: 150px;
 	max-width: 900px;
+}
+
+.answer_container {
+	width: 150px;
+	height: 24px;
+	padding: 2px;
+	border: 1px solid #aaaaaa;
 }
 
 .p30txtbox, .p38txtbox {
@@ -505,5 +512,14 @@ input[type=checkbox] {
 	font-size: 1em;
 	margin: 5px;
 	max-width: 900px;
+}
+
+.dataTables_wrapper .dataTables_length {
+	float: right;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+    text-align: left;
 }
 

@@ -72,11 +72,24 @@
             if (file == "") {
                 toastr.warning('No selected file to upload!');
                 return false;
+            } else {
+                return true;
             }
 
         }
 
-        $("input[type=submit]").on("click", Validate);
+        //confirmation dialog
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    Validate();
+                    currentForm.submit();
+                }
+            });
+        });
+
 
 
     </script>

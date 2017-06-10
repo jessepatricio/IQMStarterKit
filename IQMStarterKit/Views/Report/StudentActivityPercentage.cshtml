@@ -1,0 +1,60 @@
+﻿
+@model  IEnumerable<IQMStarterKit.Models.Report.StudentActivityPercentage>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container1">
+
+        <div class="page-header"><h2>% of Activities Completed</h2></div>
+
+        @*<div class="col-md-12">
+                @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
+            </div>*@
+
+        <table id="activity" style="width:100%" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Group Name</th>
+                    <th>% Activities Completed</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.FullName)</td>
+                        <td>@Html.DisplayFor(m => item.GroupName)</td>
+                        <td>
+                            <span class="progress-bar" role="progressbar" aria-valuenow="@item.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @item.ProgressValue%">@item.ProgressValue%</span>
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#activity').DataTable({
+                "bLengthChange": false,
+                "bFilter": true
+
+            });
+
+        });
+    </script>
+
+}
+
+

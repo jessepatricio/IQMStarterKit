@@ -226,7 +226,19 @@
 
         }
 
-        $("input[type=submit]").on("click", CheckValue);
+        //confirmation dialog
+
+
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    CheckValue();
+                }
+            });
+        });
+
 
         
 

@@ -1,9 +1,4 @@
 ﻿@model IQMStarterKit.Models.Forms.Vark
-@{
-    ViewBag.Title = "VARK";
-}
-
-
 
 @using (Html.BeginForm("Page23", "Module", FormMethod.Post))
 {
@@ -151,19 +146,31 @@
 @section Scripts{
 
     <script type="text/javascript">
-    function CheckValue() {
 
-        for (var i = 1; i < 12; i++) {
-            var radioValue = $("input[name='VARK" + i + "']:checked").val();
-            if (radioValue == null) {
-                toastr.warning('not all rows were selected!');
-                return false;
+        function Validate() {
+            for (var i = 1; i < 12; i++) {
+                var radioValue = $("input[name='VARK" + i + "']:checked").val();
+                if (radioValue == null) {
+                    toastr.warning('not all rows were selected!');
+                    return false;
+                }
             }
+            return true;
         }
 
-    }
-
-    $("input[type=submit]").on("click", CheckValue );
+        //confirmation dialog
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    if (Validate()) {
+                        currentForm.submit();
+                    }
+                }
+                
+            });
+        });
 
 
     </script>

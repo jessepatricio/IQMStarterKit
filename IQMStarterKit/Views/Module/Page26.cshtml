@@ -1,28 +1,4 @@
 ﻿
-@{
-    ViewBag.Title = "D.O.P.E.";
-}
-
-@section Scripts{
-
-    <script type="text/javascript">
-
-        function CheckValue() {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
-            if (!checkedOne) {
-                toastr.error("No selection! Please select any checkboxes.")
-                return false;
-            }
-
-        }
-
-        $("input[type=submit]").on("click", CheckValue);
-
-
-    </script>
-}
-
 @using (Html.BeginForm("Page26", "Module", FormMethod.Post))
 
 {
@@ -492,3 +468,38 @@
 }
 
 
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function CheckValue() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+            if (!checkedOne) {
+                toastr.warning("No selection! Please select any checkboxes.")
+                return false;
+            }
+            return true;
+
+        }
+
+        //confirmation dialog
+
+
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    if (CheckValue()) {
+                        currentForm.submit();
+                    }
+                }
+            });
+        });
+
+
+    </script>
+}

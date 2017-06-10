@@ -27,6 +27,7 @@ namespace IQMStarterKit.Controllers
         {
             var toc = new TOCViewModels
             {
+                // note: should indicate temp workbook id no
                 TempWorkbook =
                     _context.TempWorkbooks.FirstOrDefault(m => m.IsRemoved == false && m.TempWorkbookId == 4),
                 TempModules = _context.TempModules.ToList()
@@ -223,14 +224,15 @@ namespace IQMStarterKit.Controllers
 
 
 
-
-
+            #region start of Page14
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
             var activityID = GetTempActivityID("My Shield");
+            //get owner
+            var owner2 = GetSessionUserId();
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner2);
 
             if (stdAct2 != null)
             {
@@ -238,6 +240,7 @@ namespace IQMStarterKit.Controllers
             }
 
             return View(filePath);
+            #endregion
         }
 
         public FileResult Page14DownloadFile(string Id)
@@ -1235,8 +1238,76 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page29()
         {
-            return View();
+            var objSlang = new SlangClass();
+
+            return View(objSlang);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page29(SlangClass slang)
+        {
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("NZ Slang and Saying");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(slang);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.NoMatchedWords = GetMatchedWords(slang);
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page29").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(slang).WithError(ex.Message);
+            }
+        }
+
+
+
         public ActionResult Page30()
         {
             return View();
@@ -1342,7 +1413,12 @@ namespace IQMStarterKit.Controllers
 
         //Utility
 
-        public List<Vark> GetVarkList(FormCollection fc)
+        private int GetMatchedWords(SlangClass slang)
+        {
+            return 0;
+        }
+
+        private List<Vark> GetVarkList(FormCollection fc)
         {
             int rows = 11;
             int cur_row = 0;
@@ -1382,7 +1458,7 @@ namespace IQMStarterKit.Controllers
             return varkList;
         }
 
-        public string GetVarkResult(List<Vark> varkList)
+        private string GetVarkResult(List<Vark> varkList)
         {
 
             //check count
@@ -1417,7 +1493,7 @@ namespace IQMStarterKit.Controllers
             return yourVark;
         }
 
-        public string GetDiscResult(FormCollection fc)
+        private string GetDiscResult(FormCollection fc)
         {
             int d = 0;
             int i = 0;
