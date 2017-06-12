@@ -6,6 +6,20 @@
 
     <div class="container1">
         <h1 class="heading"><u>New Zealand Slang and Sayings</u></h1>
+
+        @if (Model.StudentActivity.ProgressValue == 100)
+        {
+
+            <div class="col-md-offset-0 col-md-12">
+
+                <div class="panel panel-info">
+                    @*<div class="panel-heading">Your MatchWord Result: <strong></strong></div>*@
+                    <div class="panel-body">Your correct matched word result: @Model.StudentActivity.NoMatchedWords/46</div>
+                </div>
+
+            </div>
+        } else {
+
         <p  style="text-align:center;"> Drag the word into the blank box that best matches the slang word or saying:</p>
        
                 <table id="table" style="margin:auto;">
@@ -289,7 +303,7 @@
                         <td>Ketchup</td>
                     <tr>
                         @Html.HiddenFor(m => m.Answer35, new { @id = "answer35" })
-                        <td><div id="q35" draggable="true" ondragstart="drag(event)" data-value="SWEET /SWEET AS">SWEET /SWEET AS</div></td>
+                        <td><div id="q35" draggable="true" ondragstart="drag(event)" data-value="SWEET / SWEET AS">SWEET /SWEET AS</div></td>
                         <td><div id="a35" title="answer35" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
                         <td style="background-color:gray;"></td>
                         <td style="text-align:center;">35</td>
@@ -333,7 +347,7 @@
                         <td><div id="a40" title="answer40" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
                         <td style="background-color:gray;"></td>
                         <td style="text-align:center;">40</td>
-                        <td>A close friend</td>
+                        <td>The common man, ordinary guy in the street</td>
                     </tr>
                     <tr>
                         @Html.HiddenFor(m => m.Answer41, new { @id = "answer41" })
@@ -386,13 +400,12 @@
                 </table>
            
 
-            @if (Model.StudentActivity.ProgressValue != 100)
-            {
+           
                 <div class="form-group;" style="text-align:center; margin-top:20px;">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
-            }
-
+            
+        }
       
 
             <div style="text-align:center; margin-top: 20px;">
@@ -436,6 +449,15 @@
             
         }
 
+        function Validate() {
+            for (var i = 1; i < 47; i++) {
+                var answer = document.getElementById("answer" + i).value;
+               // alert(answer);
+                if (answer != '') return true;
+            }
+            toastr.warning("Please try to match any words!");
+            return false;
+        }
         
 
         //confirmation dialog
@@ -446,7 +468,9 @@
             e.preventDefault();
             bootbox.confirm("Are you sure you want to submit your work?", function(result) {
                 if (result) {
-                    currentForm.submit();
+                    if (Validate()) {
+                        currentForm.submit();
+                    }
                 }
             });
         });

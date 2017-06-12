@@ -6,18 +6,31 @@
     @Html.AntiForgeryToken()
     <div class="container1">
 
-        <div class="page-header"><h2>% of Activities Completed</h2></div>
+        <div class="page-header"><h2>Percentage of Activities Completed</h2></div>
 
         @*<div class="col-md-12">
                 @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
             </div>*@
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-xs">Export</button>
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "ActivityPercentageReport" })</li>
+                <li>@Html.ActionLink("PDF", "ExportToPDF", new { @reportName = "ActivityPercentageReport" })</li>
+                <li><a href="javascript:window.print()">Print</a></li>
+            </ul>
+        </div>
+
 
         <table id="activity" style="width:100%" class="display" cellspacing="0">
             <thead>
                 <tr>
                     <th>Student Name</th>
                     <th>Group Name</th>
-                    <th>% Activities Completed</th>
+                    <th>PDP Progress (%)</th>
                     
                 </tr>
             </thead>

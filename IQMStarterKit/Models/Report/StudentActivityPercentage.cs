@@ -7,7 +7,7 @@
         public string GroupName { get; set; }
         public string StudentTotalActivities { get; set; }
         public string TotalActivities { get; set; }
-        public double ProgressValue { get; set; }
+        public string ProgressValue { get; set; }
 
     }
 }

@@ -51,6 +51,12 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.87.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.87.1\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
     </Reference>
@@ -65,6 +71,9 @@
     </Reference>
     <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -380,12 +389,17 @@
     <Compile Include="Migrations\201706082342334_AddTypeInStudentActivity.Designer.cs">
       <DependentUpon>201706082342334_AddTypeInStudentActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120722385_CreateMatchLookupTable.cs" />
+    <Compile Include="Migrations\201706120722385_CreateMatchLookupTable.Designer.cs">
+      <DependentUpon>201706120722385_CreateMatchLookupTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Models\Alert\Alert.cs" />
     <Compile Include="Models\Alert\AlertDecoratorResult.cs" />
     <Compile Include="Models\Alert\AlertExtensions.cs" />
+    <Compile Include="Models\MatchLookupModels.cs" />
     <Compile Include="Models\Report\DiscViewModel.cs" />
     <Compile Include="Models\Report\DopeViewModel.cs" />
     <Compile Include="Models\FileTypesAttribute.cs" />
@@ -997,6 +1011,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706082342334_AddTypeInStudentActivity.resx">
       <DependentUpon>201706082342334_AddTypeInStudentActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120722385_CreateMatchLookupTable.resx">
+      <DependentUpon>201706120722385_CreateMatchLookupTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

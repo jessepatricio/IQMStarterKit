@@ -2,13 +2,7 @@
 @{
     ViewBag.Title = "Page33";
 }
-@section Scripts{
-    <script type="text/javascript">
-          $('button').click(function () {
-             $(this).toggleClass('pressed');
-          });
-    </script>
-}
+
 
 @using (Html.BeginForm())
 {
@@ -165,5 +159,19 @@
 
     </div>
 
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "Page32") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "Page34")
+    </div>
+
 }
 
+
+@section Scripts{
+    <script type="text/javascript">
+          $('button').click(function () {
+             $(this).toggleClass('pressed');
+          });
+    </script>
+}

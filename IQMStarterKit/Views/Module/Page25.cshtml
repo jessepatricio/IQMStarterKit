@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@model IQMStarterKit.Models.FilePath
+
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Photo Scavenger Hunt";
@@ -63,4 +65,41 @@
         </div>
     </div>
 
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function CheckValue() {
+
+            if ($('#Shield').val() == "") {
+                // all empty
+                toastr.warning('Please select a file to upload.')
+                return false;
+            }
+            return true;
+
+        }
+
+        //confirmation dialog
+
+
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    if (CheckValue()) {
+                        currentForm.submit();
+                    }
+                }
+            });
+        });
+
+
+
+
+
+    </script>
 }

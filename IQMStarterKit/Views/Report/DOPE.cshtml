@@ -11,6 +11,19 @@
                 @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
             </div>*@
 
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-xs">Export</button>
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "DopeReport" })</li>
+                <li>@Html.ActionLink("PDF", "ExportToPDF", new { @reportName = "DopeReport" })</li>
+                <li><a href="javascript:window.print()">Print</a></li>
+            </ul>
+        </div>
+
+
         <table id="activity" style="width:100%" class="display" cellspacing="0">
             <thead>
                 <tr>

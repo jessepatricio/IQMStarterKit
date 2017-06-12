@@ -54,7 +54,14 @@
         {
             <tr>
                 <td>@Html.DisplayFor(m => item.FullName)</td>
-                <td>@Html.DisplayFor(m => item.Email)</td>
+                @if (item.GroupId == 0)
+                {
+                    <td>@Html.DisplayFor(m => item.Email)</td>
+                }
+                else
+                {
+                    <td>@Html.ActionLink(item.Email, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
+                }
                 <td>
                     @if (item.GroupId == 0)
                     {

@@ -689,8 +689,11 @@ namespace IQMStarterKit.Controllers
 
             //get id in tempActivity
             var activityID = GetTempActivityID("Human Bingo - Activity");
+            //get owner
+            var owner = GetSessionUserId();
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
+
 
             if (stdAct2 != null)
             {
@@ -821,8 +824,10 @@ namespace IQMStarterKit.Controllers
 
             //get id in tempActivity
             var activityID = GetTempActivityID("Photo Scavenger Hunt");
+            //get owner
+            var owner = GetSessionUserId();
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -1238,7 +1243,30 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page29()
         {
+
+
+            // title: NZSlang
+            // type: FormSubmission
+
             var objSlang = new SlangClass();
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("NZ Slang and Saying");
+
+            // get Current User
+            var user = GetSessionUserId();
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                objSlang = JsonConvert.DeserializeObject<SlangClass>(rec.Context);
+                objSlang.StudentActivity = rec;
+            }
+
 
             return View(objSlang);
         }
@@ -1415,7 +1443,69 @@ namespace IQMStarterKit.Controllers
 
         private int GetMatchedWords(SlangClass slang)
         {
-            return 0;
+            int matched = 0;
+            try
+            {
+
+
+
+                var correctAns = _context.MatchLookup.OrderBy(m => m.QuestionNumber).ToList();
+
+                if (slang.Answer1 != null && slang.Answer1.Trim() == correctAns[0].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer2 != null && slang.Answer2.Trim() == correctAns[1].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer3 != null && slang.Answer3.Trim() == correctAns[2].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer4 != null && slang.Answer4.Trim() == correctAns[3].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer5 != null && slang.Answer5.Trim() == correctAns[4].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer6 != null && slang.Answer6.Trim() == correctAns[5].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer7 != null && slang.Answer7.Trim() == correctAns[6].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer8 != null && slang.Answer8.Trim() == correctAns[7].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer9 != null && slang.Answer9.Trim() == correctAns[8].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer10 != null && slang.Answer10.Trim() == correctAns[9].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer11 != null && slang.Answer11.Trim() == correctAns[10].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer12 != null && slang.Answer12.Trim() == correctAns[11].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer13 != null && slang.Answer13.Trim() == correctAns[12].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer14 != null && slang.Answer14.Trim() == correctAns[13].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer15 != null && slang.Answer15.Trim() == correctAns[14].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer16 != null && slang.Answer16.Trim() == correctAns[15].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer17 != null && slang.Answer17.Trim() == correctAns[16].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer18 != null && slang.Answer18.Trim() == correctAns[17].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer19 != null && slang.Answer19.Trim() == correctAns[18].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer20 != null && slang.Answer20.Trim() == correctAns[19].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer21 != null && slang.Answer21.Trim() == correctAns[20].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer22 != null && slang.Answer22.Trim() == correctAns[21].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer23 != null && slang.Answer23.Trim() == correctAns[22].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer24 != null && slang.Answer24.Trim() == correctAns[23].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer25 != null && slang.Answer25.Trim() == correctAns[24].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer26 != null && slang.Answer26.Trim() == correctAns[25].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer27 != null && slang.Answer27.Trim() == correctAns[26].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer28 != null && slang.Answer28.Trim() == correctAns[27].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer29 != null && slang.Answer29.Trim() == correctAns[28].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer30 != null && slang.Answer30.Trim() == correctAns[29].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer31 != null && slang.Answer31.Trim() == correctAns[30].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer32 != null && slang.Answer32.Trim() == correctAns[31].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer33 != null && slang.Answer33.Trim() == correctAns[32].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer34 != null && slang.Answer34.Trim() == correctAns[33].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer35 != null && slang.Answer35.Trim() == correctAns[34].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer36 != null && slang.Answer36.Trim() == correctAns[35].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer37 != null && slang.Answer37.Trim() == correctAns[36].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer38 != null && slang.Answer38.Trim() == correctAns[37].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer39 != null && slang.Answer39.Trim() == correctAns[38].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer40 != null && slang.Answer40.Trim() == correctAns[39].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer41 != null && slang.Answer41.Trim() == correctAns[40].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer42 != null && slang.Answer42.Trim() == correctAns[41].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer43 != null && slang.Answer43.Trim() == correctAns[42].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer44 != null && slang.Answer44.Trim() == correctAns[43].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer45 != null && slang.Answer45.Trim() == correctAns[44].CorrectAnswer.Trim()) matched++;
+                if (slang.Answer46 != null && slang.Answer46.Trim() == correctAns[45].CorrectAnswer.Trim()) matched++;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return matched;
         }
 
         private List<Vark> GetVarkList(FormCollection fc)

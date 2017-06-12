@@ -223,6 +223,7 @@
                 toastr.warning('Nothing to save!.')
                 return false;
             }
+            return true;
 
         }
 
@@ -234,7 +235,9 @@
             e.preventDefault();
             bootbox.confirm("Are you sure you want to submit your work?", function (result) {
                 if (result) {
-                    CheckValue();
+                    if (CheckValue()) {
+                        currentForm.submit();
+                    }
                 }
             });
         });

@@ -37,10 +37,9 @@ namespace IQMStarterKit.Models
         public DbSet<TempActivity> TempActivities { get; set; }
 
         public DbSet<GroupModel> GroupModels { get; set; }
-
         public DbSet<StudentActivity> StudentActivities { get; set; }
-
         public DbSet<FilePath> FilePaths { get; set; }
+        public DbSet<MatchLookupModels> MatchLookup { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
