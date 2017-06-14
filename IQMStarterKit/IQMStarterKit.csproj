@@ -393,6 +393,10 @@
     <Compile Include="Migrations\201706120722385_CreateMatchLookupTable.Designer.cs">
       <DependentUpon>201706120722385_CreateMatchLookupTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706140044460_addOveralProgressValueUsers.cs" />
+    <Compile Include="Migrations\201706140044460_addOveralProgressValueUsers.Designer.cs">
+      <DependentUpon>201706140044460_addOveralProgressValueUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -601,7 +605,6 @@
     <Content Include="Content\img\checklist.png" />
     <Content Include="Content\img\Coat of Arms.jpg" />
     <Content Include="Content\img\Contract.png" />
-    <Content Include="Content\img\dart.jpg" />
     <Content Include="Content\img\dart.png" />
     <Content Include="Content\img\dots.jpg" />
     <Content Include="Content\img\Great-Impression.jpg" />
@@ -611,6 +614,7 @@
     <Content Include="Content\img\logo.svg" />
     <Content Include="Content\img\looking-for-a-job.jpg" />
     <Content Include="Content\img\LostAtSea.png" />
+    <Content Include="Content\img\MaturityContinuum.png" />
     <Content Include="Content\img\MindMap.jpg" />
     <Content Include="Content\img\noPhoneLaptop.png" />
     <Content Include="Content\img\ntec_logo.png" />
@@ -1014,6 +1018,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706120722385_CreateMatchLookupTable.resx">
       <DependentUpon>201706120722385_CreateMatchLookupTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706140044460_addOveralProgressValueUsers.resx">
+      <DependentUpon>201706140044460_addOveralProgressValueUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

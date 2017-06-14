@@ -36,7 +36,8 @@ namespace IQMStarterKit.Controllers
             if (string.IsNullOrEmpty(email)) email = User.Identity.Name;
 
             var student = UserManager.FindByEmail(email);
-            ViewBag.StudentName = student.FullName;
+            toc.StudentName = student.FullName;
+            toc.OverallProgressValue = student.OverallProgress;
 
             //load all activities to each module
             foreach (var item in toc.TempModules)
@@ -210,6 +211,10 @@ namespace IQMStarterKit.Controllers
                             _context.StudentActivities.Add(studentActivity);
                             _context.SaveChanges();
 
+                            // record overall progress
+                            ComputeOverallProgress();
+
+
                             return View("Page14").WithInfo("Congratulation! You have completed the Introduction activity!");
                         }
                     }
@@ -347,6 +352,9 @@ namespace IQMStarterKit.Controllers
 
                         _context.SaveChanges();
 
+                        // record overall progress
+                        ComputeOverallProgress();
+
 
                     }
 
@@ -438,6 +446,9 @@ namespace IQMStarterKit.Controllers
 
                     //insert record
                     _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
                 }
                 else
                 {
@@ -569,6 +580,9 @@ namespace IQMStarterKit.Controllers
                             _context.StudentActivities.Add(studentActivity);
                             _context.SaveChanges();
 
+                            // record overall progress
+                            ComputeOverallProgress();
+
                             return View("Page23").WithInfo("Congratulation! You have completed the Class Contract activity!");
                         }
                     }
@@ -671,6 +685,9 @@ namespace IQMStarterKit.Controllers
 
                 //save record
                 _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
 
                 return RedirectToAction("Page23").WithSuccess("Saved successfully! " + $"You are {yourVark}");
             }
@@ -796,6 +813,9 @@ namespace IQMStarterKit.Controllers
                         _context.FilePaths.Add(newImage);
 
                         _context.SaveChanges();
+
+                        // record overall progress
+                        ComputeOverallProgress();
 
 
                     }
@@ -932,6 +952,9 @@ namespace IQMStarterKit.Controllers
 
                         _context.SaveChanges();
 
+                        // record overall progress
+                        ComputeOverallProgress();
+
 
                     }
 
@@ -1031,6 +1054,9 @@ namespace IQMStarterKit.Controllers
                 //save record
                 _context.SaveChanges();
 
+                // record overall progress
+                ComputeOverallProgress();
+
                 return RedirectToAction("Page26").WithSuccess("Saved successfully! " + $"You are {dopeResult}");
             }
             catch (Exception ex)
@@ -1118,6 +1144,9 @@ namespace IQMStarterKit.Controllers
 
                 //save record
                 _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
 
                 return RedirectToAction("Page27").WithSuccess("Saved successfully! " + $"You are {discResult}");
             }
@@ -1227,6 +1256,9 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
+                // record overall progress
+                ComputeOverallProgress();
+
                 return RedirectToAction("Page28").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
@@ -1311,6 +1343,11 @@ namespace IQMStarterKit.Controllers
 
                     //insert record
                     _context.StudentActivities.Add(newRecord);
+
+                    //update overall progress
+                    ComputeOverallProgress();
+
+
                 }
                 else
                 {
@@ -1440,6 +1477,44 @@ namespace IQMStarterKit.Controllers
 
 
         //Utility
+
+        private void ComputeOverallProgress()
+        {
+            try
+            {
+
+
+                //get logged user id
+                var cur_user = GetSessionUserId();
+                //get logged user activities count
+                var totalStudentActivities = _context.StudentActivities.Where(m => m.CreatedBy == cur_user).Count();
+                //get total activities
+                var totalActivities = _context.TempActivities.Count();
+                //compute overall progress
+                var value = ((double)totalStudentActivities / totalActivities) * 100;
+                var percentage = Math.Round(value, 2);
+                //save to user table
+                var user = _context.Users.Where(m => m.Id == cur_user).FirstOrDefault();
+                if (user != null)
+                {
+                    user.OverallProgress = percentage;
+                }
+                else
+                {
+                    throw new Exception("User not found!");
+                }
+
+                _context.Entry(user).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
 
         private int GetMatchedWords(SlangClass slang)
         {

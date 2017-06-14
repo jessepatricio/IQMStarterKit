@@ -1,6 +1,7 @@
 ﻿using IQMStarterKit.Models.Core;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -17,6 +18,9 @@ namespace IQMStarterKit.Models
         public string FullName { get; set; }
 
         public byte GroupId { get; set; }
+
+        [DefaultValue(0.00)]
+        public double OverallProgress { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -31,7 +31,7 @@
                         <th>Description</th>
                     </tr>
                     <tr>
-                         @Html.HiddenFor(m => m.Answer1, new { @id = "answer1"})
+                         @Html.HiddenFor(m => m.Answer1, new { @id = "answer1", name = "answer" })
                         <td><div id="q1" draggable="true" ondragstart="drag(event)" data-value="BACH">BACH</div></td>
                         <td><div id="a1" title="answer1" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
                         <td style="background-color:gray;"></td>
@@ -39,7 +39,7 @@
                         <td>Scenic route</td>
                     </tr>
                     <tr>
-                        @Html.HiddenFor(m => m.Answer2, new { @id = "answer2" })
+                        @Html.HiddenFor(m => m.Answer2, new { @id = "answer2", name = "answer" })
                         <td><div id="q2" draggable="true" ondragstart="drag(event)" data-value="BLOKE">BLOKE</div></td>
                         <td><div id="a2" title="answer2" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
                         <td style="background-color:gray;"></td>

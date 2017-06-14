@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using IQMStarterKit.Models.Core;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using IQMStarterKit.Models.Core;
 
 namespace IQMStarterKit.Models
 {
-    public class TOCViewModels 
+    public class TOCViewModels
     {
         public TempWorkbook TempWorkbook { get; set; }
-        public IEnumerable<TempModule> TempModules { get; set; }        
+        public IEnumerable<TempModule> TempModules { get; set; }
+        public string StudentName { get; set; }
+        public double OverallProgressValue { get; set; }
     }
 }

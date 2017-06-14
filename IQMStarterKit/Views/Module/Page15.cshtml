@@ -43,23 +43,14 @@
 
  <script type="text/javascript">
 
-
-    //$(document).ready(function () {
-
-    //    window.setTimeout(function() {
-    //        $(".alert").fadeTo(1500, 0).slideUp(500, function(){
-    //            $(this).remove();
-    //        });
-    //    }, 5000);
-
-    //});
-
-     //confirmation dialog
+    //confirmation dialog
      $('form').submit(function (e) {
          var currentForm = this;
          e.preventDefault();
          bootbox.confirm("Are you sure you want to submit your work?", function (result) {
-             if (result) return true;
+             if (result)
+                 currentForm.submit();
+                 return true;
          });
      });
 
