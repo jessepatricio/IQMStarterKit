@@ -24,6 +24,7 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult VARK()
         {
+            Session["email"] = null;
 
             // activity 5 is VARK
             var dt = DataLayer.GetActivityResult(5);
@@ -54,6 +55,7 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult DOPE()
         {
+            Session["email"] = null;
 
             // activity 8 is DOPE
             var dt = DataLayer.GetActivityResult(8);
@@ -85,6 +87,8 @@ namespace IQMStarterKit.Controllers
         public ActionResult DISC()
         {
 
+            Session["email"] = null;
+
             // activity 9 is DISC
             var dt = DataLayer.GetActivityResult(9);
             var modelList = new List<DiscViewModel>();
@@ -114,7 +118,7 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult StudentActivityPercentage()
         {
-
+            Session["email"] = null;
             // activity 9 is DISC
             var dt = DataLayer.GetActivityPercentage();
             var modelList = new List<StudentActivityPercentage>();

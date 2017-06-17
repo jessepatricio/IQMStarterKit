@@ -81,8 +81,9 @@
             e.preventDefault();
             bootbox.confirm("Are you sure you want to submit your work?", function (result) {
                 if (result) {
-                    Validate();
-                    currentForm.submit();
+                    if (Validate()) {
+                        currentForm.submit();
+                    }
                 }
             });
         });

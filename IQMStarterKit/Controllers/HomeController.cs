@@ -5,8 +5,11 @@ namespace IQMStarterKit.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+
+
         public ActionResult Index()
         {
+            Session["email"] = null;
 
             return View();
         }
@@ -14,6 +17,8 @@ namespace IQMStarterKit.Controllers
         [AllowAnonymous]
         public ActionResult About()
         {
+            Session["email"] = null;
+
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -22,6 +27,8 @@ namespace IQMStarterKit.Controllers
         [AllowAnonymous]
         public ActionResult Contact()
         {
+            Session["email"] = null;
+
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -29,6 +36,8 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Start()
         {
+            Session["email"] = null;
+
             return RedirectToAction("Index", "Module");
         }
     }

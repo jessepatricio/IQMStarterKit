@@ -27,16 +27,35 @@ namespace IQMStarterKit.Controllers
         {
             var toc = new TOCViewModels
             {
-                // note: should indicate temp workbook id no
+                // note: should indicate temp workbook id number
                 TempWorkbook =
                     _context.TempWorkbooks.FirstOrDefault(m => m.IsRemoved == false && m.TempWorkbookId == 4),
                 TempModules = _context.TempModules.ToList()
             };
 
-            if (string.IsNullOrEmpty(email)) email = User.Identity.Name;
+            //empty email && null session (student)
+            if (string.IsNullOrEmpty(email) && Session["email"] == null)
+            {
+                email = User.Identity.Name;
+                Session["email"] = null;
+            }
+            //not empty email && null session (admin/tutor)
+            else if (!string.IsNullOrEmpty(email) && Session["email"] == null)
+            {
+                Session["email"] = email;
+            }
+            else if (Session["email"] != null)
+            {
+                email = Session["email"].ToString();
+            }
+
 
             var student = UserManager.FindByEmail(email);
             toc.StudentName = student.FullName;
+
+            if (User.IsInRole("Student")) toc.IsDemo = false;
+            else toc.IsDemo = true;
+
             toc.OverallProgressValue = student.OverallProgress;
 
             //load all activities to each module
@@ -68,6 +87,9 @@ namespace IQMStarterKit.Controllers
                 item.TempActivities = actView;
 
             }
+
+            //add the config
+            toc.GroupActivityConfigs = _context.GroupActivityConfig.Where(m => m.GroupId == student.GroupId).ToList();
 
             return View("Index", toc);
         }
@@ -154,6 +176,7 @@ namespace IQMStarterKit.Controllers
             // title: You may be interested
             // type: slide
             TempData["Page13Completed"] = true;
+
             return View();
         }
 
@@ -163,7 +186,11 @@ namespace IQMStarterKit.Controllers
             // type: Submission
 
             #region this code is for page 13
-            if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
+            if (User.IsInRole("Tutor") || User.IsInRole("Administrator"))
+            {
+                //do nothing if not student
+
+            }
             else
             {
                 if (TempData["Page13Completed"] != null)
@@ -235,7 +262,18 @@ namespace IQMStarterKit.Controllers
             //get id in tempActivity
             var activityID = GetTempActivityID("My Shield");
             //get owner
-            var owner2 = GetSessionUserId();
+            string owner2 = string.Empty;
+            //check if viewing other user
+            if (Session["email"] == null)
+            {
+                owner2 = GetSessionUserId();
+            }
+            else
+            {
+                var email = Session["email"].ToString();
+                var sel_user = UserManager.FindByEmail(email);
+                owner2 = sel_user.Id;
+            }
             //validate in studentActivity
             var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner2);
 
@@ -262,6 +300,11 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page14UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page14").WithInfo("This is just a demo.");
+            }
 
             var studentActivity = new StudentActivity();
 
@@ -374,7 +417,6 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var aboutMe = new AboutMeClass();
-
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("About Me");
@@ -400,6 +442,12 @@ namespace IQMStarterKit.Controllers
         public ActionResult Page15(FormCollection fc)
         {
             var aboutMe = new AboutMeClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page15").WithInfo("This is just a demo.");
+            }
+
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("About Me");
@@ -626,7 +674,10 @@ namespace IQMStarterKit.Controllers
         public ActionResult Page23(FormCollection fc)
         {
 
-
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page23").WithInfo("This is just a demo.");
+            }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("VARK");
@@ -724,7 +775,10 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page24UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
-
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page24").WithInfo("This is just a demo.");
+            }
             var studentActivity = new StudentActivity();
             try
             {
@@ -862,7 +916,10 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page25UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
-
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page25").WithInfo("This is just a demo.");
+            }
             var studentActivity = new StudentActivity();
             try
             {
@@ -1008,8 +1065,13 @@ namespace IQMStarterKit.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Page26(FormCollection fc)
         {
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page26").WithInfo("This is just a demo.");
+            }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("Personal Profiling - D.O.P.E.");
@@ -1101,6 +1163,10 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page27(FormCollection fc)
         {
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page27").WithInfo("This is just a demo.");
+            }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("Personal Profiling - D.I.S.C.");
@@ -1188,9 +1254,13 @@ namespace IQMStarterKit.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Page28(FormCollection fc)
         {
-
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page28").WithInfo("This is just a demo.");
+            }
             var kiwiana = new KiwianaClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -1268,11 +1338,6 @@ namespace IQMStarterKit.Controllers
 
         }
 
-
-
-
-
-
         public ActionResult Page29()
         {
 
@@ -1307,6 +1372,10 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page29(SlangClass slang)
         {
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page29").WithInfo("This is just a demo.");
+            }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("NZ Slang and Saying");

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace IQMStarterKit.Controllers
 {
+    [Authorize(Roles = "Administrator,Tutor")]
     public class GroupActivityConfigsController : CommonController
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
@@ -37,7 +38,7 @@ namespace IQMStarterKit.Controllers
                 newActivityConfig.Description = item.Description;
                 newActivityConfig.SortOrder = item.SortOrder;
 
-                var _config = groupConfig.Where(m => m.TempActivityId == item.TempActivityId).FirstOrDefault();
+                var _config = groupConfig.Where(m => m.GroupId == groupId && m.TempActivityId == item.TempActivityId).FirstOrDefault();
 
                 if (_config != null)
                 {
@@ -95,11 +96,13 @@ namespace IQMStarterKit.Controllers
                 var _config = groupConfig.Where(m => m.TempActivityId == item.TempActivityId).FirstOrDefault();
 
                 var new_lock = Request.Form["lock" + item.TempActivityId];
+                var new_remark = Request.Form["remark" + item.TempActivityId];
+
 
                 if (new_lock != "false") locker = true;
 
                 newActivityConfig.IsLocked = locker;
-
+                newActivityConfig.Remarks = new_remark.Trim();
 
                 if (_config != null)
                 {
@@ -107,7 +110,7 @@ namespace IQMStarterKit.Controllers
                     newActivityConfig.GroupActivityConfigId = _config.GroupActivityConfigId;
                     newActivityConfig.GroupId = _config.GroupId;
                     newActivityConfig.IsLocked = (locker != _config.IsLocked) ? locker : _config.IsLocked;
-                    newActivityConfig.Remarks = _config.Remarks;
+                    newActivityConfig.Remarks = new_remark.Trim();
                     newActivityConfig.CreatedBy = _config.CreatedBy;
                     newActivityConfig.CreatedDateTime = _config.CreatedDateTime;
                     newActivityConfig.ModifiedBy = _config.ModifiedBy;
@@ -123,7 +126,7 @@ namespace IQMStarterKit.Controllers
 
             foreach (var item in tempConfigs)
             {
-                
+
 
                 var model = _context.GroupActivityConfig.Where(m => m.GroupActivityConfigId == item.GroupActivityConfigId).FirstOrDefault();
 

@@ -60,11 +60,15 @@
                     
                     @if (User.IsInRole("Tutor"))
                     {
+
+                       
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course Management<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Student Progress", "ListStudents", "Admin")</li>
-                                <li>@Html.ActionLink("Course Demo", "Index", "Demo")</li>
+                                <li>@Html.ActionLink("Course Demo", "Index", "Module")</li>
+                                <li>@Html.ActionLink("Configure Groups", "Index", "GroupModels")</li>
                                
                             </ul>
 

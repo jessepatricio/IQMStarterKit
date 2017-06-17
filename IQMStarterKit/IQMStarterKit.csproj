@@ -932,10 +932,6 @@
     <Content Include="Views\Report\DISC.cshtml" />
     <Content Include="Views\Report\StudentActivityPercentage.cshtml" />
     <Content Include="Views\GroupTutorModels\Index.cshtml" />
-    <Content Include="Views\GroupActivityConfigs\Create.cshtml" />
-    <Content Include="Views\GroupActivityConfigs\Delete.cshtml" />
-    <Content Include="Views\GroupActivityConfigs\Details.cshtml" />
-    <Content Include="Views\GroupActivityConfigs\Edit.cshtml" />
     <Content Include="Views\GroupActivityConfigs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

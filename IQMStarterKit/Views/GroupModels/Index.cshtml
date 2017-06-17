@@ -4,10 +4,12 @@
 
 <h2></h2>
 
-
+@if (User.IsInRole("Administrator")) {
 <p>
-    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary"})
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary" })
 </p>
+}
+
 <div class="table-responsive">          
 <table style="width:100%" class="table table-striped table-bordered" id="groupTable" cellspacing="0">
     <thead>
@@ -23,8 +25,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+
+        @if (User.IsInRole("Tutor"))
         {
+
+            foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.GroupName)
@@ -33,14 +39,35 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) |
-                    @Html.ActionLink("Assign Tutor", "Index", "GroupTutorModels",  new { id = item.GroupId }, null) |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.GroupId }) 
-                  
+                   
+                    @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) 
+                   
                 </td>
-            </tr>     
+            </tr>
+            }
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                       
+                        @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) |
+                        @Html.ActionLink("Assign Tutor", "Index", "GroupTutorModels", new { id = item.GroupId }, null) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.GroupId })
+
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

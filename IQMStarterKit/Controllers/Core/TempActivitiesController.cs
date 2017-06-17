@@ -17,6 +17,8 @@ namespace IQMStarterKit.Controllers.Core
         // GET: TempActivities
         public ActionResult Index()
         {
+            Session["email"] = null;
+
             ViewBag.TempModules = _context.TempModules;
 
             return View(_context.TempActivities.Where(m => m.IsRemoved == false)

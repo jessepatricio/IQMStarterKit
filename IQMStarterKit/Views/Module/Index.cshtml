@@ -1,5 +1,7 @@
 ﻿@model IQMStarterKit.Models.TOCViewModels
 
+
+
 <link href="~/Content/main.css" rel="stylesheet" />
 <br/>
 <div class="page-header"><h2>@Html.DisplayFor(m => m.StudentName)  <small>Overall Progress: @Model.OverallProgressValue%</small></h2></div>
@@ -11,19 +13,24 @@
         <button class="accordion">@Html.DisplayFor(modelItem => item.Title) <small>@Html.DisplayFor(modelItem => item.Description)</small></button>
         <div class="panel">
             @foreach (var act in item.TempActivities)
-            {   
+            {
                 //int randomNumber = random.Next(0, 100);
 
                 <div class="row">
                     <div class="col-sm-5">
-                        @if (User.IsInRole("Student"))
-                        {
-                            <a class="activityLink" href="@Html.DisplayFor(modelItem => act.PageName)/@Html.DisplayFor(modelItem => act.TempActivityId)">@Html.DisplayFor(modelItem => act.Title)</a>
-                        }
-                        else
-                        { 
-                            @Html.DisplayFor(modelItem => act.Title) 
-                        }
+                       @{ 
+                           var config = Model.GroupActivityConfigs.Where(m => m.TempActivityId == act.TempActivityId).FirstOrDefault();
+
+                           if (config != null && config.IsLocked)
+                           {
+                                @Html.DisplayFor(modelItem => act.Title)
+                           }
+                           else
+                           {
+                                <a class="activityLink" href="@Html.DisplayFor(modelItem => act.PageName)/@Html.DisplayFor(modelItem => act.TempActivityId)">@Html.DisplayFor(modelItem => act.Title)</a>
+                           }
+                      }
+
                     </div>
                     <div class=".visible-xs-block, hidden-xs col-sm-5">
                         @*<span class="progress-bar" role="progressbar" aria-valuenow="@randomNumber" aria-valuemin="0" aria-valuemax="100" style="width: @randomNumber%">@randomNumber%</span>*@

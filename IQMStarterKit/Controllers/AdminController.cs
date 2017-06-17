@@ -22,8 +22,12 @@ namespace IQMStarterKit.Controllers
         // GET: Admin
 
         #region MainList Index
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index(string searchKeyword, string currentFilter, int? page)
         {
+
+            Session["email"] = null;
+
             try
             {
                 var colUsers = new List<ExtendedUserCustom>();
@@ -63,6 +67,7 @@ namespace IQMStarterKit.Controllers
 
         // GET: /Admin/Create
         #region Get Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             var objUserExtended = new ExtendedUserCustom();
@@ -76,6 +81,7 @@ namespace IQMStarterKit.Controllers
         #region POST Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(ExtendedUserCustom model)
         {
             var user = new ApplicationUser { UserName = model.Email.Trim(), Email = model.Email.Trim(), FullName = model.FullName.Trim() };
@@ -115,6 +121,7 @@ namespace IQMStarterKit.Controllers
 
         // GET: /Admin/EditUser
         #region GET EditUser
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditUser(string email)
         {
             if (email == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,6 +145,7 @@ namespace IQMStarterKit.Controllers
         #region POST EditUser
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditUser(ExtendedUserCustom extUser)
         {
             try
@@ -158,7 +166,7 @@ namespace IQMStarterKit.Controllers
 
         // DELETE: /Admin/DeleteUser
         #region DeleteUser
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteUser(string email)
         {
             try
@@ -197,6 +205,7 @@ namespace IQMStarterKit.Controllers
 
         // GET: /Admin/EditRoles
         #region GET EditRoles
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditRoles(string email)
         {
             if (email == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -222,6 +231,7 @@ namespace IQMStarterKit.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region POST EditRoles
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditRoles(UserAndRolesCustom userAndRoles)
         {
             try
@@ -260,6 +270,7 @@ namespace IQMStarterKit.Controllers
 
         // DELETE: /Admin/DeleteRole
         #region DELETE DeleteRole
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteRole(string userName, string roleName)
         {
             try
@@ -314,6 +325,7 @@ namespace IQMStarterKit.Controllers
 
         // GET: /Admin/ManageRole
         #region ManageRole
+        [Authorize(Roles = "Administrator")]
         public ActionResult ManageRole()
         {
             var roleManager =
@@ -335,6 +347,7 @@ namespace IQMStarterKit.Controllers
 
         // GET: /Admin/AddRole
         #region GET AddRole
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddRole()
         {
             var objRole = new RoleCustom();
@@ -346,6 +359,7 @@ namespace IQMStarterKit.Controllers
         #region POST AddRole
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddRole(RoleCustom role)
         {
             try
@@ -448,26 +462,35 @@ namespace IQMStarterKit.Controllers
 
 
         // Tutor's administration
+        [Authorize(Roles = "Administrator,Tutor")]
         public ActionResult ListStudents()
         {
             var colUsers = new List<ExtendedUserCustom>();
+
+            //filter user with tutor's assigned group only
+            var tutorId = User.Identity.GetUserId();
+
+            var tutorGroups = _context.GroupTutorModels.Where(m => m.TutorId == tutorId).Select(m => m.GroupId).ToList();
+
 
             var users = UserManager.Users.ToList();
 
             foreach (var item in users)
             {
 
-
-                var user = new ExtendedUserCustom
+                if (tutorGroups.Count == 0 || tutorGroups.Contains(item.GroupId))
                 {
+                    var user = new ExtendedUserCustom
+                    {
 
-                    Email = item.Email,
-                    FullName = item.FullName,
-                    GroupId = item.GroupId,
-                    ProgressValue = item.OverallProgress
+                        Email = item.Email,
+                        FullName = item.FullName,
+                        GroupId = item.GroupId,
+                        ProgressValue = item.OverallProgress
 
-                };
-                colUsers.Add(user);
+                    };
+                    colUsers.Add(user);
+                }
             }
 
             //get group list for dropdownlist

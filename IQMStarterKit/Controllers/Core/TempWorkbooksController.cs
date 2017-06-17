@@ -1,12 +1,9 @@
-﻿using System;
+﻿using IQMStarterKit.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IQMStarterKit.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace IQMStarterKit.Controllers.Core
 {
@@ -14,12 +11,14 @@ namespace IQMStarterKit.Controllers.Core
     public class TempWorkbooksController : CommonController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
-       
+
 
         // GET: TempWorkbooks
         public ActionResult Index()
         {
-            return View(_context.TempWorkbooks.Where(m=>m.IsRemoved==false).ToList());
+            Session["email"] = null;
+
+            return View(_context.TempWorkbooks.Where(m => m.IsRemoved == false).ToList());
         }
 
         // GET: TempWorkbooks/Details/5
@@ -70,7 +69,7 @@ namespace IQMStarterKit.Controllers.Core
 
                 tempWorkbook.CreatedBy = GetSessionUserId();
                 tempWorkbook.CreatedDateTime = DateTime.Now;
-                
+
                 tempWorkbook.ModifiedBy = GetSessionUserId();
                 tempWorkbook.ModifiedDateTime = DateTime.Now;
 
@@ -107,15 +106,15 @@ namespace IQMStarterKit.Controllers.Core
         //public ActionResult Edit([Bind(Include = "TempWorkbookId,Title,Description,Version,CreatedBy,CreatedDateTime,ModifiedBy,ModifiedDateTime,IsDeleted")] TempWorkbook tempWorkbook)
         public ActionResult Edit(int id)
         {
-           
+
             //get the original records from db
             var tmpWrkBook = new TempWorkbook();
             tmpWrkBook = _context.TempWorkbooks.Find(id);
 
             //update the class record
-            UpdateModel<ITempWorkbook>(tmpWrkBook) ;
+            UpdateModel<ITempWorkbook>(tmpWrkBook);
 
-            
+
             if (tmpWrkBook != null)
             {
                 //update record stamp
@@ -175,6 +174,6 @@ namespace IQMStarterKit.Controllers.Core
             }
             base.Dispose(disposing);
         }
-        
+
     }
 }

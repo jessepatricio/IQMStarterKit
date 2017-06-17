@@ -18,6 +18,8 @@ namespace IQMStarterKit.Controllers.Core
         // GET: TempModules
         public ActionResult Index()
         {
+            Session["email"] = null;
+
             var tempModule = _context.TempModules.Where(m => m.IsRemoved == false).ToList();
             foreach (var item in tempModule)
             {
