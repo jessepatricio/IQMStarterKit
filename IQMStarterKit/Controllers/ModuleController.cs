@@ -23,6 +23,12 @@ namespace IQMStarterKit.Controllers
             return RedirectToAction("ViewStudentActivities", "Module");
         }
 
+        public ActionResult CourseDemo()
+        {
+            Session["email"] = null;
+            return RedirectToAction("ViewStudentActivities", "Module");
+        }
+
         public ActionResult ViewStudentActivities(string email)
         {
             var toc = new TOCViewModels

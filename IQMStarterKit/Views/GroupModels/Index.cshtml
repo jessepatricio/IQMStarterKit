@@ -26,7 +26,7 @@
     </thead>
     <tbody>
 
-        @if (User.IsInRole("Tutor"))
+        @if (User.IsInRole("Administrator"))
         {
 
             foreach (var item in Model)
@@ -39,8 +39,13 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
+
+                    @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) |
+                    @Html.ActionLink("Assign Tutor", "Index", "GroupTutorModels", new { id = item.GroupId }, null) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GroupId })
                    
-                    @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) 
                    
                 </td>
             </tr>
@@ -58,12 +63,9 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                       
-                        @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) |
-                        @Html.ActionLink("Assign Tutor", "Index", "GroupTutorModels", new { id = item.GroupId }, null) |
-                        @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.GroupId })
+                        @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null)
+
+                        
 
                     </td>
                 </tr>

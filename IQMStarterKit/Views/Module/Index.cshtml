@@ -15,21 +15,26 @@
             @foreach (var act in item.TempActivities)
             {
                 //int randomNumber = random.Next(0, 100);
+                var config = Model.GroupActivityConfigs.Where(m => m.TempActivityId == act.TempActivityId).FirstOrDefault();
 
                 <div class="row">
                     <div class="col-sm-5">
-                       @{ 
-                           var config = Model.GroupActivityConfigs.Where(m => m.TempActivityId == act.TempActivityId).FirstOrDefault();
+                               @if (Model.IsDemo)
+                               {
+                                    <a class="activityLink" href="@Html.DisplayFor(modelItem => act.PageName)/@Html.DisplayFor(modelItem => act.TempActivityId)">@Html.DisplayFor(modelItem => act.Title)</a>
+                               }
+                               else
+                               {
 
-                           if (config != null && config.IsLocked)
-                           {
-                                @Html.DisplayFor(modelItem => act.Title)
-                           }
-                           else
-                           {
-                                <a class="activityLink" href="@Html.DisplayFor(modelItem => act.PageName)/@Html.DisplayFor(modelItem => act.TempActivityId)">@Html.DisplayFor(modelItem => act.Title)</a>
-                           }
-                      }
+                                   if (config != null && config.IsLocked)
+                                   {
+                                        @Html.DisplayFor(modelItem => act.Title)
+                                   }
+                                   else
+                                   {
+                                        <a class="activityLink" href="@Html.DisplayFor(modelItem => act.PageName)/@Html.DisplayFor(modelItem => act.TempActivityId)">@Html.DisplayFor(modelItem => act.Title)</a>
+                                   }
+                               }
 
                     </div>
                     <div class=".visible-xs-block, hidden-xs col-sm-5">
