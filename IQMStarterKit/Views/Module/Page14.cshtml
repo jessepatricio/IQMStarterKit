@@ -34,22 +34,19 @@
                             @Html.ActionLink("Download File", "Page14DownloadFile", "Module",
                             new { id = Model.StudentActivityId },
                             new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+
+
                         }
                         else
                         {
                             @Html.Label("Shield", new { @class = "label label-default" })
-
-                            @*<label class="btn btn-default btn-file">
-                                Browse <input type="file" style="display: none;">
-                            </label>*@
-
                             <input type="file" id="Shield" name="file" class="form-control" style="width:300px;" />
                             <input type="submit" value="Upload" class="btn btn-primary" />
                         }
                     </div>
                 </div>    
             </div>
-
+            
             <div class="form-group">
                 <div style="text-align:center; margin-top: 30px; width:100%;">
                     @Html.ActionLink("Previous Page", "Page13") |

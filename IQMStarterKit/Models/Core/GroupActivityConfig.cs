@@ -3,32 +3,24 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IQMStarterKit.Models
+namespace IQMStarterKit.Models.Core
 {
-    public interface IGroupModel
-    {
-        byte GroupId { get; set; }
-
-        string GroupName { get; set; }
-
-        string Description { get; set; }
-
-
-
-    }
-
-    public class GroupModel : IGroupModel
+    public class GroupActivityConfig
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public byte GroupActivityConfigId { get; set; }
+
+        [Required]
         public byte GroupId { get; set; }
 
         [Required]
-        [StringLength(255)]
-        public string GroupName { get; set; }
+        public byte TempActivityId { get; set; }
+
+        [DefaultValue(0)]
+        public bool IsLocked { get; set; }
 
         [StringLength(1000)]
-        [DataType(DataType.MultilineText)]
-        public string Description { get; set; }
+        public string Remarks { get; set; }
 
 
         //system fields
@@ -46,7 +38,8 @@ namespace IQMStarterKit.Models
         [StringLength(100)]
         public string ModifiedBy { get; set; }
 
-        [DefaultValue(0)]
-        public bool IsRemoved { get; set; }
+
+
+
     }
 }

@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace IQMStarterKit.Models
 {
     public class ExtendedUserCustom
     {
-        
+
         [Display(Name = "Full Name")]
         [Required]
         [StringLength(100)]
         public string FullName { get; set; }
 
         [Required]
-        public string Email  { get; set; }
+        public string Email { get; set; }
 
         public byte GroupId { get; set; }
 
         [Required]
         public string Password { get; set; }
 
-        public int ProgressValue { get; set; }
+        public double ProgressValue { get; set; }
 
         public IEnumerable<UserRolesCustom> Roles { get; set; }
 
@@ -62,5 +59,5 @@ namespace IQMStarterKit.Models
         public string Email { get; set; }
 
         public List<UserRoleCustom> colUserRole { get; set; }
-    } 
+    }
 }

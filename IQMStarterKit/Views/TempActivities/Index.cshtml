@@ -52,6 +52,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TempModuleId)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActivity)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -73,6 +76,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TempModuleId)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.IsActivity)
                 </td>
 
                 <td>

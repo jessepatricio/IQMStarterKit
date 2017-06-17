@@ -8,7 +8,7 @@
     @foreach (var item in Model.TempModules)
     {
         //Random random = new Random();
-        <button class="accordion">@Html.DisplayFor(modelItem => item.Title)</button>
+        <button class="accordion">@Html.DisplayFor(modelItem => item.Title) <small>@Html.DisplayFor(modelItem => item.Description)</small></button>
         <div class="panel">
             @foreach (var act in item.TempActivities)
             {   

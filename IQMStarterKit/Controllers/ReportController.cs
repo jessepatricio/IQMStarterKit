@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -204,10 +203,12 @@ namespace IQMStarterKit.Controllers
             //design gridview
             gv = FormatGridView(gv);
 
+            // return new RazorPDF.PdfResult(gv, "Index");
+
             Response.ContentType = "application/pdf";
             Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
 
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
 
             StringWriter sw = new StringWriter();
             HtmlTextWriter hw = new HtmlTextWriter(sw);

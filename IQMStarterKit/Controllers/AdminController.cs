@@ -451,13 +451,12 @@ namespace IQMStarterKit.Controllers
         public ActionResult ListStudents()
         {
             var colUsers = new List<ExtendedUserCustom>();
-            var random = new Random();
 
             var users = UserManager.Users.ToList();
 
             foreach (var item in users)
             {
-                int randomNumber = random.Next(0, 100);
+
 
                 var user = new ExtendedUserCustom
                 {
@@ -465,7 +464,7 @@ namespace IQMStarterKit.Controllers
                     Email = item.Email,
                     FullName = item.FullName,
                     GroupId = item.GroupId,
-                    ProgressValue = randomNumber
+                    ProgressValue = item.OverallProgress
 
                 };
                 colUsers.Add(user);

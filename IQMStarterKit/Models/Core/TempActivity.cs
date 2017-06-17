@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace IQMStarterKit.Models.Core
 {
-    
-    public class TempActivity 
+
+    public class TempActivity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte TempActivityId { get; set; }
@@ -17,7 +14,7 @@ namespace IQMStarterKit.Models.Core
         [Required]
         [StringLength(255)]
         public string Title { get; set; }
-        
+
 
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
@@ -28,7 +25,7 @@ namespace IQMStarterKit.Models.Core
 
         [Required]
         public int SortOrder { get; set; }
-        
+
         [Display(Name = "Module Name")]
         public byte TempModuleId { get; set; }
 
@@ -52,6 +49,9 @@ namespace IQMStarterKit.Models.Core
         [Required]
         [StringLength(100)]
         public string ModifiedBy { get; set; }
+
+        [DefaultValue(1)]
+        public bool IsActivity { get; set; }
 
         [DefaultValue(0)]
         public bool IsRemoved { get; set; }

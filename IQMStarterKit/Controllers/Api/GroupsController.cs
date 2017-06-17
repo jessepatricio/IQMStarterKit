@@ -59,7 +59,7 @@ namespace IQMStarterKit.Controllers.Api
 
             groupInDb.GroupName = group.GroupName;
             groupInDb.Description = group.Description;
-            groupInDb.TutorId = group.TutorId;
+            
 
             groupInDb.ModifiedBy = User.Identity.GetUserId();
             groupInDb.ModifiedDateTime = DateTime.Now;

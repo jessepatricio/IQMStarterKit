@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<IQMStarterKit.Models.ExtendedUserCustom>
 @using IQMStarterKit.Models
 <br />
-@{ var random = new Random();}
 
 <style>
     .dataTables_wrapper .dataTables_length {
@@ -31,7 +30,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            int randomNumber = random.Next(0, 100);
+           
             if (item.GroupId > 0)
             {
                 IEnumerable<GroupModel> grouplist = ViewBag.Groups;
@@ -43,7 +42,7 @@
                     <td>@Html.ActionLink(item.Email, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
                     <td><text>@groupname.GroupName</text></td>
                     <td>
-                        <span class="progress-bar" role="progressbar" aria-valuenow="@randomNumber" aria-valuemin="0" aria-valuemax="100" style="width: @randomNumber%">@randomNumber%</span>
+                        <span class="progress-bar active" role="progressbar" aria-valuenow="@item.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @item.ProgressValue%">&nbsp;</span>&nbsp;@item.ProgressValue %
                     </td>
                 </tr>
             }

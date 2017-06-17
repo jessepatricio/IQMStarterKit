@@ -60,7 +60,7 @@ namespace IQMStarterKit.Controllers.Core
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,TempModuleId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivityViewModels tempActivity)
+        public ActionResult Create([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,TempModuleId,IsActivity,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivityViewModels tempActivity)
         {
 
             if (ModelState.IsValid)
@@ -71,6 +71,7 @@ namespace IQMStarterKit.Controllers.Core
                 modActivity.PageName = tempActivity.PageName;
                 modActivity.TempModuleId = tempActivity.TempModuleId;
                 modActivity.SortOrder = tempActivity.SortOrder;
+                modActivity.IsActivity = tempActivity.IsActivity;
 
                 //assign system fields
                 modActivity.CreatedDateTime = DateTime.Now;
@@ -107,7 +108,7 @@ namespace IQMStarterKit.Controllers.Core
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,ProgressValue,Context,TempModuleId,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivity tempActivity)
+        public ActionResult Edit([Bind(Include = "TempActivityId,Title,Description,PageName,SortOrder,ProgressValue,Context,TempModuleId,IsActivity,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] TempActivity tempActivity)
         {
             var recActivity = _context.TempActivities.FirstOrDefault(m => m.TempActivityId == tempActivity.TempActivityId);
 
@@ -125,6 +126,7 @@ namespace IQMStarterKit.Controllers.Core
                     recActivity.Context = string.Empty;
                     recActivity.SortOrder = tempActivity.SortOrder;
                     recActivity.TempModuleId = tempActivity.TempModuleId;
+                    recActivity.IsActivity = tempActivity.IsActivity;
 
                     //update date stamp
                     recActivity.ModifiedDateTime = DateTime.Now;

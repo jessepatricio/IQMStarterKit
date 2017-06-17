@@ -18,10 +18,10 @@ namespace IQMStarterKit.Controllers
         public ActionResult Index()
         {
             var grpModels = _context.GroupModels.Where(m => m.IsRemoved == false).OrderByDescending(m => m.GroupName).ToList();
-            foreach (var item in grpModels)
-            {
-                item.TutorId = GetFullName(item.TutorId);
-            }
+            //foreach (var item in grpModels)
+            //{
+            //    item.TutorId = GetFullName(item.TutorId);
+            //}
             return View(grpModels);
         }
 

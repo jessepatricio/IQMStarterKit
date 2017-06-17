@@ -1,0 +1,78 @@
+﻿@model IQMStarterKit.Models.GroupTutorModelView
+
+<h2>Group [@Model.GroupModel.GroupName]</h2>
+
+@using (Html.BeginForm("AddTutor", "GroupTutorModels", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    @Html.HiddenFor(model => model.GroupModel.GroupId)
+    @Html.ValidationSummary(true,
+        "",
+        new { @class = "text-danger" })
+    <div class="col-md-5 form-inline" style="margin-bottom:20px;">
+        @Html.ActionLink("Back",
+            "Index", "GroupModels",
+            null,
+            new { @class = "btn btn-default" })
+        <input type="submit" value="Add Tutor" class="btn btn-default" />
+       @Html.DropDownList("AddTutor", new SelectList(Model.Tutors, "Id", "FullName"), new { @class = "form-control" })
+    </div>
+
+    <br />
+
+    <table id="group" class="display;" style="width:60%;">
+        <thead>
+            <tr>
+                <th>
+                    Assigned Tutor:
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.GroupTutorModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TutorName)
+                    </td>
+                    <td>
+                         @Html.ActionLink("Delete", "Delete",
+                            new { Id = item.GroupTutorId, groupId = Model.GroupModel.GroupId },
+                            new
+                            {
+                                onclick =
+                                    "return confirm('Are you sure you wish to remove this tutor from the group?');"
+                            })
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+
+}
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#group').DataTable({
+                "bLengthChange": false,
+                "bFilter": false,
+                "paging": false
+
+            });
+
+
+
+        });
+
+    </script>
+
+}

@@ -44,10 +44,10 @@ namespace IQMStarterKit.Controllers
             {
                 //should get student activities here
                 var actView = new List<TempActivity>();
-                var tmpActs = _context.TempActivities.Where(m => m.TempModuleId == item.TempModuleId).ToList();
+                var tmpActs = _context.TempActivities.Where(m => m.TempModuleId == item.TempModuleId && m.IsRemoved == false).ToList();
                 foreach (var row in tmpActs)
                 {
-                    var stdAct = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == row.TempActivityId && m.CreatedBy == student.Id);
+                    var stdAct = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == row.TempActivityId && m.IsRemoved == false && m.CreatedBy == student.Id);
 
                     var act = new TempActivity()
                     {
@@ -1489,7 +1489,7 @@ namespace IQMStarterKit.Controllers
                 //get logged user activities count
                 var totalStudentActivities = _context.StudentActivities.Where(m => m.CreatedBy == cur_user).Count();
                 //get total activities
-                var totalActivities = _context.TempActivities.Count();
+                var totalActivities = _context.TempActivities.Where(m => m.IsActivity == true && m.IsRemoved == false).Count();
                 //compute overall progress
                 var value = ((double)totalStudentActivities / totalActivities) * 100;
                 var percentage = Math.Round(value, 2);

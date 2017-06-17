@@ -5,31 +5,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IQMStarterKit.Models
 {
-    public interface IGroupModel
-    {
-        byte GroupId { get; set; }
-
-        string GroupName { get; set; }
-
-        string Description { get; set; }
-
-
-
-    }
-
-    public class GroupModel : IGroupModel
+    public class GroupTutorModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public byte GroupTutorId { get; set; }
+
+        [Required]
         public byte GroupId { get; set; }
 
         [Required]
-        [StringLength(255)]
-        public string GroupName { get; set; }
+        public string TutorId { get; set; }
 
-        [StringLength(1000)]
-        [DataType(DataType.MultilineText)]
-        public string Description { get; set; }
-
+        [Required]
+        public string TutorName { get; set; }
 
         //system fields
         [Required]
@@ -48,5 +36,9 @@ namespace IQMStarterKit.Models
 
         [DefaultValue(0)]
         public bool IsRemoved { get; set; }
+
+
+
+
     }
 }

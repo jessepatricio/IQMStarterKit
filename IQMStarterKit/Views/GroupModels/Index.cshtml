@@ -2,7 +2,7 @@
 @using IQMStarterKit.Models
 @using Microsoft.AspNet.Identity
 
-<h2>Group List</h2>
+<h2></h2>
 
 
 <p>
@@ -18,9 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                Tutor
-            </th>
+           
             <th>&nbsp;</th>
         </tr>
     </thead>
@@ -35,12 +33,12 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TutorId)
-                </td>
-                <td>
+                    @Html.ActionLink("Configure", "Index", "GroupActivityConfigs", new { GroupId = item.GroupId }, null) |
+                    @Html.ActionLink("Assign Tutor", "Index", "GroupTutorModels",  new { id = item.GroupId }, null) |
                     @Html.ActionLink("Edit", "Edit", new { id = item.GroupId }) |
                     @Html.ActionLink("Details", "Details", new { id = item.GroupId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.GroupId })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GroupId }) 
+                  
                 </td>
             </tr>     
         }

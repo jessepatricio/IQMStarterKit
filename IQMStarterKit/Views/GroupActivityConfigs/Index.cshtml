@@ -1,0 +1,85 @@
+﻿@model IQMStarterKit.Models.ConfigViewModel
+
+<h2>Configuration For Group: @Model.GroupModel.GroupName</h2>
+
+@using (Html.BeginForm("SaveConfig", "GroupActivityConfigs", FormMethod.Post))
+{
+
+    @Html.Hidden("GroupId", Model.GroupModel.GroupId.ToString())
+    
+    
+
+    <table style="width:100%" class="table table-striped table-bordered" id="config" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Module</th>
+                <th>Activity Title</th>
+                <th>Description</th>
+                <th>IsLocked</th>
+                <th>Remarks</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+           
+
+            @foreach (var item in Model.TempActivitiesConfig.OrderBy(m=>m.SortOrder))
+            {
+               
+
+                <tr>
+                    <td>Module @Html.DisplayFor(modelmItem => item.TempModuleId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td align="center">@Html.CheckBox("lock" + item.TempActivityId, item.IsLocked)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Remarks)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedBy)</td>
+                    <td>
+                        @if (item.CreatedDateTime.ToString() != "1/1/0001 12:00:00 AM") { @Html.DisplayFor(modelItem => item.CreatedDateTime); }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.ModifiedBy)</td>
+                    <td>
+                        @if (item.ModifiedDateTime.ToString() != "1/1/0001 12:00:00 AM") { @Html.DisplayFor(modelItem => item.ModifiedDateTime); }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br/>
+    <input type="submit" value="Save Configuration" class="btn btn-primary"/>
+    <input id="checkall" type="button" class="btn btn-default" value="Check All" />
+    @Html.ActionLink("Back to List", "Index", "GroupModels", null, new { @class = "btn btn-default"})
+
+}
+
+    @section scripts{
+        <script>
+        $(document).ready(function () {
+            $('#config').DataTable({
+                "bLengthChange": false,
+                "bFilter": false,
+                "paging": false,
+                "sorting": false
+            });
+
+            $('#checkall').click(function () {
+                //alert($(this).val());
+                if ($(this).val() == "Check All") {
+                    $('input:checkbox').attr('checked', 'checked');
+                    $(this).val('Uncheck All')
+                } else {
+                    $('input:checkbox').removeAttr('checked');
+                    $(this).val('Check All');
+                }
+});
+        });
+
+          
+        </script>
+    }
+
+
