@@ -1,8 +1,5 @@
-﻿using System;
+﻿using IQMStarterKit.Models.Core;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using IQMStarterKit.Models.Core;
 
 namespace IQMStarterKit.Models
 {

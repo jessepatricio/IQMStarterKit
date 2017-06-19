@@ -1,4 +1,5 @@
 ﻿using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -77,7 +78,7 @@ namespace IQMStarterKit.Controllers.Core
 
                 _context.TempWorkbooks.Add(tempWorkbook);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index").WithSuccess("Created Successfully!");
             }
 
             return View(tempWorkbook);
@@ -127,7 +128,7 @@ namespace IQMStarterKit.Controllers.Core
                     //save changes
                     _context.Entry(tmpWrkBook).State = EntityState.Modified;
                     _context.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index").WithSuccess("Updated Successfully!");
                 }
             }
 

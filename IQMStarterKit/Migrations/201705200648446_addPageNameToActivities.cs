@@ -1,8 +1,7 @@
 namespace IQMStarterKit.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class addPageNameToActivities : DbMigration
     {
         public override void Up()

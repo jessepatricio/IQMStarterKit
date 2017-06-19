@@ -1,25 +1,11 @@
 ﻿@model IEnumerable<IQMStarterKit.Models.TempWorkbook>
 
-@{
-    ViewBag.Title = "Workbook";
-}
-
-<h2>Workbook List</h2>
-@section scripts{
-    <script>
-     $(document).ready(function () {
-         $('#workbooks').DataTable({
-             "bLengthChange": false,
-             "bFilter": false
-         });
-        });
-    </script>
-}
+<h3>Workbook List</h3>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
-<table width="100%" class="table table-striped table-bordered" id="workbooks" cellspacing="0">
+<table class="table table-striped table-bordered" id="workbooks" cellspacing="0">
     <thead>
         <tr>
             <th>
@@ -50,10 +36,21 @@
 
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.TempWorkbookId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.TempWorkbookId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TempWorkbookId })
+                    @Html.ActionLink("Details", "Details", new { id = item.TempWorkbookId }) 
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.TempWorkbookId })*@
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#workbooks').DataTable({
+                "bLengthChange": false,
+                "bFilter": false
+            });
+        });
+    </script>
+}

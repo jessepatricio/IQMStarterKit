@@ -1,26 +1,9 @@
 ﻿@model IEnumerable<IQMStarterKit.Models.Core.TempModule>
 
-@{
-    ViewBag.Title = "Modules";
-}
-<style>
-    table {
-        width: 100%;
-    }
-</style>
-<h2>Module List</h2>
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $('#modules').DataTable({
-                "bLengthChange": false,
-                "bFilter": false
-            });
-        });
-    </script>
-}
+<h3>Module List</h3>
+
 <p>
-    @Html.ActionLink("Create New", "Create", new { @class = "form-control" })
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table table-striped table-bordered" id="modules" cellspacing="0">
     <thead>
@@ -58,3 +41,15 @@
         }
     </tbody>
 </table>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#modules').DataTable({
+                "bLengthChange": false,
+                "bFilter": false
+            });
+        });
+    </script>
+}

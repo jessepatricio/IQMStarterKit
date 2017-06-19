@@ -638,6 +638,7 @@
     <Content Include="Content\img\check1.png" />
     <Content Include="Content\img\checklist.png" />
     <Content Include="Content\img\Coat of Arms.jpg" />
+    <Content Include="Content\img\contact_us_bg.png" />
     <Content Include="Content\img\Contract.png" />
     <Content Include="Content\img\dart.png" />
     <Content Include="Content\img\dots.jpg" />
@@ -659,6 +660,7 @@
     <Content Include="Content\img\ScavengerHunt.jpg" />
     <Content Include="Content\img\spongebob.png" />
     <Content Include="Content\img\teacher_presenting.jpg" />
+    <Content Include="Content\img\team.jpg" />
     <Content Include="Content\img\test1.png" />
     <Content Include="Content\img\The_7_Habits_of_Highly_Effective_People.jpg" />
     <Content Include="Content\img\ThumbDown.png" />

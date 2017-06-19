@@ -1,13 +1,11 @@
-﻿using System;
+﻿using IQMStarterKit.Models.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using IQMStarterKit.Models.Core;
 
-namespace IQMStarterKit.Models    
+namespace IQMStarterKit.Models
 {
     public interface ITempWorkbook
     {

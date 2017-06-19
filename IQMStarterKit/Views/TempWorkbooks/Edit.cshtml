@@ -1,8 +1,5 @@
 ﻿@model IQMStarterKit.Models.TempWorkbook
 
-@{
-    ViewBag.Title = "Edit";
-}
 
 <h2>Edit</h2>
 
@@ -50,3 +47,20 @@
 }
 
 
+@section Scripts
+{
+    <script type="text/javascript">
+
+        //confirmation dialog
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) currentForm.submit();
+            });
+        });
+
+
+
+    </script>
+}

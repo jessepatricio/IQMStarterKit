@@ -1,9 +1,6 @@
-﻿using IQMStarterKit.Models;
-using Microsoft.Owin;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.Owin;
 using Owin;
-   
+
 
 [assembly: OwinStartupAttribute(typeof(IQMStarterKit.Startup))]
 namespace IQMStarterKit

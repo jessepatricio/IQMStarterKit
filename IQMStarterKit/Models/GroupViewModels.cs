@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace IQMStarterKit.Models
+﻿namespace IQMStarterKit.Models
 {
     public class GroupViewModels
     {
