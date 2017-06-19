@@ -2,9 +2,7 @@
 using IQMStarterKit.DAL;
 using IQMStarterKit.Models;
 using IQMStarterKit.Models.Report;
-using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -190,45 +188,45 @@ namespace IQMStarterKit.Controllers
 
         }
 
-        public ActionResult ExportToPDF(string reportName)
-        {
+        //public ActionResult ExportToPDF(string reportName)
+        //{
 
-            var dataSrc = GetFormattedReportDataSource(reportName);
+        //    var dataSrc = GetFormattedReportDataSource(reportName);
 
-            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
-            var fileName = reportName + "_" + sffx + ".pdf";
+        //    var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+        //    var fileName = reportName + "_" + sffx + ".pdf";
 
-            //Create a dummy GridView
-            GridView gv = new GridView();
-            gv.AllowPaging = false;
-            gv.DataSource = dataSrc;
-            gv.DataBind();
+        //    //Create a dummy GridView
+        //    GridView gv = new GridView();
+        //    gv.AllowPaging = false;
+        //    gv.DataSource = dataSrc;
+        //    gv.DataBind();
 
-            //design gridview
-            gv = FormatGridView(gv);
+        //    //design gridview
+        //    gv = FormatGridView(gv);
 
-            // return new RazorPDF.PdfResult(gv, "Index");
+        //    // return new RazorPDF.PdfResult(gv, "Index");
 
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
+        //    Response.ContentType = "application/pdf";
+        //    Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
 
-            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+        //    Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
 
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            gv.RenderControl(hw);
-            StringReader sr = new StringReader(sw.ToString());
-            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-            HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
-            PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-            pdfDoc.Open();
-            htmlparser.Parse(sr);
-            pdfDoc.Close();
-            Response.Write(pdfDoc);
-            Response.End();
+        //    StringWriter sw = new StringWriter();
+        //    HtmlTextWriter hw = new HtmlTextWriter(sw);
+        //    gv.RenderControl(hw);
+        //    StringReader sr = new StringReader(sw.ToString());
+        //    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+        //    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+        //    PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+        //    pdfDoc.Open();
+        //    htmlparser.Parse(sr);
+        //    pdfDoc.Close();
+        //    Response.Write(pdfDoc);
+        //    Response.End();
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public DataTable GetFormattedReportDataSource(string reportName)
         {
@@ -321,6 +319,117 @@ namespace IQMStarterKit.Controllers
         }
 
         #endregion
+
+
+
+        public ActionResult DISCExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+
+
+            // activity 9 is DISC
+            var dt = DataLayer.GetActivityResult(9);
+            var modelList = new List<DiscViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new DiscViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    DiscResult = item["DiscResult"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return new ViewAsPdf("DISC", modelList) { FileName = fileName };
+
+        }
+
+        public ActionResult DOPEExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+
+
+            // activity 8 is DOPE
+            var dt = DataLayer.GetActivityResult(8);
+            var modelList = new List<DopeViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new DopeViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    DopeResult = item["DopeResult"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return new ViewAsPdf("DOPE", modelList) { FileName = fileName };
+
+        }
+
+        public ActionResult VARKExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+
+
+            // activity 5 is VARK
+            var dt = DataLayer.GetActivityResult(5);
+            var modelList = new List<VarkViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new VarkViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    VarkResult = item["VarkResult"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            return new ViewAsPdf("VARK", modelList) { FileName = fileName };
+
+        }
 
 
 
