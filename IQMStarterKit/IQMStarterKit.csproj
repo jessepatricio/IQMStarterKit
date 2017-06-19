@@ -628,6 +628,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\img\AboutMe.png" />
+    <Content Include="Content\img\aspire2_jumbotron.jpg" />
     <Content Include="Content\img\aspire_logo_big.jpg" />
     <Content Include="Content\img\aspire_logo_small.png" />
     <Content Include="Content\img\aspire_logo_small2.png" />
