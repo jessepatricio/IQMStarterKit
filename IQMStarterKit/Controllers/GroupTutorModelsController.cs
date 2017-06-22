@@ -68,35 +68,7 @@ namespace IQMStarterKit.Controllers
 
 
         // Utility
-        private IEnumerable<ApplicationUser> GetTutors(byte groupId)
-        {
-            var tutors = new List<ApplicationUser>();
-
-
-            // get all users with tutor role
-            var users = _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399")).ToList();
-            // get all tutors assigned to the group id
-            var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
-
-            foreach (var user in users)
-            {
-
-                //include only tutors not  assigned in group
-                var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
-                if (x == null)
-                {
-                    tutors.Add(user);
-                }
-
-
-            }
-
-
-
-            return tutors;
-
-        }
-
+      
 
         public ActionResult Delete(int id, string groupId)
         {

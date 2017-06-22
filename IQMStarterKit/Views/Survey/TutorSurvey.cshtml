@@ -1,0 +1,146 @@
+﻿@model IQMStarterKit.Models.Forms.TutorSurveyViewModel
+
+@{
+    ViewBag.Title = "TutorSurvey";
+}
+    @using (Html.BeginForm())
+    {
+        <div class="container1" style="text-align:left;">
+
+            <div class="form-inline">
+            <h1 class="heading">Tutor Survey</h1>
+            <p><label>Tutor: </label>&nbsp;@Html.DropDownList("AddTutor", new SelectList(Model.Tutors, "Id", "FullName"), new { @class = "form-control", @style="width:200px;" })</p>
+
+            <p>Please rate the following from 1 to 5, 5 being most favourable and 1 the least favourable.</p>
+
+            <table border=1>
+                <tr>
+                    <th>&nbsp;&nbsp;</th>
+                    <th></th>
+                    <th>&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor’s explanation was clear and easy to understand.</td>
+                    <td><input name="r1" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor displayed interest and enthusiasm.</td>
+                    <td><input name="r2" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor shared past knowledge and experience.</td>
+                    <td><input name="r3" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor was respectful and treated the students well.</td>
+                    <td><input name="r4" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor answered questions well.</td>
+                    <td><input name="r5" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor organised the lesson well.</td>
+                    <td><input name="r6" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor encouraged participation in class.</td>
+                    <td><input name="r7" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;</td>
+                    <td>The tutor used the lesson time effectively.</td>
+                    <td><input name="r8" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r8" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r8" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r8" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r8" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+            </table>
+
+            <br/>
+
+                <table border=1 style="text-align:center;">
+                    <tr>
+                        <td>My overall rating for the tutor is:</td>
+                        <td style="width:140px;">
+                            <b>Below Satisfactory </b><br/>
+                            <input name="r9" type="radio" style="width:30px;" value="Below Satisfactory"/>
+                        </td>
+                        <td style="width:140px;">
+                            <b>Satisfactory</b> <br />
+                            <input name="r9" type="radio" style="width:30px;" value="Satisfactory" />
+                        </td>
+                        <td style="width:140px;">
+                            <b>Good</b><br />
+                            <input name="r9" type="radio" style="width:30px;" value="Good" />
+                        </td>
+                        <td style="width:140px;">
+                            <b>Excellent</b><br />
+                            <input name="r9" type="radio" style="width:30px;" value="Excellent" />
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <p>Are there other comments? We appreciate any feedback, positive or otherwise?</p>
+                <textarea name="TutorComment" class="TutorCommenttxtarea" cols="150" rows="10"></textarea>
+            </div>
+            <div style="text-align:center;">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", "Module", null, new { @class = "btn btn-default" } )
+            </div>
+        </div>
+    }
+

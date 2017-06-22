@@ -6,10 +6,29 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
 
     <div class="container1">
         <h1 class="heading"><strong><u>Personal Values</u></strong></h1>
+
+@if (ViewBag.ActDone)
+{
+   
+    <br /><br />
+        <div class="col-md-offset-0 col-md-12">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">Your Personal Values: <strong>@ViewBag.PersonalValues</strong></div>
+                <div class="panel-body"></div>
+            </div>
+
+        </div>
+
+
+}
+else
+{
         <p>The words below represent what most people identify as important aspects of their lives.</p>
         <p>They can range from tangible subjects, issues and topics.  If the list does not include what is important to you, do add them in the empty boxes below before commencing on the exercise.</p>
         <div id="p33Table">
@@ -102,9 +121,47 @@
                     <td><input type="checkbox" name="PersonalValues" value="Fairness" style="margin:5px;">Fairness</td>
                     <td><input type="checkbox" name="PersonalValues" value="Decisiveness" style="margin:5px;">Decisiveness</td>
                 </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="chk1" style="margin:5px;">
+                        <input class="p33txtbox" type="text" name="chk1value" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chk2"  style="margin:5px;">
+                        <input class="p33txtbox" type="text" name="chk2value" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chk3"  style="margin:5px;">
+                        <input class="p33txtbox" type="text" name="chk3value" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chk4"  style="margin:5px;">
+                        <input class="p33txtbox" type="text" name="chk4value" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chk5" style="margin:5px;">
+                        <input class="p33txtbox" type="text" name="chk5value" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chk6" style="margin:5px;">
+                        <input class="p33txtbox" type="text" name="chk6value" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                       
+
+                        <div style="text-align: center;" class="form-group`">
+                            <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                        </div>
+
+                    </td>
+                </tr>
+
             </table>
 
         </div>
+}
 
         <hr />
         <h1 class="heading"><strong><u>Personal or Core Values</u></strong></h1>
@@ -167,11 +224,45 @@
 
 }
 
+@section Scripts
 
-@section Scripts{
-    <script type="text/javascript">
-          $('button').click(function () {
-             $(this).toggleClass('pressed');
-          });
-    </script>
+{
+
+<script type="text/javascript">
+
+     function validate() {
+         totalchecked = $("[type='checkbox']:checked").length;
+         alert(totalchecked);
+         if (totalchecked == 0) {
+             toastr.warning('No values selected!');
+             return false;
+         }
+        else if (totalchecked > 3) {
+            toastr.warning('too many selection. Should select only 3 values.');
+            return false;
+        }
+        return true;
+     }
+
+     //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result)
+                 if (validate()) {
+                     currentForm.submit();
+                     return true;
+                 }
+         });
+     });
+
+
+</script>
+    @*<script type="text/javascript">
+        $('button').click(function () {
+            $(this).toggleClass('pressed');
+        });
+    </script
+        >*@
 }

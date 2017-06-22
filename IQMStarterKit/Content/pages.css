@@ -3,7 +3,7 @@
 	margin-left: auto;
 	margin-right:auto;
 	font-family:Arial, Helvetica, sans-serif;
-	min-width:1000px;
+    min-width:1000px;
 }
 
 #p1welcomeAspire{
@@ -28,11 +28,11 @@ ul.p2objList{
 
 h1.heading{
 	font-size:4em;
-	text-align:center;
+    text-align:center;
 }
 
 #p2dartimg {
-	text-align: right;
+    text-align: right;
 }
 
 #p3quote{
@@ -42,10 +42,10 @@ h1.heading{
 	font-size:3em;
 }
 #p3pasteurimg img {
-	width: 20%;
+    width: 20%;
 }
 #p3pasteurimg {
-	text-align: right;
+    text-align: right;
 }
 
 
@@ -62,10 +62,10 @@ h1.heading{
 	color:#000066;
 }
 #p4worldAskimg {
-	text-align:right;
+    text-align:right;
 }
 #p4worldAskimg img {
-	width: 20%;
+    width: 20%;
 }
 
 .p5words{
@@ -83,7 +83,7 @@ ul.p5words{
 	margin-bottom:-20px;
 }
 #p6checklistimg {
-	text-align: right;
+    text-align: right;
 }
 
 .p7List{
@@ -106,12 +106,12 @@ ul.p5words{
 }
 
 #p9img img{
-	height:280px;
+    height:280px;
 }
 
 .p10_11List{
 	font-size:20px;
-	text-align:left;
+    text-align:left;
 }
 
 td.p10_11Mod{
@@ -129,7 +129,7 @@ tr.p10_11TabRow{
 }
 
 #p10_11topicimg img{
-	width:20%;
+    width:20%;
 }
 
 
@@ -141,12 +141,12 @@ tr.p10_11TabRow{
 }
 
 #p12img {
-	padding: 10px;
+    padding: 10px;
 }
 
 #p12img img{
-	height: 300px;
-	margin-left: 100px;
+    height: 300px;
+    margin-left: 100px;
 }
 
 .p13, .p13List{
@@ -162,162 +162,600 @@ tr.p10_11TabRow{
 
 
 #p14coatOfArm{
-	height:800px;
+    height:800px;
 }
 
 .p15AboutMeContainer {
-	position: relative;
-	text-align: center;
+    position: relative;
+    text-align: center;
 }
+
 #p15aboutMeImg {
-	width:80%;
-	height:80%;
+    width: 80%;
+    height: 80%;
 }
-.p15txtbox{
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	max-width: 900px;
+
+.p15txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    max-width: 900px;
 }
+
 #p15Name {
-	position: absolute;
-	top: 165px;
-	left: 388px;
-	width: 280px;
+    position: absolute;
+    top: 165px;
+    left: 388px;
+    width: 280px;
 }
+
 #p15Place {
-	left: 627px;
-	position: absolute;
-	top: 277px;
-	width: 118px;
+    left: 627px;
+    position: absolute;
+    top: 277px;
+    width: 118px;
 }
+
 #p15Hobby {
-	height: 115px;
-	left: 208px;
-	position: absolute;
-	top: 345px;
-	width: 197px;
+    height: 115px;
+    left: 208px;
+    position: absolute;
+    top: 345px;
+    width: 197px;
 }
+
 #p15Movie {
-	left: 504px;
-	position: absolute;
-	top: 472px;
-	width: 194px;
+    left: 504px;
+    position: absolute;
+    top: 472px;
+    width: 194px;
 }
+
 #p15Important {
-	left: 298px;
-	position: absolute;
-	top: 609px;
-	width: 388px;
+    left: 298px;
+    position: absolute;
+    top: 609px;
+    width: 388px;
 }
+
 #p15Model {
-	left: 205px;
-	position: absolute;
-	top: 747px;
-	width: 195px;
+    left: 205px;
+    position: absolute;
+    top: 747px;
+    width: 195px;
 }
+
 #p15Happy {
-	left: 470px;
-	position: absolute;
-	top: 815px;
-	width: 288px;
+    left: 470px;
+    position: absolute;
+    top: 815px;
+    width: 288px;
 }
+
 #p15Dislike {
-	left: 200px;
-	position: absolute;
-	top: 940px;
-	width: 194px;
+    left: 200px;
+    position: absolute;
+    top: 940px;
+    width: 194px;
 }
+
 #p15Famous {
-	left: 530px;
-	position: absolute;
-	top: 984px;
-	width: 225px;
+    left: 530px;
+    position: absolute;
+    top: 984px;
+    width: 225px;
 }
 .p16List {
-	list-style-type: square;
-	text-align: left;
-	font-size: 3em;
+    list-style-type: square;
+    text-align: left;
+    font-size: 3em;
 }
 
 .p17-19List {
-	font-size: 3em;
+    font-size: 3em;
 }
 
 .p20-22List {
-	font-size: 3em;
-	list-style-type:none;
+    font-size: 3em;
+    list-style-type:none;
 }
 
 #p20-22img{
-	text-align:right;
+    text-align:right;
 }
 
 #p22Cheating{
-	color:darkred;
-	font-size:3em;
-	text-indent:40px;
+    color:darkred;
+    font-size:3em;
+    text-indent:40px;
 }
 
 #p23instruction{
-	margin-top:10px;
-	font-size:20px;
+    margin-top:10px;
+    font-size:20px;
 } 
 #p23VARKTable {
-	border-collapse: collapse;
+    border-collapse: collapse;
 }
 #p23VARKTable,td,th {
-	border: 1px solid black;
-	padding:5px;
+    border: 1px solid black;
+    padding:5px;
 }
 
 
 #p25img1 img{
-	width:30%;
+    width:30%;
 }
 #p25groupMission {
-	font-size: 2em;
+    font-size: 2em;
 }
 #p25instruction {
-	text-align: left;
-	font-size: 2em;
+    text-align: left;
+    font-size: 2em;
 }
 
 #p26-27 {
-	text-align: left;
-	font-size: 1.5em;
+    font-size: 1.5em;
+    text-align:center;
 }
 #p26DOPETable {
-	text-align: left;
-	margin: auto;
+    text-align: left;
+    margin: auto;
 }
 
 #p27DISCTable{
-	font-size: 1.2em;
-	margin:auto;
+    font-size: 1.2em;
+    margin:auto;
 }
 
 #p28kiwianaTable {
-	font-size: 1.5em;
-	margin: auto;
+    font-size: 1.5em;
+    margin: auto;
 }
 .p28textarea, .p30textarea, .p35textarea, .p15txtarea {
-	resize: none;
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 2px;
-	max-width: 900px;
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    max-width: 900px;
+    multiline: true;
 }
 
 .p29txtbox {
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	width: 150px;
-	max-width: 900px;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 50px;
+    max-width: 900px;
 }
+
+.p30txtbox, .p38txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 850px;
+    max-width: 900px;
+}
+.p30txtbox1 {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 900px;
+    max-width: 900px;
+}
+
+#p31List{
+    text-align:left;
+    font-size: 2em;
+}
+#p31img{
+    text-align:right;
+}
+#p31img img{
+    width:20%;
+    margin-top:-250px;
+}
+.p31txtarea, .p38txtarea, .p39txtarea, .p41txtarea, .p47txtarea, .p50-53txtarea {
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    max-width: 900px;
+}
+#p31_14HabitTable{
+    margin:auto;
+}
+
+.p32txtbox, .p36txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 900px;
+    max-width: 900px;
+}
+
+#p33Table table {
+    margin: auto;
+}
+#p33values{
+    text-align:left;
+}
+.p33txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    width: 130px;
+    margin-left:-5px;
+    max-width: 900px;
+}
+
+#p35LeadershipPlanTable {
+    margin: auto;
+    text-align: left;
+}
+
+.p39txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    width: 250px;
+    max-width: 900px;
+}
+
+
+#p40LostAtSeaContainer {
+    position: relative;
+    text-align: center;
+}
+.p40txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 1.5em;
+    height: 35px;
+    max-width: 900px;
+}
+#p40OwnSextant {
+    left: 256px;
+    position: absolute;
+    top: 126px;
+    width: 59px;
+}
+#p40GrpSextant {
+    left: 337px;
+    position: absolute;
+    top: 126px;
+    width: 62px;
+}
+#p40OwnMirror {
+    left: 256px;
+    position: absolute;
+    top: 180px;
+    width: 59px;
+}
+#p40GrpMirror {
+    left: 337px;
+    position: absolute;
+    top: 180px;
+    width: 62px;
+}
+#p40OwnNet {
+    left: 256px;
+    position: absolute;
+    top:234px;
+    width: 59px;
+}
+#p40GrpNet {
+    left: 337px;
+    position: absolute;
+    top: 234px;
+    width: 62px;
+}
+#p40OwnWater {
+    left: 256px;
+    position: absolute;
+    top: 288px;
+    width: 59px;
+}
+#p40GrpWater {
+    left: 337px;
+    position: absolute;
+    top: 288px;
+    width: 62px;
+}
+#p40OwnRations {
+    left: 256px;
+    position: absolute;
+    top: 342px;
+    width: 59px;
+}
+#p40GrpRations {
+    left: 337px;
+    position: absolute;
+    top: 342px;
+    width: 62px;
+}
+#p40OwnMap {
+    left: 256px;
+    position: absolute;
+    top: 396px;
+    width: 59px;
+}
+#p40GrpMap {
+    left: 337px;
+    position: absolute;
+    top: 396px;
+    width: 62px;
+}
+#p40OwnCushion {
+    left: 256px;
+    position: absolute;
+    top: 450px;
+    width: 59px;
+}
+#p40GrpCushion {
+    left: 337px;
+    position: absolute;
+    top: 450px;
+    width: 62px;
+}
+#p40OwnOil {
+    left: 256px;
+    position: absolute;
+    top: 504px;
+    width: 59px;
+}
+#p40GrpOil {
+    left: 337px;
+    position: absolute;
+    top: 504px;
+    width: 62px;
+}
+#p40OwnRadio {
+    left: 256px;
+    position: absolute;
+    top: 558px;
+    width: 59px;
+}
+#p40GrpRadio {
+    left: 337px;
+    position: absolute;
+    top: 558px;
+    width: 62px;
+}
+#p40OwnSheet {
+    left: 256px;
+    position: absolute;
+    top: 609px;
+    width: 59px;
+}
+#p40GrpSheet {
+    left: 337px;
+    position: absolute;
+    top: 609px;
+    width: 62px;
+}
+#p40OwnRepellent {
+    left: 256px;
+    position: absolute;
+    top: 658px;
+    width: 59px;
+}
+#p40GrpRepellent {
+    left: 337px;
+    position: absolute;
+    top: 658px;
+    width: 62px;
+}
+#p40OwnRum {
+    left: 256px;
+    position: absolute;
+    top: 712px;
+    width: 59px;
+}
+#p40GrpRum {
+    left: 337px;
+    position: absolute;
+    top: 712px;
+    width: 62px;
+}
+#p40OwnRope {
+    left: 256px;
+    position: absolute;
+    top: 766px;
+    width: 59px;
+}
+#p40GrpRope {
+    left: 337px;
+    position: absolute;
+    top: 766px;
+    width: 62px;
+}
+#p40OwnChocolate {
+    left: 256px;
+    position: absolute;
+    top: 820px;
+    width: 59px;
+}
+#p40GrpChocolate {
+    left: 337px;
+    position: absolute;
+    top: 820px;
+    width: 62px;
+}
+#p40OwnFishKit {
+    left: 256px;
+    position: absolute;
+    top: 874px;
+    width: 59px;
+}
+#p40GrpFishKit {
+    left: 337px;
+    position: absolute;
+    top: 874px;
+    width: 62px;
+}
+
+.p47List li {
+    list-style-type: none;
+}
+
+.p47List li:before {
+    content:"-";
+    margin-left:-20px;
+    margin-right:10px;
+}
+
+#p48MaturityContainer {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+}
+#p48MaturityImg {
+    width:100%;
+    height:100%;
+}
+
+.p48txtbox, .p54txtbox, .TutorNametxtbox, .p44txtbox {
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    max-width: 900px;
+}
+.p48Int {
+    position: absolute;
+    top: 50px;
+    left: 400px;
+
+}
+.p48Habit5 {
+    position: absolute;
+    top: 90px;
+    left: 295px;
+    color: white;
+}
+.p48Habit6 {
+    position: absolute;
+    top: 90px;
+    left: 545px;
+    color: white;
+}
+.p48P1 {
+    top: 150px;
+    left: 440px;
+    position: absolute;
+    font-size:2em;
+}
+.p48Habit4 {
+    position: absolute;
+    top: 250px;
+    left: 420px;
+    color: white;
+}
+.p48In {
+    position: absolute;
+    top: 380px;
+    left: 410px;
+}
+.p48Habit3 {
+    position: absolute;
+    top: 480px;
+    left: 420px;
+    color: white;
+}
+.p48P2 {
+    position: absolute;
+    top: 555px;
+    left: 440px;
+    font-size:2em;
+}
+.p48Habit1 {
+    position: absolute;
+    top: 640px;
+    left: 295px;
+    color: white;
+}
+.p48Habit2 {
+    position: absolute;
+    top: 640px;
+    left: 545px;
+    color: white;
+}
+.p48De {
+    position: absolute;
+    top: 715px;
+    left: 410px;
+}
+.p48Habit7 {
+    position: absolute;
+    top: 685px;
+    left: 870px;
+}
+
+
+#p54TableSlang td {
+    border:none;
+}
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.2); /* IE */
+    -moz-transform: scale(1.2); /* FF */
+    -webkit-transform: scale(1.2); /* Safari and Chrome */
+    -o-transform: scale(1.2); /* Opera */
+}
+
+
+.TutorCommenttxtarea, .ProgramCommenttxtarea {
+    resize: none;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    font-size: 1em;
+    margin: 5px;
+    max-width: 900px;
+}
+
+/**Journal pop up**/
+.button {
+    border: 1px solid #bfbfbf;
+    border-radius: 50%;
+    height:28px;
+    width:28px;
+    padding-left:3px;
+}
+#info_popup{
+    float:right;
+    margin-right:40px;
+    margin-top:90px;
+   
+}
+
+/* Jesse */
+
+.dataTables_wrapper .dataTables_length {
+	float: right;
+							  
+					   
+				
+			   
+					 
+}
+
+.dataTables_wrapper .dataTables_filter {
+	float: right;
+	text-align: left;
+					
+   
+}
+
 
 .answer_container {
 	width: 150px;
@@ -325,201 +763,3 @@ tr.p10_11TabRow{
 	padding: 2px;
 	border: 1px solid #aaaaaa;
 }
-
-.p30txtbox, .p38txtbox {
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	width: 850px;
-	max-width: 900px;
-}
-.p30txtbox1 {
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	width: 900px;
-	max-width: 900px;
-}
-
-#p31List{
-	text-align:left;
-	font-size: 2em;
-}
-#p31img{
-	text-align:right;
-}
-#p31img img{
-	width:20%;
-	margin-top:-250px;
-}
-.p31txtarea, .p38txtarea, .p39txtarea, .p41txtarea, .p47txtarea, .p50-53txtarea {
-	resize: none;
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	max-width: 900px;
-}
-#p31_14HabitTable{
-	margin:auto;
-}
-
-.p32txtbox, .p36txtbox {
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	width: 900px;
-	max-width: 900px;
-}
-
-#p33Table table {
-	margin: auto;
-}
-#p33values{
-	text-align:left;
-}
-
-#p35LeadershipPlanTable{
-	margin:auto;
-	text-align:left;
-}
-
-.p39txtbox {
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	width: 250px;
-	max-width: 900px;
-}
-
-.p47List li{
-	list-style-type:none;
-}
-
-.p47List li:before {
-	content:"-";
-	margin-left:-20px;
-	margin-right:10px;
-}
-
-#p48MaturityContainer {
-	position: relative;
-	text-align: center;
-	font-weight: bold;
-}
-#p48MaturityImg {
-	width:100%;
-	height:100%;
-}
-
-.p48txtbox, .p54txtbox, .TutorNametxtbox {
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	max-width: 900px;
-}
-.p48Int {
-	position: absolute;
-	top: 50px;
-	left: 400px;
-
-}
-.p48Habit5 {
-	position: absolute;
-	top: 90px;
-	left: 295px;
-	color: white;
-}
-.p48Habit6 {
-	position: absolute;
-	top: 90px;
-	left: 545px;
-	color: white;
-}
-.p48P1 {
-	position: absolute;
-	top: 188px;
-	left: 415px;
-}
-.p48Habit4 {
-	position: absolute;
-	top: 250px;
-	left: 420px;
-	color: white;
-}
-.p48In {
-	position: absolute;
-	top: 380px;
-	left: 410px;
-}
-.p48Habit3 {
-	position: absolute;
-	top: 480px;
-	left: 420px;
-	color: white;
-}
-.p48P2 {
-	position: absolute;
-	top: 560px;
-	left: 415px;
-}
-.p48Habit1 {
-	position: absolute;
-	top: 640px;
-	left: 295px;
-	color: white;
-}
-.p48Habit2 {
-	position: absolute;
-	top: 640px;
-	left: 545px;
-	color: white;
-}
-.p48De {
-	position: absolute;
-	top: 715px;
-	left: 410px;
-}
-.p48Habit7 {
-	position: absolute;
-	top: 685px;
-	left: 870px;
-}
-
-
-#p54TableSlang td {
-	border:none;
-}
-
-input[type=checkbox] {
-	/* Double-sized Checkboxes */
-	-ms-transform: scale(1.2); /* IE */
-	-moz-transform: scale(1.2); /* FF */
-	-webkit-transform: scale(1.2); /* Safari and Chrome */
-	-o-transform: scale(1.2); /* Opera */
-}
-
-
-.TutorCommenttxtarea, .ProgramCommenttxtarea {
-	resize: none;
-	border: 1px solid #bfbfbf;
-	border-radius: 2px;
-	font-size: 1em;
-	margin: 5px;
-	max-width: 900px;
-}
-
-.dataTables_wrapper .dataTables_length {
-	float: right;
-}
-
-.dataTables_wrapper .dataTables_filter {
-    float: right;
-    text-align: left;
-}
-

@@ -1,9 +1,11 @@
-﻿
+﻿@model  IQMStarterKit.Models.Forms.WinningLotteryClass
+
 @{
     ViewBag.Title = "Page36";
 }
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="container1">
         <h1 class="heading"><strong><u>Winning the Lottery EVERYDAY!!!</u></strong></h1>
 
@@ -28,23 +30,71 @@
 
         <p>In the next 5 minutes, write down how you would spend that amount of money each day</p>
 
-        <ol>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-            <li><input class="p36txtbox" type="text" name="p36Lottery"></li>
-        </ol>
-    </div>
+        <div class="form-inline">
+
+            <div class="form-group">
+                <div><label for="WinLot1">1.</label>@Html.EditorFor(model => model.WinLot1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot2">2.</label>@Html.EditorFor(model => model.WinLot2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot3">3.</label>@Html.EditorFor(model => model.WinLot3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot4">4.</label>@Html.EditorFor(model => model.WinLot4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot5">5.</label>@Html.EditorFor(model => model.WinLot5, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot6">6.</label>@Html.EditorFor(model => model.WinLot6, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot7">7.</label>@Html.EditorFor(model => model.WinLot7, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot8">8.</label>@Html.EditorFor(model => model.WinLot8, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot9">9.</label>@Html.EditorFor(model => model.WinLot9, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="WinLot10">10.</label>@Html.EditorFor(model => model.WinLot10, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p36txtbox form-control" } } : new { htmlAttributes = new { @class = "p36txtbox form-control" } })</div>
+            </div>
+            </div>
+
+            @if (Model.StudentActivity.ProgressValue != 100)
+            {
+                <div style="text-align: center;" class="form-group`">
+                    <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                </div>
+            }
+        </div>
 
     <div style="text-align:center; margin-top: 20px;">
         @Html.ActionLink("Previous Page", "Page35") |
         @Html.ActionLink("Main", "Index") |
-        @Html.ActionLink("Next Page", "Page37")
+        @Html.ActionLink("Next Page", "Page50")
     </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result)
+                 currentForm.submit();
+                 return true;
+         });
+     });
+
+    </script>
+
+
 }

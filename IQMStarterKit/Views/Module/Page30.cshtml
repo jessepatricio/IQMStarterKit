@@ -1,63 +1,99 @@
-﻿
-@{
-    ViewBag.Title = "Page30";
-}
+﻿@model IQMStarterKit.Models.Forms.cheese
+
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
         <h1 class="heading"><u>Who Moved My Cheese?</u></h1>
         <h2 style="text-align:center;"> By Dr. Spencer Johnson</h2>
             <ol>
                 <li>
-                    <p>List and describe the four characters in the story:</p>
-                    <textarea class="p30textarea" rows="5" cols="60" maxlength="200" name="answer"></textarea>
+                    <label for="answer1">List and describe the four characters in the story:</label>
+                    <div>
+                        @Html.TextAreaFor(model => model.answer1, 10, 400, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "form-control", @name = "answer1" } : new {  @class = "form-control", @name = "answer1" } )
+                    </div>
+                    <br />
                 </li>
                 <li>
+                   
                     The four characters who live in a "Maze" and look for "Cheese" to nourish them and make them happy
                     <ol>
                         <li style="list-style-type:lower-alpha;">
                             <p>What does the "Cheese" represent?</p>
-                            <input class="p30txtbox" type="text" name="p30ans2a">
+                            @Html.EditorFor(model => model.answer2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p30txtbox form-control", name = "answer2" } } : new { htmlAttributes = new { @class = "p30txtbox form-control", name = "answer2" } })
                         </li>
                         <li style="list-style-type:lower-alpha;">
                             <p>What does the "Maze" represent?</p>
-                            <input class="p30txtbox" type="text" name="p30ans2b">
+                            @Html.EditorFor(model => model.answer3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p30txtbox form-control", name = "answer3" } } : new { htmlAttributes = new { @class = "p30txtbox form-control", name = "answer3" } })
                         </li>
                     </ol>
                 </li>
                 <li>
-                    <p>One day, the four characters discovered that the cheese at Station C disappeared. How did each of them
-                    </p>
-                    <textarea class="p30textarea" rows="5" cols="150" name="answer"></textarea>
+                    <label for="answer1">One day, the four characters discovered that the cheese at Station C disappeared. How did each of them</label>
+                    <div>
+                        @Html.TextAreaFor(model => model.answer4, 10, 400, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "form-control", @name = "answer4" } : new { @class = "form-control", @name = "answer4" })
+                    </div>
                 </li>
 
-                <br />
-                <content><strong><u>My Cheese</u></strong></content>
-                <br />
-                <br />
+                
+                <content><br/><strong><u>My Cheese</u></strong><br/><br /></content>
+              
                 <li>
                     What is your "Cheese"? <br />
-                    <input class="p30txtbox1" type="text" name="p30ans2a">
+                    @Html.EditorFor(model => model.answer5, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p30txtbox form-control", name = "answer5" } } : new { htmlAttributes = new { @class = "p30txtbox form-control", name = "answer5" } })
+                    @*<input class="p30txtbox1" type="text" name="answer5">*@
                 </li>
                 <li>
                     Did you have an old "Cheese"? If yes, what was it?<br />
-                    <input class="p30txtbox1" type="text" name="p30ans2a">
+                    @Html.EditorFor(model => model.answer6, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p30txtbox form-control", name = "answer6" } } : new { htmlAttributes = new { @class = "p30txtbox form-control", name = "answer6" } })
+                    @*<input class="p30txtbox1" type="text" name="answer6">*@
                 </li>
                 <li>
+                    <label for="answer1">Was your old "Cheese" moved? How did you react? Which of the characters can you best relate to? Why?</label>
+                    <div>
+                        @Html.TextAreaFor(model => model.answer7, 10, 400, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "form-control", @name = "answer7" } : new { @class = "form-control", @name = "answer7" })
+                    </div>
                     <p>
-                        Was your old "Cheese" moved? How did you react? Which of the characters can you best relate to? Why?
-                    </p>
-                    <textarea class="p30textarea" rows="5" cols="150" name="answer"></textarea>
+                        
+                  
                 </li>
 
             </ol>
 
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
+
         <div style="text-align:center; margin-top: 20px;">
             @Html.ActionLink("Previous Page", "Page29") |
             @Html.ActionLink("Main", "Index") |
-            @Html.ActionLink("Next Page", "Page31")
+            @Html.ActionLink("Next Page", "Page32")
         </div>
     </div>
 
 }
 
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result) {
+                 currentForm.submit();
+                 return true;
+             }
+         });
+     });
+
+    </script>
+
+
+}

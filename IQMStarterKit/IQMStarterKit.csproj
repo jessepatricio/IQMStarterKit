@@ -244,6 +244,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="DAL\DataLayer.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -425,6 +426,14 @@
     <Compile Include="Migrations\201706170724423_RemoveIsRemovedFieldInConfig.Designer.cs">
       <DependentUpon>201706170724423_RemoveIsRemovedFieldInConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706200407230_addSurveyModels.cs" />
+    <Compile Include="Migrations\201706200407230_addSurveyModels.Designer.cs">
+      <DependentUpon>201706200407230_addSurveyModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706200544409_NewChanges.cs" />
+    <Compile Include="Migrations\201706200544409_NewChanges.Designer.cs">
+      <DependentUpon>201706200544409_NewChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -434,6 +443,14 @@
     <Compile Include="Models\ConfigViewModel.cs" />
     <Compile Include="Models\Core\GroupActivityConfig.cs" />
     <Compile Include="Models\Core\TempActivityConfig.cs" />
+    <Compile Include="Models\Forms\cheese.cs" />
+    <Compile Include="Models\Forms\PresentationEvaluationModel.cs" />
+    <Compile Include="Models\Forms\ProgramSurveyModel.cs" />
+    <Compile Include="Models\Forms\ProgramSurveyViewModel.cs" />
+    <Compile Include="Models\Forms\thinkCeo.cs" />
+    <Compile Include="Models\Forms\TutorSurveyModel.cs" />
+    <Compile Include="Models\Forms\TutorSurveyViewModel.cs" />
+    <Compile Include="Models\Forms\WinningLottery.cs" />
     <Compile Include="Models\GroupTutorModel.cs" />
     <Compile Include="Models\GroupTutorModelView.cs" />
     <Compile Include="Models\MatchLookupModels.cs" />
@@ -935,6 +952,12 @@
     <Content Include="Views\Report\StudentActivityPercentage.cshtml" />
     <Content Include="Views\GroupTutorModels\Index.cshtml" />
     <Content Include="Views\GroupActivityConfigs\Index.cshtml" />
+    <Content Include="Views\Module\Page18b.cshtml" />
+    <Content Include="Views\Module\Page55.cshtml" />
+    <Content Include="Views\Survey\ProgramSurvey.cshtml" />
+    <Content Include="Views\Survey\TutorSurvey.cshtml" />
+    <Content Include="Views\Survey\ProgramSurveyList.cshtml" />
+    <Content Include="Views\Survey\TutorSurveyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1076,6 +1099,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706170724423_RemoveIsRemovedFieldInConfig.resx">
       <DependentUpon>201706170724423_RemoveIsRemovedFieldInConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706200407230_addSurveyModels.resx">
+      <DependentUpon>201706200407230_addSurveyModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706200544409_NewChanges.resx">
+      <DependentUpon>201706200544409_NewChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

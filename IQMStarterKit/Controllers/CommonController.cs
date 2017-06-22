@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace IQMStarterKit.Models
 {
-    public class CommonController : Controller 
+    public class CommonController : Controller
     {
 
         private ApplicationUserManager _userManager;
@@ -68,8 +69,8 @@ namespace IQMStarterKit.Models
             }
             var colRolesForUser = UserManager.GetRoles(user.Id).ToList();
             var colRolesUserInNotIn = (from objRole in colAllRoles
-                where !colRolesForUser.Contains(objRole)
-                select objRole).ToList();
+                                       where !colRolesForUser.Contains(objRole)
+                                       select objRole).ToList();
             if (colRolesUserInNotIn.Count() == 0)
             {
                 colRolesUserInNotIn.Add("No Roles Found");
@@ -79,6 +80,67 @@ namespace IQMStarterKit.Models
         #endregion
 
 
-        
+
+        public IEnumerable<ApplicationUser> GetGroupTutors(byte groupId)
+        {
+
+            ApplicationDbContext _context = new ApplicationDbContext();
+
+            var tutors = new List<ApplicationUser>();
+
+
+            // get all users with tutor role
+            var users = _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399")).ToList();
+            // get all tutors assigned to the group id
+            var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
+
+            foreach (var user in users)
+            {
+
+                //include only tutors assigned in group
+                var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
+                if (x != null)
+                {
+                    tutors.Add(user);
+                }
+
+
+            }
+
+            return tutors;
+        }
+
+
+        public IEnumerable<ApplicationUser> GetTutors(byte groupId)
+        {
+            ApplicationDbContext _context = new ApplicationDbContext();
+
+            var tutors = new List<ApplicationUser>();
+
+
+            // get all users with tutor role
+            var users = _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399")).ToList();
+            // get all tutors assigned to the group id
+            var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
+
+            foreach (var user in users)
+            {
+
+                //include only tutors not  assigned in group
+                var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
+                if (x == null)
+                {
+                    tutors.Add(user);
+                }
+
+
+            }
+
+
+
+            return tutors;
+
+        }
+
     }
 }

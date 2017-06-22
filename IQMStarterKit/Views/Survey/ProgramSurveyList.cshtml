@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IQMStarterKit.Models.ProgramSurveyModel>
+
+@using (Html.BeginForm())
+{
+
+    <br />
+    <h2 class="heading">Programme Survey List</h2>
+    <table id="program" style="width:100%" class="table table-striped table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Date Submitted</th>
+                <th>Overall Rating</th>
+                <th>Comment</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.CreatedBy)</td>
+                    <td>@Html.DisplayFor(m => item.CreatedDateTime)</td>
+                    <td>@Html.DisplayFor(m => item.POverall)</td>
+                    <td>@Html.DisplayFor(m => item.PComment)</td>
+
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+}
+
+
+
+@section scripts{
+    <script>
+
+            $(document).ready(function () {
+                $('#program').DataTable({
+                    "bLengthChange": false,
+                    "bFilter": true
+                });
+            });
+
+           
+
+    </script>
+}

@@ -50,6 +50,11 @@ namespace IQMStarterKit.Models
 
         public DbSet<GroupActivityConfig> GroupActivityConfig { get; set; }
 
+        public DbSet<ProgramSurveyModel> ProgramSurveyModel { get; set; }
+        public DbSet<TutorSurveyModel> TutorSurveyModel { get; set; }
+        public DbSet<PresentationEvaluationModel> PresentationEvaluationModel { get; set; }
+
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

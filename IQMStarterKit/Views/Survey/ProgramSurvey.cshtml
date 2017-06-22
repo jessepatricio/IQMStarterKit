@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "ProgramSurvey";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container1" style="text-align:left;">
+        <div>
+        <h1 class="heading">PDP Program Survey</h1>
+
+        <p>Please rate the following from 1 to 5, 5 being most favourable and 1 the least favourable.</p>
+
+
+            <table border=1>
+                <tr>
+                    <th>&nbsp;&nbsp;</th>
+                    <th></th>
+                    <th>&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</th>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</td>
+                    <td>The programme was well structured and organised</td>
+                    <td><input name="r1" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r1" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</td>
+                    <td>The topics covered were relevant and beneficial</td>
+                    <td><input name="r2" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r2" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</td>
+                    <td>The activities (games, questionnaires, discussions and <br/> quizzes) were relevant to the learning objectives.</td>
+                    <td><input name="r3" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r3" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        The personal portfolio ( self-evaluation, reflection journal &nbsp;&nbsp;<br/>
+                        and exercises ) helps me learn better.
+                    </td>
+                    <td><input name="r4" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r4" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</td>
+                    <td>The course handouts were useful?</td>
+                    <td><input name="r5" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r5" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;</td>
+                    <td>The learning objectives of the programme were met.</td>
+                    <td><input name="r6" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r6" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;</td>
+                    <td>I would recommend this programme to other students.</td>
+                    <td><input name="r7" type="radio" value="1" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="2" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="3" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="4" style="width:30px;" /></td>
+                    <td><input name="r7" type="radio" value="5" style="width:30px;" /></td>
+                </tr>
+
+
+            </table>
+
+            <br />
+            <table border=1 style="text-align:center;">
+                    <tr>
+                        <td>Overall, the programme was: </td>
+                        <td style="width:140px;">
+                            <b>Below Satisfactory </b><br />
+                            <input name="r8" type="radio" style="width:30px;" value="Below Satisfactory" />
+                        </td>
+                        <td style="width:140px;">
+                            <b>Satisfactory</b> <br />
+                            <input name="r8" type="radio" style="width:30px;" value="Satisfactory" />
+                        </td>
+                        <td style="width:140px;">
+                            <b>Good</b><br />
+                            <input name="r8" type="radio" style="width:30px;" value="Good" />
+                        </td>
+                        <td style="width:140px;">
+                            <b>Excellent</b><br />
+                            <input name="r8" type="radio" style="width:30px;" value="Excellent" />
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                <p>Select your choice:</p>
+                <table border=1>
+                    <tr>
+                        <td>Time allocated for the programme was </td>
+                        <td style="width:90px; text-align:center;">too short <br/> <input name="r9" type="radio" value="Too Short" style="width:30px;" /></td>
+                        <td style="width:90px; text-align:center;">just right<br/> <input name="r9" type="radio" value="Just Right" style="width:30px;" /> </td>
+                        <td style="width:90px; text-align:center;">too long<br/> <input name="r9" type="radio" value="Too Long "style="width:30px;" /></td>
+                    </tr>
+
+                    <tr>
+                        <td>The class size (number of students) was    </td>
+                        <td style="width:90px; text-align:center;">too small<br/> <input name="r10" type="radio" value="Too Small" style="width:30px;" />  </td>
+                        <td style="width:90px; text-align:center;">just right <br/> <input name="r10" type="radio" value="Just Right" style="width:30px;" /> </td>
+                        <td style="width:90px; text-align:center;">too large<br/> <input name="r10" type="radio" value="Too Large" style="width:30px;" /></td>
+                    </tr>
+
+                    <tr>
+                        <td>The classroom used was     </td>
+                        <td style="width:90px; text-align:center;">too small<br/> <input name="r11" type="radio" value="Too Small" style="width:30px;" />  </td>
+                        <td style="width:90px; text-align:center;">just right <br/> <input name="r11" type="radio" value="Just Right" style="width:30px;" />  </td>
+                        <td style="width:90px; text-align:center;">too big<br/> <input name="r11" type="radio" value="Too Big" style="width:30px;" /></td>
+                    </tr>
+                </table>
+                <br />
+
+                <p>Are there other comments? We appreciate any feedback, positive or otherwise?</p>
+                <textarea name="ProgramComment" class="ProgramCommenttxtarea" cols="150" rows="10"></textarea>
+            </div>
+        <div style="text-align:center;">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Index", "Module", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your survey?", function (result) {
+             if (result)
+                 currentForm.submit();
+                 return true;
+         });
+     });
+
+    </script>
+
+
+}

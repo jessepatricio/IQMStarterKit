@@ -5,51 +5,88 @@
 @using (Html.BeginForm())
 {
     <div class="container1">
-        <h1 class="heading"><u>Reflection Journal</u></h1>
-        <h2 style="text-align:center;"><strong>Lost at Sea</strong></h2>
-        <table style="margin:auto;">
-            <tr>
-                <td>
-                    1.	Did everyone participate in the discussion? Or were there members in the group who dominated the session? <br />
-                    <textarea class="p41txtarea" rows="5" cols="150" name="LS1"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    2.  Why do you think some members did not or were not actively involved in the discussion? <br />
-                    <textarea class="p41txtarea" rows="5" cols="150" name="LS2"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    3. Were you able to share your ideas/views freely? Did you feel comfortable feel comfortable sharing your views/ideas. Why? <br />
-                    <textarea class="p41txtarea" rows="5" cols="150" name="LS3"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    4.	How did the group agree on the group’s priority list i.e. how was the decision arrived? <br />
-                    <textarea class="p41txtarea" rows="5" cols="150" name="LS4"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    5. Do you think that is the best way to arrive at that decision? Why? <br />
-                    <textarea class="p41txtarea" rows="5" cols="150" name="LS5"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    6.  How will this experience change the way you think or act in the event of situation that   involves group decision-making? <br />
-                    <textarea class="p41txtarea" rows="5" cols="150" name="LS6"></textarea>
-                </td>
-            </tr>
-        </table>
-    </div>
 
-    <div style="text-align:center; margin-top: 20px;">
-        @Html.ActionLink("Previous Page", "Page40") |
-        @Html.ActionLink("Main", "Index") |
-        @Html.ActionLink("Next Page", "Page42")
-    </div>
+        <!-- Trigger the modal with a button -->
+        <button type="button" id="info_popup" class="button btn-info" data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-info-sign' style="font-size:1.5em;"></span></button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Reflection Journaling:</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li> Reflection journaling means to write about what you have seen, felt and experienced </li>
+                            <li> It requires you to think deeply/critically about your experiences. </li>
+                            <li> It is a useful learning tool that encourages expression of emotions, understanding and conclusions as well as lessons learned or action plans to take. </li>
+                        </ul>
+
+                        <h4><u>Journaling Tips:</u></h4>
+                        <ul>
+                            <li>Write about what happened; give a summary of events that took place.</li>
+                            <li>Write with honesty; write down exactly how you feel; candid self-expression. Do not try to ‘sugarcoat’ your feeling and reactions. </li>
+                            <li>Write freely; do not worry about grammar rules, spelling, etc.…</li>
+                            <li>Analyse your reactions.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+            <h1 class="heading"><u>Reflection Journal</u></h1>
+            <h2 style="text-align:center;"><strong>Lost at Sea</strong></h2>
+            <table style="margin:auto;">
+                <tr>
+                    <td>
+                        1.	Did everyone participate in the discussion? Or were there members in the group who dominated the session? <br />
+                        <textarea class="p41txtarea" rows="5" cols="150" name="LS1"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        2.  Why do you think some members did not or were not actively involved in the discussion? <br />
+                        <textarea class="p41txtarea" rows="5" cols="150" name="LS2"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        3. Were you able to share your ideas/views freely? Did you feel comfortable feel comfortable sharing your views/ideas. Why? <br />
+                        <textarea class="p41txtarea" rows="5" cols="150" name="LS3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        4.	How did the group agree on the group’s priority list i.e. how was the decision arrived? <br />
+                        <textarea class="p41txtarea" rows="5" cols="150" name="LS4"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        5. Do you think that is the best way to arrive at that decision? Why? <br />
+                        <textarea class="p41txtarea" rows="5" cols="150" name="LS5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        6.  How will this experience change the way you think or act in the event of situation that   involves group decision-making? <br />
+                        <textarea class="p41txtarea" rows="5" cols="150" name="LS6"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "Page55") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "Page51")
+        </div>
 }
