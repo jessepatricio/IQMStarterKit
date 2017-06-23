@@ -1,46 +1,66 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.PersonalSWOTClass
 @{
-    ViewBag.Title = "Page47";
+    ViewBag.Title = "Personal SWOT";
 }
 @using (Html.BeginForm())
 {
-    <div class="container1">
-        <div>
-            <h1 class="heading">Doing Your Personal SWOT</h1>
-            <ol>
-                <li>In each quadrant, write out ideas in <u>point form</u>. Be as <u>specific</u> as possible.</li>
-                <li>
-                    Stretch to come up with true insights:
-                    <ul class="p47List">
-                        <li><u>Take a break</u> if you have to, and revisit your analysis when you're fresh.</li>
-                        <li>You can even show your SWOT to <u>close friends</u> to get their views.</li>
-                    </ul>
-                </li>
-                <li><u>Edit</u>. Delete repetitive ideas, and sharpen less specific ones.</li>
-                <li>
-                    Analyse what it all means. Use the tool to:
-                    <ul class="p47List">
-                        <li>Validate your current position.</li>
-                        <li>Understand the skills, attributes and experiences you should <u>emphasise</u> and the ones you should downplay.</li>
-                        <li>Brainstorm possible <u>career directions</u>.</li>
-                        <li><u>Highlight</u> opportunities to take advantage of.</li>
-                        <li><u>Flag</u> possible threats.</li>
-                    </ul>
-                </li>
-                <li>
-                    Determine possible actions. There are four types of actions you could take:
-                    <ul class="p47List">
-                        <li><u> Strengthening</u> a specific skill or adding something to your strengths quadrant.</li>
-                        <li>Minimising or <u>eliminating</u> a weakness.</li>
-                        <li>Pursuing or <u>exploiting</u> an opportunity.</li>
-                        <li><u>Protecting</u> yourself from threats.</li>
-                    </ul>
-                </li>
-                <li><u>Revisit</u> and update your SWOT chart periodically to add a level of sophistication and effectiveness to your career planning.</li>
-            </ol>
-        </div>
+    @Html.AntiForgeryToken()
 
-        <hr />
+    <div class="container1">
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" id="info_popupSWOT" class="button btn-info" data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-info-sign' style="font-size:1.5em;"></span></button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Doing Your Personal SWOT</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>In each quadrant, write out ideas in <u>point form</u>. Be as <u>specific</u> as possible.</li>
+                            <li>
+                                Stretch to come up with true insights:
+                                <ul class="p47List">
+                                    <li><u>Take a break</u> if you have to, and revisit your analysis when you're fresh.</li>
+                                    <li>You can even show your SWOT to <u>close friends</u> to get their views.</li>
+                                </ul>
+                            </li>
+                            <li><u>Edit</u>. Delete repetitive ideas, and sharpen less specific ones.</li>
+                            <li>
+                                Analyse what it all means. Use the tool to:
+                                <ul class="p47List">
+                                    <li>Validate your current position.</li>
+                                    <li>Understand the skills, attributes and experiences you should <u>emphasise</u> and the ones you should downplay.</li>
+                                    <li>Brainstorm possible <u>career directions</u>.</li>
+                                    <li><u>Highlight</u> opportunities to take advantage of.</li>
+                                    <li><u>Flag</u> possible threats.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Determine possible actions. There are four types of actions you could take:
+                                <ul class="p47List">
+                                    <li><u> Strengthening</u> a specific skill or adding something to your strengths quadrant.</li>
+                                    <li>Minimising or <u>eliminating</u> a weakness.</li>
+                                    <li>Pursuing or <u>exploiting</u> an opportunity.</li>
+                                    <li><u>Protecting</u> yourself from threats.</li>
+                                </ul>
+                            </li>
+                            <li><u>Revisit</u> and update your SWOT chart periodically to add a level of sophistication and effectiveness to your career planning.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <div>
             <h1 class="heading"><strong><u>Personal SWOT</u></strong></h1>
@@ -53,7 +73,7 @@
                         <br /> What unique resources can you draw on?
                         <br /> What do others see as your strengths?
                         <br />
-                        <textarea class="p47txtarea" cols="65" rows="10"></textarea>
+                        @Html.TextAreaFor(model => model.Strengths, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 435px;height:300px;" } : new { @class = "p47txtarea form-control", style = "width: 435px;height:300px;" })
                     </td>
                     <td>
                         <p style="text-align:center;"><strong><u>Weaknesses</u></strong></p>
@@ -61,7 +81,7 @@
                         <br />Where do you have fewer resources than others?
                         <br />What are others likely to see as weaknesses?
                         <br />
-                        <textarea class="p47txtarea" cols="65" rows="10"></textarea>
+                        @Html.TextAreaFor(model => model.Weaknesses, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 435px;height:300px;" } : new { @class = "p47txtarea form-control", style = "width: 435px;height:300px;" })
 </td>
                 </tr>
 
@@ -72,7 +92,7 @@
                         <br />What trends could you take advantage of?
                         <br />How can you turn your strengths into opportunities?
                         <br />
-                        <textarea class="p47txtarea" cols="65" rows="10"></textarea>
+                        @Html.TextAreaFor(model => model.Opportunities, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 435px;height:300px;" } : new { @class = "p47txtarea form-control", style = "width: 435px;height:300px;" })
                     </td>
                     <td>
                         <p style="text-align:center;"><strong><u>Threats</u></strong></p>
@@ -80,13 +100,24 @@
                         <br />What is your competition doing?
                         <br />What threats do your weaknesses expose you to?
                         <br />
-                        <textarea class="p47txtarea" cols="65" rows="10"></textarea>
+                        @Html.TextAreaFor(model => model.Threats, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 435px;height:300px;" } : new { @class = "p47txtarea form-control", style = "width: 435px;height:300px;" })
                     </td>
                 </tr>
             </table>
             <p style="text-align:center;"><strong>© Copyright Mind Tools Ltd, 2006-2015.</strong></p>
+
+
+            @if (Model.StudentActivity.ProgressValue != 100)
+            {
+                <div style="text-align: center; margin-top:20px;" class="form-group`">
+                    <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                </div>
+            }
+
         </div>
+
         <hr />
+
         <div>
             <h1 class="heading"><u>Personal SWOT Explanation</u></h1>
 
@@ -164,4 +195,25 @@
         @Html.ActionLink("Main", "Index") |
         @Html.ActionLink("Next Page", "Page31")
     </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result) {
+                 currentForm.submit();
+                 return true;
+             }
+         });
+     });
+
+    </script>
+
+
 }

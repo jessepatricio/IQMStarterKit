@@ -319,7 +319,6 @@ tr.p10_11TabRow{
     font-size: 1em;
     margin: 5px;
     max-width: 900px;
-    multiline: true;
 }
 
 .p29txtbox {
@@ -348,16 +347,12 @@ tr.p10_11TabRow{
     max-width: 900px;
 }
 
-#p31List{
-    text-align:left;
-    font-size: 2em;
-}
-#p31img{
-    text-align:right;
+#p31img {
+    text-align: right;
 }
 #p31img img{
     width:20%;
-    margin-top:-250px;
+    margin-top:-150px;
 }
 .p31txtarea, .p38txtarea, .p39txtarea, .p41txtarea, .p47txtarea, .p50-53txtarea {
     resize: none;
@@ -730,6 +725,7 @@ input[type=checkbox] {
     height:28px;
     width:28px;
     padding-left:3px;
+    padding-top:2px;
 }
 #info_popup{
     float:right;
@@ -738,15 +734,22 @@ input[type=checkbox] {
    
 }
 
-/* Jesse */
+/*SWOT INFO button position**/
+#info_popupSWOT {
+    float: right;
+    margin-right: 43px;
+    margin-top: 40px;
+}
 
+/*My14Habits INFO button position**/
+#info_popupMy14Habits {
+    float: right;
+    margin-right: 35px;
+    margin-top: 98px;
+}
+/* Jesse */
 .dataTables_wrapper .dataTables_length {
-	float: right;
-							  
-					   
-				
-			   
-					 
+    float: right;
 }
 
 .dataTables_wrapper .dataTables_filter {

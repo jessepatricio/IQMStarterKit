@@ -1,140 +1,179 @@
-﻿
+﻿@model  IQMStarterKit.Models.Forms.BrainstormingClass
 @{
-    ViewBag.Title = "Page44";
+    ViewBag.Title = "Brainstorming";
 }
+
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
-        <div>
+        <div class="form-inline">
             <h1 class="heading"><strong><u>Brainstorming</u></strong></h1>
 
-        <p>Group members: <input class="p44txtbox" style="width:850px" type="text" name="members"/></p>
-        <p>Uses for: <input class="p44txtbox" style="width:900px" type="text" name="uses" /></p>
+            <p>
+                Group members:@Html.EditorFor(model => model.GrpMembers, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:850px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:850px;" } })
+            </p>
+            <p>
+                Uses for:@Html.EditorFor(model => model.UsesFor, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:900px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:900px;" } })
+</p>
 
             <table>
                 <tr>
-                    <td>1. <input class="p44txtbox" style="width:440px" type="text" name="uses1" /></td>
-                    <td>31. <input class="p44txtbox" style="width:440px" type="text" name="uses31" /></td>
+                    <td>
+                       1.
+                        @Html.EditorFor(model => model.Uses1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })
+                    </td>
+                    <td>
+                        31.
+                        @Html.EditorFor(model => model.Uses31, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })
+                    </td>
                 </tr>
                 <tr>
-                    <td>2. <input class="p44txtbox" style="width:440px" type="text" name="uses2" /></td>
-                    <td>32. <input class="p44txtbox" style="width:440px" type="text" name="uses32" /></td>
+                    <td>2.@Html.EditorFor(model => model.Uses2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>32.@Html.EditorFor(model => model.Uses32, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>3. <input class="p44txtbox" style="width:440px" type="text" name="uses3" /></td>
-                    <td>33. <input class="p44txtbox" style="width:440px" type="text" name="uses33" /></td>
+                    <td>3.@Html.EditorFor(model => model.Uses3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>33.@Html.EditorFor(model => model.Uses33, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>4. <input class="p44txtbox" style="width:440px" type="text" name="uses4" /></td>
-                    <td>34. <input class="p44txtbox" style="width:440px" type="text" name="uses34" /></td>
+                    <td>4.@Html.EditorFor(model => model.Uses4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>34.@Html.EditorFor(model => model.Uses34, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>5. <input class="p44txtbox" style="width:440px" type="text" name="uses5" /></td>
-                    <td>35. <input class="p44txtbox" style="width:440px" type="text" name="uses35" /></td>
+                    <td>5.@Html.EditorFor(model => model.Uses5, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>35.@Html.EditorFor(model => model.Uses35, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>6. <input class="p44txtbox" style="width:440px" type="text" name="uses6" /></td>
-                    <td>36. <input class="p44txtbox" style="width:440px" type="text" name="uses36" /></td>
+                    <td>6.@Html.EditorFor(model => model.Uses6, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>36.@Html.EditorFor(model => model.Uses36, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>7. <input class="p44txtbox" style="width:440px" type="text" name="uses7" /></td>
-                    <td>37. <input class="p44txtbox" style="width:440px" type="text" name="uses37" /></td>
+                    <td>7.@Html.EditorFor(model => model.Uses7, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>37.@Html.EditorFor(model => model.Uses37, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>8. <input class="p44txtbox" style="width:440px" type="text" name="uses8" /></td>
-                    <td>38. <input class="p44txtbox" style="width:440px" type="text" name="uses38" /></td>
+                    <td>8.@Html.EditorFor(model => model.Uses8, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>38.@Html.EditorFor(model => model.Uses38, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>9. <input class="p44txtbox" style="width:440px" type="text" name="uses9" /></td>
-                    <td>39. <input class="p44txtbox" style="width:440px" type="text" name="uses39" /></td>
+                    <td>9.@Html.EditorFor(model => model.Uses9, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>39.@Html.EditorFor(model => model.Uses39, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>10. <input class="p44txtbox" style="width:440px" type="text" name="uses10" /></td>
-                    <td>40. <input class="p44txtbox" style="width:440px" type="text" name="uses40" /></td>
+                    <td>10.@Html.EditorFor(model => model.Uses10, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>40.@Html.EditorFor(model => model.Uses40, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>11. <input class="p44txtbox" style="width:440px" type="text" name="uses11" /></td>
-                    <td>41. <input class="p44txtbox" style="width:440px" type="text" name="uses41" /></td>
+                    <td>11.@Html.EditorFor(model => model.Uses11, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>41.@Html.EditorFor(model => model.Uses41, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>12. <input class="p44txtbox" style="width:440px" type="text" name="uses12" /></td>
-                    <td>42. <input class="p44txtbox" style="width:440px" type="text" name="uses42" /></td>
+                    <td>12.@Html.EditorFor(model => model.Uses12, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>42.@Html.EditorFor(model => model.Uses42, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>13. <input class="p44txtbox" style="width:440px" type="text" name="uses13" /></td>
-                    <td>43. <input class="p44txtbox" style="width:440px" type="text" name="uses43" /></td>
+                    <td>13.@Html.EditorFor(model => model.Uses13, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>43.@Html.EditorFor(model => model.Uses43, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>14. <input class="p44txtbox" style="width:440px" type="text" name="uses14" /></td>
-                    <td>44. <input class="p44txtbox" style="width:440px" type="text" name="uses44" /></td>
+                    <td>14.@Html.EditorFor(model => model.Uses14, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>44.@Html.EditorFor(model => model.Uses44, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>15. <input class="p44txtbox" style="width:440px" type="text" name="uses15" /></td>
-                    <td>45. <input class="p44txtbox" style="width:440px" type="text" name="uses45" /></td>
+                    <td>15.@Html.EditorFor(model => model.Uses15, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>45.@Html.EditorFor(model => model.Uses45, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 <tr>
-                    <td>16. <input class="p44txtbox" style="width:440px" type="text" name="uses16" /></td>
-                    <td>46. <input class="p44txtbox" style="width:440px" type="text" name="uses46" /></td>
+                    <td>16.@Html.EditorFor(model => model.Uses16, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>46.@Html.EditorFor(model => model.Uses46, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 <tr>
-                    <td>17. <input class="p44txtbox" style="width:440px" type="text" name="uses17" /></td>
-                    <td>47. <input class="p44txtbox" style="width:440px" type="text" name="uses47" /></td>
+                    <td>17.@Html.EditorFor(model => model.Uses17, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>47.@Html.EditorFor(model => model.Uses47, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 <tr>
-                    <td>18. <input class="p44txtbox" style="width:440px" type="text" name="uses18" /></td>
-                    <td>48. <input class="p44txtbox" style="width:440px" type="text" name="uses48" /></td>
+                    <td>18.@Html.EditorFor(model => model.Uses18, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>48.@Html.EditorFor(model => model.Uses48, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>19. <input class="p44txtbox" style="width:440px" type="text" name="uses19" /></td>
-                    <td>49. <input class="p44txtbox" style="width:440px" type="text" name="uses49" /></td>
+                    <td>19.@Html.EditorFor(model => model.Uses19, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>49.@Html.EditorFor(model => model.Uses49, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>20. <input class="p44txtbox" style="width:440px" type="text" name="uses20" /></td>
-                    <td>50. <input class="p44txtbox" style="width:440px" type="text" name="uses50" /></td>
+                    <td>20.@Html.EditorFor(model => model.Uses20, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>50.@Html.EditorFor(model => model.Uses50, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 <tr>
-                    <td>21. <input class="p44txtbox" style="width:440px" type="text" name="uses21" /></td>
-                    <td>51. <input class="p44txtbox" style="width:440px" type="text" name="uses51" /></td>
+                    <td>21.@Html.EditorFor(model => model.Uses21, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>51.@Html.EditorFor(model => model.Uses51, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>22. <input class="p44txtbox" style="width:440px" type="text" name="uses22" /></td>
-                    <td>52. <input class="p44txtbox" style="width:440px" type="text" name="uses52" /></td>
+                    <td>22.@Html.EditorFor(model => model.Uses22, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>52.@Html.EditorFor(model => model.Uses52, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>23. <input class="p44txtbox" style="width:440px" type="text" name="uses23" /></td>
-                    <td>53. <input class="p44txtbox" style="width:440px" type="text" name="uses53" /></td>
+                    <td>23.@Html.EditorFor(model => model.Uses23, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>53.@Html.EditorFor(model => model.Uses53, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>24. <input class="p44txtbox" style="width:440px" type="text" name="uses24" /></td>
-                    <td>54. <input class="p44txtbox" style="width:440px" type="text" name="uses54" /></td>
+                    <td>24.@Html.EditorFor(model => model.Uses24, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>54.@Html.EditorFor(model => model.Uses54, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>25. <input class="p44txtbox" style="width:440px" type="text" name="uses25" /></td>
-                    <td>55. <input class="p44txtbox" style="width:440px" type="text" name="uses55" /></td>
+                    <td>25.@Html.EditorFor(model => model.Uses25, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>55.@Html.EditorFor(model => model.Uses55, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>26. <input class="p44txtbox" style="width:440px" type="text" name="uses26" /></td>
-                    <td>56. <input class="p44txtbox" style="width:440px" type="text" name="uses56" /></td>
+                    <td>26.@Html.EditorFor(model => model.Uses26, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>56.@Html.EditorFor(model => model.Uses56, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>27. <input class="p44txtbox" style="width:440px" type="text" name="uses27" /></td>
-                    <td>57. <input class="p44txtbox" style="width:440px" type="text" name="uses57" /></td>
+                    <td>27.@Html.EditorFor(model => model.Uses27, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>57.@Html.EditorFor(model => model.Uses57, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>28. <input class="p44txtbox" style="width:440px" type="text" name="uses28" /></td>
-                    <td>58. <input class="p44txtbox" style="width:440px" type="text" name="uses58" /></td>
+                    <td>28.@Html.EditorFor(model => model.Uses28, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>58.@Html.EditorFor(model => model.Uses58, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>29. <input class="p44txtbox" style="width:440px" type="text" name="uses29" /></td>
-                    <td>59. <input class="p44txtbox" style="width:440px" type="text" name="uses59" /></td>
+                    <td>29.@Html.EditorFor(model => model.Uses29, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>59.@Html.EditorFor(model => model.Uses59, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
                 <tr>
-                    <td>30. <input class="p44txtbox" style="width:440px" type="text" name="uses30" /></td>
-                    <td>60. <input class="p44txtbox" style="width:440px" type="text" name="uses60" /></td>
+                    <td>30.@Html.EditorFor(model => model.Uses30, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
+                    <td>60.@Html.EditorFor(model => model.Uses60, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p44txtbox form-control", style = "width:450px;" } } : new { htmlAttributes = new { @class = "p44txtbox form-control", style = "width:450px;" } })</td>
                 </tr>
             </table>
+
+            @if (Model.StudentActivity.ProgressValue != 100)
+            {
+                <div style="text-align: center; margin-top:20px;" class="form-group`">
+                    <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                </div>
+            }
+
         </div>
     </div>
-
     <div style="text-align:center; margin-top: 20px;">
         @Html.ActionLink("Previous Page", "Page43") |
         @Html.ActionLink("Main", "Index") |
         @Html.ActionLink("Next Page", "Page45")
     </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result) {
+                 currentForm.submit();
+                 return true;
+             }
+         });
+     });
+
+    </script>
 }

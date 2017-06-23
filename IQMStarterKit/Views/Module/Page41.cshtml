@@ -1,9 +1,11 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.LostAtSeaJournalClass
 @{
-    ViewBag.Title = "Page41";
+    ViewBag.Title = "Lost At Sea - Journal";
 }
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
 
         <!-- Trigger the modal with a button -->
@@ -48,45 +50,74 @@
                 <tr>
                     <td>
                         1.	Did everyone participate in the discussion? Or were there members in the group who dominated the session? <br />
-                        <textarea class="p41txtarea" rows="5" cols="150" name="LS1"></textarea>
+                        @Html.TextAreaFor(model => model.LostSeaJournalAns1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>
                         2.  Why do you think some members did not or were not actively involved in the discussion? <br />
-                        <textarea class="p41txtarea" rows="5" cols="150" name="LS2"></textarea>
+                        @Html.TextAreaFor(model => model.LostSeaJournalAns2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>
                         3. Were you able to share your ideas/views freely? Did you feel comfortable feel comfortable sharing your views/ideas. Why? <br />
-                        <textarea class="p41txtarea" rows="5" cols="150" name="LS3"></textarea>
+                        @Html.TextAreaFor(model => model.LostSeaJournalAns3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>
                         4.	How did the group agree on the group’s priority list i.e. how was the decision arrived? <br />
-                        <textarea class="p41txtarea" rows="5" cols="150" name="LS4"></textarea>
+                        @Html.TextAreaFor(model => model.LostSeaJournalAns4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>
                         5. Do you think that is the best way to arrive at that decision? Why? <br />
-                        <textarea class="p41txtarea" rows="5" cols="150" name="LS5"></textarea>
+                        @Html.TextAreaFor(model => model.LostSeaJournalAns5, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>
                         6.  How will this experience change the way you think or act in the event of situation that   involves group decision-making? <br />
-                        <textarea class="p41txtarea" rows="5" cols="150" name="LS6"></textarea>
+                        @Html.TextAreaFor(model => model.LostSeaJournalAns6, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                     </td>
                 </tr>
             </table>
-        </div>
+
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center; margin-top:20px;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
+
+
+        </div>   
 
         <div style="text-align:center; margin-top: 20px;">
             @Html.ActionLink("Previous Page", "Page55") |
             @Html.ActionLink("Main", "Index") |
             @Html.ActionLink("Next Page", "Page51")
         </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result)
+                 currentForm.submit();
+                 return true;
+         });
+     });
+
+    </script>
+
+
 }

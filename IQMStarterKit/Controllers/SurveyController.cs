@@ -140,7 +140,7 @@ namespace IQMStarterKit.Controllers
             string newTutor = Convert.ToString(Request.Form["AddTutor"]);
 
             var rec = _context.TutorSurveyModel.Where(m => m.CreatedBy == cur_user && m.TutorId == newTutor).FirstOrDefault();
-            if (rec != null) return RedirectToAction("ProgramSurvey").WithInfo("You already submitted a survey for this tutor!");
+            if (rec != null) return RedirectToAction("TutorSurvey").WithInfo("You already submitted a survey for this tutor!");
 
 
             var tutorSurvey = new TutorSurveyModel();

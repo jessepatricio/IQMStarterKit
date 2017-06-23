@@ -1,12 +1,14 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.PersonalLeadershipPlanClass
 @{
-    ViewBag.Title = "Page35";
+    ViewBag.Title = "Goal Setting (Personal Leadership Plan)";
 }
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
         <h1 class="heading"><u>Personal Leadership Plan</u></h1>
-        <form id="p35LeadershipPlan">
+
             <table id="p35LeadershipPlanTable">
                 <tr>
                     <th style="text-align:center;">Area</th>
@@ -16,41 +18,50 @@
                 <tr>
                     <td>Learning more about self</td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.Goal1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "Goal1", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "Goal1", style = "width: 480px; height:125px;" })
+
                     </td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                       @Html.TextAreaFor(model => model.ActionPlan1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "ActionPlan1", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "ActionPlan1", style = "width: 480px; height:125px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>Acquiring knowledge and wisdom</td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.Goal2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "Goal2", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "Goal2", style = "width: 480px; height:125px;" })
                     </td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.ActionPlan2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "ActionPlan2", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "ActionPlan2", style = "width: 480px; height:125px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>Practicing new skills</td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.Goal3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "Goal3", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "Goal3", style = "width: 480px; height:125px;" })
                     </td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.ActionPlan3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "ActionPlan3", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "ActionPlan3", style = "width: 480px; height:125px;" })
                     </td>
                 </tr>
                 <tr>
                     <td>Developing personal potential</td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.Goal4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "Goal4", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "Goal4", style = "width: 480px; height:125px;" })
                     </td>
                     <td>
-                        <textarea class="p35textarea" rows="4" cols="70" maxlength="70" name="answer" form="p35LeadershipPlan"></textarea>
+                        @Html.TextAreaFor(model => model.ActionPlan4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p35textarea form-control", @name = "ActionPlan4", style = "width: 480px; height:125px;" } : new { @class = "p35textarea form-control", @name = "ActionPlan4", style = "width: 480px; height:125px;" })
                     </td>
                 </tr>
             </table>
-        </form>
+
+            @if (Model.StudentActivity.ProgressValue != 100)
+            {
+                <div style="text-align: center; margin-top:20px;" class="form-group`">
+                    <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                </div>
+            }
+
+ 
     </div>
 
     <div style="text-align:center; margin-top: 20px;">

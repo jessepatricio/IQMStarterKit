@@ -1,0 +1,72 @@
+﻿@model  IEnumerable<IQMStarterKit.Models.Top3ValuesViewModel>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container1">
+
+        <div class="page-header"><h4>Top 3 Personal Values<small></small></h4></div>
+
+        @*<div class="col-md-12">
+                @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
+            </div>*@
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-xs">Export</button>
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "MatchingWordReport" })</li>
+                <li>@Html.ActionLink("PDF", "RotativaExportToPDF", new { @reportName = "MatchingWordReport" })</li>
+                <li><a href="javascript:window.print()">Print</a></li>
+            </ul>
+        </div>
+
+
+        <table id="activity" style="width:100%" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Top 3 Personal Values</th>
+                    <th>Group Name</th>
+                    <th>DateTime Taken</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.FullName)</td>
+                        <td>@Html.DisplayFor(m => item.Top3PersonalValues)</td>
+                        <td>@Html.DisplayFor(m => item.GroupName)</td>
+                        <td>@Html.DisplayFor(m => item.CreatedDateTime)</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#activity').DataTable({
+                "bLengthChange": false,
+                "bFilter": true
+
+            });
+
+        });
+    </script>
+
+}
+
+
+
+

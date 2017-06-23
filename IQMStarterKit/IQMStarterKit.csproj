@@ -443,10 +443,21 @@
     <Compile Include="Models\ConfigViewModel.cs" />
     <Compile Include="Models\Core\GroupActivityConfig.cs" />
     <Compile Include="Models\Core\TempActivityConfig.cs" />
+    <Compile Include="Models\Forms\Brainstorming.cs" />
     <Compile Include="Models\Forms\cheese.cs" />
+    <Compile Include="Models\Forms\ClosedFistJournal.cs" />
+    <Compile Include="Models\Forms\FollowMyInstructionsJournal.cs" />
+    <Compile Include="Models\Forms\HeliumStickJournal.cs" />
+    <Compile Include="Models\Forms\LostAtSeaJournal.cs" />
+    <Compile Include="Models\Forms\My14Habits.cs" />
+    <Compile Include="Models\Forms\PassTheBallJournal.cs" />
+    <Compile Include="Models\Forms\PersonalLeadership.cs" />
+    <Compile Include="Models\Forms\PersonalLeadershipPlan.cs" />
+    <Compile Include="Models\Forms\PersonalSWOT.cs" />
     <Compile Include="Models\Forms\PresentationEvaluationModel.cs" />
     <Compile Include="Models\Forms\ProgramSurveyModel.cs" />
     <Compile Include="Models\Forms\ProgramSurveyViewModel.cs" />
+    <Compile Include="Models\Forms\SelfManagement.cs" />
     <Compile Include="Models\Forms\thinkCeo.cs" />
     <Compile Include="Models\Forms\TutorSurveyModel.cs" />
     <Compile Include="Models\Forms\TutorSurveyViewModel.cs" />
@@ -454,6 +465,8 @@
     <Compile Include="Models\GroupTutorModel.cs" />
     <Compile Include="Models\GroupTutorModelView.cs" />
     <Compile Include="Models\MatchLookupModels.cs" />
+    <Compile Include="Models\Report\Top3ValuesViewModel.cs" />
+    <Compile Include="Models\Report\MatchedWordViewModel.cs" />
     <Compile Include="Models\Report\DiscViewModel.cs" />
     <Compile Include="Models\Report\DopeViewModel.cs" />
     <Compile Include="Models\FileTypesAttribute.cs" />
@@ -958,6 +971,8 @@
     <Content Include="Views\Survey\TutorSurvey.cshtml" />
     <Content Include="Views\Survey\ProgramSurveyList.cshtml" />
     <Content Include="Views\Survey\TutorSurveyList.cshtml" />
+    <Content Include="Views\Report\MatchedWords.cshtml" />
+    <Content Include="Views\Report\Top3Values.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

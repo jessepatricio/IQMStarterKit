@@ -1,9 +1,12 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.ClosedFistJournalClass
+
 @{
-    ViewBag.Title = "Page51";
+    ViewBag.Title = "Closed Fist - Journal";
 }
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
 
         <!-- Trigger the modal with a button -->
@@ -42,7 +45,7 @@
             </div>
         </div>
 
-        <h1 class="heading"><u>Refelction Journal</u></h1>
+        <h1 class="heading"><u>Reflection Journal</u></h1>
         <h2 style="text-align:center;"><strong>Closed Fist</strong></h2>
 
         <table style="margin:auto;">
@@ -50,7 +53,7 @@
             <tr>
                 <td>
                     1. Describe what happened during the activity. (Summarise the events what happened). <br/>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -60,7 +63,7 @@
                     <ul>
                         <li> What did you like or enjoy most? Why?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns2a, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -69,7 +72,7 @@
                     <ul>
                         <li>What did you dislike most? Why?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns2b, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -81,7 +84,7 @@
                             frustrated? Why?
                         </li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns2c, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
             <tr>
@@ -90,7 +93,7 @@
                     <ul>
                         <li>What did you learn that was new to you?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns3a, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -99,7 +102,7 @@
                     <ul>
                         <li> How do you think this might be useful?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns3b, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -112,7 +115,7 @@
                             that involves a change in the future?
                         </li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns3c, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -122,11 +125,18 @@
                     <ul>
                         <li>Is there any specific action that you will take as a result of this learning experience?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.ClosedFistJournalAns4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
         </table>
+
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center; margin-top:20px;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
     </div>
 
     <div style="text-align:center; margin-top: 20px;">
@@ -134,4 +144,24 @@
         @Html.ActionLink("Main", "Index") |
         @Html.ActionLink("Next Page", "Page53")
     </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result)
+                 currentForm.submit();
+                 return true;
+         });
+     });
+
+    </script>
+
+
 }

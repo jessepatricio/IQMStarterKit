@@ -114,6 +114,71 @@ namespace IQMStarterKit.Controllers
             return View(modelList);
         }
 
+        public ActionResult MatchedWords()
+        {
+
+            Session["email"] = null;
+
+            // activity 13 NZ Slang Matching Words
+            var dt = DataLayer.GetActivityResult(13);
+            var modelList = new List<MatchedWordViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new MatchedWordViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    NoMatchedWords = item["NoMatchedWords"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            return View(modelList);
+        }
+
+        public ActionResult Top3Values()
+        {
+
+            Session["email"] = null;
+
+            // activity 19 Personal Values
+            var dt = DataLayer.GetActivityResult(19);
+            var modelList = new List<Top3ValuesViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new Top3ValuesViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    Top3PersonalValues = item["Top3PersonalValues"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            return View(modelList);
+        }
+
+
         public ActionResult StudentActivityPercentage()
         {
             Session["email"] = null;

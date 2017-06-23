@@ -1,9 +1,11 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.FollowMyInstructionsJournalClass
 @{
-    ViewBag.Title = "Page53";
+    ViewBag.Title = "Follow my Instructions - Journal";
 }
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
     <div class="container1">
 
         <!-- Trigger the modal with a button -->
@@ -50,7 +52,7 @@
             <tr>
                 <td>
                     1. Describe what happened during the activity. (Summarise the events what happened). <br/>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                   @Html.TextAreaFor(model => model.FollowInstructionsJournalAns1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -60,7 +62,7 @@
                     <ul>
                         <li> What did you like or enjoy most? Why?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns2a, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -69,7 +71,7 @@
                     <ul>
                         <li>What did you dislike most? Why?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns2b, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -81,7 +83,7 @@
                             frustrated? Why?
                         </li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns2c, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
             <tr>
@@ -90,7 +92,7 @@
                     <ul>
                         <li>What did you learn that was new to you?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns3a, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -99,7 +101,7 @@
                     <ul>
                         <li> How do you think this might be useful?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns3b, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -112,7 +114,7 @@
                             that involves a change in the future?
                         </li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns3c, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
 
@@ -122,10 +124,18 @@
                     <ul>
                         <li>Is there any specific action that you will take as a result of this learning experience?</li>
                     </ul>
-                    <textarea class="p50-53txtarea" cols="150" rows="10"></textarea>
+                    @Html.TextAreaFor(model => model.FollowInstructionsJournalAns4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
                 </td>
             </tr>
         </table>
+
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center; margin-top:20px;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
+
     </div>
 
     <div style="text-align:center; margin-top: 20px;">
@@ -133,5 +143,25 @@
         @Html.ActionLink("Main", "Index") |
         @Html.ActionLink("Next Page", "Page42")
     </div>
+
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result)
+                 currentForm.submit();
+                 return true;
+         });
+     });
+
+    </script>
+
 
 }
