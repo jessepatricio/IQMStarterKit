@@ -14,7 +14,14 @@ namespace IQMStarterKit.Models
         [Required]
         public string Email { get; set; }
 
+        [Display(Name = "Group Name")]
         public byte GroupId { get; set; }
+
+        [Display(Name = "School Month")]
+        public int MonthIntake { get; set; }
+
+        [Display(Name = "School Year")]
+        public int YearIntake { get; set; }
 
         [Required]
         public string Password { get; set; }

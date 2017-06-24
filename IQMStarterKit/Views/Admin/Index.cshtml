@@ -46,6 +46,8 @@
             <th>Student Name</th>
             <th>Email</th>
             <th>Group Name</th>
+            <th>School Month</th>
+            <th>School Year</th>
             <th></th>
         </tr>
     </thead>
@@ -67,10 +69,7 @@
                     {
                         <text>Not assigned</text>
                     }
-                    @*else if (item.GroupId == 0 && User.IsInRole("Administrator, Tutor"))
-                    {
-                        <text></text>
-                    }*@
+                 
                     else
                     {
                         IEnumerable<GroupModel> grouplist = ViewBag.Groups;
@@ -78,6 +77,21 @@
 
                        <text>@groupname.GroupName</text>
                     }
+                </td>
+                <td>
+                    
+                    @if (item.MonthIntake > 0)
+                    {
+                        @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.MonthIntake)
+                    }
+
+
+                </td>
+                <td>
+
+                  @Html.DisplayFor(modelItem => item.YearIntake)
+
+
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditUser", new { Email = item.Email }) |

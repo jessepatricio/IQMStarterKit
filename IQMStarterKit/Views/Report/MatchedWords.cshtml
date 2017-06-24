@@ -18,7 +18,7 @@
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "MatchingWordReport" })</li>
-                <li>@Html.ActionLink("PDF", "RotativaExportToPDF", new { @reportName = "MatchingWordReport" })</li>
+                <li>@Html.ActionLink("PDF", "MatchedWordsExportToPDF", new { @reportName = "MatchingWordReport" })</li>
                 <li><a href="javascript:window.print()">Print</a></li>
             </ul>
         </div>

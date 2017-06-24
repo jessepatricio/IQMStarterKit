@@ -12,6 +12,7 @@ namespace IQMStarterKit.Models
 {
     public class CommonController : Controller
     {
+        ApplicationDbContext _context = new ApplicationDbContext();
 
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
@@ -84,7 +85,7 @@ namespace IQMStarterKit.Models
         public IEnumerable<ApplicationUser> GetGroupTutors(byte groupId)
         {
 
-            ApplicationDbContext _context = new ApplicationDbContext();
+
 
             var tutors = new List<ApplicationUser>();
 
@@ -113,7 +114,7 @@ namespace IQMStarterKit.Models
 
         public IEnumerable<ApplicationUser> GetTutors(byte groupId)
         {
-            ApplicationDbContext _context = new ApplicationDbContext();
+
 
             var tutors = new List<ApplicationUser>();
 
@@ -140,6 +141,13 @@ namespace IQMStarterKit.Models
 
             return tutors;
 
+        }
+
+        public IQueryable<ApplicationUser> GetUsersInRole(string roleId)
+        {
+            return from user in _context.Users
+                   where user.Roles.Any(r => r.RoleId == roleId)
+                   select user;
         }
 
     }

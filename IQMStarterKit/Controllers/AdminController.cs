@@ -42,7 +42,9 @@ namespace IQMStarterKit.Controllers
                     {
                         Email = item.Email,
                         FullName = item.FullName,
-                        GroupId = item.GroupId
+                        GroupId = item.GroupId,
+                        MonthIntake = item.MonthIntake,
+                        YearIntake = item.YearIntake
                     };
                     colUsers.Add(user);
                 }
@@ -84,7 +86,7 @@ namespace IQMStarterKit.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create(ExtendedUserCustom model)
         {
-            var user = new ApplicationUser { UserName = model.Email.Trim(), Email = model.Email.Trim(), FullName = model.FullName.Trim() };
+            var user = new ApplicationUser { UserName = model.Email.Trim(), Email = model.Email.Trim(), FullName = model.FullName.Trim(), MonthIntake = model.MonthIntake, YearIntake = model.YearIntake };
             try
             {
 
@@ -486,6 +488,8 @@ namespace IQMStarterKit.Controllers
                         Email = item.Email,
                         FullName = item.FullName,
                         GroupId = item.GroupId,
+                        MonthIntake = item.MonthIntake,
+                        YearIntake = item.YearIntake,
                         ProgressValue = item.OverallProgress
 
                     };
@@ -544,6 +548,8 @@ namespace IQMStarterKit.Controllers
             objExtUser.Email = result.Email;
             objExtUser.FullName = result.FullName;
             objExtUser.GroupId = result.GroupId;
+            objExtUser.MonthIntake = result.MonthIntake;
+            objExtUser.YearIntake = result.YearIntake;
 
             return objExtUser;
 
@@ -561,6 +567,8 @@ namespace IQMStarterKit.Controllers
             result.Email = extUser.Email.Trim();
             result.FullName = extUser.FullName.Trim();
             result.GroupId = extUser.GroupId;
+            result.MonthIntake = extUser.MonthIntake;
+            result.YearIntake = extUser.YearIntake;
             //is account locked? unlock it
             if (UserManager.IsLockedOut(result.Id)) UserManager.ResetAccessFailedCount(result.Id);
 

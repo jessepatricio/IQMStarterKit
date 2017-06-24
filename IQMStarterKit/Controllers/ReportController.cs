@@ -23,161 +23,110 @@ namespace IQMStarterKit.Controllers
         public ActionResult VARK()
         {
             Session["email"] = null;
-
-            // activity 5 is VARK
-            var dt = DataLayer.GetActivityResult(5);
-            var modelList = new List<VarkViewModel>();
-
-
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new VarkViewModel
-                {
-
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    VarkResult = item["VarkResult"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
-                };
-
-                modelList.Add(model);
-
-            }
-
-
+            var modelList = GetVarkModel();
             return View(modelList);
         }
 
-        public ActionResult DOPE()
+        public ActionResult VARKExportToPDF(string reportName)
         {
+
             Session["email"] = null;
 
-            // activity 8 is DOPE
-            var dt = DataLayer.GetActivityResult(8);
-            var modelList = new List<DopeViewModel>();
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
 
+            var modelList = GetVarkModel();
 
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new DopeViewModel
-                {
+            return new ViewAsPdf("VARK", modelList) { FileName = fileName };
 
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    DopeResult = item["DopeResult"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
-                };
-
-                modelList.Add(model);
-
-            }
-
-
-            return View(modelList);
         }
 
         public ActionResult DISC()
         {
 
             Session["email"] = null;
-
-            // activity 9 is DISC
-            var dt = DataLayer.GetActivityResult(9);
-            var modelList = new List<DiscViewModel>();
-
-
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new DiscViewModel
-                {
-
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    DiscResult = item["DiscResult"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
-                };
-
-                modelList.Add(model);
-
-            }
-
+            var modelList = GetDiscModel();
 
             return View(modelList);
         }
 
+        public ActionResult DISCExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetDiscModel();
+
+            return new ViewAsPdf("DISC", modelList) { FileName = fileName };
+
+        }
+    
+        public ActionResult DOPE()
+        {
+            Session["email"] = null;
+            var modelList = GetDopeModel();
+
+            return View(modelList);
+        }
+
+        public ActionResult DOPEExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetDopeModel();
+
+            return new ViewAsPdf("DOPE", modelList) { FileName = fileName };
+
+        }
+        
         public ActionResult MatchedWords()
         {
 
             Session["email"] = null;
-
-            // activity 13 NZ Slang Matching Words
-            var dt = DataLayer.GetActivityResult(13);
-            var modelList = new List<MatchedWordViewModel>();
-
-
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new MatchedWordViewModel
-                {
-
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    NoMatchedWords = item["NoMatchedWords"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
-                };
-
-                modelList.Add(model);
-
-            }
-
-
+            var modelList = GetMatchedWordViewModel();
+            
             return View(modelList);
         }
 
-        public ActionResult Top3Values()
+        public ActionResult MatchedWordsExportToPDF(string reportName)
         {
 
             Session["email"] = null;
 
-            // activity 19 Personal Values
-            var dt = DataLayer.GetActivityResult(19);
-            var modelList = new List<Top3ValuesViewModel>();
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetMatchedWordViewModel();
 
+            return new ViewAsPdf("MatchedWords", modelList) { FileName = fileName };
 
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new Top3ValuesViewModel
-                {
+        }
+        
+        public ActionResult Top3Values()
+        {
 
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    Top3PersonalValues = item["Top3PersonalValues"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
-                };
-
-                modelList.Add(model);
-
-            }
-
-
+            Session["email"] = null;
+            var modelList = GetTop3ValuesViewModel();
+            
             return View(modelList);
         }
 
+        public ActionResult Top3ValuesExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetTop3ValuesViewModel();
+
+            return new ViewAsPdf("Top3Values", modelList) { FileName = fileName };
+
+        }
 
         public ActionResult StudentActivityPercentage()
         {
@@ -387,7 +336,12 @@ namespace IQMStarterKit.Controllers
 
 
 
-        public ActionResult DISCExportToPDF(string reportName)
+
+
+       
+
+
+        public ActionResult PercentageExportToPDF(string reportName)
         {
 
             Session["email"] = null;
@@ -396,78 +350,41 @@ namespace IQMStarterKit.Controllers
             var fileName = reportName + "_" + sffx + ".pdf";
 
 
-            // activity 9 is DISC
-            var dt = DataLayer.GetActivityResult(9);
-            var modelList = new List<DiscViewModel>();
+
+            var dt = DataLayer.GetActivityPercentage();
+            var modelList = new List<StudentActivityPercentage>();
 
 
             foreach (DataRow item in dt.Rows)
             {
-                var model = new DiscViewModel
+                var model = new StudentActivityPercentage
                 {
 
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    DiscResult = item["DiscResult"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
+                    UserId = item["UserId"].ToString(),
                     FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
+                    GroupName = item["GroupName"].ToString(),
+                    StudentTotalActivities = item["StudentTotalActivities"].ToString(),
+                    TotalActivities = item["TotalActivities"].ToString(),
+                    ProgressValue = item["PercentageCompletion"].ToString()
+
                 };
 
                 modelList.Add(model);
 
             }
 
-            return new ViewAsPdf("DISC", modelList) { FileName = fileName };
+
+
+
+
+            return new ViewAsPdf("StudentActivityPercentage", modelList) { FileName = fileName };
 
         }
 
-        public ActionResult DOPEExportToPDF(string reportName)
+
+        // logic
+        public List<VarkViewModel> GetVarkModel()
         {
-
-            Session["email"] = null;
-
-            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
-            var fileName = reportName + "_" + sffx + ".pdf";
-
-
-            // activity 8 is DOPE
-            var dt = DataLayer.GetActivityResult(8);
-            var modelList = new List<DopeViewModel>();
-
-
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new DopeViewModel
-                {
-
-                    TempActivityId = item["TempActivityId"].ToString(),
-                    DopeResult = item["DopeResult"].ToString(),
-                    CreatedBy = item["CreatedBy"].ToString(),
-                    CreatedDateTime = item["CreatedDateTime"].ToString(),
-                    GroupId = item["GroupId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString()
-                };
-
-                modelList.Add(model);
-
-            }
-
-            return new ViewAsPdf("DOPE", modelList) { FileName = fileName };
-
-        }
-
-        public ActionResult VARKExportToPDF(string reportName)
-        {
-
-            Session["email"] = null;
-
-            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
-            var fileName = reportName + "_" + sffx + ".pdf";
-
-
             // activity 5 is VARK
             var dt = DataLayer.GetActivityResult(5);
             var modelList = new List<VarkViewModel>();
@@ -491,13 +408,120 @@ namespace IQMStarterKit.Controllers
 
             }
 
-
-            return new ViewAsPdf("VARK", modelList) { FileName = fileName };
-
+            return modelList;
         }
 
+        public List<DiscViewModel> GetDiscModel()
+        {
+            // activity 9 is DISC
+            var dt = DataLayer.GetActivityResult(9);
+            var modelList = new List<DiscViewModel>();
 
 
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new DiscViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    DiscResult = item["DiscResult"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
+        public List<DopeViewModel> GetDopeModel()
+        {
+            // activity 8 is DOPE
+            var dt = DataLayer.GetActivityResult(8);
+            var modelList = new List<DopeViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new DopeViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    DopeResult = item["DopeResult"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
+        public List<MatchedWordViewModel> GetMatchedWordViewModel()
+        {
+            // activity 13 NZ Slang Matching Words
+            var dt = DataLayer.GetActivityResult(13);
+            var modelList = new List<MatchedWordViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new MatchedWordViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    NoMatchedWords = item["NoMatchedWords"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
+        public List<Top3ValuesViewModel> GetTop3ValuesViewModel()
+        {
+            // activity 19 Personal Values
+            var dt = DataLayer.GetActivityResult(19);
+            var modelList = new List<Top3ValuesViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new Top3ValuesViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    Top3PersonalValues = item["Top3PersonalValues"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
 
 
     }

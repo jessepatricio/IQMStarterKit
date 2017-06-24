@@ -13,8 +13,6 @@ namespace IQMStarterKit.Models
 
         string Description { get; set; }
 
-
-
     }
 
     public class GroupModel : IGroupModel
@@ -25,6 +23,8 @@ namespace IQMStarterKit.Models
         [Required]
         [StringLength(255)]
         public string GroupName { get; set; }
+
+
 
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]

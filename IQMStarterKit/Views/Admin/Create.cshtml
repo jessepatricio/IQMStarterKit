@@ -48,6 +48,23 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.MonthIntake, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MonthIntake", CustomDropDownList.GetMonthList(Model.MonthIntake), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MonthIntake, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YearIntake, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("YearIntake", CustomDropDownList.GetYearList(Model.YearIntake), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.YearIntake, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Roles,
                 htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

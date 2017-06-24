@@ -15,7 +15,7 @@
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "ActivityPercentageReport" })</li>
-                <li>@Html.ActionLink("PDF", "ExportToPDF", new { @reportName = "ActivityPercentageReport" })</li>
+                <li>@Html.ActionLink("PDF", "PercentageExportToPDF", new { @reportName = "ActivityPercentageReport" })</li>
                 <li><a href="javascript:window.print()">Print</a></li>
             </ul>
         </div>

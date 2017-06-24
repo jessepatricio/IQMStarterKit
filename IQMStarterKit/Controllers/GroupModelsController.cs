@@ -14,7 +14,7 @@ namespace IQMStarterKit.Controllers
     [Authorize(Roles = "Administrator,Tutor")]
     public class GroupModelsController : CommonController
     {
-        private const string TutorId = "882f1ae2-fb15-4bc7-9d54-ea9785a41399";
+        private const string TutorRoleId = "882f1ae2-fb15-4bc7-9d54-ea9785a41399";
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
         // GET: GroupModels
@@ -25,7 +25,7 @@ namespace IQMStarterKit.Controllers
             //get only groups assigned for tutors
             if (User.IsInRole("Administrator"))
             {
-                grpModels = _context.GroupModels.Where(m => m.IsRemoved == false).OrderByDescending(m => m.GroupName).ToList();
+                grpModels = _context.GroupModels.Where(m => m.IsRemoved == false).OrderBy(m => m.CreatedDateTime).ToList();
 
             }
             else
@@ -35,7 +35,7 @@ namespace IQMStarterKit.Controllers
                 //get tutor assigned groups
                 var tutorGroups = _context.GroupTutorModels.Where(m => m.TutorId == tutorId).Select(m => m.GroupId).ToList();
                 // get all groupd id for the current tutor
-                grpModels = _context.GroupModels.Where(m => m.IsRemoved == false && tutorGroups.Contains(m.GroupId)).OrderByDescending(m => m.GroupName).ToList();
+                grpModels = _context.GroupModels.Where(m => m.IsRemoved == false && tutorGroups.Contains(m.GroupId)).OrderBy(m => m.CreatedDateTime).ToList();
             }
 
 
@@ -65,7 +65,7 @@ namespace IQMStarterKit.Controllers
         // GET: GroupModels/Create
         public ActionResult Create()
         {
-            ViewBag.Tutors = GetUsersInRole(TutorId);
+            ViewBag.Tutors = GetUsersInRole(TutorRoleId);
 
             return View();
         }
@@ -82,7 +82,7 @@ namespace IQMStarterKit.Controllers
             if (existGroup.Any())
             {
                 //ModelState.AddModelError(String.Empty, @"GroupName already existe!");
-                ViewBag.Tutors = GetUsersInRole(TutorId);
+                ViewBag.Tutors = GetUsersInRole(TutorRoleId);
                 return RedirectToAction("Create").WithError("Group already existed!");
             }
 
@@ -130,7 +130,7 @@ namespace IQMStarterKit.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.Tutors = GetUsersInRole(TutorId);
+            ViewBag.Tutors = GetUsersInRole(TutorRoleId);
 
             return View(groupModel);
         }
@@ -140,7 +140,7 @@ namespace IQMStarterKit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GroupId,GroupName,TutorId,Description,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] GroupModel groupModel)
+        public ActionResult Edit([Bind(Include = "GroupId,GroupName,MonthIntake,YearIntake,TutorId,Description,CreatedDateTime,CreatedBy,ModifiedDateTime,ModifiedBy,IsRemoved")] GroupModel groupModel)
         {
 
 
@@ -208,11 +208,6 @@ namespace IQMStarterKit.Controllers
             base.Dispose(disposing);
         }
 
-        public IQueryable<ApplicationUser> GetUsersInRole(string roleId)
-        {
-            return from user in _context.Users
-                   where user.Roles.Any(r => r.RoleId == roleId)
-                   select user;
-        }
+
     }
 }

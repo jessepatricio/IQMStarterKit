@@ -19,6 +19,16 @@ namespace IQMStarterKit.Models
 
         public byte GroupId { get; set; }
 
+        [Required]
+        [Display(Name = "School Month")]
+        [DefaultValue(0)]
+        public int MonthIntake { get; set; }
+
+        [Required]
+        [Display(Name = "School Year")]
+        [DefaultValue(0)]
+        public int YearIntake { get; set; }
+
         [DefaultValue(0.00)]
         public double OverallProgress { get; set; }
 

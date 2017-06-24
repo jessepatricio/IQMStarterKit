@@ -246,6 +246,7 @@
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="DAL\DataLayer.cs" />
+    <Compile Include="CustomDropDownList.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -433,6 +434,18 @@
     <Compile Include="Migrations\201706200544409_NewChanges.cs" />
     <Compile Include="Migrations\201706200544409_NewChanges.Designer.cs">
       <DependentUpon>201706200544409_NewChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706232248253_addMonthYearInGroupModel.cs" />
+    <Compile Include="Migrations\201706232248253_addMonthYearInGroupModel.Designer.cs">
+      <DependentUpon>201706232248253_addMonthYearInGroupModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706240007595_changeMonthYearInGroupModel.cs" />
+    <Compile Include="Migrations\201706240007595_changeMonthYearInGroupModel.Designer.cs">
+      <DependentUpon>201706240007595_changeMonthYearInGroupModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706240026151_changeMonthYearTable.cs" />
+    <Compile Include="Migrations\201706240026151_changeMonthYearTable.Designer.cs">
+      <DependentUpon>201706240026151_changeMonthYearTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1120,6 +1133,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706200544409_NewChanges.resx">
       <DependentUpon>201706200544409_NewChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706232248253_addMonthYearInGroupModel.resx">
+      <DependentUpon>201706232248253_addMonthYearInGroupModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706240007595_changeMonthYearInGroupModel.resx">
+      <DependentUpon>201706240007595_changeMonthYearInGroupModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706240026151_changeMonthYearTable.resx">
+      <DependentUpon>201706240026151_changeMonthYearTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

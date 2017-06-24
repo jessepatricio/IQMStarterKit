@@ -2,6 +2,7 @@
 @using IQMStarterKit.Models
 @using Microsoft.AspNet.Identity
 
+
 <h2></h2>
 
 @if (User.IsInRole("Administrator")) {
@@ -17,6 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.GroupName)
             </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -35,6 +37,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GroupName)
                 </td>
+                @*<td>
+                  
+                  @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.MonthIntake)
+                   
+                  
+                </td>*@
+             
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
@@ -80,7 +89,8 @@
         $(document).ready(function () {
             $('#groupTable').DataTable({
                 "bLengthChange": false,
-                "bFilter": false
+                "bFilter": false,
+                "sorting": false
             });
         });
     </script>
