@@ -1,19 +1,30 @@
-﻿
+﻿@model IQMStarterKit.Models.PresentationEvaluationModel
+
 @{
     ViewBag.Title = "Page39";
 }
+
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(itemModel => Model.StudentId)
+    @Html.HiddenFor(itemModel => Model.StudentName)
+    @Html.HiddenFor(itemModel => Model.StudentEmail)
+    @Html.HiddenFor(itemModel => Model.TutorId)
+    @Html.HiddenFor(itemModel => Model.TutorName)
+
     <div class="container1">
-        <div>
+
+        <div class="form-inline">
         <h1 class="heading"><strong><u>Presentation Evaluation Sheet</u></strong></h1>
         <p>
-            Name of Student:
-            <input class="p39txtbox" type="text" name="studentname">
-        </p>
+            <h3>Student Name: @Html.DisplayFor(m => m.StudentName)</h3>
+       </p>
         <p>
-            Topic:
-            <input class="p39txtbox" type="text" name="topic">
+            <label for="topic">Topic:</label>&nbsp;
+            @Html.EditorFor(model => model.Topic, (Model.Topic != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p39txtbox form-control" } } : new { htmlAttributes = new { @class = "p39txtbox form-control" } })
+           
         </p>
         <table>
             <tr>
@@ -24,7 +35,9 @@
             <tr>
                 <td style="padding:15px;">1</td>
                 <td><strong>Personal Presentation and Grooming</strong></td>
-                <td><textarea class="p39txtarea" rows="3" cols="95" name="grooming"></textarea></td>
+                <td>
+                    @Html.TextAreaFor(model => model.Grooming, (Model.Grooming != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:100px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:60px;" })
+                </td>
             </tr>
             <tr>
                 <td style="padding:15px;">2</td>
@@ -40,7 +53,9 @@
                     Conclusion<br />
                     <ul><li>Sudden/Abrupt</li></ul>
                 </td>
-                <td><textarea class="p39txtarea" rows="8" cols="95" name="content"></textarea></td>
+                <td>
+                    @Html.TextAreaFor(model => model.Content, (Model.Content != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:150px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:150px;" })
+                </td>
             </tr>
             <tr>
                 <td style="padding:15px;">3</td>
@@ -55,7 +70,8 @@
                         <li>Audience Involvement/Interaction</li>
                     </ul>
                 </td>
-                <td><textarea class="p39txtarea" rows="5" cols="95" name="delivery"></textarea></td>
+                <td>@Html.TextAreaFor(model => model.Delivery, (Model.Delivery != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:150px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:150px;" })
+                </td>
             </tr>
             <tr>
                 <td style="padding:15px;">4</td>
@@ -63,30 +79,34 @@
                     <strong>Visual Aids</strong><br />
                     Power-point or other visual aid used
                 </td>
-                <td><textarea class="p39txtarea" rows="3" cols="95" name="visual"></textarea></td>
+                <td>@Html.TextAreaFor(model => model.Visual, (Model.Visual != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:150px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:150px;" })
+                </td>
             </tr>
             <tr>
                 <td style="padding:15px;">5</td>
                 <td><strong>Knowledge of subject</strong></td>
-                <td><textarea class="p39txtarea" rows="3" cols="95" name="knowledge"></textarea></td>
+                <td>@Html.TextAreaFor(model => model.Knowledge, (Model.Knowledge != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:150px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:150px;" })</td>
             </tr>
             <tr>
                 <td style="padding:15px;">6</td>
                 <td><strong>Timing - Over or Under Time?</strong></td>
-                <td><textarea class="p39txtarea" rows="3" cols="95" name="timing"></textarea></td>
+                <td>@Html.TextAreaFor(model => model.Timing, (Model.Timing != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:150px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:150px;" })</td>
             </tr>
         </table>
         <br />
         <p>
             Overall Comments:<br />
-            <textarea class="p39txtarea" rows="3" cols="195" name="comment"></textarea>
+            @Html.TextAreaFor(model => model.Comment, (Model.Comment != null) ? (object)new { @readonly = "readonly", @class = "p39txtarea form-control", style = "width: 500px; height:150px;" } : new { @class = "p39txtarea form-control", style = "width: 600px; height:150px;" })
         </p>
-        <p>Completed by:<input class="p39txtbox" type="text" name="tutorname"></p>
+        <h4>Completed by: @Html.DisplayFor(m=>m.TutorName)</h4>
         </div>
 
-        <div style="text-align:center;">
-            <input type="submit" value="submit" class="btn btn-primary" />
-        </div>
+        @if (Model.PresentationId == 0)
+        {
+            <div style="text-align:center;">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        }
     </div>
 
 

@@ -2,7 +2,7 @@
 
 namespace IQMStarterKit.Models.Forms
 {
-    public class cheese
+    public class Cheese
     {
         public string answer1 { get; set; }
         public string answer2 { get; set; }
@@ -14,7 +14,7 @@ namespace IQMStarterKit.Models.Forms
 
         public StudentActivity StudentActivity { get; set; }
 
-        public cheese()
+        public Cheese()
         {
             StudentActivity = new StudentActivity();
         }

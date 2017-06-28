@@ -2,7 +2,7 @@
 
 namespace IQMStarterKit.Models.Forms
 {
-    public class thinkCeo
+    public class ThinkCEO
     {
         public string answer1 { get; set; }
         public string answer2 { get; set; }
@@ -17,7 +17,7 @@ namespace IQMStarterKit.Models.Forms
 
         public StudentActivity StudentActivity { get; set; }
 
-        public thinkCeo()
+        public ThinkCEO()
         {
             StudentActivity = new StudentActivity();
         }

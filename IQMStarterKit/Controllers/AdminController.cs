@@ -467,6 +467,8 @@ namespace IQMStarterKit.Controllers
         [Authorize(Roles = "Administrator,Tutor")]
         public ActionResult ListStudents()
         {
+            Session["email"] = null;
+
             var colUsers = new List<ExtendedUserCustom>();
 
             //filter user with tutor's assigned group only

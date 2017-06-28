@@ -447,6 +447,18 @@
     <Compile Include="Migrations\201706240026151_changeMonthYearTable.Designer.cs">
       <DependentUpon>201706240026151_changeMonthYearTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706240326553_addEmailToPresentationEval.cs" />
+    <Compile Include="Migrations\201706240326553_addEmailToPresentationEval.Designer.cs">
+      <DependentUpon>201706240326553_addEmailToPresentationEval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706240331471_addStudentIdToPresentationEval.cs" />
+    <Compile Include="Migrations\201706240331471_addStudentIdToPresentationEval.Designer.cs">
+      <DependentUpon>201706240331471_addStudentIdToPresentationEval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706240454017_addTutorIdToPresentationEval.cs" />
+    <Compile Include="Migrations\201706240454017_addTutorIdToPresentationEval.Designer.cs">
+      <DependentUpon>201706240454017_addTutorIdToPresentationEval.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -456,9 +468,12 @@
     <Compile Include="Models\ConfigViewModel.cs" />
     <Compile Include="Models\Core\GroupActivityConfig.cs" />
     <Compile Include="Models\Core\TempActivityConfig.cs" />
+    <Compile Include="Models\FirstThingFirstViewModel.cs" />
     <Compile Include="Models\Forms\Brainstorming.cs" />
-    <Compile Include="Models\Forms\cheese.cs" />
+    <Compile Include="Models\Forms\Cheese.cs" />
     <Compile Include="Models\Forms\ClosedFistJournal.cs" />
+    <Compile Include="Models\Forms\Conflict.cs" />
+    <Compile Include="Models\Forms\FirstThingFirst.cs" />
     <Compile Include="Models\Forms\FollowMyInstructionsJournal.cs" />
     <Compile Include="Models\Forms\HeliumStickJournal.cs" />
     <Compile Include="Models\Forms\LostAtSeaJournal.cs" />
@@ -471,7 +486,7 @@
     <Compile Include="Models\Forms\ProgramSurveyModel.cs" />
     <Compile Include="Models\Forms\ProgramSurveyViewModel.cs" />
     <Compile Include="Models\Forms\SelfManagement.cs" />
-    <Compile Include="Models\Forms\thinkCeo.cs" />
+    <Compile Include="Models\Forms\ThinkCEO.cs" />
     <Compile Include="Models\Forms\TutorSurveyModel.cs" />
     <Compile Include="Models\Forms\TutorSurveyViewModel.cs" />
     <Compile Include="Models\Forms\WinningLottery.cs" />
@@ -488,10 +503,10 @@
     <Compile Include="Models\Core\TempActivity.cs" />
     <Compile Include="Models\Core\TempModule.cs" />
     <Compile Include="Models\FilePath.cs" />
-    <Compile Include="Models\Forms\kiwiana.cs" />
-    <Compile Include="Models\Forms\aboutme.cs" />
-    <Compile Include="Models\Forms\slangClass.cs" />
-    <Compile Include="Models\Forms\vark.cs" />
+    <Compile Include="Models\Forms\Kiwiana.cs" />
+    <Compile Include="Models\Forms\AboutMe.cs" />
+    <Compile Include="Models\Forms\Slang.cs" />
+    <Compile Include="Models\Forms\Vark.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\GroupViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -723,7 +738,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
@@ -1142,6 +1157,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706240026151_changeMonthYearTable.resx">
       <DependentUpon>201706240026151_changeMonthYearTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706240326553_addEmailToPresentationEval.resx">
+      <DependentUpon>201706240326553_addEmailToPresentationEval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706240331471_addStudentIdToPresentationEval.resx">
+      <DependentUpon>201706240331471_addStudentIdToPresentationEval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706240454017_addTutorIdToPresentationEval.resx">
+      <DependentUpon>201706240454017_addTutorIdToPresentationEval.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

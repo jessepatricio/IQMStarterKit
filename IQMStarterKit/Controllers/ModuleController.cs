@@ -1466,7 +1466,7 @@ namespace IQMStarterKit.Controllers
             // title: Cheese
             // type: FormSubmission
 
-            var cheese = new cheese();
+            var cheese = new Cheese();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("Cheese");
@@ -1480,7 +1480,7 @@ namespace IQMStarterKit.Controllers
             if (rec != null)
             {
                 //get context and deserialize
-                cheese = JsonConvert.DeserializeObject<cheese>(rec.Context);
+                cheese = JsonConvert.DeserializeObject<Cheese>(rec.Context);
                 cheese.StudentActivity = rec;
             }
 
@@ -1491,7 +1491,7 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page30(FormCollection fc)
         {
-            var cheese = new cheese();
+            var cheese = new Cheese();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
@@ -1691,7 +1691,7 @@ namespace IQMStarterKit.Controllers
             // title: think like ceo
             // type: FormSubmission
 
-            var thinkceo = new thinkCeo();
+            var thinkceo = new ThinkCEO();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("Think Like a CEO");
@@ -1705,7 +1705,7 @@ namespace IQMStarterKit.Controllers
             if (rec != null)
             {
                 //get context and deserialize
-                thinkceo = JsonConvert.DeserializeObject<thinkCeo>(rec.Context);
+                thinkceo = JsonConvert.DeserializeObject<ThinkCEO>(rec.Context);
                 thinkceo.StudentActivity = rec;
             }
 
@@ -1716,7 +1716,7 @@ namespace IQMStarterKit.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Page32(FormCollection fc)
         {
-            var thinkceo = new thinkCeo();
+            var thinkceo = new ThinkCEO();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
@@ -2304,7 +2304,7 @@ namespace IQMStarterKit.Controllers
             // title: First Thing First
             // type: FormSubmission
 
-            FilePath filePath = new FilePath();
+            FirstThingFirstViewModel firstThing = new FirstThingFirstViewModel();
 
             //get id in tempActivity
             var activityID = GetTempActivityID("First Thing First");
@@ -2315,10 +2315,113 @@ namespace IQMStarterKit.Controllers
 
             if (stdAct2 != null)
             {
-                filePath = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdAct2.StudentActivityId);
+                firstThing.FilePath = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdAct2.StudentActivityId);
+
+                //get context and deserialize
+                if (stdAct2.Context != "")
+                {
+                    firstThing.FirstThingFirst = JsonConvert.DeserializeObject<FirstThingFirst>(stdAct2.Context);
+                }
             }
 
-            return View(filePath);
+            return View(firstThing);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page38(FormCollection fc)
+        {
+            var firstThing = new FirstThingFirst();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page38").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("First Thing First");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                firstThing.Activities = fc.Get("FirstThingFirst.Activities").ToString();
+
+                firstThing.Matrix1 = fc.Get("FirstThingFirst.Matrix1").ToString();
+                firstThing.Matrix2 = fc.Get("FirstThingFirst.Matrix1").ToString();
+                firstThing.Matrix3 = fc.Get("FirstThingFirst.Matrix1").ToString();
+                firstThing.Matrix4 = fc.Get("FirstThingFirst.Matrix1").ToString();
+
+                firstThing.LargeTask = fc.Get("FirstThingFirst.LargeTask").ToString();
+
+
+                firstThing.SmallTask1 = fc.Get("FirstThingFirst.SmallTask1").ToString();
+                firstThing.SmallTask2 = fc.Get("FirstThingFirst.SmallTask2").ToString();
+                firstThing.SmallTask3 = fc.Get("FirstThingFirst.SmallTask3").ToString();
+                firstThing.SmallTask4 = fc.Get("FirstThingFirst.SmallTask4").ToString();
+                firstThing.SmallTask5 = fc.Get("FirstThingFirst.SmallTask5").ToString();
+                firstThing.SmallTask6 = fc.Get("FirstThingFirst.SmallTask6").ToString();
+                firstThing.SmallTask7 = fc.Get("FirstThingFirst.SmallTask7").ToString();
+                firstThing.SmallTask8 = fc.Get("FirstThingFirst.SmallTask8").ToString();
+                firstThing.SmallTask9 = fc.Get("FirstThingFirst.SmallTask9").ToString();
+                firstThing.SmallTask10 = fc.Get("FirstThingFirst.SmallTask10").ToString();
+
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(firstThing);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 50;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    if (studentRecord.ProgressValue == 50) studentRecord.ProgressValue = 100;
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page38").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(firstThing).WithError(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -2364,6 +2467,9 @@ namespace IQMStarterKit.Controllers
                     if (oldRec != null)
                     {
                         //update
+                        if (oldRec.ProgressValue == 50) oldRec.ProgressValue = 100;
+
+
                         oldRec.ModifiedBy = GetSessionUserId();
                         oldRec.ModifiedDateTime = DateTime.Now;
                         //update studentActivity table
@@ -2389,8 +2495,11 @@ namespace IQMStarterKit.Controllers
                         studentActivity.CreatedDateTime = DateTime.Now;
                         studentActivity.CreatedBy = GetSessionUserId();
 
-                        studentActivity.ProgressValue = 100;
-                        studentActivity.Type = ActivityCategory.FileSubmission;
+                        studentActivity.ProgressValue = 50;
+
+                        studentActivity.Type = ActivityCategory.FormSubmission;
+
+
                         studentActivity.ModifiedBy = GetSessionUserId();
                         studentActivity.ModifiedDateTime = DateTime.Now;
 
@@ -2438,10 +2547,109 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+
         public ActionResult Page39()
         {
-            return View();
+            // title: Presentations
+            // type: FormSubmission
+
+            PresentationEvaluationModel presentation = new PresentationEvaluationModel();
+
+            //get id in tempActivity
+            var activityID = GetTempActivityID("Presentations");
+            //get owner
+            var owner = GetSessionUserId();
+
+            if (User.IsInRole("Student"))
+            {
+                //validate presentation evaluation record
+                presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == owner);
+
+                if (presentation == null) return RedirectToAction("Index").WithInfo("Your evaluation result is not yet available.");
+
+            }
+            else if (User.IsInRole("Tutor"))
+            {
+                if (Session["email"] != null)
+                {
+                    var student = UserManager.FindByEmail(Session["email"].ToString());
+                    //validate presentation evaluation record
+                    presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == student.Id);
+
+                    if (presentation == null)
+                    {
+                        presentation = new PresentationEvaluationModel();
+                        //start eval fill student records
+                        presentation.StudentId = student.Id;
+                        presentation.StudentName = student.FullName;
+                        presentation.StudentEmail = student.Email;
+                        presentation.TutorId = GetSessionUserId();
+                        presentation.TutorName = GetFullName(owner);
+
+
+                    }
+                }
+            }
+            else if (User.IsInRole("Administrator"))
+            {
+                if (Session["email"] != null)
+                {
+                    var student = UserManager.FindByEmail(Session["email"].ToString());
+                    //validate presentation evaluation record
+                    presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == student.Id);
+
+                    if (presentation == null) return View(presentation).WithInfo("Student evaluation result is not yet available.");
+
+                }
+            }
+
+
+            return View(presentation);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page39(PresentationEvaluationModel presentation)
+        {
+
+
+            if (User.IsInRole("Administrator"))
+            {
+                return RedirectToAction("Page39").WithInfo("This is just a demo.");
+            }
+
+
+
+
+            try
+            {
+
+
+                //system fields
+                presentation.CreatedBy = GetSessionUserId();
+                presentation.CreatedDateTime = DateTime.Now;
+                presentation.ModifiedBy = GetSessionUserId();
+                presentation.ModifiedDateTime = DateTime.Now;
+
+                //insert record
+                _context.PresentationEvaluationModel.Add(presentation);
+
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page39").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(presentation).WithError(ex.Message);
+            }
+
+
+
+        }
+
+
         public ActionResult Page40()
         {
             return View();
@@ -3149,7 +3357,92 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page46()
         {
+            // title: conflict  managing
+            // type: Scoring
+
+            ViewBag.ActDone = false;
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("Conflict");
+
+            // get Current User
+            var user = GetSessionUserId();
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+
+            if (rec != null)
+            {
+                ViewBag.ActDone = true;
+                ViewBag.FirstDominant = rec.CFDominantFirst;
+                ViewBag.SecondDominant = rec.CFDominantSecond;
+            }
+
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page46(FormCollection fc)
+        {
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page46").WithInfo("This is just a demo.");
+            }
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("Conflict");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+
+            try
+            {
+                // get score from collection
+                var conflict = GetConflictManagementScore(fc);
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(conflict);
+
+
+                //insert record
+
+                var newRecord = new StudentActivity();
+                newRecord.TempActivityId = activityId;
+                newRecord.TempModuleId = moduleId;
+                newRecord.Context = context;
+                newRecord.CFDominantFirst = conflict.FirstDominant;
+                newRecord.CFDominantSecond = conflict.SecondDominant;
+                newRecord.ProgressValue = 100;
+                newRecord.Type = ActivityCategory.Score;
+
+                //system fields
+                newRecord.CreatedBy = GetSessionUserId();
+                newRecord.CreatedDateTime = DateTime.Now;
+                newRecord.ModifiedBy = GetSessionUserId();
+                newRecord.ModifiedDateTime = DateTime.Now;
+
+                _context.StudentActivities.Add(newRecord);
+
+
+                //save record
+                _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
+
+                return RedirectToAction("Page46").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Page46").WithError(ex.Message);
+            }
+
         }
 
         public ActionResult Page47()
@@ -3705,10 +3998,96 @@ namespace IQMStarterKit.Controllers
         {
             return View();
         }
+
+
+
+
         public ActionResult Page55()
         {
+            // title: How Assertive are your messages?
+            // type: Scoring
+
+            ViewBag.ActDone = false;
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("How Assertive are your messages?");
+
+            // get Current User
+            var user = GetSessionUserId();
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+
+            if (rec != null)
+            {
+                ViewBag.ActDone = true;
+                ViewBag.AssertiveScore = rec.AssertiveScore;
+
+            }
+
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page55(FormCollection fc)
+        {
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page55").WithInfo("This is just a demo.");
+            }
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("How Assertive are your messages?");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+
+            try
+            {
+                // get score from collection
+                var _assert = fc.Get("assert").Split(',').Select(int.Parse).ToArray();
+                var _score = _assert.Sum();
+
+                //insert record
+
+                var newRecord = new StudentActivity();
+                newRecord.TempActivityId = activityId;
+                newRecord.TempModuleId = moduleId;
+                newRecord.Context = string.Empty;
+                newRecord.AssertiveScore = _score;
+                newRecord.ProgressValue = 100;
+                newRecord.Type = ActivityCategory.Score;
+
+                //system fields
+                newRecord.CreatedBy = GetSessionUserId();
+                newRecord.CreatedDateTime = DateTime.Now;
+                newRecord.ModifiedBy = GetSessionUserId();
+                newRecord.ModifiedDateTime = DateTime.Now;
+
+                _context.StudentActivities.Add(newRecord);
+
+
+                //save record
+                _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
+
+                return RedirectToAction("Page55").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Page55").WithError(ex.Message);
+            }
+
+        }
+
 
 
         // redirect to survey controller actions
@@ -4095,6 +4474,58 @@ namespace IQMStarterKit.Controllers
             }
 
             retval.TotalScore = totalScore;
+
+            return retval;
+        }
+
+        private Conflict GetConflictManagementScore(FormCollection fc)
+        {
+            var dictMo = new Dictionary<string, int>();
+
+            var retval = new Conflict();
+
+            var _shark = fc.Get("Shark").Split(',').Select(int.Parse).ToArray();
+            retval.Shark = _shark.Sum();
+            dictMo.Add("Competing/Forcing Shark", retval.Shark);
+
+
+            var _owl = fc.Get("Owl").Split(',').Select(int.Parse).ToArray();
+            retval.Owl = _owl.Sum();
+            dictMo.Add("Collaborating Owl", retval.Owl);
+
+
+            var _turtle = fc.Get("Turtle").Split(',').Select(int.Parse).ToArray();
+            retval.Turtle = _turtle.Sum();
+            dictMo.Add("Avoiding Turtle", retval.Turtle);
+
+
+            var _teddy = fc.Get("Teddy").Split(',').Select(int.Parse).ToArray();
+            retval.Teddy = _teddy.Sum();
+            dictMo.Add("Accomodating Teddy", retval.Teddy);
+
+            var _fox = fc.Get("Fox").Split(',').Select(int.Parse).ToArray();
+            retval.Fox = _fox.Sum();
+            dictMo.Add("Compromising Fox", retval.Fox);
+
+
+            dictMo.OrderByDescending(x => x.Value);
+
+            var items = from pair in dictMo
+                        orderby pair.Value descending
+                        select pair;
+
+            int cnt = 0;
+            foreach (var item in items)
+            {
+                if (cnt == 0) retval.FirstDominant = item.Key.ToString();
+                else if (cnt == 1) retval.SecondDominant = item.Key.ToString();
+                else if (cnt > 1) break;
+                cnt++;
+
+            }
+
+
+
 
             return retval;
         }

@@ -5,87 +5,123 @@
 }
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
 <div class="container1">
     <h1 style="text-align:center;"><strong><u>How Assertive are your Messages?</u></strong></h1>
-    <p>Instructions: Indicate how true each of the following statements is about your own communication.  Respond instinctively rather than in the way you feel you should respond.</p>
 
-    <table style="margin:auto;">
-        <tr>
-            <th>Statement</th>
-            <th>Score</th>
-        </tr>
-        <tr>
-            <td>I would express my opinion in a group even if my view contradicted the opinions of others.</td>
-            <td>
-                <select>
-                    <option value=""> </option>
-                    <option value="1">Always or almost always false</option>
-                    <option value="2">Usually false</option>
-                    <option value="3">Sometimes true</option>
-                    <option value="4">Usually true</option>
-                    <option value="5">Always or almost always true</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>When asked to do something that I really don’t want to do.  I can say no without feeling guilty.</td>
-            <td>
-                <select>
-                    <option value=""> </option>
-                    <option value="1">Always or almost always false</option>
-                    <option value="2">Usually false</option>
-                    <option value="3">Sometimes true</option>
-                    <option value="4">Usually true</option>
-                    <option value="5">Always or almost always true</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>I can express my opinion to my superiors on the job.</td>
-            <td>
-                <select>
-                    <option value=""> </option>
-                    <option value="1">Always or almost always false</option>
-                    <option value="2">Usually false</option>
-                    <option value="3">Sometimes true</option>
-                    <option value="4">Usually true</option>
-                    <option value="5">Always or almost always true</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>I can start up a conversation with a stranger on a bus or at a business gathering without fear.</td>
-            <td>
-                <select>
-                    <option value=""> </option>
-                    <option value="1">Always or almost always false</option>
-                    <option value="2">Usually false</option>
-                    <option value="3">Sometimes true</option>
-                    <option value="4">Usually true</option>
-                    <option value="5">Always or almost always true</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>I voice objection to people’s behaviour if I feel it infringes on my rights.</td>
-            <td>
-                <select>
-                    <option value=""> </option>
-                    <option value="1">Always or almost always false</option>
-                    <option value="2">Usually false</option>
-                    <option value="3">Sometimes true</option>
-                    <option value="4">Usually true</option>
-                    <option value="5">Always or almost always true</option>
-                </select>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <p><strong>How did you do?</strong><br />All five items in this test identified characteristics of assertive communication. </p>
+        @if (ViewBag.ActDone)
+        {
 
-    <p><strong>What will you do?</strong><br />The remaining discussion in this chapter clarifies the nature of assertive communication and offers guidelines for increasing your own assertiveness.  Consider these suggestions as ways to increase your own assertiveness and at the same time to reduce your aggressive tendencies when appropriate.</p>
+            <div class="col-md-offset-0 col-md-12">
 
-    <p>De Vito, J. (2007) The Interpersonal Communication Book 11th Ed. Pearson Education Boston</p>
+                <div class="panel panel-info">
+                    <div class="panel-heading"><strong>Level of Assertiveness</strong></div>
+                    @if (ViewBag.AssertiveScore > 19) {
+                        <div class="panel-body">
+                            Your assertiveness score is <strong>High</strong>: @ViewBag.AssertiveScore
+                        </div>
+                    } else {
+                        <div class="panel-body">
+                            Your assertiveness score is <strong>Low</strong>: @ViewBag.AssertiveScore
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+
+        }
+        else
+        {
+
+            <p>Instructions: Indicate how true each of the following statements is about your own communication.  Respond instinctively rather than in the way you feel you should respond.</p>
+
+            <table style="margin:auto;">
+                <tr>
+                    <th>Statement</th>
+                    <th>Score</th>
+                </tr>
+                <tr>
+                    <td>I would express my opinion in a group even if my view contradicted the opinions of others.</td>
+                    <td>
+                        <select name="assert">
+                            <option value=""> </option>
+                            <option value="1">Always or almost always false</option>
+                            <option value="2">Usually false</option>
+                            <option value="3">Sometimes true</option>
+                            <option value="4">Usually true</option>
+                            <option value="5">Always or almost always true</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>When asked to do something that I really don’t want to do.  I can say no without feeling guilty.</td>
+                    <td>
+                        <select name="assert">
+                            <option value=""> </option>
+                            <option value="1">Always or almost always false</option>
+                            <option value="2">Usually false</option>
+                            <option value="3">Sometimes true</option>
+                            <option value="4">Usually true</option>
+                            <option value="5">Always or almost always true</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>I can express my opinion to my superiors on the job.</td>
+                    <td>
+                        <select name="assert">
+                            <option value=""> </option>
+                            <option value="1">Always or almost always false</option>
+                            <option value="2">Usually false</option>
+                            <option value="3">Sometimes true</option>
+                            <option value="4">Usually true</option>
+                            <option value="5">Always or almost always true</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>I can start up a conversation with a stranger on a bus or at a business gathering without fear.</td>
+                    <td>
+                        <select name="assert">
+                            <option value=""> </option>
+                            <option value="1">Always or almost always false</option>
+                            <option value="2">Usually false</option>
+                            <option value="3">Sometimes true</option>
+                            <option value="4">Usually true</option>
+                            <option value="5">Always or almost always true</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>I voice objection to people’s behaviour if I feel it infringes on my rights.</td>
+                    <td>
+                        <select name="assert">
+                            <option value=""> </option>
+                            <option value="1">Always or almost always false</option>
+                            <option value="2">Usually false</option>
+                            <option value="3">Sometimes true</option>
+                            <option value="4">Usually true</option>
+                            <option value="5">Always or almost always true</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form-group;" style="text-align:center; margin-top:20px;">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+
+            <br />
+            <p><strong>How did you do?</strong><br />All five items in this test identified characteristics of assertive communication. </p>
+
+            <p><strong>What will you do?</strong><br />The remaining discussion in this chapter clarifies the nature of assertive communication and offers guidelines for increasing your own assertiveness.  Consider these suggestions as ways to increase your own assertiveness and at the same time to reduce your aggressive tendencies when appropriate.</p>
+
+            <p>De Vito, J. (2007) The Interpersonal Communication Book 11th Ed. Pearson Education Boston</p>
+
+        }
 </div>
 
 <div style="text-align:center; margin-top: 20px;">

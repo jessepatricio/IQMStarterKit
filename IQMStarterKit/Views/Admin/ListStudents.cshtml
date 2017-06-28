@@ -38,10 +38,10 @@
 
 
                 <tr>
-                    <td>@Html.DisplayFor(m => item.FullName)</td>
-                    <td>@Html.ActionLink(item.Email, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
-                    <td><text>@groupname.GroupName</text></td>
-                    <td>
+                    <td style="width:150px;">@Html.DisplayFor(m => item.FullName)</td>
+                    <td style="width:150px;">@Html.ActionLink(item.Email, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
+                    <td style="width:150px;"><text>@groupname.GroupName</text></td>
+                    <td nowrap="nowrap" style="width:400px;">
                         <span class="progress-bar active" role="progressbar" aria-valuenow="@item.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @item.ProgressValue%">&nbsp;</span>&nbsp;@item.ProgressValue %
                     </td>
                 </tr>

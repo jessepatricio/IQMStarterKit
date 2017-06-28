@@ -1,11 +1,11 @@
-﻿@model IQMStarterKit.Models.FilePath
+﻿@model IQMStarterKit.Models.FirstThingFirstViewModel
 
 @using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "First Thing First";
 }
-@using (Html.BeginForm("Page45UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken();
     <div class="container1">
@@ -13,34 +13,7 @@
             <h1 class="heading"><strong><u>Habit #3 : Put First Things First</u></strong></h1>
             <h2 style="text-align:center;">Self-Management</h2>
             <p> Below, list all the things or activies you have to do in the next 7 days.</p>
-            <textarea class="p38txtarea" rows="15" cols="150" name="activities"></textarea>
-        </div>
-
-        <hr />
-
-        <div>
-            <img style="width:100%;" src="~/Content/img/timechart.png" alt="Time Table Chart" />
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="col-md-12 form-inline" style="text-align:center; margin-top:20px;">
-                    @if (Model != null && Model.FileName != null && Model.CreatedBy == User.Identity.GetUserId())
-                {
-                        @Html.ActionLink("Download File", "Page38DownloadFile", "Module",
-                            new { id = Model.StudentActivityId },
-                            new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
-
-
-                    }
-                    else
-                    {
-                        @Html.Label("First Thing First", new { @class = "label label-default" })
-                        <input type="file" id="FirstThingFirst" name="file" class="form-control" style="width:300px;" />
-                        <input type="submit" value="Upload" class="btn btn-primary" />
-                    }
-                </div>
-            </div>
+            @Html.TextAreaFor(model => model.FirstThingFirst.Activities, (Model.FirstThingFirst.Activities != null) ? (object)new { @readonly = "readonly", @class = "p38txtarea form-control", @name = "Activities", style = "width: 900px; height:300px;" } : new { @class = "p38txtarea form-control", @name = "Activities", style = "width: 900px; height:300px;" })
         </div>
 
         <hr />
@@ -56,22 +29,22 @@
                     <td style="transform: rotate(270deg);">Important</td>
                     <td style="text-align:center;">
                         I<br />
-                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                        @Html.TextAreaFor(model => model.FirstThingFirst.Matrix1, (Model.FirstThingFirst.Matrix1 != null) ? (object)new { @readonly = "readonly", @class = "p38txtarea form-control", @name = "Matrix1", style = "width: 325px; height:125px;" } : new { @class = "p38txtarea form-control", @name = "Matrix1", style = "width: 325px; height:125px;" })
                     </td>
                     <td style="text-align:center;">
                         II<br />
-                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                        @Html.TextAreaFor(model => model.FirstThingFirst.Matrix2, (Model.FirstThingFirst.Matrix2 != null) ? (object)new { @readonly = "readonly", @class = "p38txtarea form-control", @name = "Matrix2", style = "width: 325px; height:125px;" } : new { @class = "p38txtarea form-control", @name = "Matrix2", style = "width: 325px; height:125px;" })
                     </td>
                 </tr>
                 <tr>
                     <td style="transform: rotate(270deg);"> Not Important</td>
                     <td style="text-align:center;">
                         III<br />
-                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                        @Html.TextAreaFor(model => model.FirstThingFirst.Matrix1, (Model.FirstThingFirst.Matrix3 != null) ? (object)new { @readonly = "readonly", @class = "p38txtarea form-control", @name = "Matrix3", style = "width: 325px; height:125px;" } : new { @class = "p38txtarea form-control", @name = "Matrix3", style = "width: 325px; height:125px;" })
                     </td>
                     <td style="text-align:center;">
                         IV<br />
-                        <textarea class="p38txtarea" rows="5" cols="50" maxlength="70" name="answer"></textarea>
+                        @Html.TextAreaFor(model => model.FirstThingFirst.Matrix1, (Model.FirstThingFirst.Matrix4 != null) ? (object)new { @readonly = "readonly", @class = "p38txtarea form-control", @name = "Matrix4", style = "width: 325px; height:125px;" } : new { @class = "p38txtarea form-control", @name = "Matrix4", style = "width: 325px; height:125px;" })
                     </td>
                 </tr>
             </table>
@@ -79,31 +52,93 @@
         <hr />
         <div>
             <h1 class="heading"><strong><u>Large Task:</u></strong></h1>
-            <textarea class="p38txtarea" rows="5" cols="150" name="answer"></textarea>
+            @Html.TextAreaFor(model => model.FirstThingFirst.LargeTask, (Model.FirstThingFirst.LargeTask != null) ? (object)new { @readonly = "readonly", @class = "p38txtarea form-control", @name = "LargeTask", style = "width: 900px; height:150px;" } : new { @class = "p38txtarea form-control", @name = "LargeTask", style = "width: 900px; height:150px;" })
             <p><strong>Break this down into smaller more manageable tasks:</strong></p>
-            <ol>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-                <li><input class="p38txtbox" type="text" name="p38LargeTask"></li>
-            </ol>
+            <div class="form-inline">
+                <div class="row">
+                    <label for="SmallTask1">1.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask1, (Model.FirstThingFirst.SmallTask1 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask1" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask1" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">2.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask2, (Model.FirstThingFirst.SmallTask2 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask2" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask2" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">3.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask3, (Model.FirstThingFirst.SmallTask3 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask3" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask3" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">4.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask4, (Model.FirstThingFirst.SmallTask4 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask4" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask4" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">5.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask5, (Model.FirstThingFirst.SmallTask5 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask5" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask5" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">6.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask6, (Model.FirstThingFirst.SmallTask6 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask6" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask6" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">7.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask7, (Model.FirstThingFirst.SmallTask7 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask7" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask7" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">8.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask8, (Model.FirstThingFirst.SmallTask8 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask8" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask8" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">9.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask9, (Model.FirstThingFirst.SmallTask9 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask9" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask9" } })
+                </div>
+                <div class="row">
+                    <label for="SmallTask1">10.</label>@Html.EditorFor(model => model.FirstThingFirst.SmallTask10, (Model.FirstThingFirst.SmallTask10 != null) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p38txtbox form-control", name = "SmallTask10" } } : new { htmlAttributes = new { @class = "p38txtbox form-control", name = "SmallTask10" } })
+                </div>
+            </div>
+
         </div>
+
 
     </div>
 
+    if (Model.FirstThingFirst.Activities == null)
+    {
+        <div style="text-align: center; margin-top: 20px;" class="form-group`">
+            <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+        </div>
+    }
+
+}
+    @using (Html.BeginForm("Page38UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+    <hr />
+
+    <div>
+        <img style="width:100%;" src="~/Content/img/timechart.png" alt="Time Table Chart" />
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-12 form-inline" style="text-align:center; margin-top:20px;">
+                    @if (Model != null && Model.FilePath.FileName != null && Model.FilePath.CreatedBy == User.Identity.GetUserId())
+                    {
+                        @Html.ActionLink("Download File", "Page38DownloadFile", "Module",
+                 new { id = Model.FilePath.StudentActivityId },
+                 new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+
+
+                    }
+                    else
+                    {
+                        @Html.Label("First Thing First", new { @class = "label label-default" })
+                        <input type="file" id="FirstThingFirst" name="file" class="form-control" style="width:300px;" />
+                        <input type="submit" value="Upload" class="btn btn-primary" />
+                    }
+                </div>
+            </div>
+        </div>
+
+
+}
 
     <div style="text-align:center; margin-top: 20px;">
         @Html.ActionLink("Previous Page", "Page50") |
         @Html.ActionLink("Main", "Index") |
         @Html.ActionLink("Next Page", "Page37")
     </div>
-}
+
 
 @section Scripts{
 
