@@ -1,0 +1,105 @@
+﻿
+@model IQMStarterKit.Models.Report.GroupFeedbackProgramme
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container1">
+
+        <div class="page-header"><h4>Programme Survey Group Feedback</h4></div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-xs">Export</button>
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "ProgramSurveyReport" })</li>
+                <li>@Html.ActionLink("PDF", "ProgramSurveyExportToPDF", new { @reportName = "ProgramSurveyReport" })</li>
+                <li><a href="javascript:window.print()">Print</a></li>
+            </ul>
+        </div>
+
+        <h4>Ratings</h4>
+        <table id="comments" style="width:100%" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>GroupName</th>
+                    <th>(1 to 7) Rating</th>
+                    <th>Overall Rating</th>
+                    <th>Time Allocated Rating</th>
+                    <th>Class Size Rating</th>
+                    <th>Class Room Rating</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.GroupRatings)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.GroupName)</td>
+                        @{ 
+                            var output = DDLHelper.GetStarRating(item.GroupAveRating);
+                            string star = Server.HtmlDecode(output);
+                        }
+                        <td align="center">@Html.Raw(star)</td>
+                        <td align="center">@DDLHelper.GetRating(item.OverallRating)</td>
+                        <td align="center">@DDLHelper.GetOtherRating(item.TimeAllocatedRating)</td>
+                        <td align="center">@DDLHelper.GetOtherRating(item.ClassSizeRating)</td>
+                        <td align="center">@DDLHelper.GetOtherRating(item.ClassRoomRating)</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <h4>Comments</h4>
+        <table id="activity" style="width:100%" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Comments</th>
+                   
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.GroupComments)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.FullName)</td>
+                        <td>@Html.DisplayFor(m => item.Comment)</td>
+                      
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#activity').DataTable({
+                "bLengthChange": false,
+                "bFilter": true,
+                "paging": true
+
+            });
+
+            $('#comments').DataTable({
+                "bLengthChange": false,
+                "bFilter": true,
+                "paging": true
+
+            });
+        });
+    </script>
+
+}
+
+

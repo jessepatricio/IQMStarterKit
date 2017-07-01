@@ -62,7 +62,7 @@ namespace IQMStarterKit.Controllers
             return new ViewAsPdf("DISC", modelList) { FileName = fileName };
 
         }
-    
+
         public ActionResult DOPE()
         {
             Session["email"] = null;
@@ -83,13 +83,13 @@ namespace IQMStarterKit.Controllers
             return new ViewAsPdf("DOPE", modelList) { FileName = fileName };
 
         }
-        
+
         public ActionResult MatchedWords()
         {
 
             Session["email"] = null;
             var modelList = GetMatchedWordViewModel();
-            
+
             return View(modelList);
         }
 
@@ -105,13 +105,13 @@ namespace IQMStarterKit.Controllers
             return new ViewAsPdf("MatchedWords", modelList) { FileName = fileName };
 
         }
-        
+
         public ActionResult Top3Values()
         {
 
             Session["email"] = null;
             var modelList = GetTop3ValuesViewModel();
-            
+
             return View(modelList);
         }
 
@@ -128,10 +128,102 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        public ActionResult PersonalLeaderShip()
+        {
+
+            Session["email"] = null;
+            var modelList = GetPersonalLeadership();
+
+            return View(modelList);
+        }
+
+        public ActionResult PersonalLeadershipExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetPersonalLeadership();
+
+            return new ViewAsPdf("PersonalLeadership", modelList) { FileName = fileName };
+
+        }
+
+        public ActionResult SelfManagement()
+        {
+
+            Session["email"] = null;
+            var modelList = GetSelfManagement();
+
+            return View(modelList);
+        }
+
+        public ActionResult SelfManagementExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetSelfManagement();
+
+            return new ViewAsPdf("SelfManagement", modelList) { FileName = fileName };
+
+        }
+
+        public ActionResult Assertiveness()
+        {
+
+            Session["email"] = null;
+            var modelList = GetAssertiveness();
+
+            return View(modelList);
+        }
+
+        public ActionResult AssertivenesstExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetAssertiveness();
+
+            return new ViewAsPdf("Assertiveness", modelList) { FileName = fileName };
+
+        }
+
+        public ActionResult ConflictManagement()
+        {
+
+            Session["email"] = null;
+            var modelList = GetConflictManagement();
+
+            return View(modelList);
+        }
+
+        public ActionResult ConflictManagementExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetConflictManagement();
+
+            return new ViewAsPdf("ConflictManagement", modelList) { FileName = fileName };
+
+        }
+
+
+
+        //progress
+
         public ActionResult StudentActivityPercentage()
         {
             Session["email"] = null;
-            // activity 9 is DISC
+
             var dt = DataLayer.GetActivityPercentage();
             var modelList = new List<StudentActivityPercentage>();
 
@@ -159,6 +251,292 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        public ActionResult GroupActivityPercentage()
+        {
+            Session["email"] = null;
+
+            var dt = DataLayer.GetGroupActivityPercentage();
+            var modelList = new List<GroupActivityPercentage>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new GroupActivityPercentage
+                {
+                    GroupName = item["GroupName"].ToString(),
+                    ProgressValue = item["PercentageCompletion"].ToString()
+
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            return View(modelList);
+
+        }
+
+        //surveys
+
+        public ActionResult GroupFeedbackProgramme()
+        {
+            Session["email"] = null;
+
+            //get rating
+
+            var dt = DataLayer.GetGroupFeedbackProgramme();
+            var modelList = new List<GroupRating>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new GroupRating
+                {
+
+                    GroupId = item["GroupId"].ToString(),
+                    GroupName = item["GroupName"].ToString(),
+                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = int.Parse(item["OverallRating"].ToString()),
+                    TimeAllocatedRating = int.Parse(item["TimeAllocatedRating"].ToString()),
+                    ClassSizeRating = int.Parse(item["ClassSizeRating"].ToString()),
+                    ClassRoomRating = int.Parse(item["ClassRoomRating"].ToString())
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            //get comments
+            dt = DataLayer.GetGroupFeedbackComments();
+            var modelComment = new List<GroupComment>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var _model = new GroupComment
+                {
+
+                    FullName = item["FullName"].ToString(),
+                    Comment = item["PComment"].ToString(),
+
+                };
+
+                modelComment.Add(_model);
+
+            }
+
+            var progmodel = new GroupFeedbackProgramme();
+            progmodel.GroupRatings = modelList;
+            progmodel.GroupComments = modelComment;
+
+
+            return View(progmodel);
+
+        }
+
+        public GroupFeedbackProgramme ExportGroupFeedbackProgramme()
+        {
+            Session["email"] = null;
+
+            //get rating
+
+            var dt = DataLayer.GetGroupFeedbackProgramme();
+            var modelList = new List<GroupRating>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new GroupRating
+                {
+
+                    GroupId = item["GroupId"].ToString(),
+                    GroupName = item["GroupName"].ToString(),
+                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = int.Parse(item["OverallRating"].ToString()),
+                    TimeAllocatedRating = int.Parse(item["TimeAllocatedRating"].ToString()),
+                    ClassSizeRating = int.Parse(item["ClassSizeRating"].ToString()),
+                    ClassRoomRating = int.Parse(item["ClassRoomRating"].ToString())
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            //get comments
+            dt = DataLayer.GetGroupFeedbackComments();
+            var modelComment = new List<GroupComment>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var _model = new GroupComment
+                {
+
+                    FullName = item["FullName"].ToString(),
+                    Comment = item["PComment"].ToString(),
+
+                };
+
+                modelComment.Add(_model);
+
+            }
+
+            var progmodel = new GroupFeedbackProgramme();
+            progmodel.GroupRatings = modelList;
+            progmodel.GroupComments = modelComment;
+
+
+            return progmodel;
+
+        }
+
+        public ActionResult ProgramSurveyExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = ExportGroupFeedbackProgramme();
+
+
+            return new ViewAsPdf("GroupFeedbackProgramme", modelList) { FileName = fileName };
+
+        }
+
+        public ActionResult GroupFeedbackTutor()
+        {
+            Session["email"] = null;
+
+            //get rating
+
+            var dt = DataLayer.GetGroupFeedbackTutor();
+            var modelList = new List<TutorRating>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new TutorRating
+                {
+
+                    GroupId = item["GroupId"].ToString(),
+                    GroupName = item["GroupName"].ToString(),
+                    TutorId = item["TutorId"].ToString(),
+                    FullName = item["FullName"].ToString(),
+                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = int.Parse(item["OverallRating"].ToString()),
+
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            //get comments
+            dt = DataLayer.GetGroupFeedbackTutorComments();
+            var modelComment = new List<GroupTutorComment>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var _model = new GroupTutorComment
+                {
+
+                    FullName = item["FullName"].ToString(),
+                    TutorName = item["TutorName"].ToString(),
+                    Comment = item["TComment"].ToString(),
+
+                };
+
+                modelComment.Add(_model);
+
+            }
+
+            var progmodel = new GroupFeedbackTutor();
+            progmodel.TutorRatings = modelList;
+            progmodel.GroupTutorComments = modelComment;
+
+
+            return View(progmodel);
+
+        }
+
+        public GroupFeedbackTutor ExportGroupFeedbackTutor()
+        {
+            Session["email"] = null;
+
+            //get rating
+
+            var dt = DataLayer.GetGroupFeedbackTutor();
+            var modelList = new List<TutorRating>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new TutorRating
+                {
+
+                    GroupId = item["GroupId"].ToString(),
+                    GroupName = item["GroupName"].ToString(),
+                    TutorId = item["TutorId"].ToString(),
+                    FullName = item["FullName"].ToString(),
+                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = int.Parse(item["OverallRating"].ToString()),
+
+                };
+
+                modelList.Add(model);
+
+            }
+
+
+            //get comments
+            dt = DataLayer.GetGroupFeedbackTutorComments();
+            var modelComment = new List<GroupTutorComment>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var _model = new GroupTutorComment
+                {
+
+                    FullName = item["FullName"].ToString(),
+                    TutorName = item["TutorName"].ToString(),
+                    Comment = item["TComment"].ToString(),
+
+                };
+
+                modelComment.Add(_model);
+
+            }
+
+            var progmodel = new GroupFeedbackTutor();
+            progmodel.TutorRatings = modelList;
+            progmodel.GroupTutorComments = modelComment;
+
+
+            return progmodel;
+
+        }
+
+        public ActionResult TutorSurveyExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = ExportGroupFeedbackTutor();
+
+            return new ViewAsPdf("GroupFeedbackTutor", modelList) { FileName = fileName };
+
+        }
+
+
         #endregion
 
 
@@ -183,6 +561,7 @@ namespace IQMStarterKit.Controllers
             gv = FormatGridView(gv);
 
 
+
             //style to format numbers to string
             string style = @"<style> .textmode { mso-number-format:\@; } </style>";
             Response.Write(style);
@@ -202,46 +581,6 @@ namespace IQMStarterKit.Controllers
 
         }
 
-        //public ActionResult ExportToPDF(string reportName)
-        //{
-
-        //    var dataSrc = GetFormattedReportDataSource(reportName);
-
-        //    var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
-        //    var fileName = reportName + "_" + sffx + ".pdf";
-
-        //    //Create a dummy GridView
-        //    GridView gv = new GridView();
-        //    gv.AllowPaging = false;
-        //    gv.DataSource = dataSrc;
-        //    gv.DataBind();
-
-        //    //design gridview
-        //    gv = FormatGridView(gv);
-
-        //    // return new RazorPDF.PdfResult(gv, "Index");
-
-        //    Response.ContentType = "application/pdf";
-        //    Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
-
-        //    Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
-
-        //    StringWriter sw = new StringWriter();
-        //    HtmlTextWriter hw = new HtmlTextWriter(sw);
-        //    gv.RenderControl(hw);
-        //    StringReader sr = new StringReader(sw.ToString());
-        //    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-        //    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
-        //    PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-        //    pdfDoc.Open();
-        //    htmlparser.Parse(sr);
-        //    pdfDoc.Close();
-        //    Response.Write(pdfDoc);
-        //    Response.End();
-
-        //    return View();
-        //}
-
         public DataTable GetFormattedReportDataSource(string reportName)
         {
             DataTable dataSrc = new DataTable();
@@ -253,8 +592,6 @@ namespace IQMStarterKit.Controllers
                     dataSrc = DataLayer.GetActivityResult(5);
                     //remove some columns
                     dataSrc.Columns.Remove("GroupId");
-                    dataSrc.Columns.Remove("DopeResult");
-                    dataSrc.Columns.Remove("DiscResult");
                     dataSrc.Columns.Remove("TempActivityId");
                     dataSrc.Columns.Remove("CreatedBy");
                     break;
@@ -262,8 +599,6 @@ namespace IQMStarterKit.Controllers
                     dataSrc = DataLayer.GetActivityResult(8);
                     //remove some columns
                     dataSrc.Columns.Remove("GroupId");
-                    dataSrc.Columns.Remove("VarkResult");
-                    dataSrc.Columns.Remove("DiscResult");
                     dataSrc.Columns.Remove("TempActivityId");
                     dataSrc.Columns.Remove("CreatedBy");
                     break;
@@ -271,8 +606,53 @@ namespace IQMStarterKit.Controllers
                     dataSrc = DataLayer.GetActivityResult(9);
                     //remove some columns
                     dataSrc.Columns.Remove("GroupId");
-                    dataSrc.Columns.Remove("VarkResult");
-                    dataSrc.Columns.Remove("DopeResult");
+                    dataSrc.Columns.Remove("TempActivityId");
+                    dataSrc.Columns.Remove("CreatedBy");
+                    break;
+                case "MatchingWordReport":
+                    dataSrc = DataLayer.GetActivityResult(13);
+                    //remove some columns
+                    dataSrc.Columns.Remove("GroupId");
+                    dataSrc.Columns.Remove("TempActivityId");
+                    dataSrc.Columns.Remove("CreatedBy");
+                    break;
+                case "Top3ValuesReport":
+                    dataSrc = DataLayer.GetActivityResult(19);
+                    //remove some columns
+                    dataSrc.Columns.Remove("GroupId");
+                    dataSrc.Columns.Remove("TempActivityId");
+                    dataSrc.Columns.Remove("CreatedBy");
+                    break;
+
+                case "PersonalLeadershipReport":
+                    dataSrc = DataLayer.GetActivityResult(20);
+                    //remove some columns
+                    dataSrc.Columns.Remove("GroupId");
+                    dataSrc.Columns.Remove("TempActivityId");
+                    dataSrc.Columns.Remove("CreatedBy");
+                    break;
+
+                case "SelfManagementReport":
+                    dataSrc = DataLayer.GetActivityResult(24);
+                    //remove some columns
+                    dataSrc.Columns.Remove("GroupId");
+                    dataSrc.Columns.Remove("TempActivityId");
+                    dataSrc.Columns.Remove("CreatedBy");
+                    break;
+
+
+                case "AssertivenessReport":
+                    dataSrc = DataLayer.GetActivityResult(30);
+                    //remove some columns
+                    dataSrc.Columns.Remove("GroupId");
+                    dataSrc.Columns.Remove("TempActivityId");
+                    dataSrc.Columns.Remove("CreatedBy");
+                    break;
+
+                case "ConflictManagementReport":
+                    dataSrc = DataLayer.GetActivityResult(41);
+                    //remove some columns
+                    dataSrc.Columns.Remove("GroupId");
                     dataSrc.Columns.Remove("TempActivityId");
                     dataSrc.Columns.Remove("CreatedBy");
                     break;
@@ -287,6 +667,20 @@ namespace IQMStarterKit.Controllers
                     dataSrc.Columns["PercentageCompletion"].ColumnName = "% Completed";
                     break;
 
+                case "ProgramSurveyReport":
+                    dataSrc = DataLayer.GetGroupFeedbackProgramme();
+
+                    //remove some column
+                    dataSrc.Columns.Remove("GroupId");
+                    break;
+
+                case "TutorSurveyReport":
+                    dataSrc = DataLayer.GetGroupFeedbackTutor();
+
+                    //remove some column
+                    dataSrc.Columns.Remove("GroupId");
+                    dataSrc.Columns.Remove("TutorId");
+                    break;
 
             }
 
@@ -338,7 +732,7 @@ namespace IQMStarterKit.Controllers
 
 
 
-       
+
 
 
         public ActionResult PercentageExportToPDF(string reportName)
@@ -497,7 +891,7 @@ namespace IQMStarterKit.Controllers
 
         public List<Top3ValuesViewModel> GetTop3ValuesViewModel()
         {
-            // activity 19 Personal Values
+            // activity 19 top 3 values
             var dt = DataLayer.GetActivityResult(19);
             var modelList = new List<Top3ValuesViewModel>();
 
@@ -523,6 +917,118 @@ namespace IQMStarterKit.Controllers
             return modelList;
         }
 
+        public List<PersonalLeadershipViewModel> GetPersonalLeadership()
+        {
+            // activity 19 Personal Leadership
+            var dt = DataLayer.GetActivityResult(20);
+            var modelList = new List<PersonalLeadershipViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new PersonalLeadershipViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    PersonalLeadershipScore = item["PersonalLeadershipScore"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
+        public List<SelfManagementViewModel> GetSelfManagement()
+        {
+            // activity 24 self management
+            var dt = DataLayer.GetActivityResult(24);
+            var modelList = new List<SelfManagementViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new SelfManagementViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    SelfManagementScore = item["SelfManagementScore"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
+        public List<AssertivenessViewModel> GetAssertiveness()
+        {
+            // activity 30 assertiveness
+            var dt = DataLayer.GetActivityResult(30);
+            var modelList = new List<AssertivenessViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new AssertivenessViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    AssertiveScore = item["AssertiveScore"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
+        public List<ConflictManagementViewModel> GetConflictManagement()
+        {
+            // activity 41 conflict management
+            var dt = DataLayer.GetActivityResult(41);
+            var modelList = new List<ConflictManagementViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new ConflictManagementViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    CFDominantFirst = item["CFDominantFirst"].ToString(),
+                    CFDominantSecond = item["CFDominantSecond"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.ReviewQuizClass
 @{
     ViewBag.Title = "Page54";
 }
@@ -20,63 +20,38 @@
                             1. In the study of learning styles, what do the initials VARK stands for? Explain each of them briefly.
                             <br />
                             V&nbsp;
-                            <select name="vark1" class="form-control" style="width:200px;">
-                                <option value=""> </option>
-                                <option value="Visual">Visual</option>
-                                <option value="Auditory">Auditory</option>
-                                <option value="Reading/Writing">Reading/Writing</option>
-                                <option value="Kinesthetic">Kinesthetic</option>
-                            </select>
-                            Explanation: <input name="vark1exp" class="p54txtbox form-control" type="text" style="width:600px;" />
+                            @Html.TextBoxFor(modelItem => Model.QuizAns1a, new { @class = "form-control", style="width: 200px;"} )
+                            Explanation: <input name="QuizAns1a_Exp" class="p54txtbox form-control" type="text" style="width:600px;" />
                             <br />
                             A&nbsp;
-                            <select name="vark2" class="form-control" style="width:200px;">
-                                <option value=""> </option>
-                                <option value="Visual">Visual</option>
-                                <option value="Auditory">Auditory</option>
-                                <option value="Reading/Writing">Reading/Writing</option>
-                                <option value="Kinesthetic">Kinesthetic</option>
-                            </select>
-                            Explanation: <input name="vark2exp" class="p54txtbox form-control" type="text" style="width:600px;" />
+                            @Html.TextBoxFor(modelItem => Model.QuizAns1b, new { @class = "form-control", style = "width: 200px;" })
+                            Explanation: <input name="QuizAns1b_Exp" class="p54txtbox form-control" type="text" style="width:600px;" />
                             <br />
                             R&nbsp;
-                            <select name="vark3" class="form-control" style="width:200px;">
-                                <option value=""> </option>
-                                <option value="Visual">Visual</option>
-                                <option value="Auditory">Auditory</option>
-                                <option value="Reading/Writing">Reading/Writing</option>
-                                <option value="Kinesthetic">Kinesthetic</option>
-                            </select>
-                            Explanation: <input name="vark3exp" class="p54txtbox form-control" type="text" style="width:600px;" />
+                            @Html.TextBoxFor(modelItem => Model.QuizAns1c, new { @class = "form-control", style = "width: 200px;" })
+                            Explanation: <input name="QuizAns1c_Exp" class="p54txtbox form-control" type="text" style="width:600px;" />
                             <br />
                             K&nbsp;
-                            <select name="vark4" class="form-control" style="width:200px;">
-                                <option value=""> </option>
-                                <option value="Visual">Visual</option>
-                                <option value="Auditory">Auditory</option>
-                                <option value="Reading/Writing">Reading/Writing</option>
-                                <option value="Kinesthetic">Kinesthetic</option>
-                            </select>
-                            Explanation: <input name="vark4exp" class="p54txtbox form-control" type="text" style="width:600px;" />
+                            @Html.TextBoxFor(modelItem => Model.QuizAns1d, new { @class = "form-control", style = "width: 200px;" })
+                            Explanation: <input name="QuizAns1d_Exp" class="p54txtbox form-control" type="text" style="width:600px;" />
                             </div>
-
-</td>
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         2. A person who is able to cook by listening to the instructions on radio is a ________ learner.
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="varkq1">Visual</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns2, "Visual", new { @class = "form-control", name = "QuizAns2", style = "width:15px;height:15px;" })Visual</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="varkq1">Auditory</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns2, "Auditory", new { @class = "form-control", name = "QuizAns2", style = "width:15px;height:15px;" })Auditory</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="varkq1">Reading</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns2, "Reading", new { @class = "form-control", name = "QuizAns2", style = "width:15px;height:15px;" })Reading</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="varkq1">Kinesthetic</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns2, "Kinethetic", new { @class = "form-control", name = "QuizAns2", style = "width:15px;height:15px;" })Kinesthetic</label>
                         </div>
                     </td>
                 </tr>
@@ -85,17 +60,17 @@
                     <td>
                         3. A person who learns by watching the teacher demonstrate things first is a _______ learner.
                         <br />
-                        <div class="radio dl-horizontal">
-                            <label><input type="radio" name="varkq2">Visual</label>
-                        </div>
-                        <div class="radio dl-horizontal">
-                            <label><input type="radio" name="varkq2">Auditory</label>
+                        <div class="radio">
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns3, "Visual", new { @class = "form-control", name = "QuizAns3", style = "width:15px;height:15px;" })Visual</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="varkq2">Reading</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns3, "Auditory", new { @class = "form-control", name = "QuizAns3", style = "width:15px;height:15px;" })Auditory</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="varkq2">Kinesthetic</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns3, "Reading", new { @class = "form-control", name = "QuizAns3", style = "width:15px;height:15px;" })Reading</label>
+                        </div>
+                        <div class="radio">
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns3, "Kinethetic", new { @class = "form-control", name = "QuizAns3", style = "width:15px;height:15px;" })Kinesthetic</label>
                         </div>
                     </td>
                 </tr>
@@ -120,13 +95,7 @@
                                     <br />details, and prefers to work alone.
                                 </td>
                                 <td>
-                                    <select name="dope1" class="form-control" style="width:200px;">
-                                        <option value=""> </option>
-                                        <option value="Dove">Dove</option>
-                                        <option value="Owl">Owl</option>
-                                        <option value="Peacock">Peacock</option>
-                                        <option value="Eagle">Eagle</option>
-                                    </select>
+                                    @Html.DropDownListFor(modelItem => Model.QuizAns4a, new SelectList(DDLHelper.GetDopeList(), "Text", "Value", Model.QuizAns4a), null, new { @class = "form-control", style = "width: 200px;" })
                                 </td>
                             </tr>
 
@@ -138,13 +107,7 @@
                                     <br />gives in to others easily.
                                 </td>
                                 <td>
-                                    <select name="dope2" class="form-control" style="width:200px;">
-                                        <option value=""> </option>
-                                        <option value="Dove">Dove</option>
-                                        <option value="Owl">Owl</option>
-                                        <option value="Peacock">Peacock</option>
-                                        <option value="Eagle">Eagle</option>
-                                    </select>
+                                    @Html.DropDownListFor(modelItem => Model.QuizAns4b, new SelectList(DDLHelper.GetDopeList(), "Text", "Value", Model.QuizAns4b), null, new { @class = "form-control", style = "width: 200px;" })
                                 </td>
                             </tr>
 
@@ -156,14 +119,7 @@
                                     <br /> others feelings, uncooperative at times.
                                 </td>
                                 <td>
-                                    <select name="dope3" class="form-control" style="width:200px;">
-                                        <option value=""> </option>
-                                        <option value="Dove">Dove</option>
-                                        <option value="Owl">Owl</option>
-                                        <option value="Peacock">Peacock</option>
-                                        <option value="Eagle">Eagle</option>
-                                    </select>
-
+                                    @Html.DropDownListFor(modelItem => Model.QuizAns4c, new SelectList(DDLHelper.GetDopeList(), "Text", "Value", Model.QuizAns4c), null, new { @class = "form-control", style = "width: 200px;" })
                                 </td>
                             </tr>
 
@@ -174,14 +130,7 @@
                                     <br />routine tasks, impulsive, enjoys getting involved.
                                 </td>
                                 <td>
-                                    <select name="dope4" class="form-control" style="width:200px;">
-                                        <option value=""> </option>
-                                        <option value="Dove">Dove</option>
-                                        <option value="Owl">Owl</option>
-                                        <option value="Peacock">Peacock</option>
-                                        <option value="Eagle">Eagle</option>
-                                    </select>
-
+                                    @Html.DropDownListFor(modelItem => Model.QuizAns4d, new SelectList(DDLHelper.GetDopeList(), "Text", "Value", Model.QuizAns4d), null, new { @class = "form-control", style = "width: 200px;" })
                                 </td>
                             </tr>
                         </table>
@@ -191,18 +140,19 @@
                     <td>
                         5. When a member of your group is a Dove, you should:
                         <br />
-                        <div class="radio dl-horizontal">
-                            <label><input type="radio" name="dope5">a) Suggest he/she is right and show appreciation.</label>
-                        </div>
-                        <div class="radio dl-horizontal">
-                            <label><input type="radio" name="dope5">b) Be quick-paced and offer spirited explanations.</label>
+                        <div class="radio">
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns5, "a) Suggest he/she is right and show appreciation.", new { @class = "form-control", name = "QuizAns5", style = "width:15px;height:15px;" })a) Suggest he/she is right and show appreciation.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="dope5">c) Give impression that he/she has control of situations.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns5, "b) Be quick-paced and offer spirited explanations.", new { @class = "form-control", name = "QuizAns5", style = "width:15px;height:15px;" })b) Be quick-paced and offer spirited explanations.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="dope5">d) Give reassurance and create a relaxed and pleasant environment.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns5, "c) Give impression that he/she has control of situations.", new { @class = "form-control", name = "QuizAns5", style = "width:15px;height:15px;" })c) Give impression that he/she has control of situations.</label>
                         </div>
+                        <div class="radio">
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns5, "d) Give reassurance and create a relaxed and pleasant environment.", new { @class = "form-control", name = "QuizAns5", style = "width:15px;height:15px;" })d) Give reassurance and create a relaxed and pleasant environment.</label>
+                        </div>
+                       
                     </td>
                 </tr>
 
@@ -210,17 +160,17 @@
                     <td>
                         6. When a member of your group is an Eagle, you should:
                         <br />
-                        <div class="radio dl-horizontal">
-                            <label><input type="radio" name="dope6">a) Provide results in a fast pace manner.</label>
-                        </div>
-                        <div class="radio dl-horizontal">
-                            <label><input type="radio" name="dope6">b) Show commitment to work with them.</label>
+                        <div class="radio">
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns6, "a) Provide results in a fast pace manner.", new { @class = "form-control", name = "QuizAns6", style = "width:15px;height:15px;" })a) Provide results in a fast pace manner.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="dope6">c) Suggest they are right and show appreciation.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns6, "b) Show commitment to work with them.", new { @class = "form-control", name = "QuizAns6", style = "width:15px;height:15px;" })b) Show commitment to work with them.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="dope6">d) Give personal attention and affirm their position.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns6, "c) Suggest they are right and show appreciation.", new { @class = "form-control", name = "QuizAns6", style = "width:15px;height:15px;" })c) Suggest they are right and show appreciation.</label>
+                        </div>
+                        <div class="radio">
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns6, "d) Give personal attention and affirm their position.", new { @class = "form-control", name = "QuizAns6", style = "width:15px;height:15px;" })d) Give personal attention and affirm their position.</label>
                         </div>
                     </td>
                 </tr>
@@ -232,27 +182,27 @@
                     <td>
                         7. What is the population of New Zealand?
                         <br />
-                        <input name="population" class="p54txtbox form-control" type="text" style="width:500px;" />
+                        @Html.TextBoxFor(modelItem => Model.QuizAns7, new { @class = "form-control", style="width:600px" })
                         <br />
                         8. What is the name of the Dutch explorer that came in 1642?
                         <br />
-                        <input name="dutchname" class="p54txtbox form-control" type="text" style="width:500px;" />
+                       @Html.TextBoxFor(modelItem => Model.QuizAns8, new { @class = "form-control", style = "width:600px" })
                         <br />
                         9. What was the name of Cook’s Ship
                         <br />
-                        <input name="shipname" class="p54txtbox form-control" type="text" style="width:500px;" />
+                        @Html.TextBoxFor(modelItem => Model.QuizAns9, new { @class = "form-control", style = "width:600px" })
                         <br />
                         10. What year was the Treaty of Waitangi signed?
                         <br />
-                        <input name="treatyyear" class="p54txtbox form-control" type="text" style="width:500px;" />
+                        @Html.TextBoxFor(modelItem => Model.QuizAns10, new { @class = "form-control", style = "width:600px" })
                         <br />
                         11. What is a Hangi?
                         <br />
-                        <input name="hangi" class="p54txtbox form-control" type="text" style="width:800px;" />
+                        @Html.TextBoxFor(modelItem => Model.QuizAns11, new { @class = "form-control", style = "width:600px" })
                         <br />
                         12. What is a Hongi?
                         <br />
-                        <input name="hongi" class="p54txtbox form-control" type="text" style="width:800px;" />
+                        @Html.TextBoxFor(modelItem => Model.QuizAns12, new { @class = "form-control", style = "width:600px" })
                         <br />
                         13. Study the following dialogue between James and Philip.
                         <br />James: “I’m planning a party at my bach. The cuzzies will be coming. Would you like to come? Don't forget to pack your togs and sunnies.”
@@ -262,27 +212,27 @@
                         <table id="p54TableSlang">
                             <tr>
                                 <td>Bach</td>
-                                <td><input name="slang1" class="p54txtbox form-control" type="text" style="width:500px;" /></td>
+                                <td>@Html.TextBoxFor(modelItem => Model.QuizAns13a, new { @class = "form-control", style = "width:500px" })</td>
                             </tr>
                             <tr>
                                 <td>Cuzzies</td>
-                                <td><input name="slang2" class="p54txtbox form-control" type="text" style="width:500px;" /></td>
+                                <td>@Html.TextBoxFor(modelItem => Model.QuizAns13b, new { @class = "form-control", style = "width:500px" })</td>
                             </tr>
                             <tr>
                                 <td>Togs</td>
-                                <td><input name="slang3" class="p54txtbox form-control" type="text" style="width:500px;" /></td>
+                                <td>@Html.TextBoxFor(modelItem => Model.QuizAns13c, new { @class = "form-control", style = "width:500px" })</td>
                             </tr>
                             <tr>
                                 <td>Sunnies</td>
-                                <td><input name="slang4" class="p54txtbox form-control" type="text" style="width:500px;" /></td>
+                                <td>@Html.TextBoxFor(modelItem => Model.QuizAns13d, new { @class = "form-control", style = "width:500px" })</td>
                             </tr>
                             <tr>
                                 <td>Sweet as</td>
-                                <td><input name="slang5" class="p54txtbox form-control" type="text" style="width:500px;" /></td>
+                                <td>@Html.TextBoxFor(modelItem => Model.QuizAns13e, new { @class = "form-control", style = "width:500px" })</td>
                             </tr>
                             <tr>
                                 <td>Bring a plate</td>
-                                <td><input name="slang6" class="p54txtbox form-control" type="text" style="width:500px;" /></td>
+                                <td>@Html.TextBoxFor(modelItem => Model.QuizAns13f, new { @class = "form-control", style = "width:500px" })</td>
                             </tr>
                         </table>
                     </td>
@@ -292,18 +242,17 @@
                         14. Slang should <strong>NEVER</strong> be used during:
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang7">a) Job interviews.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns14, "a) Job interviews.", new { @class = "form-control", name = "QuizAns14", style = "width:15px;height:15px;" })a) Job interviews.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang7">b) Business report writing.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns14, "b) Business report writing.", new { @class = "form-control", name = "QuizAns14", style = "width:15px;height:15px;" })b) Business report writing.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang7">c) Facebook, blogs, personal websites, texting where official and/or formal matters are discussed.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns14, "c) Facebook, blogs, personal websites, texting where official and/or formal matters are discussed.", new { @class = "form-control", name = "QuizAns14", style = "width:15px;height:15px;" })c) Facebook, blogs, personal websites, texting where official and/or formal matters are discussed.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang7">d) All of the above.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns14, "d) All of the above.", new { @class = "form-control", name = "QuizAns14", style = "width:15px;height:15px;" })d) All of the above.</label>
                         </div>
-                      
                     </td>
                 </tr>
 
@@ -312,18 +261,17 @@
                         15. The correct way of maintaining eye contact with a person is to:
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang8">a) Stare hard at the person’s face.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns15, "a) Stare hard at the person’s face.", new { @class = "form-control", name = "QuizAns15", style = "width:15px;height:15px;" })a) Stare hard at the person’s face.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang8">b) Avoid looking into his /her eyes.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns15, "b) Avoid looking into his /her eyes.", new { @class = "form-control", name = "QuizAns15", style = "width:15px;height:15px;" })b) Avoid looking into his /her eyes.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang8">c) Look the person from top to toe.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns15, "c) Look the person from top to toe.", new { @class = "form-control", name = "QuizAns15", style = "width:15px;height:15px;" })c) Look the person from top to toe.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang8">d) Focus on the area between his/her eyes and chin.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns15, "d) Focus on the area between his/her eyes and chin.", new { @class = "form-control", name = "QuizAns15", style = "width:15px;height:15px;" })d) Focus on the area between his/her eyes and chin.</label>
                         </div>
-                        
                     </td>
                 </tr>
 
@@ -332,16 +280,16 @@
                         16. Which of the following is <strong>INCORRECT</strong> when making conversation /’small talk’?
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang9">a) Be mindful of non-verbal communication e.g. tone, posture.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns16, "a) Be mindful of non-verbal communication e.g. tone, posture.", new { @class = "form-control", name = "QuizAns16", style = "width:15px;height:15px;" })a) Be mindful of non-verbal communication e.g. tone, posture.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang9">b) Keep to general subjects such as salary, money and prices.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns16, "b) Keep to general subjects such as salary, money and prices.", new { @class = "form-control", name = "QuizAns16", style = "width:15px;height:15px;" })b) Keep to general subjects such as salary, money and prices.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang9">c) Avoid personal and sensitive topics, such as a broken marriage.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns16, "c) Avoid personal and sensitive topics, such as a broken marriage.", new { @class = "form-control", name = "QuizAns16", style = "width:15px;height:15px;" })c) Avoid personal and sensitive topics, such as a broken marriage.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang9">d) Avoid ‘threatening type’ or questions with right or wrong answers.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns16, "d) Avoid ‘threatening type’ or questions with right or wrong answers.", new { @class = "form-control", name = "QuizAns16", style = "width:15px;height:15px;" })d) Avoid ‘threatening type’ or questions with right or wrong answers.</label>
                         </div>
                     </td>
                 </tr>
@@ -356,18 +304,17 @@
                         17. Taking the initiative, not imposing limits on ourselves and focusing on our Circle of Influence describes the habit of:
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang10">a) Be Proactive.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns17, "a) Be Proactive.", new { @class = "form-control", name = "QuizAns17", style = "width:15px;height:15px;" })a) Be Proactive.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang10">b) Think Win-Win.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns17, "b) Think Win-Win.", new { @class = "form-control", name = "QuizAns17", style = "width:15px;height:15px;" })b) Think Win-Win.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang10">c) Put First Things First.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns17, "c) Put First Things First.", new { @class = "form-control", name = "QuizAns17", style = "width:15px;height:15px;" })c) Put First Things First.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang10">d) Seek First to Understand, Then To Be Understood.</label>
+                            <label>@Html.RadioButtonFor(modelItem => Model.QuizAns17, "d) Seek First to Understand, Then To Be Understood.", new { @class = "form-control", name = "QuizAns17", style = "width:15px;height:15px;" })d) Seek First to Understand, Then To Be Understood.</label>
                         </div>
-                       
                     </td>
                 </tr>
 
@@ -376,16 +323,16 @@
                         18. Deeply understand through empathic listening and put ourselves in the other party’s shoes describes the habit of:
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang11">a) Synergise.</label>
+                            <label><input type="radio" name="QuizAns18">a) Synergise.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang11">b) Be Proactive.</label>
+                            <label><input type="radio" name="QuizAns18">b) Be Proactive.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang11">c) Think Win-Win.</label>
+                            <label><input type="radio" name="QuizAns18">c) Think Win-Win.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang11">d) Seek First to Understand, Then to Be Understood.</label>
+                            <label><input type="radio" name="QuizAns18">d) Seek First to Understand, Then to Be Understood.</label>
                         </div>
                        
                     </td>
@@ -396,16 +343,16 @@
                         19. Taking care of our physical well-being and keeping our mind sharp by reading and writing describes the habit of:
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang12">a) Synergise.</label>
+                            <label><input type="radio" name="QuizAns19">a) Synergise.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang12">b) Think Win-Win.</label>
+                            <label><input type="radio" name="QuizAns19">b) Think Win-Win.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang12">c) Sharpen the Saw.</label>
+                            <label><input type="radio" name="QuizAns19">c) Sharpen the Saw.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang12">d) Put First Things First.</label>
+                            <label><input type="radio" name="QuizAns19">d) Put First Things First.</label>
                         </div>
                        
                     </td>
@@ -415,16 +362,16 @@
                         20. In ‘Who Moved My Cheese?’, which of the following statements is <strong>CORRECT</strong>?
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="slang13">a) Moving beyond fear can make you feel free.</label>
+                            <label><input type="radio" name="QuizAns20">a) Moving beyond fear can make you feel free.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang13">b) Able to imagine enjoying new cheese even before finding it can lead you to it.</label>
+                            <label><input type="radio" name="QuizAns20">b) Able to imagine enjoying new cheese even before finding it can lead you to it.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang13">c) The quicker you let go of the old cheese, the sooner you can find new cheese.</label>
+                            <label><input type="radio" name="QuizAns20">c) The quicker you let go of the old cheese, the sooner you can find new cheese.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="slang13">d) All of the above.</label>
+                            <label><input type="radio" name="QuizAns20">d) All of the above.</label>
                         </div>
                        
                     </td>
@@ -436,15 +383,15 @@
                         <div class="form-inline">
                             21. In goal setting, what does the acronym SMART stands for:
                             <br />
-                            S&nbsp;<input name="smart1" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            S&nbsp;<input name="QuizAns21a" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            M&nbsp;<input name="smart2" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            M&nbsp;<input name="QuizAns21b" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            A&nbsp;<input name="smart3" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            A&nbsp;<input name="QuizAns21c" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            R&nbsp;<input name="smart4" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            R&nbsp;<input name="QuizAns21d" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            T&nbsp;<input name="smart5" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            T&nbsp;<input name="QuizAns21e" class="p54txtbox form-control" type="text" style="width:400px;" />
                             </div>
 </td>
                 </tr>
@@ -455,9 +402,9 @@
                 <tr>
                     <td>
                         <div class="form-inline">
-                            22. The ‘Rock, Pebbles and Sand’ story demonstrates P<input name="self1" class="p54txtbox form-control" type="text" style="width:200px;" /> as a self-management tool/technique.
+                            22. The ‘Rock, Pebbles and Sand’ story demonstrates P<input name="QuizAns22" class="p54txtbox form-control" type="text" style="width:200px;" /> as a self-management tool/technique.
                             <br />
-                            23. The video clip ‘Eat the Frog’ encourages us to do today what needs to be done and not P<input name="self2" class="p54txtbox form-control" type="text" style="width:200px;" />.
+                            23. The video clip ‘Eat the Frog’ encourages us to do today what needs to be done and not P<input name="QuizAns23" class="p54txtbox form-control" type="text" style="width:200px;" />.
                             <br />
                             </div>
 </td>
@@ -473,16 +420,16 @@
                         24. Which one of the following statements is <strong>TRUE</strong> about consensus building?
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="think1">a) There cannot be any compromising among team members.</label>
+                            <label><input type="radio" name="QuizAns24">a) There cannot be any compromising among team members.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="think1">b) Support for a decision does not require unconditional support.</label>
+                            <label><input type="radio" name="QuizAns24">b) Support for a decision does not require unconditional support.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="think1">c) There must be a unanimous vote and everyone must be 100% satisfied.</label>
+                            <label><input type="radio" name="QuizAns24">c) There must be a unanimous vote and everyone must be 100% satisfied.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="think1">d) Consensus is finding an acceptable proposal that all members can support.</label>
+                            <label><input type="radio" name="QuizAns24">d) Consensus is finding an acceptable proposal that all members can support.</label>
                         </div>
                      
                     </td>
@@ -492,16 +439,16 @@
                         25. Which one of the following statements is <strong>TRUE</strong> about consensus building?
                         <br />
                         <div class="radio">
-                            <label><input type="radio" name="think2">a) Disagreeing is not allowed.</label>
+                            <label><input type="radio" name="QuizAns25">a) Disagreeing is not allowed.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="think2">b) Separate the issue from the personalities.</label>
+                            <label><input type="radio" name="QuizAns25">b) Separate the issue from the personalities.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="think2">c) It is not necessary for everyone to understand the topic or problem.</label>
+                            <label><input type="radio" name="QuizAns25">c) It is not necessary for everyone to understand the topic or problem.</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="think2">d) There is no point in contributing ideas and knowledge related to the subject if it is going
+                            <label><input type="radio" name="QuizAns25">d) There is no point in contributing ideas and knowledge related to the subject if it is going
                         to lead to disagreement.</label>
                         </div>
                        
@@ -513,13 +460,13 @@
                         26. List Tuckman’s four stages of group development?
                         <br />
                         <div class="form-inline">
-                            Stage1&nbsp;<input name="stage1" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            Stage1&nbsp;<input name="QuizAns26a" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            Stage2&nbsp;<input name="stage2" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            Stage2&nbsp;<input name="QuizAns26b" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            Stage3&nbsp;<input name="stage3" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            Stage3&nbsp;<input name="QuizAns26c" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
-                            Stage4&nbsp;<input name="stage4" class="p54txtbox form-control" type="text" style="width:400px;" />
+                            Stage4&nbsp;<input name="QuizAns26d" class="p54txtbox form-control" type="text" style="width:400px;" />
                             <br />
                         </div>
 </td>
@@ -532,14 +479,19 @@
                         <br />III. Address conflict
                         <br />IV. Express feeling
                         <br />
-                        <input name="r27" type="radio" style="width:30px;" />&nbsp;a) I and II only
-                        <br />
-                        <input name="r27" type="radio" style="width:30px;" />&nbsp;b) I, II and III only
-                        <br />
-                        <input name="r27" type="radio" style="width:30px;" />&nbsp;c) I, II and IV only
-                        <br />
-                        <input name="r27" type="radio" style="width:30px;" />&nbsp;d) All of the above
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns27">a) I and II only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns27">b) I, II and III only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns27">c) I, II and IV only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns27">d) All of the above</label>
+                        </div>
+                        
                     </td>
                 </tr>
 
@@ -551,14 +503,18 @@
                     <td>
                         28. Which of the following statements about communication is <strong>TRUE</strong>?
                         <br />
-                        <input name="r28" type="radio" style="width:30px;" />&nbsp;a) We communicate mainly with words.
-                        <br />
-                        <input name="r28" type="radio" style="width:30px;" />&nbsp;b) The best communication is a one-way message.
-                        <br />
-                        <input name="r28" type="radio" style="width:30px;" />&nbsp;c) Non-verbal communication is also referred to as body language.
-                        <br />
-                        <input name="r28" type="radio" style="width:30px;" />&nbsp;d) None of the above.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns28">a) We communicate mainly with words.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns28">b) The best communication is a one-way message.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns28">c) Non-verbal communication is also referred to as body language.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns28">d) None of the above.</label>
+                       </div>
                     </td>
                 </tr>
 
@@ -567,15 +523,15 @@
                     <td>
                         29. List five types of barriers to communication
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns29a" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns29b" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns29c" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns29d" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns29e" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
                     </td>
                 </tr>
@@ -587,14 +543,19 @@
                     <td>
                         30. Which of the following is a rule for brainstorming?
                         <br />
-                        <input name="r30" type="radio" style="width:30px;" />&nbsp;a) Let ideas incubate - allow them to ‘hatch’.
-                        <br />
-                        <input name="r30" type="radio" style="width:30px;" />&nbsp;b) Write down only those ideas that will be used.
-                        <br />
-                        <input name="r30" type="radio" style="width:30px;" />&nbsp;c) Generate only ideas that are realistic and relevant.
-                        <br />
-                        <input name="r30" type="radio" style="width:30px;" />&nbsp;d) Those members with no experience are not expected to participate.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns30">a) Let ideas incubate - allow them to ‘hatch’.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns30">b) Write down only those ideas that will be used.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns30">c) Generate only ideas that are realistic and relevant.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns30">d) Those members with no experience are not expected to participate.</label>
+                        </div>
+                        
                     </td>
                 </tr>
                 <tr>
@@ -608,30 +569,36 @@
                         III. Everyone to participate by taking turns if necessary.
                         <br />
                         IV. Choose a facilitator to scribe, involve and operate rules.
+
                         <br />
-                        <input name="r31" type="radio" style="width:30px;" />&nbsp;a) I and II only
-                        <br />
-                        <input name="r31" type="radio" style="width:30px;" />&nbsp;b) I, II and IV only.
-                        <br />
-                        <input name="r31" type="radio" style="width:30px;" />&nbsp;c) I, III and IV only.
-                        <br />
-                        <input name="r31" type="radio" style="width:30px;" />&nbsp;d) All of the above.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns31">a) I and II only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns31">b) I, II and IV only.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns31">c) I, III and IV only.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns31">d) All of the above.</label>
+                        </div>
+                        
                     </td>
                 </tr>
                 <tr>
                     <td>
                         32. List five uses of Mind Mapping
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns32a" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns32b" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns32c" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns32d" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns32e" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
                     </td>
                 </tr>
@@ -640,17 +607,17 @@
                     <td>
                         33. What are the colours of the six (thinking) hats and what do they represent?
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns33a" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns33b" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns33c" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns33d" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns33e" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
-                        &nbsp;<input class="p54txtbox" type="text" style="width:400px;" />
+                        &nbsp;<input name="QuizAns33f" class="p54txtbox form-control" type="text" style="width:400px;" />
                         <br />
                     </td>
                 </tr>
@@ -658,46 +625,63 @@
                     <td>
                         34. Causes of conflict include:
                         <br />
-                        <input name="r34" type="radio" style="width:30px;" />&nbsp;a) Poor communication.
-                        <br />
-                        <input name="r34" type="radio" style="width:30px;" />&nbsp;b) Personality differences.
-                        <br />
-                        <input name="r34" type="radio" style="width:30px;" />&nbsp;c) Difference in perceptions.
-                        <br />
-                        <input name="r34" type="radio" style="width:30px;" />&nbsp;d) All of the above.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns34">a) Poor communication.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns34">b) Personality differences.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns34">c) Difference in perceptions.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns34">d) All of the above.</label>
+                        </div>
+                        
                     </td>
                 </tr>
                 <tr>
                     <td>
                         35. In situations where harmony is extremely important, the issue is not as important to you as it is to the other person, and you are willing to let others learn by mistake, the conflict management style to use is:
                         <br />
-                        <input name="r35" type="radio" style="width:30px;" />&nbsp;a) Fox.
-                        <br />
-                        <input name="r35" type="radio" style="width:30px;" />&nbsp;b) Owl.
-                        <br />
-                        <input name="r35" type="radio" style="width:30px;" />&nbsp;c) Shark.
-                        <br />
-                        <input name="r35" type="radio" style="width:30px;" />&nbsp;d) Turtle.
-                        <br />
-                        <input name="r35" type="radio" style="width:30px;" />&nbsp;e) Teddy Bear.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns35">a) Fox.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns35">b) Owl.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns35">c) Shark.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns35">d) Turtle.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns35">e) Teddy Bear.</label>
+                        </div>
+                       
                     </td>
                 </tr>
                 <tr>
                     <td>
                         36. In situations where you know you are right and where time is short and a quick decision is needed, the conflict management style to use is:
                         <br />
-                        <input name="r36" type="radio" style="width:30px;" />&nbsp;a) Fox.
-                        <br />
-                        <input name="r36" type="radio" style="width:30px;" />&nbsp;b) Owl.
-                        <br />
-                        <input name="r36" type="radio" style="width:30px;" />&nbsp;c) Shark.
-                        <br />
-                        <input name="r36" type="radio" style="width:30px;" />&nbsp;d) Turtle.
-                        <br />
-                        <input name="r1" type="radio" style="width:30px;" />&nbsp;e) Teddy Bear.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns36">a) Fox.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns36">b) Owl.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns36">c) Shark.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns36">d) Turtle.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns36">e) Teddy Bear.</label>
+                        </div>
+                       
 
                     </td>
                 </tr>
@@ -713,15 +697,19 @@
                         <br />III. What strengths you should consider making stronger to further enhance your ability to pursue your goals..
                         <br />IV. What weaknesses you need to improve on, or manage, so that they don’t impede your goal setting.
                         <br />
-                        <input name="r37" type="radio" style="width:30px;" />&nbsp;a) I and II only
-                        <br />
-                        <input name="r37" type="radio" style="width:30px;" />&nbsp;b) III and IV only
-                        <br />
-                        <input name="r37" type="radio" style="width:30px;" />&nbsp;c) I and III only
-                        <br />
-                        <input name="r37" type="radio" style="width:30px;" />&nbsp;d) All of the above
-                        <br />
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns37">a) I and II only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns37">b) III and IV only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns37">c) I and III only</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns37">d) All of the above</label>
+                        </div>
+                     
                     </td>
                 </tr>
 
@@ -729,14 +717,19 @@
                     <td>
                         38. In the FISH! Philosophy, lending a helping hand, giving words of encouragement and offering to listen best describe which of the following concept?
                         <br />
-                        <input name="r38" type="radio" style="width:30px;" />&nbsp;a) Play!
-                        <br />
-                        <input name="r38" type="radio" style="width:30px;" />&nbsp;b) Make Their Day
-                        <br />
-                        <input name="r38" type="radio" style="width:30px;" />&nbsp;c) Be There/Be Present
-                        <br />
-                        <input name="r38" type="radio" style="width:30px;" />&nbsp;d) Choose Your Attitude
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns38">a) Play!</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns38">b) Make Their Day</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns38">c) Be There/Be Present</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns38">d) Choose Your Attitude</label>
+                        </div>
+                       
                     </td>
                 </tr>
 
@@ -745,14 +738,21 @@
                     <td>
                         39. In the FISH! Philosophy, being totally focused, listening deeply and showing enthusiasm and dedication describe which of the following concept?
                         <br />
-                        <input name="r39" type="radio" style="width:30px;" />&nbsp;a) Play!
-                        <br />
-                        <input name="r39" type="radio" style="width:30px;" />&nbsp;b) Make Their Day
-                        <br />
-                        <input name="r39" type="radio" style="width:30px;" />&nbsp;c) Be There/Be Present
-                        <br />
-                        <input name="r39" type="radio" style="width:30px;" />&nbsp;d) Choose Your Attitude
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns39">a) Play!</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns39">b) Make Their Day</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns39">c) Be There/Be Present</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns39">d) Choose Your Attitude</label>
+                        </div>
+
+
+                    
                     </td>
                 </tr>
 
@@ -761,26 +761,60 @@
                     <td>
                         40. Which of the following statements about Choosing Your Attitude is FALSE?
                         <br />
-                        <input name="r40" type="radio" style="width:30px;" />&nbsp;a) Choose to look for the best in everything.
-                        <br />
-                        <input name="r40" type="radio" style="width:30px;" />&nbsp;b) It’s about accepting full responsibility for all of our choices.
-                        <br />
-                        <input name="r40" type="radio" style="width:30px;" />&nbsp;c) With positive attitude comes potential problems and threats.
-                        <br />
-                        <input name="r40" type="radio" style="width:30px;" />&nbsp;d) Attitude is a choice you can make, even if you can’t choose the work you do.
-                        <br />
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns40">a) Choose to look for the best in everything.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns40">b) It’s about accepting full responsibility for all of our choices.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns40">c) With positive attitude comes potential problems and threats.</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="QuizAns40">d) Attitude is a choice you can make, even if you can’t choose the work you do.</label>
+                        </div>
+
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 
-    <div style="text-align:center; margin-top: 20px;">
-        @Html.ActionLink("Previous Page", "Page48") |
-        @Html.ActionLink("Main", "Index")
-    </div>
+    if (Model.StudentActivity.ProgressValue != 100)
+    {
+        <div style="text-align: center; margin-top:20px;" class="form-group`">
+            <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+        </div>
+    }
+
+    
 }
 
 
 
 
+<div style="text-align:center; margin-top: 20px;">
+    @Html.ActionLink("Previous Page", "Page48") |
+    @Html.ActionLink("Main", "Index")
+</div>
+
+
+@section Scripts {
+
+<script type="text/javascript">
+
+    //confirmation dialog
+    $('form').submit(function (e) {
+        var currentForm = this;
+        e.preventDefault();
+        bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+            if (result)
+                currentForm.submit();
+            return true;
+        });
+    });
+
+</script>
+
+
+}

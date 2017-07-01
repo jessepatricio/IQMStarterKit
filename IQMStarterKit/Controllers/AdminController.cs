@@ -273,8 +273,9 @@ namespace IQMStarterKit.Controllers
         // DELETE: /Admin/DeleteRole
         #region DELETE DeleteRole
         [Authorize(Roles = "Administrator")]
-        public ActionResult DeleteRole(string userName, string roleName)
+        public ActionResult DeleteRole(string roleName)
         {
+            string userName = Request.QueryString["Email"].ToString();
             try
             {
                 if ((userName == null) || (roleName == null))
@@ -307,7 +308,9 @@ namespace IQMStarterKit.Controllers
 
                 ViewBag.AddRole = new SelectList(RolesUserIsNotIn(userName));
 
-                return RedirectToAction("EditRoles", new { UserName = userName });
+                var objUserAndRoles = GetUserAndRoles(user.Email);
+
+                return RedirectToAction("EditRoles", objUserAndRoles).WithSuccess("Role deleted successfully!");
             }
             catch (Exception ex)
             {

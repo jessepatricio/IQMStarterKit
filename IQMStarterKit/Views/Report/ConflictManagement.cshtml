@@ -1,15 +1,13 @@
-﻿@model  IEnumerable<IQMStarterKit.Models.DiscViewModel>
+﻿@model  IEnumerable<IQMStarterKit.Models.Report.ConflictManagementViewModel>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="container1">
 
-        <div class="page-header"><h4>DISC Report <small>(Dominant, Influential, Steady, and Conscientious)</small></h4></div>
+        <div class="page-header"><h4>Conflict Management<small></small></h4></div>
 
-        @*<div class="col-md-12">
-                @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
-            </div>*@
+    
 
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs">Export</button>
@@ -17,8 +15,8 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "DiscReport" })</li>
-                <li>@Html.ActionLink("PDF", "RotativaExportToPDF", new { @reportName = "DiscReport" })</li>
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "ConflictManagementReport" })</li>
+                <li>@Html.ActionLink("PDF", "ConflictManagementExportToPDF", new { @reportName = "ConflictManagementReport" })</li>
                 <li><a href="javascript:window.print()">Print</a></li>
             </ul>
         </div>
@@ -28,7 +26,8 @@
             <thead>
                 <tr>
                     <th>Student Name</th>
-                    <th>DISC Result</th>
+                    <th>First Dominant</th>
+                    <th>Second Dominant</th>
                     <th>Group Name</th>
                     <th>DateTime Taken</th>
                 </tr>
@@ -39,7 +38,8 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(m => item.FullName)</td>
-                        <td>@Html.DisplayFor(m => item.DiscResult)</td>
+                        <td>@Html.DisplayFor(m => item.CFDominantFirst)</td>
+                        <td>@Html.DisplayFor(m => item.CFDominantSecond)</td>
                         <td>@Html.DisplayFor(m => item.GroupName)</td>
                         <td>@Html.DisplayFor(m => item.CreatedDateTime)</td>
                     </tr>

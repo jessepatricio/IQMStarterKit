@@ -55,6 +55,8 @@ namespace IQMStarterKit.Controllers
         {
             //validate is user already submitted a survey
             var cur_user = GetSessionUserId();
+            var user = UserManager.FindById(cur_user);
+
 
             var rec = _context.ProgramSurveyModel.Where(m => m.CreatedBy == cur_user).FirstOrDefault();
             if (rec != null) return RedirectToAction("ProgramSurvey").WithInfo("You already submitted a programme survey!");
@@ -65,6 +67,7 @@ namespace IQMStarterKit.Controllers
 
             try
             {
+
 
                 var r1 = fc.Get("r1");
                 programSurvey.P1 = int.Parse(r1);
@@ -81,20 +84,22 @@ namespace IQMStarterKit.Controllers
                 var r7 = fc.Get("r7");
                 programSurvey.P7 = int.Parse(r7);
                 var r8 = fc.Get("r8");
-                programSurvey.POverall = r8;
+                programSurvey.POverall = int.Parse(r8);
                 var r9 = fc.Get("r9");
-                programSurvey.PTimeAllocated = r9;
+                programSurvey.PTimeAllocated = int.Parse(r9);
                 var r10 = fc.Get("r10");
-                programSurvey.PClassSize = r10;
+                programSurvey.PClassSize = int.Parse(r10);
                 var r11 = fc.Get("r11");
-                programSurvey.PClassroom = r11;
+                programSurvey.PClassroom = int.Parse(r11);
 
                 var ProgramComment = fc.Get("ProgramComment");
                 programSurvey.PComment = (ProgramComment == "") ? string.Empty : ProgramComment;
 
+                programSurvey.GroupId = user.GroupId;
+
                 //systems field
-                programSurvey.CreatedBy = User.Identity.GetUserId();
-                programSurvey.ModifiedBy = User.Identity.GetUserId();
+                programSurvey.CreatedBy = user.Id;
+                programSurvey.ModifiedBy = user.Id;
                 programSurvey.CreatedDateTime = DateTime.Now;
                 programSurvey.ModifiedDateTime = DateTime.Now;
 
@@ -136,6 +141,7 @@ namespace IQMStarterKit.Controllers
         {
             //validate if user submitting duplicate survey
             var cur_user = GetSessionUserId();
+            var user = UserManager.FindById(cur_user);
 
             string newTutor = Convert.ToString(Request.Form["AddTutor"]);
 
@@ -162,11 +168,13 @@ namespace IQMStarterKit.Controllers
             var r8 = fc.Get("r8");
             tutorSurvey.T8 = int.Parse(r8);
             var r9 = fc.Get("r9");
-            tutorSurvey.TOverall = r9;
+            tutorSurvey.TOverall = int.Parse(r9);
 
             var TutorComment = fc.Get("TutorComment");
             tutorSurvey.TutorId = newTutor;
             tutorSurvey.TComment = (TutorComment == "") ? string.Empty : TutorComment;
+
+            tutorSurvey.GroupId = user.GroupId;
 
             //systems field
             tutorSurvey.CreatedBy = cur_user;

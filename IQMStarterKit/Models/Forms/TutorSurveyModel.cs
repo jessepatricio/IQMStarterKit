@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace IQMStarterKit.Models
 {
@@ -21,8 +18,10 @@ namespace IQMStarterKit.Models
         public int T6 { get; set; }
         public int T7 { get; set; }
         public int T8 { get; set; }
-        public string TOverall { get; set; }
+        public int TOverall { get; set; }
         public string TComment { get; set; }
+
+        public byte GroupId { get; set; }
 
         //system fields
         public string CreatedBy { get; set; }

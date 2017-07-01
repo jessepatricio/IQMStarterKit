@@ -36,9 +36,9 @@
                     @Html.DisplayFor(m => item.RoleName)
                 </td>
                 <td>
-                    @if (item.RoleName.ToLower() != "admin")
+                    @if (item.RoleName.ToLower() != "Administrator")
                 {
-                        @Html.ActionLink("Delete", "DeleteUserRole", new { RoleName = item.RoleName },
+                        @Html.ActionLink("Delete", "DeleteUserRole", new {  RoleName = item.RoleName },
                    new { onclick = "return confirm('Are you sure you want to delete role?');" })
                     }
                 </td>

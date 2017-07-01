@@ -1,15 +1,13 @@
-﻿@model  IEnumerable<IQMStarterKit.Models.DiscViewModel>
+﻿@model  IEnumerable<IQMStarterKit.Models.Report.PersonalLeadershipViewModel>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="container1">
 
-        <div class="page-header"><h4>DISC Report <small>(Dominant, Influential, Steady, and Conscientious)</small></h4></div>
+        <div class="page-header"><h4>Personal Leadership<small></small></h4></div>
 
-        @*<div class="col-md-12">
-                @Html.ActionLink("Excel", "ExportToExcel", new { @class="btn btn-primary"})
-            </div>*@
+    
 
         <div class="btn-group">
             <button type="button" class="btn btn-primary btn-xs">Export</button>
@@ -17,8 +15,8 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "DiscReport" })</li>
-                <li>@Html.ActionLink("PDF", "RotativaExportToPDF", new { @reportName = "DiscReport" })</li>
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "PersonalLeadershipReport" })</li>
+                <li>@Html.ActionLink("PDF", "PersonalLeadershipExportToPDF", new { @reportName = "PersonalLeadershipReport" })</li>
                 <li><a href="javascript:window.print()">Print</a></li>
             </ul>
         </div>
@@ -28,7 +26,7 @@
             <thead>
                 <tr>
                     <th>Student Name</th>
-                    <th>DISC Result</th>
+                    <th>Personal Leadership Score</th>
                     <th>Group Name</th>
                     <th>DateTime Taken</th>
                 </tr>
@@ -39,7 +37,7 @@
                 {
                     <tr>
                         <td>@Html.DisplayFor(m => item.FullName)</td>
-                        <td>@Html.DisplayFor(m => item.DiscResult)</td>
+                        <td>@Html.DisplayFor(m => item.PersonalLeadershipScore)</td>
                         <td>@Html.DisplayFor(m => item.GroupName)</td>
                         <td>@Html.DisplayFor(m => item.CreatedDateTime)</td>
                     </tr>

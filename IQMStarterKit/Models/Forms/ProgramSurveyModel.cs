@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace IQMStarterKit.Models
 {
@@ -19,11 +16,14 @@ namespace IQMStarterKit.Models
         public int P5 { get; set; }
         public int P6 { get; set; }
         public int P7 { get; set; }
-        public string POverall{ get; set; }
-        public string PTimeAllocated { get; set; }
-        public string PClassSize { get; set; }
-        public string PClassroom { get; set; }
+        public int POverall { get; set; }
+        public int PTimeAllocated { get; set; }
+        public int PClassSize { get; set; }
+        public int PClassroom { get; set; }
         public string PComment { get; set; }
+
+        public byte GroupId { get; set; }
+
 
         //system fields
         public string CreatedBy { get; set; }

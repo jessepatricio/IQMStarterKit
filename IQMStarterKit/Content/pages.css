@@ -627,20 +627,20 @@ tr.p10_11TabRow{
 }
 .p48Int {
     position: absolute;
-    top: 50px;
+    top: 35px;
     left: 400px;
 
 }
 .p48Habit5 {
     position: absolute;
-    top: 90px;
-    left: 295px;
+    top: 88px;
+    left: 290px;
     color: white;
 }
 .p48Habit6 {
     position: absolute;
-    top: 90px;
-    left: 545px;
+    top: 88px;
+    left: 542px;
     color: white;
 }
 .p48P1 {
@@ -651,14 +651,14 @@ tr.p10_11TabRow{
 }
 .p48Habit4 {
     position: absolute;
-    top: 250px;
-    left: 420px;
+    top: 242px;
+    left: 418px;
     color: white;
 }
 .p48In {
     position: absolute;
     top: 380px;
-    left: 410px;
+    left: 400px;
 }
 .p48Habit3 {
     position: absolute;

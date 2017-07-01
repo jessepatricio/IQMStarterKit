@@ -104,6 +104,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Introduction
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             return View();
         }
 
@@ -111,6 +125,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Programme Objectives
             // type: slide
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -118,6 +146,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Chance favours the prepared mind
             // type: slide
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -125,6 +167,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Is yours a 'prepared mind?'
             // type: slide
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -132,6 +188,21 @@ namespace IQMStarterKit.Controllers
         {
             // title:  You will be experiencing many new things
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -139,6 +210,21 @@ namespace IQMStarterKit.Controllers
         {
             // title: Course Requirements
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -146,6 +232,21 @@ namespace IQMStarterKit.Controllers
         {
             // title: Attendance Issues
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -153,6 +254,21 @@ namespace IQMStarterKit.Controllers
         {
             // title: Student Services Contact Details
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -160,6 +276,21 @@ namespace IQMStarterKit.Controllers
         {
             // title: About the Programme
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -167,6 +298,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Topics
             // type: slide
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -174,6 +319,21 @@ namespace IQMStarterKit.Controllers
         {
             // title: Effective Soft Skill
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -181,6 +341,21 @@ namespace IQMStarterKit.Controllers
         {
             // title: You may be interested
             // type: slide
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("Introduction");
+
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             TempData["Page13Completed"] = true;
 
             return View();
@@ -266,7 +441,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("My Shield");
+            var activityId = GetTempActivityID("My Shield");
             //get owner
             string owner2 = string.Empty;
             //check if viewing other user
@@ -280,8 +455,18 @@ namespace IQMStarterKit.Controllers
                 var sel_user = UserManager.FindByEmail(email);
                 owner2 = sel_user.Id;
             }
+
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner2, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner2);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner2);
 
             if (stdAct2 != null)
             {
@@ -430,6 +615,14 @@ namespace IQMStarterKit.Controllers
             // get Current User
             var user = GetSessionUserId();
 
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(user, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
 
@@ -532,6 +725,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Tutor-Student Contract
             // type: Slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -539,6 +746,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Classroom Rules
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -546,6 +767,19 @@ namespace IQMStarterKit.Controllers
         {
             // title: Classroom Rules
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             return View();
         }
 
@@ -553,6 +787,19 @@ namespace IQMStarterKit.Controllers
         {
             // title: Classroom Rules
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             return View();
         }
 
@@ -560,6 +807,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Classroom Rules
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -567,6 +828,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Electronics Etiquette
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             return View();
         }
 
@@ -574,6 +849,19 @@ namespace IQMStarterKit.Controllers
         {
             // title: Classroom Rules
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             return View();
         }
 
@@ -581,6 +869,20 @@ namespace IQMStarterKit.Controllers
         {
             // title: Classroom Rules
             // type: slide
+
+            //validate if record already existed
+            byte activityId = GetTempActivityID("Class Contract");
+
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             TempData["Page22Completed"] = true;
             return View();
         }
@@ -604,11 +906,11 @@ namespace IQMStarterKit.Controllers
                         //validate if record already existed
                         var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Class Contract");
 
-                        var owner = GetSessionUserId();
+                        var owner2 = GetSessionUserId();
                         // check if record already existed
                         var stdAct =
                             _context.StudentActivities.Where(m => m.TempActivityId == tempAct.TempActivityId &&
-                                                                  m.CreatedBy == owner);
+                                                                  m.CreatedBy == owner2);
                         //go directly to view
                         if (!stdAct.Any())
                         {
@@ -664,10 +966,18 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("VARK");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -770,16 +1080,23 @@ namespace IQMStarterKit.Controllers
 
             // title: Human Bingo - Activity
             // type: FileSubmission
-
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("Human Bingo - Activity");
+            var activityId = GetTempActivityID("Human Bingo - Activity");
+
             //get owner
             var owner = GetSessionUserId();
-            //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
 
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            //validate in studentActivity
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -918,11 +1235,20 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("Photo Scavenger Hunt");
+            var activityId = GetTempActivityID("Photo Scavenger Hunt");
             //get owner
             var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -1068,10 +1394,19 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Personal Profiling - D.O.P.E.");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1163,10 +1498,19 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Personal Profiling - D.I.S.C.");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1257,10 +1601,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Kiwiana - Activity");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1372,10 +1723,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("NZ Slang and Saying");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1472,10 +1830,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Cheese");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1583,10 +1948,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("My 14 Habits for More Effective Me");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1697,10 +2069,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Think Like a CEO");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1812,10 +2191,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Personal Values");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1909,10 +2295,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Personal Leadership");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -1997,10 +2390,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Goal Setting (Personal Leadership Plan)");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -2106,10 +2506,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Goal Setting (Winning Lottery)");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -2221,10 +2628,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Self-Management");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -2268,7 +2682,7 @@ namespace IQMStarterKit.Controllers
                 newRecord.TempActivityId = activityId;
                 newRecord.TempModuleId = moduleId;
                 newRecord.Context = context;
-                newRecord.PersonalLeaderShipScore = selfManagement.TotalScore;
+                newRecord.SelfManagementScore = selfManagement.TotalScore;
                 newRecord.ProgressValue = 100;
                 newRecord.Type = ActivityCategory.Score;
 
@@ -2287,12 +2701,12 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page34").WithSuccess("Saved successfully! " + $"You scored {selfManagement.TotalScore} points");
+                return RedirectToAction("Page37").WithSuccess("Saved successfully! " + $"You scored {selfManagement.TotalScore} points");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Page34").WithError(ex.Message);
+                return RedirectToAction("Page37").WithError(ex.Message);
             }
 
         }
@@ -2307,11 +2721,18 @@ namespace IQMStarterKit.Controllers
             FirstThingFirstViewModel firstThing = new FirstThingFirstViewModel();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("First Thing First");
+            var activityId = GetTempActivityID("First Thing First");
             //get owner
             var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -2556,12 +2977,16 @@ namespace IQMStarterKit.Controllers
             PresentationEvaluationModel presentation = new PresentationEvaluationModel();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("Presentations");
+            var activityId = GetTempActivityID("Presentations");
             //get owner
             var owner = GetSessionUserId();
 
+            //check if config locked for student
             if (User.IsInRole("Student"))
             {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+
                 //validate presentation evaluation record
                 presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == owner);
 
@@ -2652,8 +3077,180 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page40()
         {
-            return View();
+            // title: Lost At Sea - Activity
+            // type: Form Check Submission
+
+            var lost = new LostAtSeaViewModel();
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("Lost At Sea - Activity");
+
+            // get Current User
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                var own = JsonConvert.DeserializeObject<LostAtSeaViewModel>(rec.Context);
+
+                lost.OwnLostAtSea = own.OwnLostAtSea;
+                if (rec.ProgressValue == 100)
+                {
+                    lost.GroupLostAtSea = own.GroupLostAtSea;
+                }
+                lost.StudentActivity = rec;
+            }
+
+            return View(lost);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page40(FormCollection fc)
+        {
+            var mainLostSea = new LostAtSeaViewModel();
+            var ownLostSea = new OwnLostAtSeaActivityClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page40").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("Lost At Sea - Activity");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+
+                //validate if own were submitted
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+
+                if (studentRecord == null)
+                {
+                    //first submission
+                    //generate context string from form collection
+
+                    ownLostSea.O_Sextant = fc.Get("OwnLostAtSea.O_Sextant").ToString();
+                    ownLostSea.O_Mirror = fc.Get("OwnLostAtSea.O_Mirror").ToString();
+                    ownLostSea.O_Net = fc.Get("OwnLostAtSea.O_Net").ToString();
+                    ownLostSea.O_Water = fc.Get("OwnLostAtSea.O_Water").ToString();
+                    ownLostSea.O_Rations = fc.Get("OwnLostAtSea.O_Rations").ToString();
+                    ownLostSea.O_Map = fc.Get("OwnLostAtSea.O_Map").ToString();
+                    ownLostSea.O_Cushion = fc.Get("OwnLostAtSea.O_Cushion").ToString();
+                    ownLostSea.O_Oil = fc.Get("OwnLostAtSea.O_Oil").ToString();
+                    ownLostSea.O_Radio = fc.Get("OwnLostAtSea.O_Radio").ToString();
+                    ownLostSea.O_Sheet = fc.Get("OwnLostAtSea.O_Sheet").ToString();
+                    ownLostSea.O_Repellent = fc.Get("OwnLostAtSea.O_Repellent").ToString();
+                    ownLostSea.O_Rum = fc.Get("OwnLostAtSea.O_Rum").ToString();
+                    ownLostSea.O_Rope = fc.Get("OwnLostAtSea.O_Rope").ToString();
+                    ownLostSea.O_Chocolate = fc.Get("OwnLostAtSea.O_Chocolate").ToString();
+                    ownLostSea.O_FishKit = fc.Get("OwnLostAtSea.O_FishKit").ToString();
+
+                    //add to main class
+                    mainLostSea.OwnLostAtSea = ownLostSea;
+
+                    // serialize to json format for context store
+                    string context = JsonConvert.SerializeObject(mainLostSea);
+
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 50;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    var grpLostSea = new GroupLostAtSeaActivityClass();
+                    //generate context string from form collection
+
+                    grpLostSea.G_Sextant = fc.Get("GroupLostAtSea.G_Sextant").ToString();
+                    grpLostSea.G_Mirror = fc.Get("GroupLostAtSea.G_Mirror").ToString();
+                    grpLostSea.G_Net = fc.Get("GroupLostAtSea.G_Net").ToString();
+                    grpLostSea.G_Water = fc.Get("GroupLostAtSea.G_Water").ToString();
+                    grpLostSea.G_Rations = fc.Get("GroupLostAtSea.G_Rations").ToString();
+                    grpLostSea.G_Map = fc.Get("GroupLostAtSea.G_Map").ToString();
+                    grpLostSea.G_Cushion = fc.Get("GroupLostAtSea.G_Cushion").ToString();
+                    grpLostSea.G_Oil = fc.Get("GroupLostAtSea.G_Oil").ToString();
+                    grpLostSea.G_Radio = fc.Get("GroupLostAtSea.G_Radio").ToString();
+                    grpLostSea.G_Sheet = fc.Get("GroupLostAtSea.G_Sheet").ToString();
+                    grpLostSea.G_Repellent = fc.Get("GroupLostAtSea.G_Repellent").ToString();
+                    grpLostSea.G_Rum = fc.Get("GroupLostAtSea.G_Rum").ToString();
+                    grpLostSea.G_Rope = fc.Get("GroupLostAtSea.G_Rope").ToString();
+                    grpLostSea.G_Chocolate = fc.Get("GroupLostAtSea.G_Chocolate").ToString();
+                    grpLostSea.G_FishKit = fc.Get("GroupLostAtSea.G_FishKit").ToString();
+
+                    //get previous object saved and deserialize
+                    var lostContext = JsonConvert.DeserializeObject<LostAtSeaViewModel>(studentRecord.Context);
+                    lostContext.GroupLostAtSea = grpLostSea;
+
+                    // serialize to json format for context store
+                    string context = JsonConvert.SerializeObject(lostContext);
+
+                    studentRecord.ProgressValue = 100;
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                    // record overall progress
+                    ComputeOverallProgress();
+
+
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page40").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(ownLostSea).WithError(ex.Message);
+            }
+        }
+
+
+
+
+
+
+
         public ActionResult Page41()
         {
             // title: Lost At Sea - Activity
@@ -2665,10 +3262,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Lost At Sea - Journal");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -2770,11 +3374,19 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("Problem Solving - Dots");
+            var activityId = GetTempActivityID("Problem Solving - Dots");
             //get owner
             var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -2904,9 +3516,6 @@ namespace IQMStarterKit.Controllers
         }
 
 
-
-
-
         public ActionResult Page43()
         {
 
@@ -2916,11 +3525,19 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("Problem Solving - Cake");
+            var activityId = GetTempActivityID("Problem Solving - Cake");
             //get owner
             var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -3061,10 +3678,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Brainstorming");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3222,11 +3846,19 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityID = GetTempActivityID("Draw Mind Map");
+            var activityId = GetTempActivityID("Draw Mind Map");
             //get owner
             var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityID && m.CreatedBy == owner);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -3367,10 +3999,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Conflict");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3456,10 +4095,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Personal SWOT");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3551,12 +4197,127 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page48()
         {
-            return View();
+            // title: Maturity Continuum
+            // type: FormSubmission
+
+            var mc = new MaturityContinuumClass();
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("The Maturity Continuum");
+            //get owner
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+            //validate in studentActivity
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                mc = JsonConvert.DeserializeObject<MaturityContinuumClass>(rec.Context);
+                mc.StudentActivity = rec;
+            }
+            return View(mc);
         }
-        public ActionResult Page49()
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page48(FormCollection fc)
         {
-            return View();
+            var mc = new MaturityContinuumClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page48").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("The Maturity Continuum");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                mc.Int = fc.Get("Int").ToString();
+                mc.Habit5 = fc.Get("Habit5").ToString();
+                mc.Habit6 = fc.Get("Habit6").ToString();
+                mc.Habit4 = fc.Get("Habit4").ToString();
+
+                mc.In = fc.Get("In").ToString();
+
+                mc.Habit3 = fc.Get("Habit3").ToString();
+                mc.Habit1 = fc.Get("Habit1").ToString();
+                mc.Habit2 = fc.Get("Habit2").ToString();
+
+                mc.De = fc.Get("De").ToString();
+                mc.Habit7 = fc.Get("Habit7").ToString();
+                mc.Habit8 = fc.Get("Habit8").ToString();
+
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(mc);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page48").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(mc).WithError(ex.Message);
+            }
         }
+
+
+
+
         public ActionResult Page50()
         {
             // title: Pass the Ball - Journal
@@ -3568,10 +4329,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Pass the Ball - Journal");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3678,10 +4446,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Closed Fist - Journal");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3787,10 +4562,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Helium Stick - Journal");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3897,10 +4679,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Follow my Instructions - Journal");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -3996,10 +4785,36 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult Page54()
         {
-            return View();
+            // title: Review Quiz
+            // type: Scoring
+            var reviewQuiz = new ReviewQuizClass();
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("Evaluation - Review Quiz");
+
+            // get Current User
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                reviewQuiz = JsonConvert.DeserializeObject<ReviewQuizClass>(rec.Context);
+                reviewQuiz.StudentActivity = rec;
+            }
+
+            return View(reviewQuiz);
         }
-
-
 
 
         public ActionResult Page55()
@@ -4014,10 +4829,17 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("How Assertive are your messages?");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -4559,6 +5381,19 @@ namespace IQMStarterKit.Controllers
             if (chk6 == "on") personals += "," + customval6;
 
             return personals;
+        }
+
+        private string IsActivityLocked(string owner, byte activityID)
+        {
+            //check if config locked for student
+
+            var user = UserManager.FindById(owner);
+            var isLocked = _context.GroupActivityConfig.Where(m => m.TempActivityId == activityID && m.GroupId == user.GroupId).Select(m => m.IsLocked).FirstOrDefault();
+
+            if (isLocked) return "The activity you have selected is currently locked!";
+
+
+            return "";
         }
 
 
