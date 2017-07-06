@@ -216,6 +216,28 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        public ActionResult ReviewQuiz()
+        {
+            Session["email"] = null;
+            var modelList = GetReviewQuiz();
+
+            return View(modelList);
+        }
+
+        public ActionResult ReviewQuizExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+            var modelList = GetReviewQuiz();
+
+            return new ViewAsPdf("ReviewQuiz", modelList) { FileName = fileName };
+
+        }
+
+
 
 
         //progress
@@ -1029,6 +1051,35 @@ namespace IQMStarterKit.Controllers
 
             return modelList;
         }
+
+        public List<ReviewQuizViewModel> GetReviewQuiz()
+        {
+            // activity 48 review quiz
+            var dt = DataLayer.GetActivityResult(48);
+            var modelList = new List<ReviewQuizViewModel>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new ReviewQuizViewModel
+                {
+
+                    TempActivityId = item["TempActivityId"].ToString(),
+                    ReviewQuizScore = item["ReviewQuizScore"].ToString(),
+                    CreatedBy = item["CreatedBy"].ToString(),
+                    CreatedDateTime = item["CreatedDateTime"].ToString(),
+                    GroupId = item["GroupId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString()
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return modelList;
+        }
+
 
     }
 }

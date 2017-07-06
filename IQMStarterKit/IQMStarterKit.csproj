@@ -512,6 +512,7 @@
     <Compile Include="Models\Report\GroupFeedbackProgramme.cs" />
     <Compile Include="Models\Report\PersonalLeadershipViewModel.cs" />
     <Compile Include="Models\Report\AssertivenessViewModel.cs" />
+    <Compile Include="Models\Report\ReviewQuizViewModel.cs" />
     <Compile Include="Models\Report\SelfManagementViewModel.cs" />
     <Compile Include="Models\Report\GroupActivityPercentage.cs" />
     <Compile Include="Models\Report\Top3ValuesViewModel.cs" />
@@ -1028,6 +1029,7 @@
     <Content Include="Views\Report\GroupFeedbackProgramme.cshtml" />
     <Content Include="Views\Report\GroupFeedbackTutor.cshtml" />
     <Content Include="Views\Report\GroupActivityPercentage.cshtml" />
+    <Content Include="Views\Report\ReviewQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

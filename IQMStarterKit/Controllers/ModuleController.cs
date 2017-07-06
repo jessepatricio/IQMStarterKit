@@ -3043,9 +3043,6 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("Page39").WithInfo("This is just a demo.");
             }
 
-
-
-
             try
             {
 
@@ -3059,9 +3056,36 @@ namespace IQMStarterKit.Controllers
                 //insert record
                 _context.PresentationEvaluationModel.Add(presentation);
 
+                //add record to student activity table
+
+                //get temp activity id by title
+                //note: title should be the same with the search keyword when using lamda expression
+                byte activityId = GetTempActivityID("Presentations");
+                //get module id
+                var moduleId = GetTempModuleIdByActivityID(activityId);
+                //get current user
+
+                var newRecord = new StudentActivity();
+                newRecord.TempActivityId = activityId;
+                newRecord.TempModuleId = moduleId;
+                newRecord.Context = "";
+                newRecord.ProgressValue = 100;
+                newRecord.Type = ActivityCategory.FormSubmission;
+
+                //system fields
+                newRecord.CreatedBy = presentation.StudentId;
+                newRecord.CreatedDateTime = DateTime.Now;
+                newRecord.ModifiedBy = presentation.StudentId;
+                newRecord.ModifiedDateTime = DateTime.Now;
+
+                //insert record
+                _context.StudentActivities.Add(newRecord);
 
                 // save record
                 _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
 
                 return RedirectToAction("Page39").WithSuccess("Saved successfully!");
             }
@@ -4788,33 +4812,284 @@ namespace IQMStarterKit.Controllers
             // title: Review Quiz
             // type: Scoring
             var reviewQuiz = new ReviewQuizClass();
+            //ViewBag.ActDone = false;
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
             byte activityId = GetTempActivityID("Evaluation - Review Quiz");
 
             // get Current User
-            var owner = GetSessionUserId();
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
+            var user = GetSessionUserId();
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
 
             if (rec != null)
             {
-                //get context and deserialize
-                reviewQuiz = JsonConvert.DeserializeObject<ReviewQuizClass>(rec.Context);
+
                 reviewQuiz.StudentActivity = rec;
+
             }
 
             return View(reviewQuiz);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Page54(FormCollection fc)
+        {
+            var reviewQuiz = new ReviewQuizClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("Page54").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("Evaluation - Review Quiz");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                reviewQuiz.QuizAns1a = fc.Get("QuizAns1a").ToString();
+                reviewQuiz.QuizAns1a_Exp = fc.Get("QuizAns1a_Exp").ToString();
+                reviewQuiz.QuizAns1b = fc.Get("QuizAns1b").ToString();
+                reviewQuiz.QuizAns1b_Exp = fc.Get("QuizAns1b_Exp").ToString();
+                reviewQuiz.QuizAns1c = fc.Get("QuizAns1c").ToString();
+                reviewQuiz.QuizAns1c_Exp = fc.Get("QuizAns1c_Exp").ToString();
+                reviewQuiz.QuizAns1d = fc.Get("QuizAns1d").ToString();
+                reviewQuiz.QuizAns1d_Exp = fc.Get("QuizAns1d_Exp").ToString();
+
+                if (fc.Get("QuizAns2") != null)
+                {
+                    reviewQuiz.QuizAns2 = fc.Get("QuizAns2").ToString();
+                }
+                if (fc.Get("QuizAns3") != null)
+                {
+                    reviewQuiz.QuizAns3 = fc.Get("QuizAns3").ToString();
+                }
+
+                reviewQuiz.QuizAns4a = fc.Get("QuizAns4a").ToString();
+                reviewQuiz.QuizAns4b = fc.Get("QuizAns4b").ToString();
+                reviewQuiz.QuizAns4c = fc.Get("QuizAns4c").ToString();
+                reviewQuiz.QuizAns4d = fc.Get("QuizAns4d").ToString();
+
+                if (fc.Get("QuizAns5") != null)
+                {
+                    reviewQuiz.QuizAns5 = fc.Get("QuizAns5").ToString();
+                }
+                if (fc.Get("QuizAns6") != null)
+                {
+                    reviewQuiz.QuizAns6 = fc.Get("QuizAns6").ToString();
+                }
+
+                // M2 (Spirit of NZ, NZ My New Home)
+
+                reviewQuiz.QuizAns7 = fc.Get("QuizAns7").ToString();
+                reviewQuiz.QuizAns8 = fc.Get("QuizAns8").ToString();
+                reviewQuiz.QuizAns9 = fc.Get("QuizAns9").ToString();
+                reviewQuiz.QuizAns10 = fc.Get("QuizAns10").ToString();
+                reviewQuiz.QuizAns11 = fc.Get("QuizAns11").ToString();
+                reviewQuiz.QuizAns12 = fc.Get("QuizAns12").ToString();
+
+                reviewQuiz.QuizAns13a = fc.Get("QuizAns13a").ToString();
+                reviewQuiz.QuizAns13b = fc.Get("QuizAns13b").ToString();
+                reviewQuiz.QuizAns13c = fc.Get("QuizAns13c").ToString();
+                reviewQuiz.QuizAns13d = fc.Get("QuizAns13d").ToString();
+                reviewQuiz.QuizAns13e = fc.Get("QuizAns13e").ToString();
+                reviewQuiz.QuizAns13f = fc.Get("QuizAns13f").ToString();
+
+                if (fc.Get("QuizAns14") != null)
+                {
+                    reviewQuiz.QuizAns14 = fc.Get("QuizAns14").ToString();
+                }
+                if (fc.Get("QuizAns15") != null)
+                {
+                    reviewQuiz.QuizAns15 = fc.Get("QuizAns15").ToString();
+                }
+                if (fc.Get("QuizAns16") != null)
+                {
+                    reviewQuiz.QuizAns16 = fc.Get("QuizAns16").ToString();
+                }
+
+                // M3 (Be Proactive, Begin with the End in Mind)
+                if (fc.Get("QuizAns17") != null)
+                {
+                    reviewQuiz.QuizAns17 = fc.Get("QuizAns17").ToString();
+                }
+                if (fc.Get("QuizAns18") != null)
+                {
+                    reviewQuiz.QuizAns18 = fc.Get("QuizAns18").ToString();
+                }
+                if (fc.Get("QuizAns19") != null)
+                {
+                    reviewQuiz.QuizAns19 = fc.Get("QuizAns19").ToString();
+                }
+                if (fc.Get("QuizAns20") != null)
+                {
+                    reviewQuiz.QuizAns20 = fc.Get("QuizAns20").ToString();
+                }
+
+                reviewQuiz.QuizAns21a = fc.Get("QuizAns21a").ToString();
+                reviewQuiz.QuizAns21b = fc.Get("QuizAns21b").ToString();
+                reviewQuiz.QuizAns21c = fc.Get("QuizAns21c").ToString();
+                reviewQuiz.QuizAns21d = fc.Get("QuizAns21d").ToString();
+                reviewQuiz.QuizAns21e = fc.Get("QuizAns21e").ToString();
+
+                // M4 (Put First Things First)
+
+                reviewQuiz.QuizAns22 = fc.Get("QuizAns22").ToString();
+                reviewQuiz.QuizAns23 = fc.Get("QuizAns23").ToString();
+
+                // M5 (Think win win)
+                if (fc.Get("QuizAns24") != null)
+                {
+                    reviewQuiz.QuizAns24 = fc.Get("QuizAns24").ToString();
+                }
+                if (fc.Get("QuizAns25") != null)
+                {
+                    reviewQuiz.QuizAns25 = fc.Get("QuizAns25").ToString();
+                }
+
+                reviewQuiz.QuizAns26a = fc.Get("QuizAns26a").ToString();
+                reviewQuiz.QuizAns26b = fc.Get("QuizAns26b").ToString();
+                reviewQuiz.QuizAns26c = fc.Get("QuizAns26c").ToString();
+                reviewQuiz.QuizAns26d = fc.Get("QuizAns26d").ToString();
+
+                if (fc.Get("QuizAns27") != null)
+                {
+                    reviewQuiz.QuizAns27 = fc.Get("QuizAns27").ToString();
+                }
+
+                // M6 (Seek first)
+                if (fc.Get("QuizAns28") != null)
+                {
+                    reviewQuiz.QuizAns28 = fc.Get("QuizAns28").ToString();
+                }
+
+                reviewQuiz.QuizAns29a = fc.Get("QuizAns29a").ToString();
+                reviewQuiz.QuizAns29b = fc.Get("QuizAns29b").ToString();
+                reviewQuiz.QuizAns29c = fc.Get("QuizAns29c").ToString();
+                reviewQuiz.QuizAns29d = fc.Get("QuizAns29d").ToString();
+                reviewQuiz.QuizAns29e = fc.Get("QuizAns29e").ToString();
+
+
+                // M7 (Synergise)
+                if (fc.Get("QuizAns30") != null)
+                {
+                    reviewQuiz.QuizAns30 = fc.Get("QuizAns30").ToString();
+                }
+                if (fc.Get("QuizAns31") != null)
+                {
+                    reviewQuiz.QuizAns31 = fc.Get("QuizAns31").ToString();
+                }
+
+                reviewQuiz.QuizAns32a = fc.Get("QuizAns32a").ToString();
+                reviewQuiz.QuizAns32b = fc.Get("QuizAns32b").ToString();
+                reviewQuiz.QuizAns32c = fc.Get("QuizAns32c").ToString();
+                reviewQuiz.QuizAns32d = fc.Get("QuizAns32d").ToString();
+                reviewQuiz.QuizAns32e = fc.Get("QuizAns32e").ToString();
+
+                reviewQuiz.QuizAns33a = fc.Get("QuizAns33a").ToString();
+                reviewQuiz.QuizAns33b = fc.Get("QuizAns33b").ToString();
+                reviewQuiz.QuizAns33c = fc.Get("QuizAns33c").ToString();
+                reviewQuiz.QuizAns33d = fc.Get("QuizAns33d").ToString();
+                reviewQuiz.QuizAns33e = fc.Get("QuizAns33e").ToString();
+                reviewQuiz.QuizAns33f = fc.Get("QuizAns33f").ToString();
+
+                if (fc.Get("QuizAns34") != null)
+                {
+                    reviewQuiz.QuizAns34 = fc.Get("QuizAns34").ToString();
+                }
+                if (fc.Get("QuizAns35") != null)
+                {
+                    reviewQuiz.QuizAns35 = fc.Get("QuizAns35").ToString();
+                }
+                if (fc.Get("QuizAns36") != null)
+                {
+                    reviewQuiz.QuizAns36 = fc.Get("QuizAns36").ToString();
+                }
+
+                // M8 (Sharpen the saw) 
+                if (fc.Get("QuizAns37") != null)
+                {
+                    reviewQuiz.QuizAns37 = fc.Get("QuizAns37").ToString();
+                }
+                if (fc.Get("QuizAns38") != null)
+                {
+                    reviewQuiz.QuizAns38 = fc.Get("QuizAns38").ToString();
+                }
+                if (fc.Get("QuizAns39") != null)
+                {
+                    reviewQuiz.QuizAns39 = fc.Get("QuizAns39").ToString();
+                }
+                if (fc.Get("QuizAns40") != null)
+                {
+                    reviewQuiz.QuizAns40 = fc.Get("QuizAns40").ToString();
+                }
+                //validate answer
+                reviewQuiz = ValidateQuiz(reviewQuiz);
+
+
+
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(reviewQuiz);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ReviewQuizScore = reviewQuiz.TotalScore;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.Score;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("Page54").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Page54", reviewQuiz).WithError(ex.Message);
+            }
+        }
+
 
 
         public ActionResult Page55()
@@ -4942,10 +5217,15 @@ namespace IQMStarterKit.Controllers
         {
             try
             {
-
-
                 //get logged user id
                 var cur_user = GetSessionUserId();
+
+                if (Session["email"] != null)
+                {
+                    var student = UserManager.FindByEmail(Session["email"].ToString());
+                    cur_user = student.Id;
+                }
+               
                 //get logged user activities count
                 var totalStudentActivities = _context.StudentActivities.Where(m => m.CreatedBy == cur_user).Count();
                 //get total activities
@@ -5395,6 +5675,193 @@ namespace IQMStarterKit.Controllers
 
             return "";
         }
+
+        private ReviewQuizClass LoadQuizAnswers()
+        {
+            var retval = new ReviewQuizClass();
+
+            retval.QuizAns1a = "visual";
+            retval.QuizAns1b = "auditory";
+            retval.QuizAns1c = "reading";
+            retval.QuizAns1d = "kinesthetic";
+            retval.QuizAns2 = "b";
+            retval.QuizAns3 = "a";
+            retval.QuizAns4a = "owl";
+            retval.QuizAns4b = "dove";
+            retval.QuizAns4c = "eagle";
+            retval.QuizAns4d = "peacock";
+            retval.QuizAns5 = "d";
+            retval.QuizAns6 = "a";
+            retval.QuizAns7 = "4.7 million";
+            retval.QuizAns8 = "Abel Tasman";
+            retval.QuizAns9 = "the endeavour";
+            retval.QuizAns10 = "1840";
+            retval.QuizAns11 = "traditional, cooking";
+            retval.QuizAns12 = "traditional, greeting";
+            retval.QuizAns13a = "a basic holiday home";
+            retval.QuizAns13b = "relatives";
+            retval.QuizAns13c = "bathing suit";
+            retval.QuizAns13d = "sunglasses";
+            retval.QuizAns13e = " great, excellent";
+            retval.QuizAns13f = "bring a plate of food to share";
+            retval.QuizAns14 = "d";
+            retval.QuizAns15 = "d";
+            retval.QuizAns16 = "b";
+            retval.QuizAns17 = "a";
+            retval.QuizAns18 = "d";
+            retval.QuizAns19 = "c";
+            retval.QuizAns20 = "d";
+            retval.QuizAns21a = "specific";
+            retval.QuizAns21b = "measurable";
+            retval.QuizAns21c = "achievable";
+            retval.QuizAns21d = "realistic";
+            retval.QuizAns21e = "time bound";
+            retval.QuizAns22 = "prioritizing";
+            retval.QuizAns23 = "procastinate";
+            retval.QuizAns24 = "d";
+            retval.QuizAns25 = "b";
+            retval.QuizAns26a = "forming";
+            retval.QuizAns26b = "storming";
+            retval.QuizAns26c = "norming";
+            retval.QuizAns26d = "performing";
+            retval.QuizAns27 = "d";
+            retval.QuizAns28 = "c";
+            retval.QuizAns29a = "noise, physical distance, internal attitude, emotions, stress,environmental conditions, different interpretations, language, poor listening habits,perception";
+            retval.QuizAns29b = "noise, physical distance, internal attitude, emotions, stress,environmental conditions, different interpretations, language, poor listening habits,perception";
+            retval.QuizAns29c = "noise, physical distance, internal attitude, emotions, stress,environmental conditions, different interpretations, language, poor listening habits,perception";
+            retval.QuizAns29d = "noise, physical distance, internal attitude, emotions, stress,environmental conditions, different interpretations, language, poor listening habits,perception";
+            retval.QuizAns29e = "noise, physical distance, internal attitude, emotions, stress,environmental conditions, different interpretations, language, poor listening habits,perception";
+            retval.QuizAns30 = "d";
+            retval.QuizAns31 = "c";
+            retval.QuizAns32a = "mote taking, problem solving, studying and memorising information, planning, researching and consolidating information,presenting information, simplifying complex subjects";
+            retval.QuizAns32b = "mote taking, problem solving, studying and memorising information, planning, researching and consolidating information,presenting information, simplifying complex subjects";
+            retval.QuizAns32c = "mote taking, problem solving, studying and memorising information, planning, researching and consolidating information,presenting information, simplifying complex subjects";
+            retval.QuizAns32d = "mote taking, problem solving, studying and memorising information, planning, researching and consolidating information,presenting information, simplifying complex subjects";
+            retval.QuizAns32e = "note taking, problem solving, studying and memorising information, planning, researching and consolidating information,presenting information, simplifying complex subjects";
+            retval.QuizAns33a = "hat";
+            retval.QuizAns33b = "hat";
+            retval.QuizAns33c = "hat";
+            retval.QuizAns33d = "hat";
+            retval.QuizAns33e = "hat";
+            retval.QuizAns33f = "hat";
+            retval.QuizAns34 = "d";
+            retval.QuizAns35 = "e";
+            retval.QuizAns36 = "c";
+            retval.QuizAns37 = "d";
+            retval.QuizAns38 = "b";
+            retval.QuizAns39 = "c";
+            retval.QuizAns40 = "c";
+
+            return retval;
+        }
+
+        private ReviewQuizClass ValidateQuiz(ReviewQuizClass retval)
+        {
+            var answer = LoadQuizAnswers();
+
+            if (retval.QuizAns1a.ToLower().Trim().Contains(answer.QuizAns1a.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns1b.ToLower().Trim().Contains(answer.QuizAns1b.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns1c.ToLower().Trim().Contains(answer.QuizAns1c.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns1d.ToLower().Trim().Contains(answer.QuizAns1d.ToLower().Trim())) retval.TotalScore += 1;
+
+            if (retval.QuizAns2 != null && retval.QuizAns2.ToLower().Trim() == answer.QuizAns2.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns3 != null && retval.QuizAns3.ToLower().Trim() == answer.QuizAns3.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns4a.ToLower().Trim() == answer.QuizAns4a.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns4b.ToLower().Trim() == answer.QuizAns4b.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns4c.ToLower().Trim() == answer.QuizAns4c.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns4d.ToLower().Trim() == answer.QuizAns4d.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns5 != null && retval.QuizAns5.ToLower().Trim() == answer.QuizAns5.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns6 != null && retval.QuizAns6.ToLower().Trim() == answer.QuizAns6.ToLower().Trim()) retval.TotalScore += 1;
+
+
+            if (retval.QuizAns7.ToLower().Trim().Contains(answer.QuizAns7.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns8.ToLower().Trim().Contains(answer.QuizAns8.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns9.ToLower().Trim().Contains(answer.QuizAns9.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns10.ToLower().Trim().Contains(answer.QuizAns10.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns11.ToLower().Trim().Contains(answer.QuizAns11.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns12.ToLower().Trim().Contains(answer.QuizAns12.ToLower().Trim())) retval.TotalScore += 1;
+
+            if (retval.QuizAns13a.ToLower().Trim() != "" && answer.QuizAns13a.ToLower().Trim().Contains(retval.QuizAns13a.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns13b.ToLower().Trim() != "" && answer.QuizAns13b.ToLower().Trim().Contains(retval.QuizAns13b.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns13c.ToLower().Trim() != "" && answer.QuizAns13c.ToLower().Trim().Contains(retval.QuizAns13c.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns13d.ToLower().Trim() != "" && answer.QuizAns13d.ToLower().Trim().Contains(retval.QuizAns13d.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns13e.ToLower().Trim() != "" && answer.QuizAns13e.ToLower().Trim().Contains(retval.QuizAns13e.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns13f.ToLower().Trim() != "" && answer.QuizAns13f.ToLower().Trim().Contains(retval.QuizAns13f.ToLower().Trim())) retval.TotalScore += 1;
+
+            if (retval.QuizAns14 != null && retval.QuizAns14.ToLower().Trim() == answer.QuizAns14.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns15 != null && retval.QuizAns15.ToLower().Trim() == answer.QuizAns15.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns16 != null && retval.QuizAns16.ToLower().Trim() == answer.QuizAns16.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns17 != null && retval.QuizAns17.ToLower().Trim() == answer.QuizAns17.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns18 != null && retval.QuizAns18.ToLower().Trim() == answer.QuizAns18.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns19 != null && retval.QuizAns19.ToLower().Trim() == answer.QuizAns19.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns20 != null && retval.QuizAns20.ToLower().Trim() == answer.QuizAns20.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns21a.ToLower().Trim() == answer.QuizAns21a.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns21b.ToLower().Trim() == answer.QuizAns21b.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns21c.ToLower().Trim() == answer.QuizAns21c.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns21d.ToLower().Trim() == answer.QuizAns21d.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns21e.ToLower().Trim() == answer.QuizAns21e.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns22.ToLower().Trim() == answer.QuizAns22.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns23.ToLower().Trim() == answer.QuizAns23.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns24 != null && retval.QuizAns24.ToLower().Trim() == answer.QuizAns24.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns25 != null && retval.QuizAns25.ToLower().Trim() == answer.QuizAns25.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns26a.ToLower().Trim() == answer.QuizAns26a.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns26b.ToLower().Trim() == answer.QuizAns26b.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns26c.ToLower().Trim() == answer.QuizAns26c.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns26d.ToLower().Trim() == answer.QuizAns26d.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns27 != null && retval.QuizAns27.ToLower().Trim() == answer.QuizAns27.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns28 != null && retval.QuizAns28.ToLower().Trim() == answer.QuizAns28.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns29a.ToLower().Trim() != "" && answer.QuizAns29a.ToLower().Trim().Contains(retval.QuizAns29a.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns29b.ToLower().Trim() != "" && answer.QuizAns29b.ToLower().Trim().Contains(retval.QuizAns29b.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns29c.ToLower().Trim() != "" && answer.QuizAns29c.ToLower().Trim().Contains(retval.QuizAns29c.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns29d.ToLower().Trim() != "" && answer.QuizAns29d.ToLower().Trim().Contains(retval.QuizAns29d.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns29e.ToLower().Trim() != "" && answer.QuizAns29e.ToLower().Trim().Contains(retval.QuizAns29e.ToLower().Trim())) retval.TotalScore += 1;
+
+            if (retval.QuizAns30 != null && retval.QuizAns30.ToLower().Trim() == answer.QuizAns30.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns31 != null && retval.QuizAns31.ToLower().Trim() == answer.QuizAns31.ToLower().Trim()) retval.TotalScore += 1;
+
+            if (retval.QuizAns32a.ToLower().Trim() != "" && answer.QuizAns32a.ToLower().Trim().Contains(retval.QuizAns32a.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns32b.ToLower().Trim() != "" && answer.QuizAns32b.ToLower().Trim().Contains(retval.QuizAns32b.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns32c.ToLower().Trim() != "" && answer.QuizAns32c.ToLower().Trim().Contains(retval.QuizAns32c.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns32d.ToLower().Trim() != "" && answer.QuizAns32d.ToLower().Trim().Contains(retval.QuizAns32d.ToLower().Trim())) retval.TotalScore += 1;
+            if (retval.QuizAns32e.ToLower().Trim() != "" && answer.QuizAns32e.ToLower().Trim().Contains(retval.QuizAns32e.ToLower().Trim())) retval.TotalScore += 1;
+
+            if (CheckHat(retval.QuizAns33a.ToLower().Trim())) retval.TotalScore += 1;
+            if (CheckHat(retval.QuizAns33b.ToLower().Trim())) retval.TotalScore += 1;
+            if (CheckHat(retval.QuizAns33c.ToLower().Trim())) retval.TotalScore += 1;
+            if (CheckHat(retval.QuizAns33d.ToLower().Trim())) retval.TotalScore += 1;
+            if (CheckHat(retval.QuizAns33e.ToLower().Trim())) retval.TotalScore += 1;
+            if (CheckHat(retval.QuizAns33f.ToLower().Trim())) retval.TotalScore += 1;
+
+
+            if (retval.QuizAns34 != null && retval.QuizAns34.ToLower().Trim() == answer.QuizAns34.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns35 != null && retval.QuizAns35.ToLower().Trim() == answer.QuizAns35.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns36 != null && retval.QuizAns36.ToLower().Trim() == answer.QuizAns36.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns37 != null && retval.QuizAns37.ToLower().Trim() == answer.QuizAns37.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns38 != null && retval.QuizAns38.ToLower().Trim() == answer.QuizAns38.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns39 != null && retval.QuizAns39.ToLower().Trim() == answer.QuizAns39.ToLower().Trim()) retval.TotalScore += 1;
+            if (retval.QuizAns40 != null && retval.QuizAns40.ToLower().Trim() == answer.QuizAns40.ToLower().Trim()) retval.TotalScore += 1;
+            return retval;
+        }
+
+        private bool CheckHat(string answer)
+        {
+            if (answer.Contains("white")) return true;
+            if (answer.Contains("red")) return true;
+            if (answer.Contains("blue")) return true;
+            if (answer.Contains("yellow")) return true;
+            if (answer.Contains("green")) return true;
+            if (answer.Contains("black")) return true;
+            return false;
+        }
+
 
 
     }

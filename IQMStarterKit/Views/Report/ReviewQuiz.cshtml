@@ -1,0 +1,70 @@
+﻿@model  IEnumerable<IQMStarterKit.Models.Report.ReviewQuizViewModel>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container1">
+
+        <div class="page-header"><h4>Evaluation - Review Quiz<small></small></h4></div>
+
+    
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-xs">Export</button>
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>@Html.ActionLink("Excel", "ExportToExcel", new { @reportName = "ReviewQuizReport" })</li>
+                <li>@Html.ActionLink("PDF", "ReviewQuizExportToPDF", new { @reportName = "ReviewQuizReport" })</li>
+                <li><a href="javascript:window.print()">Print</a></li>
+            </ul>
+        </div>
+
+
+        <table id="activity" style="width:100%" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Review Quiz Score</th>
+                    <th>Group Name</th>
+                    <th>DateTime Taken</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.FullName)</td>
+                        <td>@Html.DisplayFor(m => item.ReviewQuizScore)</td>
+                        <td>@Html.DisplayFor(m => item.GroupName)</td>
+                        <td>@Html.DisplayFor(m => item.CreatedDateTime)</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+}
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#activity').DataTable({
+                "bLengthChange": false,
+                "bFilter": true
+
+            });
+
+        });
+    </script>
+
+}
+
+
+
+
