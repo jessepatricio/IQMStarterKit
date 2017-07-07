@@ -202,6 +202,7 @@ tr.p10_11TabRow{
     position: absolute;
     top: 345px;
     width: 197px;
+    resize:none;
 }
 
 #p15Movie {

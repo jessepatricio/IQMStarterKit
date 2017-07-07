@@ -758,9 +758,6 @@
                             <div class="radio">
                                 <label>@Html.RadioButtonFor(modelItem => Model.QuizAns39, "D", new { @class = "form-control", style = "width:15px;height:15px;" })d) Choose Your Attitude</label>
                             </div>
-
-
-
                         </td>
                     </tr>
 
@@ -769,17 +766,19 @@
                         <td>
                             40. Which of the following statements about Choosing Your Attitude is FALSE?
                             <br />
-                            <div class="radio">
-                                <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "A", new { @class = "form-control", style = "width:15px;height:15px;" })a) Choose to look for the best in everything.</label>
-                            </div>
-                            <div class="radio">
-                                <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "B", new { @class = "form-control", style = "width:15px;height:15px;" })b) It’s about accepting full responsibility for all of our choices.</label>
-                            </div>
-                            <div class="radio">
-                                <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "C", new { @class = "form-control", style = "width:15px;height:15px;" })c) With positive attitude comes potential problems and threats.</label>
-                            </div>
-                            <div class="radio">
-                                <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "D", new { @class = "form-control", style = "width:15px;height:15px;" })d) Attitude is a choice you can make, even if you can’t choose the work you do.</label>
+                            <div class="question">
+                                <div class="radio">
+                                    <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "A", new { @class = "form-control", style = "width:15px;height:15px;" })a) Choose to look for the best in everything.</label>
+                                </div>
+                                <div class="radio">
+                                    <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "B", new { @class = "form-control", style = "width:15px;height:15px;" })b) It’s about accepting full responsibility for all of our choices.</label>
+                                </div>
+                                <div class="radio">
+                                    <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "C", new { @class = "form-control", style = "width:15px;height:15px;" })c) With positive attitude comes potential problems and threats.</label>
+                                </div>
+                                <div class="radio">
+                                    <label>@Html.RadioButtonFor(modelItem => Model.QuizAns40, "D", new { @class = "form-control", style = "width:15px;height:15px;" })d) Attitude is a choice you can make, even if you can’t choose the work you do.</label>
+                                </div>
                             </div>
 
                         </td>
@@ -802,16 +801,38 @@
 
 @section Scripts {
 
+
+
     <script type="text/javascript">
+
+        function validate() {
+
+            var all_answered = true;
+            $("input:radio").each(function () {
+                var name = $(this).attr("name");
+                if ($("input:radio[name=" + name + "]:checked").length == 0) {
+                    toastr.warning("At least one question in not answered.: " + name);
+                    return false;
+                }
+            });
+
+            return true;
+           
+        }
 
         //confirmation dialog
         $('form').submit(function (e) {
             var currentForm = this;
             e.preventDefault();
             bootbox.confirm("Are you sure you want to submit your work?", function (result) {
-                if (result)
-                    currentForm.submit();
-                return true;
+                if (result) {
+                    if (validate()) {
+                        currentForm.submit();
+                        //toastr.success('saving...');
+                    }
+                    return true;
+                }
+
             });
         });
 

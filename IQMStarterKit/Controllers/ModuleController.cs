@@ -485,8 +485,7 @@ namespace IQMStarterKit.Controllers
 
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
-
-
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Page14UploadFile(FilePath filepath, UploadFileModel fileModel)
@@ -634,8 +633,7 @@ namespace IQMStarterKit.Controllers
             }
             return View(aboutMe);
         }
-
-
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Page15(FormCollection fc)
@@ -1073,8 +1071,7 @@ namespace IQMStarterKit.Controllers
             }
 
         }
-
-
+        
         public ActionResult Page24()
         {
 
@@ -1257,8 +1254,7 @@ namespace IQMStarterKit.Controllers
 
             return View(filePath);
         }
-
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Page25UploadFile(FilePath filepath, UploadFileModel fileModel)
@@ -2279,9 +2275,7 @@ namespace IQMStarterKit.Controllers
 
 
         }
-
-
-
+        
 
         public ActionResult Page34()
         {
@@ -2613,8 +2607,7 @@ namespace IQMStarterKit.Controllers
 
 
         }
-
-
+        
 
         public ActionResult Page37()
         {
@@ -3138,7 +3131,7 @@ namespace IQMStarterKit.Controllers
 
             return View(lost);
         }
-
+   
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -3268,13 +3261,7 @@ namespace IQMStarterKit.Controllers
                 return View(ownLostSea).WithError(ex.Message);
             }
         }
-
-
-
-
-
-
-
+        
         public ActionResult Page41()
         {
             // title: Lost At Sea - Activity

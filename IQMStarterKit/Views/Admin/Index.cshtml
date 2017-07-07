@@ -55,15 +55,17 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(m => item.FullName)</td>
+                
                 @if (item.GroupId == 0)
                 {
-                    <td>@Html.DisplayFor(m => item.Email)</td>
+                    <td>@Html.DisplayFor(m => item.FullName)</td>
+
                 }
                 else
                 {
-                    <td>@Html.ActionLink(item.Email, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
+                    <td>@Html.ActionLink(item.FullName, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
                 }
+                <td>@Html.DisplayFor(m => item.Email)</td>
                 <td>
                     @if (item.GroupId == 0)
                     {

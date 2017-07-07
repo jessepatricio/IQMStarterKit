@@ -206,7 +206,7 @@
                     </tr>
                     <tr>
                         @Html.HiddenFor(m => m.Answer26, new { @id = "answer26" })
-                        <td><div id="q26" draggable="true" ondragstart="drag(event)" data-value="MATE'S RATE'">MATE'S RATE</div></td>
+                        <td><div id="q26" draggable="true" ondragstart="drag(event)" data-value="MATE'S RATE">MATE'S RATES</div></td>
                         <td style="background-color:gray;"></td>
                         <td><div id="a26" title="answer26" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
                         <td>Hiking</td>
@@ -319,7 +319,7 @@
                         @Html.HiddenFor(m => m.Answer42, new { @id = "answer42" })
                         <td><div id="q42" draggable="true" ondragstart="drag(event)" data-value="TRAMPING">TRAMPING</div></td>
                         <td style="background-color:gray;"></td>
-                        <td><div id="a42" title="answe42" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td><div id="a42" title="answer42" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
                         <td>Great, excellent</td>
                     </tr>
                     <tr>
@@ -408,7 +408,7 @@
                // alert(answer);
                 if (answer != '') return true;
             }
-            toastr.warning("Please try to match any words!");
+            toastr.warning("Please try to match more words!");
             return false;
         }
         
