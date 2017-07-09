@@ -29,7 +29,7 @@
             <div class="form-group">
                 <div class="col-md-12">
                     <div class="col-md-12 form-inline" style="text-align:center; margin-top:20px;">
-                        @if (Model != null && Model.FileName != null && Model.CreatedBy == User.Identity.GetUserId())
+                        @if (Model != null && Model.FileName != null)
                         {
                             @Html.ActionLink("Download File", "Page14DownloadFile", "Module",
                             new { id = Model.StudentActivityId },

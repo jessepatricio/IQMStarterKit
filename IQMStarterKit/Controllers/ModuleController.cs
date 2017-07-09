@@ -111,6 +111,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -130,6 +137,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -152,6 +166,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -172,6 +193,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -195,6 +223,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -216,6 +251,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -239,6 +281,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -260,6 +309,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -283,6 +339,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -303,6 +366,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -326,6 +396,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -347,6 +424,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -382,10 +466,10 @@ namespace IQMStarterKit.Controllers
                         //validate if record already existed
                         var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Introduction");
 
-                        var owner = GetSessionUserId();
+                        var _owner = GetSessionUserId();
                         var stdAct =
                             _context.StudentActivities.Where(m => m.TempActivityId == tempAct.TempActivityId &&
-                                                                  m.CreatedBy == owner);
+                                                                  m.CreatedBy == _owner);
                         //go directly to view
                         if (!stdAct.Any())
                         {
@@ -443,30 +527,26 @@ namespace IQMStarterKit.Controllers
             //get id in tempActivity
             var activityId = GetTempActivityID("My Shield");
             //get owner
-            string owner2 = string.Empty;
-            //check if viewing other user
-            if (Session["email"] == null)
-            {
-                owner2 = GetSessionUserId();
-            }
-            else
-            {
-                var email = Session["email"].ToString();
-                var sel_user = UserManager.FindByEmail(email);
-                owner2 = sel_user.Id;
-            }
+            string owner = GetSessionUserId();
 
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
-                var lockMessage = IsActivityLocked(owner2, activityId);
+                var lockMessage = IsActivityLocked(owner, activityId);
                 if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
             }
 
 
             //validate in studentActivity
-            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner2);
+            var stdAct2 = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (stdAct2 != null)
             {
@@ -485,7 +565,7 @@ namespace IQMStarterKit.Controllers
 
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Page14UploadFile(FilePath filepath, UploadFileModel fileModel)
@@ -612,18 +692,26 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("About Me");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
 
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
-                var lockMessage = IsActivityLocked(user, activityId);
+                var lockMessage = IsActivityLocked(owner, activityId);
                 if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
             }
 
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -633,7 +721,7 @@ namespace IQMStarterKit.Controllers
             }
             return View(aboutMe);
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Page15(FormCollection fc)
@@ -729,6 +817,13 @@ namespace IQMStarterKit.Controllers
 
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -749,6 +844,13 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Class Contract");
 
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -771,6 +873,13 @@ namespace IQMStarterKit.Controllers
 
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -791,6 +900,13 @@ namespace IQMStarterKit.Controllers
 
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -810,6 +926,13 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Class Contract");
 
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -832,6 +955,13 @@ namespace IQMStarterKit.Controllers
 
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -853,6 +983,13 @@ namespace IQMStarterKit.Controllers
 
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -872,6 +1009,13 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Class Contract");
 
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -904,11 +1048,11 @@ namespace IQMStarterKit.Controllers
                         //validate if record already existed
                         var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Class Contract");
 
-                        var owner2 = GetSessionUserId();
+                        var _owner = GetSessionUserId();
                         // check if record already existed
                         var stdAct =
                             _context.StudentActivities.Where(m => m.TempActivityId == tempAct.TempActivityId &&
-                                                                  m.CreatedBy == owner2);
+                                                                  m.CreatedBy == _owner);
                         //go directly to view
                         if (!stdAct.Any())
                         {
@@ -965,6 +1109,14 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -1071,7 +1223,7 @@ namespace IQMStarterKit.Controllers
             }
 
         }
-        
+
         public ActionResult Page24()
         {
 
@@ -1084,6 +1236,13 @@ namespace IQMStarterKit.Controllers
 
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -1236,6 +1395,13 @@ namespace IQMStarterKit.Controllers
             //get owner
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -1254,7 +1420,7 @@ namespace IQMStarterKit.Controllers
 
             return View(filePath);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Page25UploadFile(FilePath filepath, UploadFileModel fileModel)
@@ -1392,6 +1558,13 @@ namespace IQMStarterKit.Controllers
             // get Current User
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -1496,6 +1669,13 @@ namespace IQMStarterKit.Controllers
             // get Current User
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -1598,6 +1778,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -1721,6 +1908,13 @@ namespace IQMStarterKit.Controllers
             // get Current User
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -1827,6 +2021,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -1945,6 +2146,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -2066,6 +2274,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -2189,6 +2404,13 @@ namespace IQMStarterKit.Controllers
             // get Current User
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -2275,7 +2497,7 @@ namespace IQMStarterKit.Controllers
 
 
         }
-        
+
 
         public ActionResult Page34()
         {
@@ -2290,6 +2512,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -2385,6 +2614,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -2502,6 +2738,13 @@ namespace IQMStarterKit.Controllers
             // get Current User
             var owner = GetSessionUserId();
 
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
             //check if config locked for student
             if (User.IsInRole("Student"))
             {
@@ -2607,7 +2850,7 @@ namespace IQMStarterKit.Controllers
 
 
         }
-        
+
 
         public ActionResult Page37()
         {
@@ -2622,6 +2865,13 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -2717,6 +2967,13 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("First Thing First");
             //get owner
             var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -2973,6 +3230,12 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("Presentations");
             //get owner
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -3105,6 +3368,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -3131,7 +3400,7 @@ namespace IQMStarterKit.Controllers
 
             return View(lost);
         }
-   
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -3261,7 +3530,7 @@ namespace IQMStarterKit.Controllers
                 return View(ownLostSea).WithError(ex.Message);
             }
         }
-        
+
         public ActionResult Page41()
         {
             // title: Lost At Sea - Activity
@@ -3274,6 +3543,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -3388,6 +3663,12 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("Problem Solving - Dots");
             //get owner
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -3539,6 +3820,12 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("Problem Solving - Cake");
             //get owner
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -3690,6 +3977,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -3860,6 +4153,12 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("Draw Mind Map");
             //get owner
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4011,6 +4310,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4107,6 +4412,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4217,6 +4528,12 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("The Maturity Continuum");
             //get owner
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4341,6 +4658,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4458,6 +4781,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4574,6 +4903,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4691,6 +5026,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -4806,10 +5147,16 @@ namespace IQMStarterKit.Controllers
             byte activityId = GetTempActivityID("Evaluation - Review Quiz");
 
             // get Current User
-            var user = GetSessionUserId();
+            var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user);
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
@@ -5092,6 +5439,12 @@ namespace IQMStarterKit.Controllers
 
             // get Current User
             var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
 
             //check if config locked for student
             if (User.IsInRole("Student"))
@@ -5212,7 +5565,7 @@ namespace IQMStarterKit.Controllers
                     var student = UserManager.FindByEmail(Session["email"].ToString());
                     cur_user = student.Id;
                 }
-               
+
                 //get logged user activities count
                 var totalStudentActivities = _context.StudentActivities.Where(m => m.CreatedBy == cur_user).Count();
                 //get total activities

@@ -10,7 +10,6 @@ namespace IQMStarterKit.DAL
     {
         private static string connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-
         public static DataTable GetActivityResult(int activityId)
         {
             var retval = new DataTable();

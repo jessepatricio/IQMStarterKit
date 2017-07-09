@@ -92,21 +92,31 @@ namespace IQMStarterKit.Models
 
             // get all users with tutor role
             var users = _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399")).ToList();
-            // get all tutors assigned to the group id
-            var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
 
-            foreach (var user in users)
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-
-                //include only tutors assigned in group
-                var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
-                if (x != null)
-                {
-                    tutors.Add(user);
-                }
-
-
+                //include all tutors assigned in group
+                foreach (var user in users) tutors.Add(user);
             }
+            else
+            {
+                // get all tutors assigned to the group id
+                var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
+                foreach (var user in users)
+                {
+
+                    //include only tutors assigned in group
+                    var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
+                    if (x != null)
+                    {
+                        tutors.Add(user);
+                    }
+
+
+                }
+            }
+
+
 
             return tutors;
         }

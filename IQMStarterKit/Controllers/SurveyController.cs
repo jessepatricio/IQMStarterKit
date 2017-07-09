@@ -53,6 +53,10 @@ namespace IQMStarterKit.Controllers
         [HttpPost]
         public ActionResult ProgramSurvey(FormCollection fc)
         {
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("ProgramSurvey").WithInfo("This is just a demo.");
+            }
             //validate is user already submitted a survey
             var cur_user = GetSessionUserId();
             var user = UserManager.FindById(cur_user);
@@ -139,6 +143,10 @@ namespace IQMStarterKit.Controllers
         [HttpPost]
         public ActionResult TutorSurvey(FormCollection fc)
         {
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("TutorSurvey").WithInfo("This is just a demo.");
+            }
             //validate if user submitting duplicate survey
             var cur_user = GetSessionUserId();
             var user = UserManager.FindById(cur_user);

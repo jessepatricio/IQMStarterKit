@@ -477,7 +477,20 @@ namespace IQMStarterKit.Controllers
             //filter user with tutor's assigned group only
             var tutorId = User.Identity.GetUserId();
 
-            var tutorGroups = _context.GroupTutorModels.Where(m => m.TutorId == tutorId).Select(m => m.GroupId).ToList();
+            List<byte> tutorGroups;
+
+            if (User.IsInRole("Administrator"))
+            {
+                //display all students
+                tutorGroups = _context.GroupTutorModels.Select(m => m.GroupId).ToList();
+
+            }
+            else
+            {
+                //display by group/tutor relation
+                tutorGroups = _context.GroupTutorModels.Where(m => m.TutorId == tutorId).Select(m => m.GroupId).ToList();
+            }
+
 
 
             var users = UserManager.Users.ToList();

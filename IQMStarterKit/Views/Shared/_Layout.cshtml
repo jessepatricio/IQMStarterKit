@@ -65,6 +65,7 @@
                                 <li class="divider"></li>
                                 <li>@Html.ActionLink("Student Progress", "StudentActivityPercentage", "Report")</li>
                                 <li>@Html.ActionLink("Group Progress", "GroupActivityPercentage", "Report")</li>
+                                <li class="divider"></li>
                                 <li>@Html.ActionLink("Programme Feedback", "GroupFeedbackProgramme", "Report")</li>
                                 <li>@Html.ActionLink("Tutor Feedback", "GroupFeedbackTutor", "Report")</li>
 
@@ -75,7 +76,7 @@
                     @if (User.IsInRole("Tutor"))
                     {
 
-                       
+
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course Management<b class="caret"></b></a>
@@ -83,7 +84,6 @@
                                 <li>@Html.ActionLink("Student Progress", "ListStudents", "Admin")</li>
                                 <li>@Html.ActionLink("Course Demo", "CourseDemo", "Module")</li>
                                 <li>@Html.ActionLink("Configure Groups", "Index", "GroupModels")</li>
-                               
                             </ul>
 
                         </li>

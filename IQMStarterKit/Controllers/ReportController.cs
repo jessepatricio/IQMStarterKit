@@ -23,19 +23,20 @@ namespace IQMStarterKit.Controllers
         public ActionResult VARK()
         {
             Session["email"] = null;
-            var modelList = GetVarkModel();
+            var modelList = GetVarkModelAsync();
             return View(modelList);
         }
 
         public ActionResult VARKExportToPDF(string reportName)
         {
 
+
             Session["email"] = null;
 
             var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
             var fileName = reportName + "_" + sffx + ".pdf";
 
-            var modelList = GetVarkModel();
+            var modelList = GetVarkModelAsync();
 
             return new ViewAsPdf("VARK", modelList) { FileName = fileName };
 
@@ -753,10 +754,6 @@ namespace IQMStarterKit.Controllers
 
 
 
-
-
-
-
         public ActionResult PercentageExportToPDF(string reportName)
         {
 
@@ -799,12 +796,11 @@ namespace IQMStarterKit.Controllers
 
 
         // logic
-        public List<VarkViewModel> GetVarkModel()
+        public List<VarkViewModel> GetVarkModelAsync()
         {
             // activity 5 is VARK
             var dt = DataLayer.GetActivityResult(5);
             var modelList = new List<VarkViewModel>();
-
 
             foreach (DataRow item in dt.Rows)
             {
@@ -1079,6 +1075,11 @@ namespace IQMStarterKit.Controllers
 
             return modelList;
         }
+
+
+        //helper
+
+
 
 
     }
