@@ -136,45 +136,45 @@ namespace IQMStarterKit.Controllers.Core
         }
 
         // GET: TempWorkbooks/Delete/5
-        public ActionResult Delete(byte? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
-            if (tempWorkbook == null)
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult Delete(byte? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
+        //    if (tempWorkbook == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            //get user fullname
-            tempWorkbook.CreatedBy = GetFullName(tempWorkbook.CreatedBy);
-            tempWorkbook.ModifiedBy = GetFullName(tempWorkbook.ModifiedBy);
-            return View(tempWorkbook);
-        }
+        //    //get user fullname
+        //    tempWorkbook.CreatedBy = GetFullName(tempWorkbook.CreatedBy);
+        //    tempWorkbook.ModifiedBy = GetFullName(tempWorkbook.ModifiedBy);
+        //    return View(tempWorkbook);
+        //}
 
         // POST: TempWorkbooks/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(byte id)
-        {
-            TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
-            if (tempWorkbook != null) tempWorkbook.IsRemoved = true; //soft delete
-            _context.Entry(tempWorkbook).State = EntityState.Modified;
-            //db.TempWorkbooks.Remove(tempWorkbook);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(byte id)
+        //{
+        //    TempWorkbook tempWorkbook = _context.TempWorkbooks.Find(id);
+        //    if (tempWorkbook != null) tempWorkbook.IsRemoved = true; //soft delete
+        //    _context.Entry(tempWorkbook).State = EntityState.Modified;
+        //    //db.TempWorkbooks.Remove(tempWorkbook);
+        //    _context.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        _context.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
     }
 }

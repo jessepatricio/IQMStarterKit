@@ -1,4 +1,5 @@
-﻿
+﻿@model IQMStarterKit.Models.Forms.Dope
+
 @using (Html.BeginForm("Page26", "Module", FormMethod.Post))
 
 {
@@ -7,32 +8,34 @@
     <div class="container1">
         <h1 class="heading"><u>D.O.P.E Personal Profiling</u></h1>
 
-        @if (ViewBag.ActDone)
+        @if (Model.StudentActivity.ProgressValue == 100)
         {
 
             var explanation = string.Empty;
 
-            if (ViewBag.Dope == "Dove")
+            switch (Model.StudentActivity.DopeResult)
             {
-                explanation = "The peaceful dove. The dove is people-orientated, loyal, friendly, hard-working and a great team player but tends to avoid change, confrontation, risk-taking and assertiveness.";
+                case "Dove":
+                    explanation = "The peaceful dove. The dove is people-orientated, loyal, friendly, hard-working and a great team player but tends to avoid change, confrontation, risk-taking and assertiveness.";
+                    break;
+                case "Owl":
+                    explanation = "The wise owl. The owl is logical, mathematically minded, methodical and sometimes seen as a perfectionist. The owl can be slow to make decisions and inflexible if rules and logic says otherwise. Owls are not big risk takers but love detail.";
+                    break;
+                case "Peacock":
+                    explanation = "The showy peacock. The peacock loves talking, being the center of attention, has passion/ enthusiasm and is happy/ optimistic. Peacocks can be accused of talking too much, and aren’t good with detail or time-control.";
+                    break;
+                case "Eagle":
+                    explanation = "The bold eagle. Eagles are dominant, stimulated by challenge, decisive and direct. Eagles can be blunt/ stubborn, can lose sight of the big-picture and can be insensitive to other people’s needs. Eagles are natural achievers.";
+                    break;
+
             }
-            else if (ViewBag.Dope == "Owl")
-            {
-                explanation = "The wise owl. The owl is logical, mathematically minded, methodical and sometimes seen as a perfectionist. The owl can be slow to make decisions and inflexible if rules and logic says otherwise. Owls are not big risk takers but love detail.";
-            }
-            else if (ViewBag.Dope == "Peacock")
-            {
-                explanation = "The showy peacock. The peacock loves talking, being the center of attention, has passion/ enthusiasm and is happy/ optimistic. Peacocks can be accused of talking too much, and aren’t good with detail or time-control.";
-            }
-            else if (ViewBag.Dope == "Eagle")
-            {
-                explanation = "The bold eagle. Eagles are dominant, stimulated by challenge, decisive and direct. Eagles can be blunt/ stubborn, can lose sight of the big-picture and can be insensitive to other people’s needs. Eagles are natural achievers.";
-            }
+
+            
             <br/><br/>
             <div class="col-md-offset-0 col-md-12">
 
                 <div class="panel panel-info">
-                    <div class="panel-heading">Your DOPE Result: <strong>@ViewBag.Dope</strong></div>
+                    <div class="panel-heading">Your DOPE Result: <strong>@Model.StudentActivity.DopeResult</strong></div>
                     <div class="panel-body">@explanation</div>
                 </div>
 

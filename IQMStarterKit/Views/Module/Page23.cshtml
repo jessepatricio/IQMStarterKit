@@ -10,9 +10,9 @@
            
                 <h1>VARK</h1>
 
-               @if (ViewBag.ActDone)
+               @if (Model.StudentActivity.ProgressValue == 100)
                {
-                    <div class="alert alert-success"> Your VARK Result: <strong>@ViewBag.Vark</strong></div>
+                    <div class="alert alert-success"> Your VARK Result: <strong>@Model.StudentActivity.VarkResult</strong></div>
                         <div class="col-md-offset-0 col-md-12">
 
                         <div class="panel panel-info">

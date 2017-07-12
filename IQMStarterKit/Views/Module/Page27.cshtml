@@ -1,8 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "DISC";
-}
-
+﻿@model IQMStarterKit.Models.Forms.Disc
 
 @using (Html.BeginForm("Page27", "Module", FormMethod.Post))
 {
@@ -11,31 +7,31 @@
     <div class="container1">
         <h1 class="heading"><u>DISC Personality Profiling</u></h1>
 
-    @if (ViewBag.ActDone)
+    @if (Model.StudentActivity.ProgressValue == 100)
     {
         var explanation = string.Empty;
 
-        if (ViewBag.Disc == "Dominant")
+        switch(Model.StudentActivity.DiscResult)
         {
-            explanation = "The D Personality Style tends to be direct and decisive, sometimes described as dominant. They would prefer to lead than follow, and tend towards leadership and management positions. They tend to have high self-confidence and are risk takers and problem solvers, which enables others to look to them for decisions and direction. They tend to be self-starters.";
+            case "Dominant":
+                explanation = "The D Personality Style tends to be direct and decisive, sometimes described as dominant. They would prefer to lead than follow, and tend towards leadership and management positions. They tend to have high self-confidence and are risk takers and problem solvers, which enables others to look to them for decisions and direction. They tend to be self-starters.";
+                break;
+            case "Influential":
+                explanation = "The I Personality Style is not afraid to be the center of attention. They are enthusiastic, optimistic, talkative, persuasive, impulsive and emotional. This Personality Type will trust others naturally, truly enjoys being around others, and functions best when around people and working in teams.";
+                break;
+            case "Steady":
+                explanation = "The S Personality Type is known for being steady, stable, and predictable. They are even-tempered, friendly, sympathetic with others, and very generous with loved ones. The S is understanding and listens well. Preferring close, personal relationships, the S is very opened with loved ones, but can also be possessive at times and hold them close.";
+                break;
+            case "Conscientious":
+                explanation = "The C DISC Styles are accurate, precise, detail-oriented, and conscientious. They think very analytically and systematically and make decisions carefully with plenty of research and information to back it up. The C has very high standards for both themselves and others. Because they focus on the details and see what many other styles do not, they tend to be good problem solvers and very creative people.";
+                break;
         }
-        else if (ViewBag.Disc == "Influential")
-        {
-            explanation = "The I Personality Style is not afraid to be the center of attention. They are enthusiastic, optimistic, talkative, persuasive, impulsive and emotional. This Personality Type will trust others naturally, truly enjoys being around others, and functions best when around people and working in teams.";
-        }
-        else if (ViewBag.Disc == "Steady")
-        {
-            explanation = "The S Personality Typeis known for being steady, stable, and predictable. They are even-tempered, friendly, sympathetic with others, and very generous with loved ones. The S is understanding and listens well. Preferring close, personal relationships, the S is very opened with loved ones, but can also be possessive at times and hold them close.";
-        }
-        else if (ViewBag.Disc == "Conscientious")
-        {
-            explanation = "The C DISC Styles are accurate, precise, detail-oriented, and conscientious. They think very analytically and systematically and make decisions carefully with plenty of research and information to back it up. The C has very high standards for both themselves and others. Because they focus on the details and see what many other styles do not, they tend to be good problem solvers and very creative people.";
-        }
+        
         <br /><br />
         <div class="col-md-offset-0 col-md-12">
 
             <div class="panel panel-info">
-                <div class="panel-heading">Your DISC Result: <strong>@ViewBag.Disc</strong></div>
+                <div class="panel-heading">Your DISC Result: <strong>@Model.StudentActivity.DiscResult</strong></div>
                 <div class="panel-body">@explanation</div>
             </div>
 

@@ -8,7 +8,7 @@ namespace IQMStarterKit.Models.Core
 {
     public class TempModule
     {
-     
+
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte TempModuleId { get; set; }
@@ -17,16 +17,19 @@ namespace IQMStarterKit.Models.Core
         [StringLength(255)]
         public string Title { get; set; }
 
+        [StringLength(3)]
+        public string Code { get; set; }
+
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required]
         public int SortOrder { get; set; }
-        
+
         [Display(Name = "Workbook")]
         public byte TempWorkbookId { get; set; }
-        
+
         public IEnumerable<TempActivity> TempActivities { get; set; }
 
 
@@ -39,7 +42,7 @@ namespace IQMStarterKit.Models.Core
         [Required]
         [StringLength(100)]
         public string CreatedBy { get; set; }
-        
+
         [Required]
         public DateTime ModifiedDateTime { get; set; }
 

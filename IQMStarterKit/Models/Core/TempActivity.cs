@@ -20,6 +20,10 @@ namespace IQMStarterKit.Models.Core
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        [StringLength(3)]
+        public string Code { get; set; }
+
+
         [StringLength(255)]
         public string PageName { get; set; }
 

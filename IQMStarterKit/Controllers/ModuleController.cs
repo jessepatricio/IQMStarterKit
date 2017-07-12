@@ -25,6 +25,7 @@ namespace IQMStarterKit.Controllers
 
         public ActionResult CourseDemo()
         {
+            // remove session email to enable demo for tutor and admin
             Session["email"] = null;
             return RedirectToAction("ViewStudentActivities", "Module");
         }
@@ -39,29 +40,34 @@ namespace IQMStarterKit.Controllers
                 TempModules = _context.TempModules.ToList()
             };
 
-            //empty email && null session (student)
+            //if empty parameter email && null session (student)
             if (string.IsNullOrEmpty(email) && Session["email"] == null)
             {
+                //get session user email
                 email = User.Identity.Name;
-                Session["email"] = null;
             }
-            //not empty email && null session (admin/tutor)
+            //parameter email has value and no student is selected
             else if (!string.IsNullOrEmpty(email) && Session["email"] == null)
             {
+                //put the selected student to session variable
                 Session["email"] = email;
             }
+            //session still has email variable
             else if (Session["email"] != null)
             {
+                //get the selected student email
                 email = Session["email"].ToString();
             }
 
-
+            //display fullname in course workbook
             var student = UserManager.FindByEmail(email);
             toc.StudentName = student.FullName;
 
+            //set demo flag
             if (User.IsInRole("Student")) toc.IsDemo = false;
             else toc.IsDemo = true;
 
+            //set overall progress
             toc.OverallProgressValue = student.OverallProgress;
 
             //load all activities to each module
@@ -69,10 +75,13 @@ namespace IQMStarterKit.Controllers
             {
                 //should get student activities here
                 var actView = new List<TempActivity>();
-                var tmpActs = _context.TempActivities.Where(m => m.TempModuleId == item.TempModuleId && m.IsRemoved == false).ToList();
+                var tmpActs = _context.TempActivities
+                    .Where(m => m.TempModuleId == item.TempModuleId && m.IsRemoved == false)
+                    .ToList();
                 foreach (var row in tmpActs)
                 {
-                    var stdAct = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == row.TempActivityId && m.IsRemoved == false && m.CreatedBy == student.Id);
+                    var stdAct = _context.StudentActivities
+                        .FirstOrDefault(m => m.TempActivityId == row.TempActivityId && m.IsRemoved == false && m.CreatedBy == student.Id);
 
                     var act = new TempActivity()
                     {
@@ -106,7 +115,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -133,7 +142,7 @@ namespace IQMStarterKit.Controllers
             // title: Programme Objectives
             // type: slide
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -161,7 +170,7 @@ namespace IQMStarterKit.Controllers
             // title: Chance favours the prepared mind
             // type: slide
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -189,7 +198,7 @@ namespace IQMStarterKit.Controllers
             // title: Is yours a 'prepared mind?'
             // type: slide
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -218,7 +227,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -247,7 +256,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -276,7 +285,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -305,7 +314,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -334,7 +343,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -362,7 +371,7 @@ namespace IQMStarterKit.Controllers
             // title: Topics
             // type: slide
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -391,7 +400,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -420,7 +429,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Introduction");
+            var activityId = GetTempActivityID("A01");
 
             //get owner
             var owner = GetSessionUserId();
@@ -464,7 +473,7 @@ namespace IQMStarterKit.Controllers
                     {
                         //save introduction as completed
                         //validate if record already existed
-                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Introduction");
+                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Code == "A01");
 
                         var _owner = GetSessionUserId();
                         var stdAct =
@@ -603,7 +612,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("My Shield");
+                    byte activityId = GetTempActivityID("A02");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -689,7 +698,7 @@ namespace IQMStarterKit.Controllers
             var aboutMe = new AboutMeClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("About Me");
+            byte activityId = GetTempActivityID("A03");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -735,7 +744,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("About Me");
+            byte activityId = GetTempActivityID("A03");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -813,7 +822,7 @@ namespace IQMStarterKit.Controllers
             // type: Slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -841,7 +850,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -869,7 +878,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -896,7 +905,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -923,7 +932,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -951,7 +960,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -979,7 +988,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -1006,7 +1015,7 @@ namespace IQMStarterKit.Controllers
             // type: slide
 
             //validate if record already existed
-            byte activityId = GetTempActivityID("Class Contract");
+            byte activityId = GetTempActivityID("A04");
 
             var owner = GetSessionUserId();
 
@@ -1033,8 +1042,7 @@ namespace IQMStarterKit.Controllers
         {
             // title: VARK
             // type: result
-            var vark = new List<Vark>();
-            ViewBag.ActDone = false;
+
 
             #region for Page22
             if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
@@ -1046,7 +1054,7 @@ namespace IQMStarterKit.Controllers
                     {
                         //save class contract as completed
                         //validate if record already existed
-                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Title == "Class Contract");
+                        var tempAct = _context.TempActivities.FirstOrDefault(m => m.Code == "A04");
 
                         var _owner = GetSessionUserId();
                         // check if record already existed
@@ -1105,7 +1113,10 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("VARK");
+
+            var vark = new Vark();
+
+            byte activityId = GetTempActivityID("A05");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -1131,15 +1142,11 @@ namespace IQMStarterKit.Controllers
 
             if (rec != null)
             {
-                //get context and deserialize
-                //vark = JsonConvert.DeserializeObject<List<Vark>>(rec.Context);
-
-                ViewBag.ActDone = true;
-                ViewBag.Vark = rec.VarkResult;
+                vark.StudentActivity = rec;
 
             }
 
-            return View();
+            return View(vark);
 
         }
 
@@ -1154,7 +1161,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("VARK");
+            byte activityId = GetTempActivityID("A05");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -1232,7 +1239,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Human Bingo - Activity");
+            var activityId = GetTempActivityID("A06");
 
             //get owner
             var owner = GetSessionUserId();
@@ -1297,7 +1304,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("Human Bingo - Activity");
+                    byte activityId = GetTempActivityID("A06");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -1391,7 +1398,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Photo Scavenger Hunt");
+            var activityId = GetTempActivityID("A07");
             //get owner
             var owner = GetSessionUserId();
 
@@ -1456,7 +1463,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("Photo Scavenger Hunt");
+                    byte activityId = GetTempActivityID("A07");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -1549,11 +1556,11 @@ namespace IQMStarterKit.Controllers
             // title: Personal Profiling - DOPE
             // type: Result
 
-            ViewBag.ActDone = false;
+            var dope = new Dope();
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Profiling - D.O.P.E.");
+            byte activityId = GetTempActivityID("A08");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -1573,22 +1580,16 @@ namespace IQMStarterKit.Controllers
             }
 
 
-
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
-                //get context and deserialize
-
-                ViewBag.ActDone = true;
-                ViewBag.Dope = rec.DopeResult;
+                dope.StudentActivity = rec;
 
             }
 
-
-
-            return View();
+            return View(dope);
         }
 
         [HttpPost]
@@ -1601,7 +1602,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Profiling - D.O.P.E.");
+            byte activityId = GetTempActivityID("A08");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -1660,11 +1661,12 @@ namespace IQMStarterKit.Controllers
             // title: DISC
             // type: Result
 
-            ViewBag.ActDone = false;
+            var disc = new Disc();
+
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Profiling - D.I.S.C.");
+            byte activityId = GetTempActivityID("A09");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -1684,19 +1686,16 @@ namespace IQMStarterKit.Controllers
             }
 
 
-
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
             if (rec != null)
             {
-                //get context and deserialize
-                ViewBag.ActDone = true;
-                ViewBag.Disc = rec.DiscResult;
+                disc.StudentActivity = rec;
 
             }
 
-            return View();
+            return View(disc);
         }
 
         [HttpPost]
@@ -1709,7 +1708,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Profiling - D.I.S.C.");
+            byte activityId = GetTempActivityID("A09");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -1728,7 +1727,7 @@ namespace IQMStarterKit.Controllers
             {
 
                 // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(fc.Get("DOPE"));
+                string context = JsonConvert.SerializeObject(fc.Get("DISC"));
 
                 //insert record
 
@@ -1774,7 +1773,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Kiwiana - Activity");
+            byte activityId = GetTempActivityID("A10");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -1818,7 +1817,7 @@ namespace IQMStarterKit.Controllers
             var kiwiana = new KiwianaClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Kiwiana - Activity");
+            byte activityId = GetTempActivityID("A10");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -1903,7 +1902,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("NZ Slang and Saying");
+            byte activityId = GetTempActivityID("A11");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -1946,7 +1945,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("NZ Slang and Saying");
+            byte activityId = GetTempActivityID("A11");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2017,7 +2016,7 @@ namespace IQMStarterKit.Controllers
             var cheese = new Cheese();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Cheese");
+            byte activityId = GetTempActivityID("A12");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2062,7 +2061,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("cheese");
+            byte activityId = GetTempActivityID("A12");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2142,7 +2141,7 @@ namespace IQMStarterKit.Controllers
             var myHabit = new My14HabitsClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("My 14 Habits for More Effective Me");
+            byte activityId = GetTempActivityID("A44");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2187,7 +2186,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("My 14 Habits for More Effective Me");
+            byte activityId = GetTempActivityID("A44");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2270,7 +2269,7 @@ namespace IQMStarterKit.Controllers
             var thinkceo = new ThinkCEO();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Think Like a CEO");
+            byte activityId = GetTempActivityID("A13");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2315,7 +2314,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Think Like a CEO");
+            byte activityId = GetTempActivityID("A13");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2399,7 +2398,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Values");
+            byte activityId = GetTempActivityID("A14");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2445,7 +2444,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Values");
+            byte activityId = GetTempActivityID("A14");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2508,7 +2507,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Leadership");
+            byte activityId = GetTempActivityID("A15");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2550,7 +2549,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal Leadership");
+            byte activityId = GetTempActivityID("A15");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2610,7 +2609,7 @@ namespace IQMStarterKit.Controllers
             var leadershipPlan = new PersonalLeadershipPlanClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Goal Setting (Personal Leadership Plan)");
+            byte activityId = GetTempActivityID("A16");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2655,7 +2654,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Goal Setting (Personal Leadership Plan)");
+            byte activityId = GetTempActivityID("A16");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2733,7 +2732,7 @@ namespace IQMStarterKit.Controllers
             var winLot = new WinningLotteryClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Goal Setting (Winning Lottery)");
+            byte activityId = GetTempActivityID("A17");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2778,7 +2777,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Goal Setting (Winning Lottery)");
+            byte activityId = GetTempActivityID("A17");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2861,7 +2860,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Self-Management");
+            byte activityId = GetTempActivityID("A21");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -2903,7 +2902,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Self-Management");
+            byte activityId = GetTempActivityID("A21");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -2964,7 +2963,7 @@ namespace IQMStarterKit.Controllers
             FirstThingFirstViewModel firstThing = new FirstThingFirstViewModel();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("First Thing First");
+            var activityId = GetTempActivityID("A20");
             //get owner
             var owner = GetSessionUserId();
 
@@ -3012,7 +3011,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("First Thing First");
+            byte activityId = GetTempActivityID("A20");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -3126,7 +3125,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("First Thing First");
+                    byte activityId = GetTempActivityID("A20");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -3227,7 +3226,7 @@ namespace IQMStarterKit.Controllers
             PresentationEvaluationModel presentation = new PresentationEvaluationModel();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Presentations");
+            var activityId = GetTempActivityID("A34");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -3316,7 +3315,7 @@ namespace IQMStarterKit.Controllers
 
                 //get temp activity id by title
                 //note: title should be the same with the search keyword when using lamda expression
-                byte activityId = GetTempActivityID("Presentations");
+                byte activityId = GetTempActivityID("A34");
                 //get module id
                 var moduleId = GetTempModuleIdByActivityID(activityId);
                 //get current user
@@ -3364,7 +3363,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Lost At Sea - Activity");
+            byte activityId = GetTempActivityID("A25");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -3416,7 +3415,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Lost At Sea - Activity");
+            byte activityId = GetTempActivityID("A25");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -3539,7 +3538,7 @@ namespace IQMStarterKit.Controllers
             var lostSea = new LostAtSeaJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Lost At Sea - Journal");
+            byte activityId = GetTempActivityID("A27");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -3583,7 +3582,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Lost At Sea - Journal");
+            byte activityId = GetTempActivityID("A27");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -3660,7 +3659,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Problem Solving - Dots");
+            var activityId = GetTempActivityID("A36");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -3721,7 +3720,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("Problem Solving - Dots");
+                    byte activityId = GetTempActivityID("A36");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -3817,7 +3816,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Problem Solving - Cake");
+            var activityId = GetTempActivityID("A37");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -3877,7 +3876,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("Problem Solving - Cake");
+                    byte activityId = GetTempActivityID("A37");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -3973,7 +3972,7 @@ namespace IQMStarterKit.Controllers
             var brainstorming = new BrainstormingClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Brainstorming");
+            byte activityId = GetTempActivityID("A38");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4016,7 +4015,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Brainstorming");
+            byte activityId = GetTempActivityID("A38");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4150,7 +4149,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("Draw Mind Map");
+            var activityId = GetTempActivityID("A39");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -4210,7 +4209,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("Draw Mind Map");
+                    byte activityId = GetTempActivityID("A39");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -4306,7 +4305,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Conflict");
+            byte activityId = GetTempActivityID("A40");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4348,7 +4347,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Conflict");
+            byte activityId = GetTempActivityID("A40");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4408,7 +4407,7 @@ namespace IQMStarterKit.Controllers
             var swot = new PersonalSWOTClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal SWOT");
+            byte activityId = GetTempActivityID("A43");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4452,7 +4451,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Personal SWOT");
+            byte activityId = GetTempActivityID("A43");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4525,7 +4524,7 @@ namespace IQMStarterKit.Controllers
             var mc = new MaturityContinuumClass();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("The Maturity Continuum");
+            var activityId = GetTempActivityID("A45");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -4567,7 +4566,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("The Maturity Continuum");
+            byte activityId = GetTempActivityID("A45");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4654,7 +4653,7 @@ namespace IQMStarterKit.Controllers
             var passBall = new PassTheBallJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Pass the Ball - Journal");
+            byte activityId = GetTempActivityID("A18");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4698,7 +4697,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Pass the Ball - Journal");
+            byte activityId = GetTempActivityID("A18");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4777,7 +4776,7 @@ namespace IQMStarterKit.Controllers
             var closedFist = new ClosedFistJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Closed Fist - Journal");
+            byte activityId = GetTempActivityID("A28");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4821,7 +4820,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Closed Fist - Journal");
+            byte activityId = GetTempActivityID("A28");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4899,7 +4898,7 @@ namespace IQMStarterKit.Controllers
             var heliumStick = new HeliumStickJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Helium Stick - Journal");
+            byte activityId = GetTempActivityID("A41");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4943,7 +4942,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Helium Stick - Journal");
+            byte activityId = GetTempActivityID("A41");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -5022,7 +5021,7 @@ namespace IQMStarterKit.Controllers
             var followInstructions = new FollowMyInstructionsJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Follow my Instructions - Journal");
+            byte activityId = GetTempActivityID("A33");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -5066,7 +5065,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Follow my Instructions - Journal");
+            byte activityId = GetTempActivityID("A33");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -5144,7 +5143,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Evaluation - Review Quiz");
+            byte activityId = GetTempActivityID("A48");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -5181,7 +5180,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("Evaluation - Review Quiz");
+            byte activityId = GetTempActivityID("A48");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -5435,7 +5434,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("How Assertive are your messages?");
+            byte activityId = GetTempActivityID("A26");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -5477,7 +5476,7 @@ namespace IQMStarterKit.Controllers
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("How Assertive are your messages?");
+            byte activityId = GetTempActivityID("A26");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -5541,9 +5540,9 @@ namespace IQMStarterKit.Controllers
 
 
         //Utility
-        private byte GetTempActivityID(string v)
+        private byte GetTempActivityID(string _code)
         {
-            return _context.TempActivities.FirstOrDefault(m => m.Title == v).TempActivityId;
+            return _context.TempActivities.FirstOrDefault(m => m.Code == _code).TempActivityId;
         }
 
         private byte GetTempModuleIdByActivityID(byte Id)
