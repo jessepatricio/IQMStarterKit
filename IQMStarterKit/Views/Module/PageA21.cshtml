@@ -1,0 +1,78 @@
+﻿@model  IQMStarterKit.Models.Forms.LostAtSeaViewModel
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    bool flag = false;
+
+    if (Model.OwnLostAtSea == null) { flag = true; }
+
+    <div  class="main_container">
+        <div id="p40LostAtSeaContainer">
+            <img src="~/Content/img/LostAtSea.png" alt="Lost at Sea Activity" />
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Sextant, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new{htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnSextant" }} : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnSextant" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Sextant, (Model.StudentActivity.ProgressValue == 100 || flag ) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpSextant" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpSextant" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Mirror, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnMirror" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnMirror" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Mirror, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpMirror" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpMirror" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Net, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnNet" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnNet" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Net, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpNet" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpNet" } })
+
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Water, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnWater" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnWater" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Water, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpWater" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpWater" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Rations, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnRations" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnRations" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Rations, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpRations" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpRations" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Map, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnMap" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnMap" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Map, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpMap" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpMap" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Cushion, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnCushion" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnCushion" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Cushion, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpCushion" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpCushion" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Oil, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnOil" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnOil" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Oil, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpOil" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpOil" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Radio, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnRadio" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnRadio" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Radio, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpRadio" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpRadio" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Sheet, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnSheet" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnSheet" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Sheet, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpSheet" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpSheet" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Repellent, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnRepellent" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnRepellent" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Repellent, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpRepellent" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpRepellent" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Rum, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnRum" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnRum" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Rum, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpRum" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpRum" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Rope, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnRope" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnRope" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Rope, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpRope" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpRope" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_Chocolate, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnChocolate" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnChocolate" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_Chocolate, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpChocolate" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpChocolate" } })
+
+            @Html.EditorFor(model => model.OwnLostAtSea.O_FishKit, (Model.StudentActivity.ProgressValue == 100 || !flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40OwnFishKit" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40OwnFishKit" } })
+            @Html.EditorFor(model => model.GroupLostAtSea.G_FishKit, (Model.StudentActivity.ProgressValue == 100 || flag) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p40txtbox form-control", id = "p40GrpFishKit" } } : new { htmlAttributes = new { @class = "p40txtbox form-control", id = "p40GrpFishKit" } })
+        </div> 
+
+       
+
+        @if (Model.OwnLostAtSea == null || Model.GroupLostAtSea == null)
+        {
+            <div style="text-align: center; margin-top: 20px;" class="form-group`">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "PageA20") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA22")
+    </div>
+}

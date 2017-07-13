@@ -1,0 +1,23 @@
+﻿
+@using (Html.BeginForm())
+{
+    <div class="main_container">
+        <h1 class="heading">Electronics Etiquette</h1>
+        <br />
+        <ul class="p20-22List">
+            <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Do not use laptops unless instructed to do so by your tutors</li>
+            <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Switch all electronic devices to silent or off</li>
+        </ul>
+        <div id="p20-22img">
+            <img src="~/Content/img/noPhoneLaptop.png" alt="No Phone and Laptop Allowed graphic">
+        </div>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "PageA04_04") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA04_06")
+        </div>
+
+    </div>
+}
+

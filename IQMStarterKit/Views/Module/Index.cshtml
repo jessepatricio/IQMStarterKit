@@ -6,7 +6,7 @@
 <br/>
 <div class="page-header"><h2>@Html.DisplayFor(m => m.StudentName)  <small>Overall Progress: @Model.OverallProgressValue%</small></h2></div>
 
-<div class="container1">
+<div class="main_container">
     @foreach (var item in Model.TempModules)
     {
         //Random random = new Random();
@@ -38,7 +38,6 @@
 
                     </div>
                     <div class=".visible-xs-block, hidden-xs col-sm-5">
-                        @*<span class="progress-bar" role="progressbar" aria-valuenow="@randomNumber" aria-valuemin="0" aria-valuemax="100" style="width: @randomNumber%">@randomNumber%</span>*@
                         <span class="progress-bar" role="progressbar" aria-valuenow="@act.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @act.ProgressValue%">@act.ProgressValue%</span>
                     </div>
 

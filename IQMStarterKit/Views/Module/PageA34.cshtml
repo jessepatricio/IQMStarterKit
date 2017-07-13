@@ -1,0 +1,196 @@
+﻿@model IQMStarterKit.Models.Forms.My14HabitsClass
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div  class="main_container">
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" id="info_popupMy14Habits" class="button btn-info" data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-info-sign' style="font-size:1.5em;"></span></button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">7 Habits of Highly Effective People</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>Be Proactive</li>
+                            <li>Begin with the End in Mind</li>
+                            <li>Put First Things First</li>
+                            <li>Think Win Win</li>
+                            <li>Seek First to Understand, Then to be Understood</li>
+                            <li>Synergise</li>
+                            <li>Sharpen the Saw</li>
+                        </ol>
+                        <div id="p31img">
+                            <img src="~/Content/img/The_7_Habits_of_Highly_Effective_People.jpg" alt="7 Habits Book Graphic" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <p style="text-align:center; font-size:50px;"><strong><u>My 14 Habits of a More Effective Me</u></strong></p>
+        <p  style="text-align:center;">Explain how you can adopt Stephen Covey’s Seven Habits of Highly Effective People in your life by giving two examples for each habit. <br/> Your examples may be based on different settings for example in school, at work, with friends / family members.</p>
+        <table id="p31_14HabitTable">
+            <tr>
+                <td>
+                    <strong><u>Be Proactive</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.Proactive1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.Proactive2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong><u>Begin with the End in Mind</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.EndMind1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.EndMind2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong><u>Put First Things First</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.FirstThings1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.FirstThings2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong><u>Think Win Win</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.WinWin1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.WinWin2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong><u>Seek First to Understand, then to be Understand</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.SeekFirst1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.SeekFirst2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong><u>Synergise</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.Synergise1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.Synergise2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong><u>Sharpen the Saw</u></strong>
+                    <table>
+                        <tr>
+                            <td>
+                                1)
+                                @Html.TextAreaFor(model => model.SharpenSaw1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                                <br />
+                                2)
+                                @Html.TextAreaFor(model => model.SharpenSaw2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p47txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p47txtarea form-control", style = "width: 900px;height:150px;" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center; margin-top:20px;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "PageA33") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA35")
+    </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result) {
+                 currentForm.submit();
+                 return true;
+             }
+         });
+     });
+
+    </script>
+
+
+}

@@ -1,0 +1,79 @@
+﻿@model IQMStarterKit.Models.Forms.ThinkCEO
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div  class="main_container">
+        <div class="form-inline">
+
+            <h1 class="heading"><strong><u>Think like a CEO. Think BIG</u></strong></h1>
+            <p>You are the CEO or Managing Director of a large company.  List any 10 plans, ideas, activities, etc. you will want to implement or carry out to make your company successful.</p>
+            <div class="form-group">
+                <div><label for="answer1">1.</label>@Html.EditorFor(model => model.answer1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer1", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer1", style= "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer2">2.</label>@Html.EditorFor(model => model.answer2, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer2", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer2", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">3.</label>@Html.EditorFor(model => model.answer3, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer3", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer3", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">4.</label>@Html.EditorFor(model => model.answer4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer4", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer4", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">5.</label>@Html.EditorFor(model => model.answer5, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer5", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer5", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">6.</label>@Html.EditorFor(model => model.answer6, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer6", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer6", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">7.</label>@Html.EditorFor(model => model.answer7, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer7", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer7", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">8.</label>@Html.EditorFor(model => model.answer8, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer8", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer8", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">9.</label>@Html.EditorFor(model => model.answer9, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer9", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer9", style = "width: 900px;" } })</div>
+            </div>
+            <div class="form-group">
+                <div><label for="answer1">10.</label>@Html.EditorFor(model => model.answer10, (Model.StudentActivity.ProgressValue == 100) ? (object)new { htmlAttributes = new { @readonly = "readonly", @class = "p32txtbox form-control", name = "answer10", style = "width: 900px;" } } : new { htmlAttributes = new { @class = "p32txtbox form-control", name = "answer10", style = "width: 900px;" } })</div>
+            </div>
+           
+
+            @if (Model.StudentActivity.ProgressValue != 100)
+            {
+                <div style="text-align: center;" class="form-group`">
+                    <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+                </div>
+            }
+
+            <div style="text-align:center; margin-top: 20px;">
+                @Html.ActionLink("Previous Page", "PageA12") |
+                @Html.ActionLink("Main", "Index") |
+                @Html.ActionLink("Next Page", "PageA14")
+            </div>
+            </div>
+        </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result) {
+                 currentForm.submit();
+                 return true;
+             }
+         });
+     });
+
+ </script>
+
+
+}

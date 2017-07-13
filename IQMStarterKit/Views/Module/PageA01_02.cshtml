@@ -1,0 +1,21 @@
+﻿
+@using (Html.BeginForm())
+{
+<div class="main_container">
+    <div style="text-align: center;">
+        <h1 id="p3quote">Chance favours the prepared mind</h1>
+        <p id="p3author">-Loius Pasteur</p>
+
+        <div id="p3pasteurimg">
+            <img src="~/Content/img/Pasteur.jpg" alt="Loius Pasteur">
+        </div>
+        <br/>
+        <div>
+            @Html.ActionLink("Previous Page", "PageA01_01") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA01_03")
+        </div>
+    </div>
+</div>
+
+}

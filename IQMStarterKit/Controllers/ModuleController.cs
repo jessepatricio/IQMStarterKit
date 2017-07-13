@@ -109,7 +109,7 @@ namespace IQMStarterKit.Controllers
             return View("Index", toc);
         }
 
-        public ActionResult Page1()
+        public ActionResult PageA01()
         {
             // title: Introduction
             // type: slide
@@ -137,10 +137,11 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page2()
+        public ActionResult PageA01_01()
         {
             // title: Programme Objectives
             // type: slide
+
             //get id in tempActivity
             var activityId = GetTempActivityID("A01");
 
@@ -165,7 +166,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page3()
+        public ActionResult PageA01_02()
         {
             // title: Chance favours the prepared mind
             // type: slide
@@ -193,7 +194,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page4()
+        public ActionResult PageA01_03()
         {
             // title: Is yours a 'prepared mind?'
             // type: slide
@@ -221,7 +222,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page5()
+        public ActionResult PageA01_04()
         {
             // title:  You will be experiencing many new things
             // type: slide
@@ -250,7 +251,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page6()
+        public ActionResult PageA01_05()
         {
             // title: Course Requirements
             // type: slide
@@ -279,7 +280,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page7()
+        public ActionResult PageA01_06()
         {
             // title: Attendance Issues
             // type: slide
@@ -308,7 +309,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page8()
+        public ActionResult PageA01_07()
         {
             // title: Student Services Contact Details
             // type: slide
@@ -337,7 +338,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page9()
+        public ActionResult PageA01_08()
         {
             // title: About the Programme
             // type: slide
@@ -366,7 +367,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page10()
+        public ActionResult PageA01_09()
         {
             // title: Topics
             // type: slide
@@ -394,7 +395,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page12()
+        public ActionResult PageA01_10()
         {
             // title: Effective Soft Skill
             // type: slide
@@ -423,7 +424,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page13()
+        public ActionResult PageA01_11()
         {
             // title: You may be interested
             // type: slide
@@ -449,17 +450,17 @@ namespace IQMStarterKit.Controllers
             }
 
 
-            TempData["Page13Completed"] = true;
+            TempData["PageA01_11_Completed"] = true;
 
             return View();
         }
 
-        public ActionResult Page14()
+        public ActionResult PageA02()
         {
             // title: Personal Coat of Arms
             // type: Submission
 
-            #region this code is for page 13
+            #region this code is for PageA01_11
             if (User.IsInRole("Tutor") || User.IsInRole("Administrator"))
             {
                 //do nothing if not student
@@ -467,7 +468,7 @@ namespace IQMStarterKit.Controllers
             }
             else
             {
-                if (TempData["Page13Completed"] != null)
+                if (TempData["PageA01_11_Completed"] != null)
                 {
                     try
                     {
@@ -506,7 +507,7 @@ namespace IQMStarterKit.Controllers
                             studentActivity.DiscResult = string.Empty;
                             studentActivity.Top3PersonalValues = string.Empty;
 
-                            TempData["Page13Completed"] = null;
+                            TempData["PageA01_11_Completed"] = null;
                             // exclude fields not to be saved
 
                             _context.StudentActivities.Add(studentActivity);
@@ -516,7 +517,7 @@ namespace IQMStarterKit.Controllers
                             ComputeOverallProgress();
 
 
-                            return View("Page14").WithInfo("Congratulation! You have completed the Introduction activity!");
+                            return View("PageA02").WithInfo("Congratulation! You have completed the Introduction activity!");
                         }
                     }
                     catch (EntityException e)
@@ -530,11 +531,11 @@ namespace IQMStarterKit.Controllers
 
 
 
-            #region start of Page14
+            #region start of PageA02
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("My Shield");
+            var activityId = GetTempActivityID("A02");
             //get owner
             string owner = GetSessionUserId();
 
@@ -566,7 +567,7 @@ namespace IQMStarterKit.Controllers
             #endregion
         }
 
-        public FileResult Page14DownloadFile(string Id)
+        public FileResult PageA02DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -577,12 +578,12 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page14UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA02UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page14").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA02").WithInfo("This is just a demo.");
             }
 
             var studentActivity = new StudentActivity();
@@ -681,16 +682,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page14").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA02").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page14").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PageA02").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public ActionResult Page15()
+        public ActionResult PageA03()
         {
             // title: About Me
             // type: FormSubmission
@@ -733,13 +734,13 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page15(FormCollection fc)
+        public ActionResult PageA03(FormCollection fc)
         {
             var aboutMe = new AboutMeClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page15").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA03").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
@@ -806,7 +807,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page15").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA03").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -816,7 +817,7 @@ namespace IQMStarterKit.Controllers
 
         }
 
-        public ActionResult Page16()
+        public ActionResult PageA04()
         {
             // title: Tutor-Student Contract
             // type: Slide
@@ -844,7 +845,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page17()
+        public ActionResult PageA04_01()
         {
             // title: Classroom Rules
             // type: slide
@@ -872,7 +873,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page18()
+        public ActionResult PageA04_02()
         {
             // title: Classroom Rules
             // type: slide
@@ -899,7 +900,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page18b()
+        public ActionResult PageA04_03()
         {
             // title: Classroom Rules
             // type: slide
@@ -926,7 +927,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page19()
+        public ActionResult PageA04_04()
         {
             // title: Classroom Rules
             // type: slide
@@ -954,7 +955,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page20()
+        public ActionResult PageA04_05()
         {
             // title: Electronics Etiquette
             // type: slide
@@ -982,7 +983,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page21()
+        public ActionResult PageA04_06()
         {
             // title: Classroom Rules
             // type: slide
@@ -1009,7 +1010,7 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
-        public ActionResult Page22()
+        public ActionResult PageA04_07()
         {
             // title: Classroom Rules
             // type: slide
@@ -1034,11 +1035,11 @@ namespace IQMStarterKit.Controllers
             }
 
 
-            TempData["Page22Completed"] = true;
+            TempData["PageA04Completed"] = true;
             return View();
         }
 
-        public ActionResult Page23()
+        public ActionResult PageA05()
         {
             // title: VARK
             // type: result
@@ -1048,7 +1049,7 @@ namespace IQMStarterKit.Controllers
             if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
             else
             {
-                if (TempData["Page22Completed"] != null)
+                if (TempData["PageA04Completed"] != null)
                 {
                     try
                     {
@@ -1088,7 +1089,7 @@ namespace IQMStarterKit.Controllers
                             studentActivity.DiscResult = string.Empty;
                             studentActivity.Top3PersonalValues = string.Empty;
 
-                            TempData["Page22Completed"] = null;
+                            TempData["PageA04Completed"] = null;
                             // exclude fields not to be saved
 
                             _context.StudentActivities.Add(studentActivity);
@@ -1097,7 +1098,7 @@ namespace IQMStarterKit.Controllers
                             // record overall progress
                             ComputeOverallProgress();
 
-                            return RedirectToAction("Page23").WithInfo("Congratulation! You have completed the Class Contract activity!");
+                            return RedirectToAction("PageA05").WithInfo("Congratulation! You have completed the Class Contract activity!");
                         }
                     }
                     catch (EntityException e)
@@ -1114,7 +1115,7 @@ namespace IQMStarterKit.Controllers
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
 
-            var vark = new Vark();
+            var vark = new VarkView();
 
             byte activityId = GetTempActivityID("A05");
 
@@ -1140,11 +1141,7 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-                vark.StudentActivity = rec;
-
-            }
+            if (rec != null) vark.StudentActivity = rec;
 
             return View(vark);
 
@@ -1152,12 +1149,12 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page23(FormCollection fc)
+        public ActionResult PageA05(FormCollection fc)
         {
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page23").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA05").WithInfo("This is just a demo.");
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -1202,18 +1199,7 @@ namespace IQMStarterKit.Controllers
 
                     _context.StudentActivities.Add(newRecord);
                 }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.VarkResult = yourVark;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-                    //modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
 
-
-
-                }
 
                 //save record
                 _context.SaveChanges();
@@ -1221,17 +1207,17 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page23").WithSuccess("Saved successfully! " + $"You are {yourVark}");
+                return RedirectToAction("PageA05").WithSuccess("Saved successfully! " + $"You are {yourVark}");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Page23").WithError(ex.Message);
+                return RedirectToAction("PageA05").WithError(ex.Message);
             }
 
         }
 
-        public ActionResult Page24()
+        public ActionResult PageA06()
         {
 
             // title: Human Bingo - Activity
@@ -1271,11 +1257,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page24UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA06UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page24").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA06").WithInfo("This is just a demo.");
             }
             var studentActivity = new StudentActivity();
             try
@@ -1373,16 +1359,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page24").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA06").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page24").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PageA06").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public FileResult Page24DownloadFile(string Id)
+        public FileResult PageA06DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -1390,7 +1376,7 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
-        public ActionResult Page25()
+        public ActionResult PageA07()
         {
             // title: Photo Scavenger Hunt
             // type: FileSubmission
@@ -1430,11 +1416,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page25UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA07UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page25").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA07").WithInfo("This is just a demo.");
             }
             var studentActivity = new StudentActivity();
             try
@@ -1532,16 +1518,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page25").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA07").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page25").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PageA07").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public FileResult Page25DownloadFile(string Id)
+        public FileResult PageA07DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -1550,7 +1536,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page26()
+        public ActionResult PageA08()
         {
 
             // title: Personal Profiling - DOPE
@@ -1583,22 +1569,19 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-                dope.StudentActivity = rec;
+            if (rec != null) dope.StudentActivity = rec;
 
-            }
 
             return View(dope);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page26(FormCollection fc)
+        public ActionResult PageA08(FormCollection fc)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page26").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA08").WithInfo("This is just a demo.");
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -1612,7 +1595,7 @@ namespace IQMStarterKit.Controllers
 
             if (string.IsNullOrEmpty(dopeResult))
             {
-                return RedirectToAction("Page26").WithError("No result was given. Please make sure you have selected any checkboxes.");
+                return RedirectToAction("PageA08").WithError("No result was given. Please make sure you have selected any checkboxes.");
             }
 
             var studentActivity = new StudentActivity();
@@ -1647,16 +1630,16 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page26").WithSuccess("Saved successfully! " + $"You are {dopeResult}");
+                return RedirectToAction("PageA08").WithSuccess("Saved successfully! " + $"You are {dopeResult}");
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page26").WithError(ex.Message);
+                return RedirectToAction("PageA08").WithError(ex.Message);
             }
 
         }
 
-        public ActionResult Page27()
+        public ActionResult PageA09()
         {
             // title: DISC
             // type: Result
@@ -1689,22 +1672,18 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-                disc.StudentActivity = rec;
-
-            }
+            if (rec != null) disc.StudentActivity = rec;
 
             return View(disc);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page27(FormCollection fc)
+        public ActionResult PageA09(FormCollection fc)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page27").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA09").WithInfo("This is just a demo.");
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -1718,7 +1697,7 @@ namespace IQMStarterKit.Controllers
 
             if (string.IsNullOrEmpty(discResult))
             {
-                return RedirectToAction("Page27").WithError("No result was given. Please make sure you have chosen any options.");
+                return RedirectToAction("PageA09").WithError("No result was given. Please make sure you have chosen any options.");
             }
 
             var studentActivity = new StudentActivity();
@@ -1753,18 +1732,18 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page27").WithSuccess("Saved successfully! " + $"You are {discResult}");
+                return RedirectToAction("PageA09").WithSuccess("Saved successfully! " + $"You are {discResult}");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Page27").WithError(ex.Message);
+                return RedirectToAction("PageA09").WithError(ex.Message);
             }
 
 
         }
 
-        public ActionResult Page28()
+        public ActionResult PageA10()
         {
             // title: Kiwiana
             // type: FormSubmission
@@ -1808,11 +1787,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page28(FormCollection fc)
+        public ActionResult PageA10(FormCollection fc)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page28").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA10").WithInfo("This is just a demo.");
             }
             var kiwiana = new KiwianaClass();
             //get temp activity id by title
@@ -1882,7 +1861,7 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page28").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA10").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -1891,7 +1870,7 @@ namespace IQMStarterKit.Controllers
 
         }
 
-        public ActionResult Page29()
+        public ActionResult PageA11()
         {
 
 
@@ -1937,11 +1916,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page29(SlangClass slang)
+        public ActionResult PageA11(SlangClass slang)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page29").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA11").WithInfo("This is just a demo.");
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -1999,7 +1978,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page29").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA11").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -2008,7 +1987,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page30()
+        public ActionResult PageA12()
         {
             // title: Cheese
             // type: FormSubmission
@@ -2050,13 +2029,13 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page30(FormCollection fc)
+        public ActionResult PageA12(FormCollection fc)
         {
             var cheese = new Cheese();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page30").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA12").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
@@ -2122,7 +2101,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page30").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA12").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -2133,135 +2112,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page31()
-        {
-            // title: My 14 Habits for More Effective Me
-            // type: FormSubmission
-
-            var myHabit = new My14HabitsClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A44");
-
-            // get Current User
-            var owner = GetSessionUserId();
-
-            // check session is not null
-            if (Session["email"] != null)
-            {
-                var user = UserManager.FindByEmail(Session["email"].ToString());
-                owner = user.Id;
-            }
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
-
-            // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-            if (rec != null)
-            {
-                //get context and deserialize
-                myHabit = JsonConvert.DeserializeObject<My14HabitsClass>(rec.Context);
-                myHabit.StudentActivity = rec;
-            }
-
-            return View(myHabit);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Page31(FormCollection fc)
-        {
-            var myHabit = new My14HabitsClass();
-
-            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
-            {
-                return RedirectToAction("Page31").WithInfo("This is just a demo.");
-            }
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A44");
-            //get module id
-            var moduleId = GetTempModuleIdByActivityID(activityId);
-            //get current user
-            var owner = GetSessionUserId();
-
-            try
-            {
-                //generate context string from form collection
-
-                myHabit.Proactive1 = fc.Get("Proactive1").ToString();
-                myHabit.Proactive2 = fc.Get("Proactive2").ToString();
-                myHabit.EndMind1 = fc.Get("EndMind1").ToString();
-                myHabit.EndMind2 = fc.Get("EndMind2").ToString();
-                myHabit.FirstThings1 = fc.Get("FirstThings1").ToString();
-                myHabit.FirstThings2 = fc.Get("FirstThings2").ToString();
-                myHabit.WinWin1 = fc.Get("WinWin1").ToString();
-                myHabit.WinWin2 = fc.Get("WinWin2").ToString();
-                myHabit.SeekFirst1 = fc.Get("SeekFirst1").ToString();
-                myHabit.SeekFirst2 = fc.Get("SeekFirst2").ToString();
-                myHabit.Synergise1 = fc.Get("Synergise1").ToString();
-                myHabit.Synergise2 = fc.Get("Synergise2").ToString();
-                myHabit.SharpenSaw1 = fc.Get("SharpenSaw1").ToString();
-                myHabit.SharpenSaw2 = fc.Get("SharpenSaw2").ToString();
-
-                // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(myHabit);
-
-                //validate if record already existed
-                var studentRecord = _context.StudentActivities
-                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-                if (studentRecord == null)
-                {
-                    var newRecord = new StudentActivity();
-                    newRecord.TempActivityId = activityId;
-                    newRecord.TempModuleId = moduleId;
-                    newRecord.Context = context;
-                    newRecord.ProgressValue = 100;
-                    newRecord.Type = ActivityCategory.FormSubmission;
-
-                    //system fields
-                    newRecord.CreatedBy = GetSessionUserId();
-                    newRecord.CreatedDateTime = DateTime.Now;
-                    newRecord.ModifiedBy = GetSessionUserId();
-                    newRecord.ModifiedDateTime = DateTime.Now;
-
-                    //insert record
-                    _context.StudentActivities.Add(newRecord);
-
-                    // record overall progress
-                    ComputeOverallProgress();
-                }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-
-                    // modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
-
-                }
-
-                // save record
-                _context.SaveChanges();
-
-                return RedirectToAction("Page31").WithSuccess("Saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                return View(myHabit).WithError(ex.Message);
-            }
-        }
-
-        public ActionResult Page32()
+        public ActionResult PageA13()
         {
             // title: think like ceo
             // type: FormSubmission
@@ -2303,7 +2154,7 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page32(FormCollection fc)
+        public ActionResult PageA13(FormCollection fc)
         {
             var thinkceo = new ThinkCEO();
 
@@ -2378,7 +2229,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page32").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA13").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -2389,12 +2240,12 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page33()
+        public ActionResult PageA14()
         {
             // title: Personal Values
             // type: Result
 
-            ViewBag.ActDone = false;
+            var personalvalues = new PersonalValues();
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -2420,20 +2271,14 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-                //get context and deserialize
-                ViewBag.ActDone = true;
-                ViewBag.PersonalValues = rec.Top3PersonalValues;
+            if (rec != null) personalvalues.StudentActivity = rec;
 
-            }
-
-            return View();
+            return View(personalvalues);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page33(FormCollection fc)
+        public ActionResult PageA14(FormCollection fc)
         {
 
 
@@ -2485,12 +2330,12 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page33").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA14").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Page33").WithError(ex.Message);
+                return RedirectToAction("PageA14").WithError(ex.Message);
             }
 
 
@@ -2498,12 +2343,12 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page34()
+        public ActionResult PageA15()
         {
             // title: Personal Leadership
             // type: Scoring
 
-            ViewBag.ActDone = false;
+            var personalleadership = new PersonalLeadership();
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -2529,23 +2374,20 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-                ViewBag.ActDone = true;
-                ViewBag.PersonalLeadershipScore = rec.PersonalLeaderShipScore;
-            }
+            if (rec != null) personalleadership.StudentActivity = rec;
 
-            return View();
+
+            return View(personalleadership);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page34(FormCollection fc)
+        public ActionResult PageA15(FormCollection fc)
         {
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page34").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA15").WithInfo("This is just a demo.");
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
@@ -2590,18 +2432,18 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page34").WithSuccess("Saved successfully! " + $"You scored {personalLeadership.TotalScore} points");
+                return RedirectToAction("PageA15").WithSuccess("Saved successfully! " + $"You scored {personalLeadership.TotalScore} points");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Page34").WithError(ex.Message);
+                return RedirectToAction("PageA15").WithError(ex.Message);
             }
 
         }
 
 
-        public ActionResult Page35()
+        public ActionResult PageA16()
         {
             // title: Personal Leadership Plan
             // type: FormSubmission
@@ -2643,13 +2485,13 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page35(FormCollection fc)
+        public ActionResult PageA16(FormCollection fc)
         {
             var leadershipPlan = new PersonalLeadershipPlanClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page35").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA16").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
@@ -2715,7 +2557,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page35").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA16").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -2724,7 +2566,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page36()
+        public ActionResult PageA17()
         {
             // title: Winning Lottery
             // type: FormSubmission
@@ -2766,13 +2608,13 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page36(FormCollection fc)
+        public ActionResult PageA17(FormCollection fc)
         {
             var winLot = new WinningLotteryClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page36").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA17").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
@@ -2840,7 +2682,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page36").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA17").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -2850,21 +2692,18 @@ namespace IQMStarterKit.Controllers
 
         }
 
-
-        public ActionResult Page37()
+        public ActionResult PageA18()
         {
-            // title: self managing
-            // type: Scoring
+            // title: Pass the Ball - Journal
+            // type: FormSubmission
 
-            ViewBag.ActDone = false;
-
+            var passBall = new PassTheBallJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A21");
+            byte activityId = GetTempActivityID("A18");
 
             // get Current User
             var owner = GetSessionUserId();
-
             // check session is not null
             if (Session["email"] != null)
             {
@@ -2884,77 +2723,98 @@ namespace IQMStarterKit.Controllers
 
             if (rec != null)
             {
-                ViewBag.ActDone = true;
-                ViewBag.SelfManagementScore = rec.SelfManagementScore;
+                //get context and deserialize
+                passBall = JsonConvert.DeserializeObject<PassTheBallJournalClass>(rec.Context);
+                passBall.StudentActivity = rec;
             }
 
-            return View();
+            return View(passBall);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page37(FormCollection fc)
+        public ActionResult PageA18(FormCollection fc)
         {
+            var passBall = new PassTheBallJournalClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page37").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA18").WithInfo("This is just a demo.");
             }
+
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A21");
+            byte activityId = GetTempActivityID("A18");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
             var owner = GetSessionUserId();
 
-
             try
             {
-                // get score from collection
-                var selfManagement = GetSelfManagementScore(fc);
+                //generate context string from form collection
+
+                passBall.PassBallJournalAns1 = fc.Get("PassBallJournalAns1").ToString();
+                passBall.PassBallJournalAns2a = fc.Get("PassBallJournalAns2a").ToString();
+                passBall.PassBallJournalAns2b = fc.Get("PassBallJournalAns2b").ToString();
+                passBall.PassBallJournalAns2c = fc.Get("PassBallJournalAns2c").ToString();
+                passBall.PassBallJournalAns3a = fc.Get("PassBallJournalAns3a").ToString();
+                passBall.PassBallJournalAns3b = fc.Get("PassBallJournalAns3b").ToString();
+                passBall.PassBallJournalAns3c = fc.Get("PassBallJournalAns3c").ToString();
+                passBall.PassBallJournalAns4 = fc.Get("PassBallJournalAns4").ToString();
 
                 // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(selfManagement);
+                string context = JsonConvert.SerializeObject(passBall);
 
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-                //insert record
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.FormSubmission;
 
-                var newRecord = new StudentActivity();
-                newRecord.TempActivityId = activityId;
-                newRecord.TempModuleId = moduleId;
-                newRecord.Context = context;
-                newRecord.SelfManagementScore = selfManagement.TotalScore;
-                newRecord.ProgressValue = 100;
-                newRecord.Type = ActivityCategory.Score;
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
 
-                //system fields
-                newRecord.CreatedBy = GetSessionUserId();
-                newRecord.CreatedDateTime = DateTime.Now;
-                newRecord.ModifiedBy = GetSessionUserId();
-                newRecord.ModifiedDateTime = DateTime.Now;
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
 
-                _context.StudentActivities.Add(newRecord);
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
 
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
 
-                //save record
+                }
+
+                // save record
                 _context.SaveChanges();
 
-                // record overall progress
-                ComputeOverallProgress();
-
-                return RedirectToAction("Page37").WithSuccess("Saved successfully! " + $"You scored {selfManagement.TotalScore} points");
+                return RedirectToAction("PageA18").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
-
-                return RedirectToAction("Page37").WithError(ex.Message);
+                return View(passBall).WithError(ex.Message);
             }
-
         }
 
 
-        public ActionResult Page38()
+        public ActionResult PageA19()
         {
 
             // title: First Thing First
@@ -2963,7 +2823,7 @@ namespace IQMStarterKit.Controllers
             FirstThingFirstViewModel firstThing = new FirstThingFirstViewModel();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("A20");
+            var activityId = GetTempActivityID("A19");
             //get owner
             var owner = GetSessionUserId();
 
@@ -3000,18 +2860,18 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page38(FormCollection fc)
+        public ActionResult PageA19(FormCollection fc)
         {
             var firstThing = new FirstThingFirst();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page38").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA19").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A20");
+            byte activityId = GetTempActivityID("A19");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -3086,7 +2946,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page38").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA19").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -3096,11 +2956,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page38UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA19UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page38").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA19").WithInfo("This is just a demo.");
             }
             var studentActivity = new StudentActivity();
             try
@@ -3125,7 +2985,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("A20");
+                    byte activityId = GetTempActivityID("A19");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -3200,16 +3060,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page38").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA19").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page38").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PageA19").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public FileResult Page38DownloadFile(string Id)
+        public FileResult PageA19DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -3217,18 +3077,20 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
-
-        public ActionResult Page39()
+        public ActionResult PageA20()
         {
-            // title: Presentations
-            // type: FormSubmission
+            // title: self managing
+            // type: Scoring
 
-            PresentationEvaluationModel presentation = new PresentationEvaluationModel();
+            var selfmanagement = new SelfManagement();
 
-            //get id in tempActivity
-            var activityId = GetTempActivityID("A34");
-            //get owner
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A20");
+
+            // get Current User
             var owner = GetSessionUserId();
+
             // check session is not null
             if (Session["email"] != null)
             {
@@ -3241,120 +3103,80 @@ namespace IQMStarterKit.Controllers
             {
                 var lockMessage = IsActivityLocked(owner, activityId);
                 if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-
-                //validate presentation evaluation record
-                presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == owner);
-
-                if (presentation == null) return RedirectToAction("Index").WithInfo("Your evaluation result is not yet available.");
-
-            }
-            else if (User.IsInRole("Tutor"))
-            {
-                if (Session["email"] != null)
-                {
-                    var student = UserManager.FindByEmail(Session["email"].ToString());
-                    //validate presentation evaluation record
-                    presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == student.Id);
-
-                    if (presentation == null)
-                    {
-                        presentation = new PresentationEvaluationModel();
-                        //start eval fill student records
-                        presentation.StudentId = student.Id;
-                        presentation.StudentName = student.FullName;
-                        presentation.StudentEmail = student.Email;
-                        presentation.TutorId = GetSessionUserId();
-                        presentation.TutorName = GetFullName(owner);
-
-
-                    }
-                }
-            }
-            else if (User.IsInRole("Administrator"))
-            {
-                if (Session["email"] != null)
-                {
-                    var student = UserManager.FindByEmail(Session["email"].ToString());
-                    //validate presentation evaluation record
-                    presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == student.Id);
-
-                    if (presentation == null) return View(presentation).WithInfo("Student evaluation result is not yet available.");
-
-                }
             }
 
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            return View(presentation);
+            if (rec != null) selfmanagement.StudentActivity = rec;
+
+
+            return View(selfmanagement);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page39(PresentationEvaluationModel presentation)
+        public ActionResult PageA20(FormCollection fc)
         {
 
-
-            if (User.IsInRole("Administrator"))
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page39").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA20").WithInfo("This is just a demo.");
             }
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A20");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
 
             try
             {
+                // get score from collection
+                var selfManagement = GetSelfManagementScore(fc);
 
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(selfManagement);
 
-                //system fields
-                presentation.CreatedBy = GetSessionUserId();
-                presentation.CreatedDateTime = DateTime.Now;
-                presentation.ModifiedBy = GetSessionUserId();
-                presentation.ModifiedDateTime = DateTime.Now;
 
                 //insert record
-                _context.PresentationEvaluationModel.Add(presentation);
-
-                //add record to student activity table
-
-                //get temp activity id by title
-                //note: title should be the same with the search keyword when using lamda expression
-                byte activityId = GetTempActivityID("A34");
-                //get module id
-                var moduleId = GetTempModuleIdByActivityID(activityId);
-                //get current user
 
                 var newRecord = new StudentActivity();
                 newRecord.TempActivityId = activityId;
                 newRecord.TempModuleId = moduleId;
-                newRecord.Context = "";
+                newRecord.Context = context;
+                newRecord.SelfManagementScore = selfManagement.TotalScore;
                 newRecord.ProgressValue = 100;
-                newRecord.Type = ActivityCategory.FormSubmission;
+                newRecord.Type = ActivityCategory.Score;
 
                 //system fields
-                newRecord.CreatedBy = presentation.StudentId;
+                newRecord.CreatedBy = GetSessionUserId();
                 newRecord.CreatedDateTime = DateTime.Now;
-                newRecord.ModifiedBy = presentation.StudentId;
+                newRecord.ModifiedBy = GetSessionUserId();
                 newRecord.ModifiedDateTime = DateTime.Now;
 
-                //insert record
                 _context.StudentActivities.Add(newRecord);
 
-                // save record
+
+                //save record
                 _context.SaveChanges();
 
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page39").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA20").WithSuccess("Saved successfully! " + $"You scored {selfManagement.TotalScore} points");
             }
             catch (Exception ex)
             {
-                return View(presentation).WithError(ex.Message);
+
+                return RedirectToAction("PageA20").WithError(ex.Message);
             }
-
-
 
         }
 
-
-        public ActionResult Page40()
+        public ActionResult PageA21()
         {
             // title: Lost At Sea - Activity
             // type: Form Check Submission
@@ -3363,7 +3185,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A25");
+            byte activityId = GetTempActivityID("A21");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -3403,19 +3225,19 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page40(FormCollection fc)
+        public ActionResult PageA21(FormCollection fc)
         {
             var mainLostSea = new LostAtSeaViewModel();
             var ownLostSea = new OwnLostAtSeaActivityClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page40").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA21").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A25");
+            byte activityId = GetTempActivityID("A21");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -3515,14 +3337,12 @@ namespace IQMStarterKit.Controllers
                     // record overall progress
                     ComputeOverallProgress();
 
-
-
                 }
 
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page40").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA21").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -3530,15 +3350,110 @@ namespace IQMStarterKit.Controllers
             }
         }
 
-        public ActionResult Page41()
+        public ActionResult PageA22()
         {
-            // title: Lost At Sea - Activity
+            // title: How Assertive are your messages?
+            // type: Scoring
+
+            var assertive = new Assertive();
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A22");
+
+            // get Current User
+            var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null) assertive.StudentActivity = rec;
+
+
+            return View(assertive);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PageA22(FormCollection fc)
+        {
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("PageA22").WithInfo("This is just a demo.");
+            }
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A22");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+
+            try
+            {
+                // get score from collection
+                var _assert = fc.Get("assert").Split(',').Select(int.Parse).ToArray();
+                var _score = _assert.Sum();
+
+                //insert record
+
+                var newRecord = new StudentActivity();
+                newRecord.TempActivityId = activityId;
+                newRecord.TempModuleId = moduleId;
+                newRecord.Context = string.Empty;
+                newRecord.AssertiveScore = _score;
+                newRecord.ProgressValue = 100;
+                newRecord.Type = ActivityCategory.Score;
+
+                //system fields
+                newRecord.CreatedBy = GetSessionUserId();
+                newRecord.CreatedDateTime = DateTime.Now;
+                newRecord.ModifiedBy = GetSessionUserId();
+                newRecord.ModifiedDateTime = DateTime.Now;
+
+                _context.StudentActivities.Add(newRecord);
+
+
+                //save record
+                _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
+
+                return RedirectToAction("PageA22").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("PageA22").WithError(ex.Message);
+            }
+
+        }
+
+        public ActionResult PageA23()
+        {
+            // title: Lost At Sea - Journal
             // type: FormSubmission
 
             var lostSea = new LostAtSeaJournalClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A27");
+            byte activityId = GetTempActivityID("A23");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -3571,18 +3486,18 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page41(FormCollection fc)
+        public ActionResult PageA23(FormCollection fc)
         {
             var lostSea = new LostAtSeaJournalClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page41").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA23").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A27");
+            byte activityId = GetTempActivityID("A23");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -3642,7 +3557,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page41").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA23").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -3650,7 +3565,387 @@ namespace IQMStarterKit.Controllers
             }
         }
 
-        public ActionResult Page42()
+
+        public ActionResult PageA24()
+        {
+            // title: Closed Fist - Journal
+            // type: FormSubmission
+
+            var closedFist = new ClosedFistJournalClass();
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A24");
+
+            // get Current User
+            var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                closedFist = JsonConvert.DeserializeObject<ClosedFistJournalClass>(rec.Context);
+                closedFist.StudentActivity = rec;
+            }
+
+            return View(closedFist);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PageA24(FormCollection fc)
+        {
+            var closedFist = new ClosedFistJournalClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("PageA24").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A24");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                closedFist.ClosedFistJournalAns1 = fc.Get("ClosedFistJournalAns1").ToString();
+                closedFist.ClosedFistJournalAns2a = fc.Get("ClosedFistJournalAns2a").ToString();
+                closedFist.ClosedFistJournalAns2b = fc.Get("ClosedFistJournalAns2b").ToString();
+                closedFist.ClosedFistJournalAns2c = fc.Get("ClosedFistJournalAns2c").ToString();
+                closedFist.ClosedFistJournalAns3a = fc.Get("ClosedFistJournalAns3a").ToString();
+                closedFist.ClosedFistJournalAns3b = fc.Get("ClosedFistJournalAns3b").ToString();
+                closedFist.ClosedFistJournalAns3c = fc.Get("ClosedFistJournalAns3c").ToString();
+                closedFist.ClosedFistJournalAns4 = fc.Get("ClosedFistJournalAns4").ToString();
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(closedFist);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("PageA24").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(closedFist).WithError(ex.Message);
+            }
+        }
+
+        public ActionResult PageA25()
+        {
+            // title: Follow my Instructions - Journal
+            // type: FormSubmission
+
+            var followInstructions = new FollowMyInstructionsJournalClass();
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A25");
+
+            // get Current User
+            var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                followInstructions = JsonConvert.DeserializeObject<FollowMyInstructionsJournalClass>(rec.Context);
+                followInstructions.StudentActivity = rec;
+            }
+
+            return View(followInstructions);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PageA25(FormCollection fc)
+        {
+            var followInstructions = new FollowMyInstructionsJournalClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("PageA25").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A25");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                followInstructions.FollowInstructionsJournalAns1 = fc.Get("FollowInstructionsJournalAns1").ToString();
+                followInstructions.FollowInstructionsJournalAns2a = fc.Get("FollowInstructionsJournalAns2a").ToString();
+                followInstructions.FollowInstructionsJournalAns2b = fc.Get("FollowInstructionsJournalAns2b").ToString();
+                followInstructions.FollowInstructionsJournalAns2c = fc.Get("FollowInstructionsJournalAns2c").ToString();
+                followInstructions.FollowInstructionsJournalAns3a = fc.Get("FollowInstructionsJournalAns3a").ToString();
+                followInstructions.FollowInstructionsJournalAns3b = fc.Get("FollowInstructionsJournalAns3b").ToString();
+                followInstructions.FollowInstructionsJournalAns3c = fc.Get("FollowInstructionsJournalAns3c").ToString();
+                followInstructions.FollowInstructionsJournalAns4 = fc.Get("FollowInstructionsJournalAns4").ToString();
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(followInstructions);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("PageA25").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(followInstructions).WithError(ex.Message);
+            }
+        }
+
+
+        public ActionResult PageA26()
+        {
+            // title: Presentations
+            // type: FormSubmission
+
+            PresentationEvaluationModel presentation = new PresentationEvaluationModel();
+
+            //get id in tempActivity
+            var activityId = GetTempActivityID("A26");
+            //get owner
+            var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+
+                //validate presentation evaluation record
+                presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == owner);
+
+                if (presentation == null) return RedirectToAction("Index").WithInfo("Your evaluation result is not yet available.");
+
+            }
+            else if (User.IsInRole("Tutor"))
+            {
+                if (Session["email"] != null)
+                {
+                    var student = UserManager.FindByEmail(Session["email"].ToString());
+                    //validate presentation evaluation record
+                    presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == student.Id);
+
+                    if (presentation == null)
+                    {
+                        presentation = new PresentationEvaluationModel();
+                        //start eval fill student records
+                        presentation.StudentId = student.Id;
+                        presentation.StudentName = student.FullName;
+                        presentation.StudentEmail = student.Email;
+                        presentation.TutorId = GetSessionUserId();
+                        presentation.TutorName = GetFullName(owner);
+
+
+                    }
+                }
+            }
+            else if (User.IsInRole("Administrator"))
+            {
+                if (Session["email"] != null)
+                {
+                    var student = UserManager.FindByEmail(Session["email"].ToString());
+                    //validate presentation evaluation record
+                    presentation = _context.PresentationEvaluationModel.FirstOrDefault(m => m.StudentId == student.Id);
+
+                    if (presentation == null) return View(presentation).WithInfo("Student evaluation result is not yet available.");
+
+                }
+            }
+
+
+            return View(presentation);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PageA26(PresentationEvaluationModel presentation)
+        {
+
+
+            if (User.IsInRole("Administrator"))
+            {
+                return RedirectToAction("PageA26").WithInfo("This is just a demo.");
+            }
+
+            try
+            {
+
+
+                //system fields
+                presentation.CreatedBy = GetSessionUserId();
+                presentation.CreatedDateTime = DateTime.Now;
+                presentation.ModifiedBy = GetSessionUserId();
+                presentation.ModifiedDateTime = DateTime.Now;
+
+                //insert record
+                _context.PresentationEvaluationModel.Add(presentation);
+
+                //add record to student activity table
+
+                //get temp activity id by title
+                //note: title should be the same with the search keyword when using lamda expression
+                byte activityId = GetTempActivityID("A26");
+                //get module id
+                var moduleId = GetTempModuleIdByActivityID(activityId);
+                //get current user
+
+                var newRecord = new StudentActivity();
+                newRecord.TempActivityId = activityId;
+                newRecord.TempModuleId = moduleId;
+                newRecord.Context = "";
+                newRecord.ProgressValue = 100;
+                newRecord.Type = ActivityCategory.FormSubmission;
+
+                //system fields
+                newRecord.CreatedBy = presentation.StudentId;
+                newRecord.CreatedDateTime = DateTime.Now;
+                newRecord.ModifiedBy = presentation.StudentId;
+                newRecord.ModifiedDateTime = DateTime.Now;
+
+                //insert record
+                _context.StudentActivities.Add(newRecord);
+
+                // save record
+                _context.SaveChanges();
+
+                // record overall progress
+                ComputeOverallProgress();
+
+                return RedirectToAction("PageA26").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(presentation).WithError(ex.Message);
+            }
+
+
+
+        }
+
+
+        public ActionResult PageA27()
         {
 
             // title: Problem Solving - Dots
@@ -3659,7 +3954,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("A36");
+            var activityId = GetTempActivityID("A27");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -3691,11 +3986,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page42UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA27UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page42").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA27").WithInfo("This is just a demo.");
             }
             var studentActivity = new StudentActivity();
             try
@@ -3720,7 +4015,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("A36");
+                    byte activityId = GetTempActivityID("A27");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -3789,16 +4084,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page42").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA27").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page42").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PageA27").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public FileResult Page42DownloadFile(string Id)
+        public FileResult PageA27DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -3807,7 +4102,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page43()
+        public ActionResult PageA28()
         {
 
             // title: Problem Solving - Cake
@@ -3816,7 +4111,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("A37");
+            var activityId = GetTempActivityID("A28");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -3847,11 +4142,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page43UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA28UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page43").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA28").WithInfo("This is just a demo.");
             }
             var studentActivity = new StudentActivity();
             try
@@ -3876,7 +4171,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("A37");
+                    byte activityId = GetTempActivityID("A28");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -3945,16 +4240,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page43").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA28").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page43").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PagA28").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public FileResult Page43DownloadFile(string Id)
+        public FileResult PageA28DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -3964,7 +4259,7 @@ namespace IQMStarterKit.Controllers
 
 
 
-        public ActionResult Page44()
+        public ActionResult PageA29()
         {
             // title: Brainstorming
             // type: FormSubmission
@@ -3972,7 +4267,7 @@ namespace IQMStarterKit.Controllers
             var brainstorming = new BrainstormingClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A38");
+            byte activityId = GetTempActivityID("A29");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4004,18 +4299,18 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page44(FormCollection fc)
+        public ActionResult PageA29(FormCollection fc)
         {
             var brainstorming = new BrainstormingClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page44").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA29").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A38");
+            byte activityId = GetTempActivityID("A29");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4130,7 +4425,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page44").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA29").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -4139,8 +4434,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-
-        public ActionResult Page45()
+        public ActionResult PageA30()
         {
 
             // title: Draw Mind Map
@@ -4149,7 +4443,7 @@ namespace IQMStarterKit.Controllers
             FilePath filePath = new FilePath();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("A39");
+            var activityId = GetTempActivityID("A30");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -4180,11 +4474,11 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page45UploadFile(FilePath filepath, UploadFileModel fileModel)
+        public ActionResult PageA30UploadFile(FilePath filepath, UploadFileModel fileModel)
         {
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page45").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA30").WithInfo("This is just a demo.");
             }
             var studentActivity = new StudentActivity();
             try
@@ -4209,7 +4503,7 @@ namespace IQMStarterKit.Controllers
 
                     //get temp activity id by title
                     //note: title should be the same with the search keyword when using lamda expression
-                    byte activityId = GetTempActivityID("A39");
+                    byte activityId = GetTempActivityID("A30");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
@@ -4278,16 +4572,16 @@ namespace IQMStarterKit.Controllers
                     }
 
                 }
-                return RedirectToAction("Page45").WithSuccess("File uploaded successfully!");
+                return RedirectToAction("PageA30").WithSuccess("File uploaded successfully!");
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page45").WithError("File upload failed!" + ex.Message);
+                return RedirectToAction("PageA30").WithError("File upload failed!" + ex.Message);
             }
         }
 
-        public FileResult Page45DownloadFile(string Id)
+        public FileResult PageA30DownloadFile(string Id)
         {
             var stdId = byte.Parse(Id);
 
@@ -4296,16 +4590,16 @@ namespace IQMStarterKit.Controllers
         }
 
 
-        public ActionResult Page46()
+        public ActionResult PageA31()
         {
             // title: conflict  managing
             // type: Scoring
 
-            ViewBag.ActDone = false;
+            var conflict = new Conflict();
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A40");
+            byte activityId = GetTempActivityID("A31");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4326,28 +4620,23 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-                ViewBag.ActDone = true;
-                ViewBag.FirstDominant = rec.CFDominantFirst;
-                ViewBag.SecondDominant = rec.CFDominantSecond;
-            }
+            if (rec != null) conflict.StudentActivity = rec;
 
-            return View();
+            return View(conflict);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page46(FormCollection fc)
+        public ActionResult PageA31(FormCollection fc)
         {
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page46").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA31").WithInfo("This is just a demo.");
             }
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A40");
+            byte activityId = GetTempActivityID("A31");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4389,17 +4678,138 @@ namespace IQMStarterKit.Controllers
                 // record overall progress
                 ComputeOverallProgress();
 
-                return RedirectToAction("Page46").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA31").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Page46").WithError(ex.Message);
+                return RedirectToAction("PageA31").WithError(ex.Message);
             }
 
         }
 
-        public ActionResult Page47()
+        public ActionResult PageA32()
+        {
+            // title: Helium Stick - Journal
+            // type: FormSubmission
+
+            var heliumStick = new HeliumStickJournalClass();
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A32");
+
+            // get Current User
+            var owner = GetSessionUserId();
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                heliumStick = JsonConvert.DeserializeObject<HeliumStickJournalClass>(rec.Context);
+                heliumStick.StudentActivity = rec;
+            }
+
+            return View(heliumStick);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PageA32(FormCollection fc)
+        {
+            var heliumStick = new HeliumStickJournalClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("PageA32").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A32");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                heliumStick.HeliumStickJournalAns1 = fc.Get("HeliumStickJournalAns1").ToString();
+                heliumStick.HeliumStickJournalAns2a = fc.Get("HeliumStickJournalAns2a").ToString();
+                heliumStick.HeliumStickJournalAns2b = fc.Get("HeliumStickJournalAns2b").ToString();
+                heliumStick.HeliumStickJournalAns2c = fc.Get("HeliumStickJournalAns2c").ToString();
+                heliumStick.HeliumStickJournalAns3a = fc.Get("HeliumStickJournalAns3a").ToString();
+                heliumStick.HeliumStickJournalAns3b = fc.Get("HeliumStickJournalAns3b").ToString();
+                heliumStick.HeliumStickJournalAns3c = fc.Get("HeliumStickJournalAns3c").ToString();
+                heliumStick.HeliumStickJournalAns4 = fc.Get("HeliumStickJournalAns4").ToString();
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(heliumStick);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("PageA32").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(heliumStick).WithError(ex.Message);
+            }
+        }
+
+        public ActionResult PageA33()
         {
             // title: Personal SWOT
             // type: FormSubmission
@@ -4407,7 +4817,7 @@ namespace IQMStarterKit.Controllers
             var swot = new PersonalSWOTClass();
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A43");
+            byte activityId = GetTempActivityID("A33");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -4440,18 +4850,18 @@ namespace IQMStarterKit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page47(FormCollection fc)
+        public ActionResult PageA33(FormCollection fc)
         {
             var swot = new PersonalSWOTClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page47").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA33").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A43");
+            byte activityId = GetTempActivityID("A33");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4508,7 +4918,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page47").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA33").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -4516,7 +4926,137 @@ namespace IQMStarterKit.Controllers
             }
         }
 
-        public ActionResult Page48()
+
+        public ActionResult PageA34()
+        {
+            // title: My 14 Habits for More Effective Me
+            // type: FormSubmission
+
+            var myHabit = new My14HabitsClass();
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A34");
+
+            // get Current User
+            var owner = GetSessionUserId();
+
+            // check session is not null
+            if (Session["email"] != null)
+            {
+                var user = UserManager.FindByEmail(Session["email"].ToString());
+                owner = user.Id;
+            }
+
+            //check if config locked for student
+            if (User.IsInRole("Student"))
+            {
+                var lockMessage = IsActivityLocked(owner, activityId);
+                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
+            }
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+            if (rec != null)
+            {
+                //get context and deserialize
+                myHabit = JsonConvert.DeserializeObject<My14HabitsClass>(rec.Context);
+                myHabit.StudentActivity = rec;
+            }
+
+            return View(myHabit);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PageA34(FormCollection fc)
+        {
+            var myHabit = new My14HabitsClass();
+
+            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
+            {
+                return RedirectToAction("PageA34").WithInfo("This is just a demo.");
+            }
+
+            //get temp activity id by title
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A34");
+            //get module id
+            var moduleId = GetTempModuleIdByActivityID(activityId);
+            //get current user
+            var owner = GetSessionUserId();
+
+            try
+            {
+                //generate context string from form collection
+
+                myHabit.Proactive1 = fc.Get("Proactive1").ToString();
+                myHabit.Proactive2 = fc.Get("Proactive2").ToString();
+                myHabit.EndMind1 = fc.Get("EndMind1").ToString();
+                myHabit.EndMind2 = fc.Get("EndMind2").ToString();
+                myHabit.FirstThings1 = fc.Get("FirstThings1").ToString();
+                myHabit.FirstThings2 = fc.Get("FirstThings2").ToString();
+                myHabit.WinWin1 = fc.Get("WinWin1").ToString();
+                myHabit.WinWin2 = fc.Get("WinWin2").ToString();
+                myHabit.SeekFirst1 = fc.Get("SeekFirst1").ToString();
+                myHabit.SeekFirst2 = fc.Get("SeekFirst2").ToString();
+                myHabit.Synergise1 = fc.Get("Synergise1").ToString();
+                myHabit.Synergise2 = fc.Get("Synergise2").ToString();
+                myHabit.SharpenSaw1 = fc.Get("SharpenSaw1").ToString();
+                myHabit.SharpenSaw2 = fc.Get("SharpenSaw2").ToString();
+
+                // serialize to json format for context store
+                string context = JsonConvert.SerializeObject(myHabit);
+
+                //validate if record already existed
+                var studentRecord = _context.StudentActivities
+                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
+
+                if (studentRecord == null)
+                {
+                    var newRecord = new StudentActivity();
+                    newRecord.TempActivityId = activityId;
+                    newRecord.TempModuleId = moduleId;
+                    newRecord.Context = context;
+                    newRecord.ProgressValue = 100;
+                    newRecord.Type = ActivityCategory.FormSubmission;
+
+                    //system fields
+                    newRecord.CreatedBy = GetSessionUserId();
+                    newRecord.CreatedDateTime = DateTime.Now;
+                    newRecord.ModifiedBy = GetSessionUserId();
+                    newRecord.ModifiedDateTime = DateTime.Now;
+
+                    //insert record
+                    _context.StudentActivities.Add(newRecord);
+
+                    // record overall progress
+                    ComputeOverallProgress();
+                }
+                else
+                {
+                    studentRecord.Context = context;
+                    studentRecord.ModifiedBy = GetSessionUserId();
+                    studentRecord.ModifiedDateTime = DateTime.Now;
+
+                    // modify record
+                    _context.Entry(studentRecord).State = EntityState.Modified;
+
+                }
+
+                // save record
+                _context.SaveChanges();
+
+                return RedirectToAction("PageA34").WithSuccess("Saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                return View(myHabit).WithError(ex.Message);
+            }
+        }
+
+
+        public ActionResult PageA35()
         {
             // title: Maturity Continuum
             // type: FormSubmission
@@ -4524,7 +5064,7 @@ namespace IQMStarterKit.Controllers
             var mc = new MaturityContinuumClass();
 
             //get id in tempActivity
-            var activityId = GetTempActivityID("A45");
+            var activityId = GetTempActivityID("A35");
             //get owner
             var owner = GetSessionUserId();
             // check session is not null
@@ -4551,22 +5091,20 @@ namespace IQMStarterKit.Controllers
             return View(mc);
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page48(FormCollection fc)
+        public ActionResult PageA35(FormCollection fc)
         {
             var mc = new MaturityContinuumClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page48").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA35").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A45");
+            byte activityId = GetTempActivityID("A35");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -4634,7 +5172,7 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page48").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA35").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
@@ -4643,498 +5181,7 @@ namespace IQMStarterKit.Controllers
         }
 
 
-
-
-        public ActionResult Page50()
-        {
-            // title: Pass the Ball - Journal
-            // type: FormSubmission
-
-            var passBall = new PassTheBallJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A18");
-
-            // get Current User
-            var owner = GetSessionUserId();
-            // check session is not null
-            if (Session["email"] != null)
-            {
-                var user = UserManager.FindByEmail(Session["email"].ToString());
-                owner = user.Id;
-            }
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
-
-            // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-            if (rec != null)
-            {
-                //get context and deserialize
-                passBall = JsonConvert.DeserializeObject<PassTheBallJournalClass>(rec.Context);
-                passBall.StudentActivity = rec;
-            }
-
-            return View(passBall);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Page50(FormCollection fc)
-        {
-            var passBall = new PassTheBallJournalClass();
-
-            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
-            {
-                return RedirectToAction("Page50").WithInfo("This is just a demo.");
-            }
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A18");
-            //get module id
-            var moduleId = GetTempModuleIdByActivityID(activityId);
-            //get current user
-            var owner = GetSessionUserId();
-
-            try
-            {
-                //generate context string from form collection
-
-                passBall.PassBallJournalAns1 = fc.Get("PassBallJournalAns1").ToString();
-                passBall.PassBallJournalAns2a = fc.Get("PassBallJournalAns2a").ToString();
-                passBall.PassBallJournalAns2b = fc.Get("PassBallJournalAns2b").ToString();
-                passBall.PassBallJournalAns2c = fc.Get("PassBallJournalAns2c").ToString();
-                passBall.PassBallJournalAns3a = fc.Get("PassBallJournalAns3a").ToString();
-                passBall.PassBallJournalAns3b = fc.Get("PassBallJournalAns3b").ToString();
-                passBall.PassBallJournalAns3c = fc.Get("PassBallJournalAns3c").ToString();
-                passBall.PassBallJournalAns4 = fc.Get("PassBallJournalAns4").ToString();
-
-                // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(passBall);
-
-                //validate if record already existed
-                var studentRecord = _context.StudentActivities
-                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-                if (studentRecord == null)
-                {
-                    var newRecord = new StudentActivity();
-                    newRecord.TempActivityId = activityId;
-                    newRecord.TempModuleId = moduleId;
-                    newRecord.Context = context;
-                    newRecord.ProgressValue = 100;
-                    newRecord.Type = ActivityCategory.FormSubmission;
-
-                    //system fields
-                    newRecord.CreatedBy = GetSessionUserId();
-                    newRecord.CreatedDateTime = DateTime.Now;
-                    newRecord.ModifiedBy = GetSessionUserId();
-                    newRecord.ModifiedDateTime = DateTime.Now;
-
-                    //insert record
-                    _context.StudentActivities.Add(newRecord);
-
-                    // record overall progress
-                    ComputeOverallProgress();
-                }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-
-                    // modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
-
-                }
-
-                // save record
-                _context.SaveChanges();
-
-                return RedirectToAction("Page50").WithSuccess("Saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                return View(passBall).WithError(ex.Message);
-            }
-        }
-
-
-
-        public ActionResult Page51()
-        {
-            // title: Closed Fist - Journal
-            // type: FormSubmission
-
-            var closedFist = new ClosedFistJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A28");
-
-            // get Current User
-            var owner = GetSessionUserId();
-            // check session is not null
-            if (Session["email"] != null)
-            {
-                var user = UserManager.FindByEmail(Session["email"].ToString());
-                owner = user.Id;
-            }
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
-
-            // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-            if (rec != null)
-            {
-                //get context and deserialize
-                closedFist = JsonConvert.DeserializeObject<ClosedFistJournalClass>(rec.Context);
-                closedFist.StudentActivity = rec;
-            }
-
-            return View(closedFist);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Page51(FormCollection fc)
-        {
-            var closedFist = new ClosedFistJournalClass();
-
-            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
-            {
-                return RedirectToAction("Page51").WithInfo("This is just a demo.");
-            }
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A28");
-            //get module id
-            var moduleId = GetTempModuleIdByActivityID(activityId);
-            //get current user
-            var owner = GetSessionUserId();
-
-            try
-            {
-                //generate context string from form collection
-
-                closedFist.ClosedFistJournalAns1 = fc.Get("ClosedFistJournalAns1").ToString();
-                closedFist.ClosedFistJournalAns2a = fc.Get("ClosedFistJournalAns2a").ToString();
-                closedFist.ClosedFistJournalAns2b = fc.Get("ClosedFistJournalAns2b").ToString();
-                closedFist.ClosedFistJournalAns2c = fc.Get("ClosedFistJournalAns2c").ToString();
-                closedFist.ClosedFistJournalAns3a = fc.Get("ClosedFistJournalAns3a").ToString();
-                closedFist.ClosedFistJournalAns3b = fc.Get("ClosedFistJournalAns3b").ToString();
-                closedFist.ClosedFistJournalAns3c = fc.Get("ClosedFistJournalAns3c").ToString();
-                closedFist.ClosedFistJournalAns4 = fc.Get("ClosedFistJournalAns4").ToString();
-
-                // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(closedFist);
-
-                //validate if record already existed
-                var studentRecord = _context.StudentActivities
-                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-                if (studentRecord == null)
-                {
-                    var newRecord = new StudentActivity();
-                    newRecord.TempActivityId = activityId;
-                    newRecord.TempModuleId = moduleId;
-                    newRecord.Context = context;
-                    newRecord.ProgressValue = 100;
-                    newRecord.Type = ActivityCategory.FormSubmission;
-
-                    //system fields
-                    newRecord.CreatedBy = GetSessionUserId();
-                    newRecord.CreatedDateTime = DateTime.Now;
-                    newRecord.ModifiedBy = GetSessionUserId();
-                    newRecord.ModifiedDateTime = DateTime.Now;
-
-                    //insert record
-                    _context.StudentActivities.Add(newRecord);
-
-                    // record overall progress
-                    ComputeOverallProgress();
-                }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-
-                    // modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
-
-                }
-
-                // save record
-                _context.SaveChanges();
-
-                return RedirectToAction("Page51").WithSuccess("Saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                return View(closedFist).WithError(ex.Message);
-            }
-        }
-
-
-        public ActionResult Page52()
-        {
-            // title: Helium Stick - Journal
-            // type: FormSubmission
-
-            var heliumStick = new HeliumStickJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A41");
-
-            // get Current User
-            var owner = GetSessionUserId();
-            // check session is not null
-            if (Session["email"] != null)
-            {
-                var user = UserManager.FindByEmail(Session["email"].ToString());
-                owner = user.Id;
-            }
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
-
-            // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-            if (rec != null)
-            {
-                //get context and deserialize
-                heliumStick = JsonConvert.DeserializeObject<HeliumStickJournalClass>(rec.Context);
-                heliumStick.StudentActivity = rec;
-            }
-
-            return View(heliumStick);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Page52(FormCollection fc)
-        {
-            var heliumStick = new HeliumStickJournalClass();
-
-            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
-            {
-                return RedirectToAction("Page52").WithInfo("This is just a demo.");
-            }
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A41");
-            //get module id
-            var moduleId = GetTempModuleIdByActivityID(activityId);
-            //get current user
-            var owner = GetSessionUserId();
-
-            try
-            {
-                //generate context string from form collection
-
-                heliumStick.HeliumStickJournalAns1 = fc.Get("HeliumStickJournalAns1").ToString();
-                heliumStick.HeliumStickJournalAns2a = fc.Get("HeliumStickJournalAns2a").ToString();
-                heliumStick.HeliumStickJournalAns2b = fc.Get("HeliumStickJournalAns2b").ToString();
-                heliumStick.HeliumStickJournalAns2c = fc.Get("HeliumStickJournalAns2c").ToString();
-                heliumStick.HeliumStickJournalAns3a = fc.Get("HeliumStickJournalAns3a").ToString();
-                heliumStick.HeliumStickJournalAns3b = fc.Get("HeliumStickJournalAns3b").ToString();
-                heliumStick.HeliumStickJournalAns3c = fc.Get("HeliumStickJournalAns3c").ToString();
-                heliumStick.HeliumStickJournalAns4 = fc.Get("HeliumStickJournalAns4").ToString();
-
-                // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(heliumStick);
-
-                //validate if record already existed
-                var studentRecord = _context.StudentActivities
-                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-                if (studentRecord == null)
-                {
-                    var newRecord = new StudentActivity();
-                    newRecord.TempActivityId = activityId;
-                    newRecord.TempModuleId = moduleId;
-                    newRecord.Context = context;
-                    newRecord.ProgressValue = 100;
-                    newRecord.Type = ActivityCategory.FormSubmission;
-
-                    //system fields
-                    newRecord.CreatedBy = GetSessionUserId();
-                    newRecord.CreatedDateTime = DateTime.Now;
-                    newRecord.ModifiedBy = GetSessionUserId();
-                    newRecord.ModifiedDateTime = DateTime.Now;
-
-                    //insert record
-                    _context.StudentActivities.Add(newRecord);
-
-                    // record overall progress
-                    ComputeOverallProgress();
-                }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-
-                    // modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
-
-                }
-
-                // save record
-                _context.SaveChanges();
-
-                return RedirectToAction("Page52").WithSuccess("Saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                return View(heliumStick).WithError(ex.Message);
-            }
-        }
-
-
-
-        public ActionResult Page53()
-        {
-            // title: Follow my Instructions - Journal
-            // type: FormSubmission
-
-            var followInstructions = new FollowMyInstructionsJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A33");
-
-            // get Current User
-            var owner = GetSessionUserId();
-            // check session is not null
-            if (Session["email"] != null)
-            {
-                var user = UserManager.FindByEmail(Session["email"].ToString());
-                owner = user.Id;
-            }
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
-
-            // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-            if (rec != null)
-            {
-                //get context and deserialize
-                followInstructions = JsonConvert.DeserializeObject<FollowMyInstructionsJournalClass>(rec.Context);
-                followInstructions.StudentActivity = rec;
-            }
-
-            return View(followInstructions);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Page53(FormCollection fc)
-        {
-            var followInstructions = new FollowMyInstructionsJournalClass();
-
-            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
-            {
-                return RedirectToAction("Page53").WithInfo("This is just a demo.");
-            }
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A33");
-            //get module id
-            var moduleId = GetTempModuleIdByActivityID(activityId);
-            //get current user
-            var owner = GetSessionUserId();
-
-            try
-            {
-                //generate context string from form collection
-
-                followInstructions.FollowInstructionsJournalAns1 = fc.Get("FollowInstructionsJournalAns1").ToString();
-                followInstructions.FollowInstructionsJournalAns2a = fc.Get("FollowInstructionsJournalAns2a").ToString();
-                followInstructions.FollowInstructionsJournalAns2b = fc.Get("FollowInstructionsJournalAns2b").ToString();
-                followInstructions.FollowInstructionsJournalAns2c = fc.Get("FollowInstructionsJournalAns2c").ToString();
-                followInstructions.FollowInstructionsJournalAns3a = fc.Get("FollowInstructionsJournalAns3a").ToString();
-                followInstructions.FollowInstructionsJournalAns3b = fc.Get("FollowInstructionsJournalAns3b").ToString();
-                followInstructions.FollowInstructionsJournalAns3c = fc.Get("FollowInstructionsJournalAns3c").ToString();
-                followInstructions.FollowInstructionsJournalAns4 = fc.Get("FollowInstructionsJournalAns4").ToString();
-
-                // serialize to json format for context store
-                string context = JsonConvert.SerializeObject(followInstructions);
-
-                //validate if record already existed
-                var studentRecord = _context.StudentActivities
-                    .FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-                if (studentRecord == null)
-                {
-                    var newRecord = new StudentActivity();
-                    newRecord.TempActivityId = activityId;
-                    newRecord.TempModuleId = moduleId;
-                    newRecord.Context = context;
-                    newRecord.ProgressValue = 100;
-                    newRecord.Type = ActivityCategory.FormSubmission;
-
-                    //system fields
-                    newRecord.CreatedBy = GetSessionUserId();
-                    newRecord.CreatedDateTime = DateTime.Now;
-                    newRecord.ModifiedBy = GetSessionUserId();
-                    newRecord.ModifiedDateTime = DateTime.Now;
-
-                    //insert record
-                    _context.StudentActivities.Add(newRecord);
-
-                    // record overall progress
-                    ComputeOverallProgress();
-                }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-
-                    // modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
-
-                }
-
-                // save record
-                _context.SaveChanges();
-
-                return RedirectToAction("Page53").WithSuccess("Saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                return View(followInstructions).WithError(ex.Message);
-            }
-        }
-
-        public ActionResult Page54()
+        public ActionResult PageA36()
         {
             // title: Review Quiz
             // type: Scoring
@@ -5143,7 +5190,7 @@ namespace IQMStarterKit.Controllers
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A48");
+            byte activityId = GetTempActivityID("A36");
 
             // get Current User
             var owner = GetSessionUserId();
@@ -5157,30 +5204,25 @@ namespace IQMStarterKit.Controllers
             // validate if record already existed in student activity table
             var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
 
-            if (rec != null)
-            {
-
-                reviewQuiz.StudentActivity = rec;
-
-            }
+            if (rec != null) reviewQuiz.StudentActivity = rec;
 
             return View(reviewQuiz);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Page54(FormCollection fc)
+        public ActionResult PageA36(FormCollection fc)
         {
             var reviewQuiz = new ReviewQuizClass();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
-                return RedirectToAction("Page54").WithInfo("This is just a demo.");
+                return RedirectToAction("PageA36").WithInfo("This is just a demo.");
             }
 
             //get temp activity id by title
             //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A48");
+            byte activityId = GetTempActivityID("A36");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
             //get current user
@@ -5415,115 +5457,13 @@ namespace IQMStarterKit.Controllers
                 // save record
                 _context.SaveChanges();
 
-                return RedirectToAction("Page54").WithSuccess("Saved successfully!");
+                return RedirectToAction("PageA36").WithSuccess("Saved successfully!");
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Page54", reviewQuiz).WithError(ex.Message);
+                return RedirectToAction("PageA36", reviewQuiz).WithError(ex.Message);
             }
         }
-
-
-
-        public ActionResult Page55()
-        {
-            // title: How Assertive are your messages?
-            // type: Scoring
-
-            ViewBag.ActDone = false;
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A26");
-
-            // get Current User
-            var owner = GetSessionUserId();
-            // check session is not null
-            if (Session["email"] != null)
-            {
-                var user = UserManager.FindByEmail(Session["email"].ToString());
-                owner = user.Id;
-            }
-
-            //check if config locked for student
-            if (User.IsInRole("Student"))
-            {
-                var lockMessage = IsActivityLocked(owner, activityId);
-                if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
-            }
-
-            // validate if record already existed in student activity table
-            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == owner);
-
-            if (rec != null)
-            {
-                ViewBag.ActDone = true;
-                ViewBag.AssertiveScore = rec.AssertiveScore;
-
-            }
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Page55(FormCollection fc)
-        {
-
-            if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
-            {
-                return RedirectToAction("Page55").WithInfo("This is just a demo.");
-            }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
-            byte activityId = GetTempActivityID("A26");
-            //get module id
-            var moduleId = GetTempModuleIdByActivityID(activityId);
-            //get current user
-            var owner = GetSessionUserId();
-
-
-            try
-            {
-                // get score from collection
-                var _assert = fc.Get("assert").Split(',').Select(int.Parse).ToArray();
-                var _score = _assert.Sum();
-
-                //insert record
-
-                var newRecord = new StudentActivity();
-                newRecord.TempActivityId = activityId;
-                newRecord.TempModuleId = moduleId;
-                newRecord.Context = string.Empty;
-                newRecord.AssertiveScore = _score;
-                newRecord.ProgressValue = 100;
-                newRecord.Type = ActivityCategory.Score;
-
-                //system fields
-                newRecord.CreatedBy = GetSessionUserId();
-                newRecord.CreatedDateTime = DateTime.Now;
-                newRecord.ModifiedBy = GetSessionUserId();
-                newRecord.ModifiedDateTime = DateTime.Now;
-
-                _context.StudentActivities.Add(newRecord);
-
-
-                //save record
-                _context.SaveChanges();
-
-                // record overall progress
-                ComputeOverallProgress();
-
-                return RedirectToAction("Page55").WithSuccess("Saved successfully!");
-            }
-            catch (Exception ex)
-            {
-
-                return RedirectToAction("Page55").WithError(ex.Message);
-            }
-
-        }
-
 
 
         // redirect to survey controller actions

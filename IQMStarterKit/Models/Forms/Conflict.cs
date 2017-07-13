@@ -1,4 +1,6 @@
-﻿namespace IQMStarterKit.Models.Forms
+﻿using IQMStarterKit.Models.Core;
+
+namespace IQMStarterKit.Models.Forms
 {
     public class Conflict
     {
@@ -10,5 +12,13 @@
 
         public string FirstDominant { get; set; }
         public string SecondDominant { get; set; }
+
+        public StudentActivity StudentActivity { get; set; }
+
+        public Conflict()
+        {
+            StudentActivity = new StudentActivity();
+
+        }
     }
 }

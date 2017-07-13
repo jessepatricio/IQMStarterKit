@@ -1,0 +1,47 @@
+﻿@model IQMStarterKit.Models.FilePath
+@using Microsoft.AspNet.Identity
+
+@using (Html.BeginForm("PageA06UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+   
+    @Html.AntiForgeryToken()
+    
+    <div class="main_container">
+        <div style="text-align:center;">
+            <img src="~/Content/img/Human Bingo Activity.png" alt="Human Bingo Activity Chart">
+        </div>
+
+     
+            <div class="form-group">
+                <div class="col-md-offset-3">
+                    @if (Model != null && Model.FileName != null && Model.CreatedBy == User.Identity.GetUserId())
+                    {
+                        <div class="col-md-3"></div>
+                            <div class="col-md-8 form-inline">
+                                @Html.ActionLink("Download File", "PageA06DownloadFile", "Module",
+                                  new { id = Model.StudentActivityId },
+                                  new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+                            </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-1"></div>
+                            <div class="col-md-8 form-inline">
+                                @Html.Label("Human Bingo", new { @class = "label label-default" })
+                                <input type="file" id="Shield" name="file" class="form-control" style="width:300px;" />
+                                <input type="submit" value="Upload" class="btn btn-primary" />
+                            </div>
+                    }
+                </div>
+            </div>
+            <br />
+            <div style="text-align:center; margin-top: 30px;width:100%;">
+                @Html.ActionLink("Previous Page", "PageA05") |
+                @Html.ActionLink("Main", "Index") |
+                @Html.ActionLink("Next Page", "PageA07")
+            </div>
+      
+    </div>
+}
+
+

@@ -1,0 +1,23 @@
+﻿
+@using (Html.BeginForm())
+{
+    <div class="main_container">
+        <h1 class="heading">Classroom Rules</h1>
+        <br />
+        <p class="p17-19List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Speak English Only</p>
+        <ul class="p17-19List">
+            <li>Students from different parts of the world.</li>
+            <li>Great opportunity to improve English.</li>
+            <li>Good spoken English helps in job search.</li>
+        </ul>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "PageA04") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA04_02")
+        </div>
+
+    </div>
+}
+
+

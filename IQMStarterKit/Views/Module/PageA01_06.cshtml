@@ -1,0 +1,19 @@
+﻿
+@using (Html.BeginForm())
+{
+    <div class="main_container">
+        <h1 class="heading">Attendance Issues</h1>
+
+        <ul class="p7List">
+            <li> Attendance must be 100%, with absence supported by a medical certificate. <br /><span style="color:red;">(We are not in a position to grant leave.)</span></li>
+            <li> Late for 15 minutes and more can be marked absent for an entire hour; you may not be allowed into class until break time. Leaving the class early is considered absent.</li>
+            <li> As an act of courtesy, contact the Student Service Team if you are going to be late or absent.</li>
+        </ul>
+        <br/>
+        <div style="text-align:center">
+            @Html.ActionLink("Previous Page", "PageA01_05") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA01_07")
+        </div>
+    </div>
+}

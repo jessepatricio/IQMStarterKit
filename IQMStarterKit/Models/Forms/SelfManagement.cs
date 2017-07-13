@@ -1,4 +1,6 @@
-﻿namespace IQMStarterKit.Models.Forms
+﻿using IQMStarterKit.Models.Core;
+
+namespace IQMStarterKit.Models.Forms
 {
     public class SelfManagement
     {
@@ -23,5 +25,13 @@
         public string Value19 { get; set; }
         public string Value20 { get; set; }
         public int TotalScore { get; set; }
+
+        public StudentActivity StudentActivity { get; set; }
+
+        public SelfManagement()
+        {
+            StudentActivity = new StudentActivity();
+
+        }
     }
 }

@@ -1,0 +1,77 @@
+﻿@model IQMStarterKit.Models.FilePath
+
+@using Microsoft.AspNet.Identity
+
+
+@using (Html.BeginForm("PageA30UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    <div  class="main_container">
+        <div style="text-align:center">
+            <img src="~/Content/img/MindMap.jpg" alt="Activity Mind Map" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="col-md-12 form-inline" style="text-align:center; margin-top:20px;">
+                @if (Model != null && Model.FileName != null && Model.CreatedBy == User.Identity.GetUserId())
+                {
+                    @Html.ActionLink("Download File", "PageA30DownloadFile", "Module",
+                            new { id = Model.StudentActivityId },
+                            new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+
+
+                }
+                else
+                {
+                    @Html.Label("Draw Mind Map", new { @class = "label label-default" })
+                    <input type="file" id="MindMap" name="file" class="form-control" style="width:300px;" />
+                    <input type="submit" value="Upload" class="btn btn-primary" />
+                }
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "PageA29") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA31")
+    </div>
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function CheckValue() {
+
+            if ($('#MindMap').val() == "") {
+                // all empty
+                toastr.warning('Please select a file to upload.')
+                return false;
+            }
+            return true;
+
+        }
+
+        //confirmation dialog
+
+
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    if (CheckValue()) {
+                        currentForm.submit();
+                    }
+                }
+            });
+        });
+
+    </script>
+}
+
+

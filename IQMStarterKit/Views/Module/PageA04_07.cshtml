@@ -1,0 +1,24 @@
+﻿
+@using (Html.BeginForm())
+{
+
+    <div class="main_container">
+        <h1 class="heading">Classroom Rules</h1>
+        <br />
+        <ul class="p20-22List">
+            <li><span class="glyphicon glyphicon-ok"></span> &nbsp; The activities and exercises are <strong>NOT</strong> about winning, it’s the learning that’s more important.</li>
+        </ul>
+        <p id="p22Cheating"> Cheating is not allowed.</p>
+        <div id="p20-22img">
+            <img src="~/Content/img/ThumbDown.png" alt="Thumbs Down graphic">
+        </div>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "PageA04_06") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA05")
+        </div>
+
+    </div>
+}
+

@@ -1,4 +1,6 @@
-﻿namespace IQMStarterKit.Models.Forms
+﻿using IQMStarterKit.Models.Core;
+
+namespace IQMStarterKit.Models.Forms
 {
     public class PersonalLeadership
     {
@@ -24,6 +26,12 @@
         public string Value20 { get; set; }
         public int TotalScore { get; set; }
 
+        public StudentActivity StudentActivity { get; set; }
 
+        public PersonalLeadership()
+        {
+            StudentActivity = new StudentActivity();
+
+        }
     }
 }

@@ -1,0 +1,22 @@
+﻿
+@using (Html.BeginForm())
+{
+<div class="main_container">
+    <h1 class="heading">You may be interested...</h1>
+    <p class="p13"><u>Short Courses</u></p>
+    <ul class="p13List">
+        <li>Barista Skills</li>
+        <li>License Controller Qualification (LCQ)</li>
+        <li>Creating Classic Coctails</li>
+        <li>Introduction to Wine and Beer</li>
+    </ul>
+    <p class="p13"><strong>For more information, see Torika of the International Team (Ground Floor)</strong></p>
+
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "PageA01_10") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA02")
+    </div>
+
+</div>
+}

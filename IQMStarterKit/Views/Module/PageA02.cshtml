@@ -1,0 +1,98 @@
+﻿@model IQMStarterKit.Models.FilePath
+@using Microsoft.AspNet.Identity
+
+<div class="main_container">
+    <div>
+        <h1 class="heading">Personal Coat of Arms</h1>
+        <ul class="p14List">
+            <li>In Medieval Europe, and many other parts of the world, people used pictures and symbols on their shields to identify who they were and tell others about themselves.  You are going to  construct your own &#34;personal shield&#34; and share its meaning with each other </li>
+            <li>See the shield outline for your use</li>
+            <li>In each quadrant use any combination of drawings and pictures to tell others about yourself using only coloured pens/pencils</li>
+        </ul>
+    </div>
+    <hr />
+    <div>
+        <h1 class="heading">Activity</h1>
+        <h2 style="text-align:center;"> <strong> Using only pictures and symbols</strong></h2>
+        <h2 style="text-align:center;"> <strong> No words, letters or numbers</strong></h2>
+
+        <div style="text-align:center;">
+            <img id="p14coatOfArm" src="~/Content/img/Coat of Arms.jpg" alt="Personal Coat of Arms Graphic">
+        </div>
+    </div>
+
+    @using (Html.BeginForm("PageA02UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+            @Html.AntiForgeryToken();
+
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-12 form-inline" style="text-align:center; margin-top:20px;">
+                        @if (Model != null && Model.FileName != null)
+                        {
+                            @Html.ActionLink("Download File", "PageA02DownloadFile", "Module",
+                            new { id = Model.StudentActivityId },
+                            new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+
+
+                        }
+                        else
+                        {
+                            @Html.Label("Shield", new { @class = "label label-default" })
+                            <input type="file" id="Shield" name="file" class="form-control" style="width:300px;" />
+                            <input type="submit" value="Upload" class="btn btn-primary" />
+                        }
+                    </div>
+                </div>    
+            </div>
+            <br/>
+            <div class="form-group">
+                <div style="text-align:center; margin-top: 30px; width:100%;">
+                    @Html.ActionLink("Previous Page", "PageA01_11") |
+                    @Html.ActionLink("Main", "Index") |
+                    @Html.ActionLink("Next Page", "PageA03")
+                </div>
+            </div>
+    }
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function Validate() {
+
+            var file = document.getElementById("Shield").value;
+              
+            if (file == "") {
+                toastr.warning('No selected file to upload!');
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+
+        //confirmation dialog
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    if (Validate()) {
+                        currentForm.submit();
+                    }
+                }
+            });
+        });
+
+
+
+    </script>
+}
+    
+
+
+

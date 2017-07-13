@@ -1,0 +1,21 @@
+﻿
+@using (Html.BeginForm())
+{
+    <div class="main_container">
+
+        <p class="p5words"> You will be experiencing many new things: new country, new expectations...we will...</p>
+
+        <ul class="p5words">
+            <li> Identify some differences between NZ and your home country.</li>
+            <li> Suggest how you can better prepare yourself to cope with these differences.</li>
+        </ul>
+        <br />
+    </div>
+    <br />
+    <div style="text-align:center">
+        @Html.ActionLink("Previous Page", "PageA01_03") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA01_05")
+    </div>
+
+}

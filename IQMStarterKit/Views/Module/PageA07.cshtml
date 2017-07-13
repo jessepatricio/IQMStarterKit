@@ -1,0 +1,100 @@
+﻿@model IQMStarterKit.Models.FilePath
+@using Microsoft.AspNet.Identity
+
+
+@using (Html.BeginForm("PageA07UploadFile", "Module", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    
+    @Html.AntiForgeryToken()
+    <div class="main_container">
+        <div style="text-align:center;">
+            <h1 class="heading">Photo Scavenger Hunt</h1>
+
+            <div id="p25img1">
+                <img src="~/Content/img/scavenger.png" alt="Scavenger Graphic" />
+            </div>
+            <p id="p25groupMission"><strong><u>Your Group Mission:</u></strong></p>
+
+            <p id="p25instruction">
+                Get a photo with the given list of objects/landmarks/people. Except for the person taking the photo, all team members must be in the photo.  Try and make your photos as interesting as possible. Use your imagination!!  NO Internet allowed.
+                <br />
+                <br />
+                The first team to return with the most points wins.
+            </p>
+
+            <div id="p25img2">
+                <img src="~/Content/img/ScavengerHunt.jpg" alt="Scavenger List Graphic" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2">
+                @if (Model != null && Model.FileName != null && Model.CreatedBy == User.Identity.GetUserId())
+                {
+                    <div class="col-md-3"></div>
+                    <div class="col-md-8 form-inline">
+                        @Html.ActionLink("Download File", "PageA07DownloadFile", "Module",
+                                new { id = Model.StudentActivityId },
+                                new { @class = "btn btn-info", role = "button", data_icon = "gear", target = "_new" })
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8 form-inline">
+                        @Html.Label("Photo Scavenger Hunt", new { @class = "label label-default" })
+                        <input type="file" id="Shield" name="file" class="form-control" style="width:300px;" />
+                        <input type="submit" value="Upload" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+         </div>
+
+        <br />
+
+        <div style="text-align:center; margin-top: 30px;width:100%;">
+            @Html.ActionLink("Previous Page", "PageA06") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA08")
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function CheckValue() {
+
+            if ($('#Shield').val() == "") {
+                // all empty
+                toastr.warning('Please select a file to upload.')
+                return false;
+            }
+            return true;
+
+        }
+
+        //confirmation dialog
+
+
+        $('form').submit(function (e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+                if (result) {
+                    if (CheckValue()) {
+                        currentForm.submit();
+                    }
+                }
+            });
+        });
+
+
+
+
+
+    </script>
+}

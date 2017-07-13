@@ -1,0 +1,23 @@
+﻿
+@using (Html.BeginForm())
+{
+    <div class="main_container">
+        <h1 class="heading">Classroom Rules</h1>
+        <br />
+        <ul class="p20-22List">
+            <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Work with different people.</li>
+            <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Be sensitive and respectful towards others and their culture.</li>
+            <li><span class="glyphicon glyphicon-ok"></span> &nbsp; Interact with others; make new friends.</li>
+        </ul>
+        <div id="p20-22img">
+            <img src="~/Content/img/spongebob.png" alt="Spongebob and Patrick graphic">
+        </div>
+
+        <div style="text-align:center; margin-top: 20px;">
+            @Html.ActionLink("Previous Page", "PageA04_05") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA04_07")
+        </div>
+
+    </div>
+}

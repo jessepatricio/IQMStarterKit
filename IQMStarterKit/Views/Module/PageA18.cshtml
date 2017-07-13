@@ -1,0 +1,162 @@
+﻿@model IQMStarterKit.Models.Forms.PassTheBallJournalClass
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div  class="main_container">
+
+        <!-- Trigger the modal with a button -->
+        <button type="button" id="info_popup" class="button btn-info" data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-info-sign' style="font-size:1.5em;"></span></button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Reflection Journaling:</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li> Reflection journaling means to write about what you have seen, felt and experienced </li>
+                            <li> It requires you to think deeply/critically about your experiences. </li>
+                            <li> It is a useful learning tool that encourages expression of emotions, understanding and conclusions as well as lessons learned or action plans to take. </li>
+                        </ul>
+
+                        <h4><u>Journaling Tips:</u></h4>
+                        <ul>
+                            <li>Write about what happened; give a summary of events that took place.</li>
+                            <li>Write with honesty; write down exactly how you feel; candid self-expression. Do not try to ‘sugarcoat’ your feeling and reactions. </li>
+                            <li>Write freely; do not worry about grammar rules, spelling, etc.…</li>
+                            <li>Analyse your reactions.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h1 class="heading"><u>Reflection Journal</u></h1>
+        <h2 style="text-align:center;"><strong>Pass the Ball</strong></h2>
+
+        <table style="margin:auto;">
+
+            <tr>
+                <td>
+                    1. Describe what happened during the activity. (Summarise the events what happened).<br/>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns1, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    2. Describe your personal reaction.
+                    <ul>
+                        <li> What did you like or enjoy most? Why?</li>
+                    </ul>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns2a, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <ul>
+                        <li>What did you dislike most? Why?</li>
+                    </ul>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns2b, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            What did you find challenging or difficult? Were there moments when you felt frustrated? Why?
+                        </li>
+                    </ul>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns2c, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    3. New Learning
+                    <ul>
+                        <li>What did you learn that was new to you?</li>
+                    </ul>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns3a, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <ul>
+                        <li> How do you think this might be useful?</li>
+                    </ul>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns3b, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            How will this experience change the way you think or act in the event of situation that involves a change in the future?
+                        </li>
+                    </ul>
+                     @Html.TextAreaFor(model => model.PassBallJournalAns3c, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", @name = "Goal1", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", @name = "Goal1", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    4. Action to be taken
+                    <ul>
+                        <li>Is there any specific action that you will take as a result of this learning experience?</li>
+                    </ul>
+                    @Html.TextAreaFor(model => model.PassBallJournalAns4, (Model.StudentActivity.ProgressValue == 100) ? (object)new { @readonly = "readonly", @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" } : new { @class = "p50-53txtarea form-control", style = "width: 900px;height:150px;" })
+                </td>
+            </tr>
+
+        </table>
+
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center; margin-top:20px;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
+
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "PageA17") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA19")
+    </div>
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+    //confirmation dialog
+     $('form').submit(function (e) {
+         var currentForm = this;
+         e.preventDefault();
+         bootbox.confirm("Are you sure you want to submit your work?", function (result) {
+             if (result)
+                 currentForm.submit();
+                 return true;
+         });
+     });
+
+    </script>
+
+
+}

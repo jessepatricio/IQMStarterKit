@@ -1,6 +1,4 @@
-﻿using IQMStarterKit.Models.Core;
-
-namespace IQMStarterKit.Models.Forms
+﻿namespace IQMStarterKit.Models.Forms
 {
     public class Vark
     {
@@ -9,12 +7,6 @@ namespace IQMStarterKit.Models.Forms
         public bool ReadingWriting { get; set; }
         public bool Kinesthetic { get; set; }
 
-        public StudentActivity StudentActivity { get; set; }
 
-        public Vark()
-        {
-            StudentActivity = new StudentActivity();
-
-        }
     }
 }

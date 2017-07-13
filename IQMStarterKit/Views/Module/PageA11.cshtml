@@ -1,0 +1,436 @@
+﻿@model IQMStarterKit.Models.Forms.SlangClass
+
+@using (Html.BeginForm("PageA11", "Module", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="main_container">
+        <h1 class="heading"><u>New Zealand Slang and Sayings</u></h1>
+
+        @if (Model.StudentActivity.ProgressValue == 100)
+        {
+
+            <div class="col-md-offset-0 col-md-12">
+
+                <div class="panel panel-info">
+                    <div class="panel-body">Your correct matched word result: @Model.StudentActivity.NoMatchedWords/46</div>
+                </div>
+
+            </div>
+        } else {
+
+        <p  style="text-align:center;"> Drag the word into the blank box that best matches the slang word or saying:</p>
+       
+                <table id="table" style="margin:auto;">
+                    <tr>
+                        <th>Slang word or saying</th>
+                        <th style="background-color:gray;"></th>
+                        <th style="text-align:center;"></th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                         @Html.HiddenFor(m => m.Answer1, new { @id = "answer1", name = "answer" })
+                        <td><div id="q1" draggable="true" ondragstart="drag(event)" data-value="BACH">BACH</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a1" title="answer1" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Scenic route</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer2, new { @id = "answer2", name = "answer" })
+                        <td><div id="q2" draggable="true" ondragstart="drag(event)" data-value="BLOKE">BLOKE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a2" title="answer2" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Insulated box used to keep food and drinks cold</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer3, new { @id = "answer3" })
+                        <td><div id="q3" draggable="true" ondragstart="drag(event)" data-value="BOY-RACER">BOY-RACER</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a3" title="answer3" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Rugby</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer4, new { @id = "answer4" })
+                        <td><div id="q4" draggable="true" ondragstart="drag(event)" data-value="BRO">BRO</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a4" title="answer4" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>University</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer5, new { @id = "answer5" })
+                        <td><div id="q5" draggable="true" ondragstart="drag(event)" data-value="BRING A PLATE">BRING A PLATE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a5" title="answer5" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Waterproof rubber boots</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer6, new { @id = "answer6" })
+                        <td><div id="q6" draggable="true" ondragstart="drag(event)" data-value="BYO (SIGNAGE)">BYO (SIGNAGE)</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a6" title="answer6" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Exhausted, tired</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer7, new { @id = "answer7" })
+                        <td><div id="q7" draggable="true" ondragstart="drag(event)" data-value="CHEERS">CHEERS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a7" title="answer7" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Food Taken "to go", fast food</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer8, new { @id = "answer8" })
+                        <td><div id="q8" draggable="true" ondragstart="drag(event)" data-value="CHILLY BIN">CHILLY BIN</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a8" title="answer8" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>A discount for a friend</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer9, new { @id = "answer9" })
+                        <td><div id="q9" draggable="true" ondragstart="drag(event)" data-value="CHIPPIES">CHIPPIES</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a9" title="answer9" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Sunglasses</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer10, new { @id = "answer10" })
+                        <td><div id="q10" draggable="true" ondragstart="drag(event)" data-value="CHOICE">CHOICE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a10" title="answer10" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Overseas experience</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer11, new { @id = "answer11" })
+                        <td><div id="q11" draggable="true" ondragstart="drag(event)" data-value="CHOCKA">CHOCKA</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a11" title="answer11" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Toilet</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer12, new { @id = "answer12" })
+                        <td><div id="q12" draggable="true" ondragstart="drag(event)" data-value="CROOK">CROOK</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a12" title="answer12" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Great, excellent</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer13, new { @id = "answer13" })
+                        <td><div id="q13" draggable="true" ondragstart="drag(event)" data-value="CUPPA">CUPPA</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a13" title="answer13" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Present</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer14, new { @id = "answer14" })
+                        <td><div id="q14" draggable="true" ondragstart="drag(event)" data-value="CUZZIES">CUZZIES</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a14" title="answer14" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Bring a plate of food to share</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer15, new { @id = "answer15" })
+                        <td><div id="q15" draggable="true" ondragstart="drag(event)" data-value="DAIRY">DAIRY</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a15" title="answer15" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Steal</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer16, new { @id = "answer16" })
+                        <td><div id="q16" draggable="true" ondragstart="drag(event)" data-value="FOOTY">FOOTY</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a16" title="answer16" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Thanks</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer17, new { @id = "answer17" })
+                        <td><div id="q17" draggable="true" ondragstart="drag(event)" data-value="GUMBOOTS">GUMBOOTS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a17" title="answer17" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>A flightless bird or a person from New Zealand</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer18, new { @id = "answer18" })
+                        <td><div id="q18" draggable="true" ondragstart="drag(event)" data-value="HARD CASE">HARD CASE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a18" title="answer18" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Someone from Britain</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer19, new { @id = "answer19" })
+                        <td><div id="q19" draggable="true" ondragstart="drag(event)" data-value="HEAPS">HEAPS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a19" title="answer19" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Sick</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer20, new { @id = "answer20" })
+                        <td><div id="q20" draggable="true" ondragstart="drag(event)" data-value="HOT CHIPS">HOT CHIPS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a20" title="answer20" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Bathing Suit</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer21, new { @id = "answer21" })
+                        <td><div id="q21" draggable="true" ondragstart="drag(event)" data-value="KIWI">KIWI</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a21" title="answer21" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Paying for something on behalf of others (e.g. Round of drinks)</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer22, new { @id = "answer22" })
+                        <td><div id="q22" draggable="true" ondragstart="drag(event)" data-value="KNACKERED">KNACKERED</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a22" title="answer22" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>A basic holiday home, at beach or lake</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer23, new { @id = "answer23" })
+                        <td><div id="q23" draggable="true" ondragstart="drag(event)" data-value="LOLLIES">LOLLIES</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a23" title="answer23" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Forever, a long time</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer24, new { @id = "answer24" })
+                        <td><div id="q24" draggable="true" ondragstart="drag(event)" data-value="LOO">LOO</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a24" title="answer24" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Relatives</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer25, new { @id = "answer25" })
+                        <td><div id="q25" draggable="true" ondragstart="drag(event)" data-value="MATE">MATE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a25" title="answer25" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Often used in the place of "please"</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer26, new { @id = "answer26" })
+                        <td><div id="q26" draggable="true" ondragstart="drag(event)" data-value="MATE'S RATES">MATE'S RATES</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a26" title="answer26" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Hiking</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer27, new { @id = "answer27" })
+                        <td><div id="q27" draggable="true" ondragstart="drag(event)" data-value="NANA">NANA</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a27" title="answer27" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Grandmother</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer28, new { @id = "answer28" })
+                        <td><div id="q28" draggable="true" ondragstart="drag(event)" data-value="NICK">NICK</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a28" title="answer28" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Potato chips or crisps</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer29, new { @id = "answer29" })
+                        <td><div id="q29" draggable="true" ondragstart="drag(event)" data-value="OE">OE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a29" title="answer29" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Utility Vehicle</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer30, new { @id = "answer30" })
+                        <td><div id="q30" draggable="true" ondragstart="drag(event)" data-value="POM / POMMIE">POM / POMMIE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a30" title="answer30" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>A lot</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer31, new { @id = "answer31" })
+                        <td><div id="q31" draggable="true" ondragstart="drag(event)" data-value="PRESSIE">PRESSIE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a31" title="answer31" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Brother or good friend</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer32, new { @id = "answer32" })
+                        <td><div id="q32" draggable="true" ondragstart="drag(event)" data-value="SHOUT">SHOUT</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a32" title="answer32" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>French fries</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer33, new { @id = "answer33" })
+                        <td><div id="q33" draggable="true" ondragstart="drag(event)" data-value="STUCK IN">STUCK IN</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a33" title="answer33" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Full</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer34, new { @id = "answer34" })
+                        <td><div id="q34" draggable="true" ondragstart="drag(event)" data-value="SUNNIES">SUNNIES</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a34" title="answer34" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Ketchup</td>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer35, new { @id = "answer35" })
+                        <td><div id="q35" draggable="true" ondragstart="drag(event)" data-value="SWEET / SWEET AS">SWEET /SWEET AS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a35" title="answer35" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Convenience store</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer36, new { @id = "answer36" })
+                        <td><div id="q36" draggable="true" ondragstart="drag(event)" data-value="TA">TA</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a36" title="answer36" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Bring your own bottle of wine</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer37, new { @id = "answer37" })
+                        <td><div id="q37" draggable="true" ondragstart="drag(event)" data-value="TAKEAWAYS">TAKEAWAYS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a37" title="answer37" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Candy or sweets</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer38, new { @id = "answer38" })
+                        <td><div id="q38" draggable="true" ondragstart="drag(event)" data-value="THANKS">THANKS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a38" title="answer38" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>In the middle of no-where</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer39, new { @id = "answer39" })
+                        <td><div id="q39" draggable="true" ondragstart="drag(event)" data-value="TIKI TOUR">TIKI TOUR</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a39" title="answer39" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>To start working on something</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer40, new { @id = "answer40" })
+                        <td><div id="q40" draggable="true" ondragstart="drag(event)" data-value="TOGS">TOGS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a40" title="answer40" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>The common man, ordinary guy in the street</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer41, new { @id = "answer41" })
+                        <td><div id="q41" draggable="true" ondragstart="drag(event)" data-value="TOMATO SAUCE">TOMATO SAUCE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a41" title="answer41" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>A close friend</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer42, new { @id = "answer42" })
+                        <td><div id="q42" draggable="true" ondragstart="drag(event)" data-value="TRAMPING">TRAMPING</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a42" title="answer42" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Great, excellent</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer43, new { @id = "answer43" })
+                        <td><div id="q43" draggable="true" ondragstart="drag(event)" data-value="UTE">UTE</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a43" title="answer43" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Cup of tea / coffee</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer44, new { @id = "answer44" })
+                        <td><div id="q44" draggable="true" ondragstart="drag(event)" data-value="UNI">UNI</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a44" title="answer44" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Clown, witty person</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer45, new { @id = "answer45" })
+                        <td><div id="q45" draggable="true" ondragstart="drag(event)" data-value="WOP WOPS">WOP WOPS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a45" title="answer45" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Young person in a fast car, typically with stereo on loud</td>
+                    </tr>
+                    <tr>
+                        @Html.HiddenFor(m => m.Answer46, new { @id = "answer46" })
+                        <td><div id="q46" draggable="true" ondragstart="drag(event)" data-value="YONKS">YONKS</div></td>
+                        <td style="background-color:gray;"></td>
+                        <td><div id="a46" title="answer46" class="answer_container" ondrop="drop(event)" ondragover="allowDrop(event)"></div></td>
+                        <td>Often used in a place of "thank you"</td>
+                    </tr>
+                </table>
+           
+
+           
+                <div class="form-group;" style="text-align:center; margin-top:20px;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            
+        }
+      
+
+            <div style="text-align:center; margin-top: 20px;">
+                @Html.ActionLink("Previous Page", "PageA10") |
+                @Html.ActionLink("Main", "Index") |
+                @Html.ActionLink("Next Page", "PageA12")
+            </div>
+
+        </div>
+}
+
+@section Scripts{
+
+    <script>
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            if (ev.target.hasChildNodes()) { return; }
+           
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+    
+            //alert(ev.target.title);
+
+            var objFrom = document.getElementById(data);
+            var answer = objFrom.getAttribute('data-value');
+            //alert(answer);
+
+            var objHidden = document.getElementById(ev.target.title);
+            
+            objHidden.setAttribute("value", answer);
+
+            
+        }
+
+        function Validate() {
+            for (var i = 1; i < 47; i++) {
+                var answer = document.getElementById("answer" + i).value;
+               // alert(answer);
+                if (answer != '') return true;
+            }
+            toastr.warning("Please try to match more words!");
+            return false;
+        }
+        
+
+        //confirmation dialog
+
+      
+        $('form').submit(function(e) {
+            var currentForm = this;
+            e.preventDefault();
+            bootbox.confirm("Are you sure you want to submit your work?", function(result) {
+                if (result) {
+                    if (Validate()) {
+                        currentForm.submit();
+                    }
+                }
+            });
+        });
+
+
+    
+   
+    </script>
+
+}
+

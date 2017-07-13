@@ -1,0 +1,111 @@
+﻿@model  IQMStarterKit.Models.Forms.MaturityContinuumClass
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div  class="main_container">
+        <h4 style="text-align:center;">The Basic Framework of Stephen Covey’s Seven Habits:</h4>
+
+        <h1 class="heading"><strong><u>The Maturity Continuum</u></strong></h1> <br />
+
+        <p style="text-align:center;">Fill up the diagram below according to Stephen Covey’s explanation of the Maturity Continuum:</p>
+        <div class="form-inline">
+            <div id="p48MaturityContainer">
+                <img id="p48MaturityImg" src="~/Content/img/MaturityContinuum.png" alt="Maturity Continuum" />
+
+                <p class="p48Int">
+                    Int
+                    @Html.EditorFor(model => model.Int, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48Habit5">
+                    Habit 5:<br />
+                    @Html.EditorFor(model => model.Habit5, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48Habit6">
+                    Habit 6:<br />
+                    @Html.EditorFor(model => model.Habit6, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48P1">PUBLIC<br />VICTORY</p>
+
+                <p class="p48Habit4">
+                    Habit 4:<br />
+                    @Html.EditorFor(model => model.Habit4, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48In">
+                    In
+                    @Html.EditorFor(model => model.In, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48Habit3">
+                    Habit 3:<br />
+                    @Html.EditorFor(model => model.Habit3, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48P2">PRIVATE<br />VICTORY</p>
+
+                <p class="p48Habit1">
+                    Habit 1:<br />
+                    @Html.EditorFor(model => model.Habit1, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+                <p class="p48Habit2">
+                    Habit 2:<br />
+                    @Html.EditorFor(model => model.Habit2, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48De">
+                    De
+                    @Html.EditorFor(model => model.De, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48Habit7">
+                    Habit 7:<br />
+                    @Html.EditorFor(model => model.Habit7, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:155px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:155px;" } })
+                </p>
+
+                <p class="p48Habit8">
+                    and the 8th Habit:
+                    @Html.EditorFor(model => model.Habit8, (Model.StudentActivity.ProgressValue == 100) ? (object)new
+           { htmlAttributes = new { @readonly = "readonly", @class = "p48txtbox form-control", style = "width:860px;" }
+           } : new { htmlAttributes = new { @class = "p48txtbox form-control", style = "width:860px;" } })
+                </p>
+            </div>
+        </div>
+
+        @if (Model.StudentActivity.ProgressValue != 100)
+        {
+            <div style="text-align: center;" class="form-group`">
+                <button type="submit" class="form-control btn btn-primary" style="width: 100px;">Save</button>
+            </div>
+        }
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        @Html.ActionLink("Previous Page", "PageA34") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA36")
+    </div>
+}

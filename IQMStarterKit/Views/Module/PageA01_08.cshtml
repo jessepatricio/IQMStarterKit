@@ -1,0 +1,27 @@
+﻿
+@using (Html.BeginForm())
+{
+<div class="main_container">
+    <div style="text-align:center">
+        <h1 class="heading">About the Programme</h1>
+        <p class="p9List">The programme comprises two components:</p>
+        <ul class="p9List">
+            <li> Personal Effectiveness</li>
+            <li> Aspire2work job search and CVs</li>
+        </ul>
+
+        <div id="p9img">
+            <img src="~/Content/img/Great-Impression.jpg" alt="Great Impression graphic">
+            <img src="~/Content/img/looking-for-a-job.jpg" alt="Job Hunting graphic">
+        </div>
+
+        <br/><br />
+
+        <div style="text-align:center">
+            @Html.ActionLink("Previous Page", "PageA01_07") |
+            @Html.ActionLink("Main", "Index") |
+            @Html.ActionLink("Next Page", "PageA01_09")
+        </div>
+    </div>
+</div>
+}

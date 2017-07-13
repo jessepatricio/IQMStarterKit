@@ -1,0 +1,20 @@
+﻿
+
+@using (Html.BeginForm())
+{
+<div class="main_container">
+    <h1 class="heading">Student Services Contact Details</h1>
+
+    <ul class="p8List">
+        <li> Office - Ground Level, Tower C</li>
+        <li> Telephone - <strong>09 5555 400</strong> </li>
+        <li> Email - reception@aspire2.ac.nz</li>
+    </ul>
+    <br/>
+    <div style="text-align:center">
+        @Html.ActionLink("Previous Page", "PageA01_06") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA01_08")
+    </div>
+</div>
+}

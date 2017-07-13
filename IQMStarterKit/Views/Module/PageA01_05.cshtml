@@ -1,0 +1,24 @@
+﻿
+
+@using (Html.BeginForm())
+{
+<div class="main_container">
+    <h1 class="heading">Course Requirements</h1>
+
+    <ul class="p6List">
+        <li> PDP is an Integral part of your Diploma course in Aspire 2 International; <strong>attendance is compulsory</strong>.</li>
+        <li> Completion of class exercises, questionnaires, reflection journals, topical quizzes</li>
+        <li> Class participation!!!</li>
+    </ul>
+
+    <div id="p6checklistimg">
+        <img src="~/Content/img/checklist.png" alt="Checklist graphic">
+    </div>
+    <br/>
+    <div style="text-align:center">
+        @Html.ActionLink("Previous Page", "PageA01_04") |
+        @Html.ActionLink("Main", "Index") |
+        @Html.ActionLink("Next Page", "PageA01_06")
+    </div>
+</div>
+}
