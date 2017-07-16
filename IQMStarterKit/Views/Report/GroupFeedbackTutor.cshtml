@@ -38,11 +38,12 @@
                         <td>@Html.DisplayFor(m => item.GroupName)</td>
                         <td>@Html.DisplayFor(m => item.FullName)</td>
                         @{ 
-                            var output = DDLHelper.GetStarRating(item.GroupAveRating);
+                            var output = DDLHelper.GetStarRating(float.Parse(item.GroupAveRating.ToString()));
                             string star = Server.HtmlDecode(output);
                         }
-                        <td align="center">@Html.Raw(star)</td>
-                        <td align="center">@DDLHelper.GetRating(item.OverallRating)</td>
+                        <td align="center">@Html.Raw(star) (@item.GroupAveRating)</td>
+                        <td align="center">@DDLHelper.GetRating(item.OverallRating) (@item.OverallRating)</td>
+                        
                     </tr>
                 }
             </tbody>

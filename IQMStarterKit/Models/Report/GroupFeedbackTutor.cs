@@ -14,8 +14,8 @@ namespace IQMStarterKit.Models.Report
         public string GroupName { get; set; }
         public string TutorId { get; set; }
         public string FullName { get; set; }
-        public int GroupAveRating { get; set; }
-        public int OverallRating { get; set; }
+        public float GroupAveRating { get; set; }
+        public float OverallRating { get; set; }
 
     }
 

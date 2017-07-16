@@ -39,7 +39,7 @@
     // administrator's default page
     @Html.Partial("_AdminLandingPage")
 }
-else if (User.IsInRole("Student"))
+else if (User.IsInRole("Student") )
 {
     // student's default page
     @Html.Partial("_StudentLandingPage")

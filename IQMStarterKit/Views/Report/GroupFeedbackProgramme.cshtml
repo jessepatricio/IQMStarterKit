@@ -39,19 +39,21 @@
                     <tr>
                         <td>@Html.DisplayFor(m => item.GroupName)</td>
                         @{ 
-                            var output = DDLHelper.GetStarRating(item.GroupAveRating);
+                            var output = DDLHelper.GetStarRating(float.Parse(item.GroupAveRating.ToString()));
                             string star = Server.HtmlDecode(output);
                         }
-                        <td align="center">@Html.Raw(star)</td>
-                        <td align="center">@DDLHelper.GetRating(item.OverallRating)</td>
-                        <td align="center">@DDLHelper.GetOtherRating(item.TimeAllocatedRating)</td>
-                        <td align="center">@DDLHelper.GetOtherRating(item.ClassSizeRating)</td>
-                        <td align="center">@DDLHelper.GetOtherRating(item.ClassRoomRating)</td>
+                        <td align="center">@Html.Raw(star)  (@item.GroupAveRating)</td>
+                        <td align="center">@DDLHelper.GetRating(item.OverallRating) (@item.OverallRating)</td>
+                        <td align="center">@DDLHelper.GetOtherRating(item.TimeAllocatedRating) (@item.TimeAllocatedRating)</td>
+                        <td align="center">@DDLHelper.GetOtherRating(item.ClassSizeRating) (@item.ClassSizeRating)</td>
+                        <td align="center">@DDLHelper.GetOtherRating(item.ClassRoomRating) (@item.ClassRoomRating)</td>
                     </tr>
                 }
             </tbody>
 
         </table>
+
+      
 
         <h4>Comments</h4>
         <table id="activity" style="width:100%" class="display" cellspacing="0">
@@ -82,23 +84,27 @@
 
 @section Scripts {
 
-    <script>
-        $(document).ready(function () {
-            $('#activity').DataTable({
-                "bLengthChange": false,
-                "bFilter": true,
-                "paging": true
+   <script type="text/javascript">
+       $(document).ready(function () {
+           $('#activity').DataTable({
+               "bLengthChange": false,
+               "bFilter": true,
+               "paging": true
 
-            });
+           });
 
-            $('#comments').DataTable({
-                "bLengthChange": false,
-                "bFilter": true,
-                "paging": true
+           $('#comments').DataTable({
+               "bLengthChange": false,
+               "bFilter": true,
+               "paging": true
 
-            });
-        });
+           });
+       });
+
+       
     </script>
+
+
 
 }
 

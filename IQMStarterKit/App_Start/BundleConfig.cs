@@ -24,7 +24,8 @@ namespace IQMStarterKit
                       "~/Scripts/respond.js",
                       "~/Scripts/DataTables/jquery.datatables.js",
                       "~/Scripts/DataTables/datatables.bootstrap.js",
-                      "~/Scripts/toastr.js"
+                      "~/Scripts/toastr.js",
+                      "~/Scripts/loader.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

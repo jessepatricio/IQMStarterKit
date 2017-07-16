@@ -23,6 +23,7 @@
             <th>Email</th>
             <th>Group</th>
             <th>PDP Progress</th>
+            <th></th>
 
         </tr>
     </thead>
@@ -44,6 +45,7 @@
                     <td nowrap="nowrap" style="width:400px;">
                         <span class="progress-bar active" role="progressbar" aria-valuenow="@item.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @item.ProgressValue%">&nbsp;@item.ProgressValue%</span>
                     </td>
+                    <td>@Html.ActionLink("Generate Workbook", "GeneratePDPMergedFile", "Report", new { @email = item.Email }, new { @class = "btn btn-primary"})</td>
                 </tr>
             }
         }

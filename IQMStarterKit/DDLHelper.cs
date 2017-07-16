@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace IQMStarterKit
@@ -29,10 +30,13 @@ namespace IQMStarterKit
             return _result;
         }
 
-        public static string GetRating(int rating)
+        public static string GetRating(float rating)
         {
             string retval = string.Empty;
-            switch (rating)
+            decimal val = decimal.Parse(rating.ToString());
+            int rateVal = int.Parse(Math.Round(val).ToString());
+
+            switch (rateVal)
             {
                 case 1: retval = "Below Satisfactory"; break;
                 case 2: retval = "Satisfactory"; break;
@@ -44,12 +48,14 @@ namespace IQMStarterKit
         }
 
 
-        public static string GetStarRating(int rating)
+        public static string GetStarRating(float rating)
         {
             string retval = string.Empty;
+            decimal val = decimal.Parse(rating.ToString());
+            int rateVal = int.Parse(Math.Round(val).ToString());
 
 
-            for (int i = 0; i < rating; i++)
+            for (int i = 0; i < rateVal; i++)
             {
                 retval += "<span class='glyphicon glyphicon-star - empty'></span>";
             }
@@ -59,10 +65,13 @@ namespace IQMStarterKit
 
 
 
-        public static string GetOtherRating(int rating)
+        public static string GetOtherRating(float rating)
         {
             string retval = string.Empty;
-            switch (rating)
+            decimal val = decimal.Parse(rating.ToString());
+            int rateVal = int.Parse(Math.Round(val).ToString());
+
+            switch (rateVal)
             {
                 case 1: retval = "Too Short"; break;
                 case 2: retval = "Just Right"; break;

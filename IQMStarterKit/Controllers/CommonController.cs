@@ -16,6 +16,7 @@ namespace IQMStarterKit.Models
 
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+
         //Utility
 
         #region ApplicationUserManager
@@ -46,52 +47,19 @@ namespace IQMStarterKit.Models
         }
         #endregion
 
-        public string GetSessionUserId()
-        {
-            return UserManager.FindByEmail(User.Identity.Name).Id.ToString();
-        }
-
-        public string GetFullName(string userId)
-        {
-            return (userId != null) ? UserManager.FindById(userId).FullName.ToString() : String.Empty;
-        }
-
-        #region RolesUserIsNotIn
-        public List<string> RolesUserIsNotIn(string email)
-        {
-            // Get roles the user is not in
-            var colAllRoles = RoleManager.Roles.Select(x => x.Name).ToList();
-            // Go get the roles for an individual
-            ApplicationUser user = UserManager.FindByEmail(email);
-            // If we could not find the user, throw an exception
-            if (user == null)
-            {
-                throw new Exception("Could not find the User");
-            }
-            var colRolesForUser = UserManager.GetRoles(user.Id).ToList();
-            var colRolesUserInNotIn = (from objRole in colAllRoles
-                                       where !colRolesForUser.Contains(objRole)
-                                       select objRole).ToList();
-            if (colRolesUserInNotIn.Count() == 0)
-            {
-                colRolesUserInNotIn.Add("No Roles Found");
-            }
-            return colRolesUserInNotIn;
-        }
-        #endregion
 
 
+
+        //helper
 
         public IEnumerable<ApplicationUser> GetGroupTutors(byte groupId)
         {
-
-
-
             var tutors = new List<ApplicationUser>();
-
-
             // get all users with tutor role
-            var users = _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399")).ToList();
+            var users = _context.Users
+                .Include(u => u.Roles)
+                .Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399"))
+                .ToList();
 
             if (User.IsInRole("Administrator") || User.IsInRole("Tutor"))
             {
@@ -101,17 +69,15 @@ namespace IQMStarterKit.Models
             else
             {
                 // get all tutors assigned to the group id
-                var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
+                var groupTutors = _context.GroupTutorModels
+                    .Where(m => m.GroupId == groupId)
+                    .ToList();
+
                 foreach (var user in users)
                 {
-
                     //include only tutors assigned in group
                     var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
-                    if (x != null)
-                    {
-                        tutors.Add(user);
-                    }
-
+                    if (x != null) tutors.Add(user);
 
                 }
             }
@@ -121,36 +87,27 @@ namespace IQMStarterKit.Models
             return tutors;
         }
 
-
         public IEnumerable<ApplicationUser> GetTutors(byte groupId)
         {
-
-
             var tutors = new List<ApplicationUser>();
-
-
             // get all users with tutor role
-            var users = _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399")).ToList();
+            var users = _context.Users
+                .Include(u => u.Roles)
+                .Where(u => u.Roles.Any(r => r.RoleId == "882f1ae2-fb15-4bc7-9d54-ea9785a41399"))
+                .ToList();
             // get all tutors assigned to the group id
-            var groupTutors = _context.GroupTutorModels.Where(m => m.GroupId == groupId).ToList();
+            var groupTutors = _context.GroupTutorModels
+                .Where(m => m.GroupId == groupId)
+                .ToList();
 
             foreach (var user in users)
             {
-
                 //include only tutors not  assigned in group
                 var x = groupTutors.Where(m => m.TutorId == user.Id).FirstOrDefault();
-                if (x == null)
-                {
-                    tutors.Add(user);
-                }
-
-
+                if (x == null) tutors.Add(user);
             }
 
-
-
             return tutors;
-
         }
 
         public IQueryable<ApplicationUser> GetUsersInRole(string roleId)
@@ -159,6 +116,41 @@ namespace IQMStarterKit.Models
                    where user.Roles.Any(r => r.RoleId == roleId)
                    select user;
         }
+
+        public List<string> RolesUserIsNotIn(string email)
+        {
+            // Get roles the user is not in
+            var colAllRoles = RoleManager.Roles.Select(x => x.Name).ToList();
+            // Go get the roles for an individual
+            ApplicationUser user = UserManager.FindByEmail(email);
+            // If we could not find the user, throw an exception
+            if (user == null) throw new Exception("Could not find the User");
+
+            var colRolesForUser = UserManager.GetRoles(user.Id).ToList();
+            var colRolesUserInNotIn = (from objRole in colAllRoles
+                                       where !colRolesForUser.Contains(objRole)
+                                       select objRole).ToList();
+            if (colRolesUserInNotIn.Count() == 0) colRolesUserInNotIn.Add("No Roles Found");
+
+            return colRolesUserInNotIn;
+        }
+
+        public string GetSessionUserId()
+        {
+            return UserManager.FindByEmail(User.Identity.Name).Id.ToString();
+        }
+
+        public byte GetTempActivityID(string _code)
+        {
+            return _context.TempActivities.FirstOrDefault(m => m.Code == _code).TempActivityId;
+        }
+
+        public string GetFullName(string userId)
+        {
+            return (userId != null) ? UserManager.FindById(userId).FullName.ToString() : String.Empty;
+        }
+
+
 
     }
 }

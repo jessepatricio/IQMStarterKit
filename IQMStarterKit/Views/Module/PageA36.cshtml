@@ -825,9 +825,8 @@
                 if (result) {
                     if (validate()) {
                         currentForm.submit();
-                        //toastr.success('saving...');
+                        return true;
                     }
-                    return true;
                 }
 
             });

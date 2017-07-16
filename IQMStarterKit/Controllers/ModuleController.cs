@@ -17,7 +17,9 @@ namespace IQMStarterKit.Controllers
     public class ModuleController : CommonController
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
-        // GET: Module
+
+        #region Table Of Contents
+
         public ActionResult Index()
         {
             return RedirectToAction("ViewStudentActivities", "Module");
@@ -108,6 +110,10 @@ namespace IQMStarterKit.Controllers
 
             return View("Index", toc);
         }
+
+        #endregion
+
+        #region A01: Introduction 
 
         public ActionResult PageA01()
         {
@@ -455,6 +461,10 @@ namespace IQMStarterKit.Controllers
             return View();
         }
 
+        #endregion
+
+        #region A02: Personal Coat of Arms
+
         public ActionResult PageA02()
         {
             // title: Personal Coat of Arms
@@ -567,15 +577,6 @@ namespace IQMStarterKit.Controllers
             #endregion
         }
 
-        public FileResult PageA02DownloadFile(string Id)
-        {
-            var stdId = byte.Parse(Id);
-
-            var fileToRetrieve = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdId);
-
-            return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PageA02UploadFile(FilePath filepath, UploadFileModel fileModel)
@@ -591,14 +592,13 @@ namespace IQMStarterKit.Controllers
             try
             {
 
-
                 if (fileModel.File != null && fileModel.File.ContentLength > 0)
                 {
                     // extract the file content to byte array
                     var content = new byte[fileModel.File.ContentLength];
                     // reads the content from stream
                     fileModel.File.InputStream.Read(content, 0, fileModel.File.ContentLength);
-
+                    // create file model
                     var newImage = new FilePath
                     {
                         FileName = System.IO.Path.GetFileName(fileModel.File.FileName),
@@ -610,18 +610,18 @@ namespace IQMStarterKit.Controllers
 
                     };
 
-
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A02");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
                     //get current user
                     var owner = GetSessionUserId();
                     //check if record existed
-                    StudentActivity oldRec =
-                        _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId &&
-                                                              m.CreatedBy == owner);
+                    StudentActivity oldRec = _context.StudentActivities
+                        .Where(m => m.TempActivityId == activityId && m.CreatedBy == owner)
+                        .FirstOrDefault();
+
+
                     if (oldRec != null)
                     {
                         //update
@@ -631,7 +631,9 @@ namespace IQMStarterKit.Controllers
                         _context.Entry(oldRec).State = EntityState.Modified;
 
                         //since there are studentactivity record there should be a file
-                        var oldFile = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == oldRec.StudentActivityId);
+                        var oldFile = _context.FilePaths
+                            .Where(m => m.StudentActivityId == oldRec.StudentActivityId)
+                            .FirstOrDefault();
 
                         //update new content
                         oldFile.Content = newImage.Content;
@@ -663,19 +665,18 @@ namespace IQMStarterKit.Controllers
                         studentActivity.DiscResult = string.Empty;
                         studentActivity.Top3PersonalValues = string.Empty;
 
-
                         _context.StudentActivities.Add(studentActivity);
-
+                        // save student activity record
                         _context.SaveChanges();
 
                         // get generated id for new activity
                         newImage.StudentActivityId = studentActivity.StudentActivityId;
 
                         _context.FilePaths.Add(newImage);
-
+                        // save file record
                         _context.SaveChanges();
 
-                        // record overall progress
+                        // update overall progress
                         ComputeOverallProgress();
 
 
@@ -691,14 +692,26 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        public FileResult PageA02DownloadFile(string Id)
+        {
+            var stdId = byte.Parse(Id);
+
+            var fileToRetrieve = _context.FilePaths.FirstOrDefault(m => m.StudentActivityId == stdId);
+
+            return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
+        }
+
+        #endregion
+
+        #region A03: About Me
+
         public ActionResult PageA03()
         {
             // title: About Me
             // type: FormSubmission
 
             var aboutMe = new AboutMeClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A03");
 
             // get Current User
@@ -743,8 +756,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA03").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A03");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -754,7 +766,6 @@ namespace IQMStarterKit.Controllers
             try
             {
                 //generate context string from form collection
-
                 aboutMe.Name = fc.Get("name").ToString();
                 aboutMe.Place = fc.Get("place").ToString();
                 aboutMe.Hobby = fc.Get("hobby").ToString();
@@ -793,16 +804,6 @@ namespace IQMStarterKit.Controllers
                     // record overall progress
                     ComputeOverallProgress();
                 }
-                else
-                {
-                    studentRecord.Context = context;
-                    studentRecord.ModifiedBy = GetSessionUserId();
-                    studentRecord.ModifiedDateTime = DateTime.Now;
-
-                    // modify record
-                    _context.Entry(studentRecord).State = EntityState.Modified;
-
-                }
 
                 // save record
                 _context.SaveChanges();
@@ -816,6 +817,10 @@ namespace IQMStarterKit.Controllers
 
 
         }
+
+        #endregion
+
+        #region A04: Contracts
 
         public ActionResult PageA04()
         {
@@ -1034,16 +1039,20 @@ namespace IQMStarterKit.Controllers
                 if (lockMessage != "") return RedirectToAction("Index").WithWarning(lockMessage);
             }
 
-
+            //flag that contract where done
             TempData["PageA04Completed"] = true;
+
             return View();
         }
+
+        #endregion
+
+        #region A05: VARK
 
         public ActionResult PageA05()
         {
             // title: VARK
             // type: result
-
 
             #region for Page22
             if (User.IsInRole("Tutor") || User.IsInRole("Administrator")) { }
@@ -1059,8 +1068,8 @@ namespace IQMStarterKit.Controllers
 
                         var _owner = GetSessionUserId();
                         // check if record already existed
-                        var stdAct =
-                            _context.StudentActivities.Where(m => m.TempActivityId == tempAct.TempActivityId &&
+                        var stdAct = _context.StudentActivities
+                            .Where(m => m.TempActivityId == tempAct.TempActivityId &&
                                                                   m.CreatedBy == _owner);
                         //go directly to view
                         if (!stdAct.Any())
@@ -1112,10 +1121,9 @@ namespace IQMStarterKit.Controllers
             #endregion
 
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
 
             var vark = new VarkView();
+            //get temp activity id by code
 
             byte activityId = GetTempActivityID("A05");
 
@@ -1156,8 +1164,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA05").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A05");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1216,6 +1223,10 @@ namespace IQMStarterKit.Controllers
             }
 
         }
+
+        #endregion
+
+        #region A06: Human Bingo 
 
         public ActionResult PageA06()
         {
@@ -1288,8 +1299,7 @@ namespace IQMStarterKit.Controllers
 
 
 
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A06");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1376,6 +1386,10 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+        #endregion
+
+        #region A07: Photo Scavenger
+
         public ActionResult PageA07()
         {
             // title: Photo Scavenger Hunt
@@ -1447,8 +1461,7 @@ namespace IQMStarterKit.Controllers
 
 
 
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A07");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1535,6 +1548,9 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+        #endregion
+
+        #region A08: DOPE
 
         public ActionResult PageA08()
         {
@@ -1544,8 +1560,7 @@ namespace IQMStarterKit.Controllers
 
             var dope = new Dope();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A08");
 
             // get Current User
@@ -1583,8 +1598,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA08").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A08");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1639,6 +1653,10 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A09: DISC
+
         public ActionResult PageA09()
         {
             // title: DISC
@@ -1646,9 +1664,7 @@ namespace IQMStarterKit.Controllers
 
             var disc = new Disc();
 
-
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A09");
 
             // get Current User
@@ -1685,8 +1701,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA09").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A09");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1743,6 +1758,10 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A10: Kiwiana
+
         public ActionResult PageA10()
         {
             // title: Kiwiana
@@ -1750,8 +1769,7 @@ namespace IQMStarterKit.Controllers
 
             var kiwiana = new KiwianaClass();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A10");
 
             // get Current User
@@ -1794,8 +1812,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA10").WithInfo("This is just a demo.");
             }
             var kiwiana = new KiwianaClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A10");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1870,6 +1887,10 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A11: Matched Words
+
         public ActionResult PageA11()
         {
 
@@ -1879,8 +1900,7 @@ namespace IQMStarterKit.Controllers
 
             var objSlang = new SlangClass();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A11");
 
             // get Current User
@@ -1922,8 +1942,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA11").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A11");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -1986,6 +2005,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A12: Cheese
 
         public ActionResult PageA12()
         {
@@ -1993,8 +2015,7 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var cheese = new Cheese();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A12");
 
             // get Current User
@@ -2038,8 +2059,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA12").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A12");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2111,6 +2131,9 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A13: Think Like a CEO
 
         public ActionResult PageA13()
         {
@@ -2118,8 +2141,7 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var thinkceo = new ThinkCEO();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A13");
 
             // get Current User
@@ -2163,8 +2185,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("Page32").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A13");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2239,6 +2260,9 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A14: Personal Values
 
         public ActionResult PageA14()
         {
@@ -2247,8 +2271,7 @@ namespace IQMStarterKit.Controllers
 
             var personalvalues = new PersonalValues();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A14");
 
             // get Current User
@@ -2287,8 +2310,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("Page23").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A14");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2342,6 +2364,9 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A15: Personal Leadership 
 
         public ActionResult PageA15()
         {
@@ -2350,8 +2375,7 @@ namespace IQMStarterKit.Controllers
 
             var personalleadership = new PersonalLeadership();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A15");
 
             // get Current User
@@ -2389,8 +2413,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA15").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A15");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2442,6 +2465,9 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A16: Personal Leadership Plan
 
         public ActionResult PageA16()
         {
@@ -2449,8 +2475,7 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var leadershipPlan = new PersonalLeadershipPlanClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A16");
 
             // get Current User
@@ -2494,8 +2519,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA16").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A16");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2565,6 +2589,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A17: Winning Lottery
 
         public ActionResult PageA17()
         {
@@ -2572,8 +2599,7 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var winLot = new WinningLotteryClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A17");
 
             // get Current User
@@ -2617,8 +2643,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA17").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A17");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2692,14 +2717,17 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A18: Journal - Pass The Ball
+
         public ActionResult PageA18()
         {
             // title: Pass the Ball - Journal
             // type: FormSubmission
 
             var passBall = new PassTheBallJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A18");
 
             // get Current User
@@ -2742,8 +2770,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA18").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A18");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2813,6 +2840,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A19: First Thing First
 
         public ActionResult PageA19()
         {
@@ -2869,8 +2899,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA19").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A19");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -2983,8 +3012,7 @@ namespace IQMStarterKit.Controllers
 
                     };
 
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A19");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3077,6 +3105,10 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+        #endregion
+
+        #region A20: Self Managing
+
         public ActionResult PageA20()
         {
             // title: self managing
@@ -3084,8 +3116,7 @@ namespace IQMStarterKit.Controllers
 
             var selfmanagement = new SelfManagement();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A20");
 
             // get Current User
@@ -3123,8 +3154,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA20").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A20");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3176,6 +3206,10 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A21: Lost At Sea
+
         public ActionResult PageA21()
         {
             // title: Lost At Sea - Activity
@@ -3183,8 +3217,7 @@ namespace IQMStarterKit.Controllers
 
             var lost = new LostAtSeaViewModel();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A21");
 
             // get Current User
@@ -3235,8 +3268,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA21").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A21");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3350,6 +3382,10 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A22: Assertive
+
         public ActionResult PageA22()
         {
             // title: How Assertive are your messages?
@@ -3357,8 +3393,7 @@ namespace IQMStarterKit.Controllers
 
             var assertive = new Assertive();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A22");
 
             // get Current User
@@ -3395,8 +3430,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA22").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A22");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3445,14 +3479,17 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A23: Journal - Lost At Sea
+
         public ActionResult PageA23()
         {
             // title: Lost At Sea - Journal
             // type: FormSubmission
 
             var lostSea = new LostAtSeaJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A23");
 
             // get Current User
@@ -3495,8 +3532,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA23").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A23");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3565,6 +3601,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A24: Journal - Closed Fist
 
         public ActionResult PageA24()
         {
@@ -3572,8 +3611,7 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var closedFist = new ClosedFistJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A24");
 
             // get Current User
@@ -3616,8 +3654,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA24").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A24");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3687,14 +3724,17 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A25: Journal - Follow my Instructions
+
         public ActionResult PageA25()
         {
             // title: Follow my Instructions - Journal
             // type: FormSubmission
 
             var followInstructions = new FollowMyInstructionsJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A25");
 
             // get Current User
@@ -3737,8 +3777,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA25").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A25");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3808,11 +3847,18 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A26: Presentations Eval
 
         public ActionResult PageA26()
         {
             // title: Presentations
             // type: FormSubmission
+            if (!User.IsInRole("Student") && Session["email"] == null)
+            {
+                return RedirectToAction("ListStudents", "Admin").WithInfo("Please select student to evaluate.");
+            }
 
             PresentationEvaluationModel presentation = new PresentationEvaluationModel();
 
@@ -3820,6 +3866,7 @@ namespace IQMStarterKit.Controllers
             var activityId = GetTempActivityID("A26");
             //get owner
             var owner = GetSessionUserId();
+
             // check session is not null
             if (Session["email"] != null)
             {
@@ -3850,12 +3897,14 @@ namespace IQMStarterKit.Controllers
                     if (presentation == null)
                     {
                         presentation = new PresentationEvaluationModel();
+
+                        var tutorId = GetSessionUserId();
                         //start eval fill student records
                         presentation.StudentId = student.Id;
                         presentation.StudentName = student.FullName;
                         presentation.StudentEmail = student.Email;
-                        presentation.TutorId = GetSessionUserId();
-                        presentation.TutorName = GetFullName(owner);
+                        presentation.TutorId = tutorId;
+                        presentation.TutorName = GetFullName(tutorId);
 
 
                     }
@@ -3904,8 +3953,7 @@ namespace IQMStarterKit.Controllers
 
                 //add record to student activity table
 
-                //get temp activity id by title
-                //note: title should be the same with the search keyword when using lamda expression
+                //get temp activity id by code
                 byte activityId = GetTempActivityID("A26");
                 //get module id
                 var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -3944,6 +3992,9 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A27: Problem Solving - DOTS
 
         public ActionResult PageA27()
         {
@@ -4013,8 +4064,7 @@ namespace IQMStarterKit.Controllers
 
                     };
 
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A27");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4101,6 +4151,9 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+        #endregion
+
+        #region A28: Problem Solving - CAKE
 
         public ActionResult PageA28()
         {
@@ -4169,8 +4222,7 @@ namespace IQMStarterKit.Controllers
 
                     };
 
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A28");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4257,7 +4309,9 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+        #endregion
 
+        #region A29: Brainstorming
 
         public ActionResult PageA29()
         {
@@ -4265,8 +4319,7 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var brainstorming = new BrainstormingClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A29");
 
             // get Current User
@@ -4308,8 +4361,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA29").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A29");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4433,6 +4485,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A30: Draw Mind Map
 
         public ActionResult PageA30()
         {
@@ -4501,8 +4556,7 @@ namespace IQMStarterKit.Controllers
 
                     };
 
-                    //get temp activity id by title
-                    //note: title should be the same with the search keyword when using lamda expression
+                    //get temp activity id by code
                     byte activityId = GetTempActivityID("A30");
                     //get module id
                     var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4589,6 +4643,9 @@ namespace IQMStarterKit.Controllers
             return File(fileToRetrieve.Content, fileToRetrieve.ContentType);
         }
 
+        #endregion
+
+        #region A31: Conflict Managing
 
         public ActionResult PageA31()
         {
@@ -4597,8 +4654,7 @@ namespace IQMStarterKit.Controllers
 
             var conflict = new Conflict();
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A31");
 
             // get Current User
@@ -4634,8 +4690,7 @@ namespace IQMStarterKit.Controllers
             {
                 return RedirectToAction("PageA31").WithInfo("This is just a demo.");
             }
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A31");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4688,14 +4743,17 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        #endregion
+
+        #region A32: Journal - Helium Stick
+
         public ActionResult PageA32()
         {
             // title: Helium Stick - Journal
             // type: FormSubmission
 
             var heliumStick = new HeliumStickJournalClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A32");
 
             // get Current User
@@ -4738,8 +4796,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA32").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A32");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4809,14 +4866,18 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A33: Personal SWOT 
+
         public ActionResult PageA33()
         {
             // title: Personal SWOT
             // type: FormSubmission
 
             var swot = new PersonalSWOTClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A33");
 
             // get Current User
@@ -4859,8 +4920,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA33").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A33");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -4926,6 +4986,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A34: 14 Habits
 
         public ActionResult PageA34()
         {
@@ -4933,8 +4996,8 @@ namespace IQMStarterKit.Controllers
             // type: FormSubmission
 
             var myHabit = new My14HabitsClass();
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A34");
 
             // get Current User
@@ -4978,8 +5041,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA34").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A34");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -5055,6 +5117,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A35: Maturity Continuum
 
         public ActionResult PageA35()
         {
@@ -5102,8 +5167,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA35").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A35");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -5180,6 +5244,9 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
+
+        #region A06: Review Quiz
 
         public ActionResult PageA36()
         {
@@ -5188,8 +5255,7 @@ namespace IQMStarterKit.Controllers
             var reviewQuiz = new ReviewQuizClass();
             //ViewBag.ActDone = false;
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A36");
 
             // get Current User
@@ -5220,8 +5286,7 @@ namespace IQMStarterKit.Controllers
                 return RedirectToAction("PageA36").WithInfo("This is just a demo.");
             }
 
-            //get temp activity id by title
-            //note: title should be the same with the search keyword when using lamda expression
+            //get temp activity id by code
             byte activityId = GetTempActivityID("A36");
             //get module id
             var moduleId = GetTempModuleIdByActivityID(activityId);
@@ -5231,7 +5296,6 @@ namespace IQMStarterKit.Controllers
             try
             {
                 //generate context string from form collection
-
                 reviewQuiz.QuizAns1a = fc.Get("QuizAns1a").ToString();
                 reviewQuiz.QuizAns1a_Exp = fc.Get("QuizAns1a_Exp").ToString();
                 reviewQuiz.QuizAns1b = fc.Get("QuizAns1b").ToString();
@@ -5241,28 +5305,18 @@ namespace IQMStarterKit.Controllers
                 reviewQuiz.QuizAns1d = fc.Get("QuizAns1d").ToString();
                 reviewQuiz.QuizAns1d_Exp = fc.Get("QuizAns1d_Exp").ToString();
 
-                if (fc.Get("QuizAns2") != null)
-                {
-                    reviewQuiz.QuizAns2 = fc.Get("QuizAns2").ToString();
-                }
-                if (fc.Get("QuizAns3") != null)
-                {
-                    reviewQuiz.QuizAns3 = fc.Get("QuizAns3").ToString();
-                }
+                if (fc.Get("QuizAns2") != null) reviewQuiz.QuizAns2 = fc.Get("QuizAns2").ToString();
+
+                if (fc.Get("QuizAns3") != null) reviewQuiz.QuizAns3 = fc.Get("QuizAns3").ToString();
 
                 reviewQuiz.QuizAns4a = fc.Get("QuizAns4a").ToString();
                 reviewQuiz.QuizAns4b = fc.Get("QuizAns4b").ToString();
                 reviewQuiz.QuizAns4c = fc.Get("QuizAns4c").ToString();
                 reviewQuiz.QuizAns4d = fc.Get("QuizAns4d").ToString();
 
-                if (fc.Get("QuizAns5") != null)
-                {
-                    reviewQuiz.QuizAns5 = fc.Get("QuizAns5").ToString();
-                }
-                if (fc.Get("QuizAns6") != null)
-                {
-                    reviewQuiz.QuizAns6 = fc.Get("QuizAns6").ToString();
-                }
+                if (fc.Get("QuizAns5") != null) reviewQuiz.QuizAns5 = fc.Get("QuizAns5").ToString();
+
+                if (fc.Get("QuizAns6") != null) reviewQuiz.QuizAns6 = fc.Get("QuizAns6").ToString();
 
                 // M2 (Spirit of NZ, NZ My New Home)
 
@@ -5465,8 +5519,11 @@ namespace IQMStarterKit.Controllers
             }
         }
 
+        #endregion
 
-        // redirect to survey controller actions
+
+        // Survey Redirects
+        #region Survey Redirects
 
         public ActionResult ProgramSurvey()
         {
@@ -5478,18 +5535,18 @@ namespace IQMStarterKit.Controllers
             return RedirectToAction("TutorSurvey", "Survey", null);
         }
 
+        #endregion
 
-        //Utility
-        private byte GetTempActivityID(string _code)
-        {
-            return _context.TempActivities.FirstOrDefault(m => m.Code == _code).TempActivityId;
-        }
 
+        // Helper
+        #region Helper functions
+
+        //find module id by activity id
         private byte GetTempModuleIdByActivityID(byte Id)
         {
-            return _context.TempActivities.FirstOrDefault(m => m.TempActivityId == Id).TempModuleId;
+            return _context.TempActivities
+                .FirstOrDefault(m => m.TempActivityId == Id).TempModuleId;
         }
-
 
         // update overall progress of student
         private void ComputeOverallProgress()
@@ -5506,36 +5563,50 @@ namespace IQMStarterKit.Controllers
                 }
 
                 //get logged user activities count
-                var totalStudentActivities = _context.StudentActivities.Where(m => m.CreatedBy == cur_user).Count();
+                var totalStudentActivities = _context.StudentActivities
+                    .Where(m => m.CreatedBy == cur_user).Count();
                 //get total activities
-                var totalActivities = _context.TempActivities.Where(m => m.IsActivity == true && m.IsRemoved == false).Count();
+                var totalActivities = _context.TempActivities
+                    .Where(m => m.IsActivity == true && m.IsRemoved == false).Count();
                 //compute overall progress
                 var value = ((double)totalStudentActivities / totalActivities) * 100;
                 var percentage = Math.Round(value, 2);
                 //save to user table
-                var user = _context.Users.Where(m => m.Id == cur_user).FirstOrDefault();
-                if (user != null)
-                {
-                    user.OverallProgress = percentage;
-                }
-                else
-                {
-                    throw new Exception("User not found!");
-                }
-
+                var user = _context.Users
+                    .Where(m => m.Id == cur_user).FirstOrDefault();
+                //validate user
+                if (user != null) user.OverallProgress = percentage;
+                else throw new Exception("User not found!");
+                //save changes
                 _context.Entry(user).State = EntityState.Modified;
                 _context.SaveChanges();
             }
             catch (Exception)
             {
-
                 throw;
             }
 
 
         }
 
-        // logic for each custom activity
+        //check if config locked for student
+        private string IsActivityLocked(string owner, byte activityID)
+        {
+            var user = UserManager.FindById(owner);
+            var isLocked = _context.GroupActivityConfig
+                .Where(m => m.TempActivityId == activityID && m.GroupId == user.GroupId)
+                .Select(m => m.IsLocked).FirstOrDefault();
+
+            if (isLocked) return "The activity you have selected is currently in locked state!";
+
+            return string.Empty;
+        }
+
+        #endregion
+
+        // Business Logic
+        #region Business Logic
+
         private int GetMatchedWords(SlangClass slang)
         {
             int matched = 0;
@@ -5603,46 +5674,6 @@ namespace IQMStarterKit.Controllers
             return matched;
         }
 
-        private List<Vark> GetVarkList(FormCollection fc)
-        {
-            int rows = 11;
-            int cur_row = 0;
-            var varkList = new List<Vark>();
-
-            for (int i = 0; i < rows; i++)
-            {
-                cur_row = i + 1;
-                var row = fc.Get("VARK" + cur_row);
-
-                if (row == null)
-                {
-                    break;
-                }
-
-                var vark = new Vark();
-                switch (row.ToString())
-                {
-                    case "V":
-                        vark.Visual = true;
-                        break;
-                    case "A":
-                        vark.Auditory = true;
-                        break;
-                    case "R":
-                        vark.ReadingWriting = true;
-                        break;
-                    case "K":
-                        vark.Kinesthetic = true;
-                        break;
-                }
-
-                varkList.Add(vark);
-
-            }
-
-            return varkList;
-        }
-
         private PersonalLeadership PersonalLeaderShipScore(FormCollection fc)
         {
             int rows = 21;
@@ -5698,8 +5729,6 @@ namespace IQMStarterKit.Controllers
             return retval;
         }
 
-
-
         private string GetVarkResult(List<Vark> varkList)
         {
 
@@ -5733,6 +5762,46 @@ namespace IQMStarterKit.Controllers
             }
 
             return yourVark;
+        }
+
+        private List<Vark> GetVarkList(FormCollection fc)
+        {
+            int rows = 11;
+            int cur_row = 0;
+            var varkList = new List<Vark>();
+
+            for (int i = 0; i < rows; i++)
+            {
+                cur_row = i + 1;
+                var row = fc.Get("VARK" + cur_row);
+
+                if (row == null)
+                {
+                    break;
+                }
+
+                var vark = new Vark();
+                switch (row.ToString())
+                {
+                    case "V":
+                        vark.Visual = true;
+                        break;
+                    case "A":
+                        vark.Auditory = true;
+                        break;
+                    case "R":
+                        vark.ReadingWriting = true;
+                        break;
+                    case "K":
+                        vark.Kinesthetic = true;
+                        break;
+                }
+
+                varkList.Add(vark);
+
+            }
+
+            return varkList;
         }
 
         private string GetDiscResult(FormCollection fc)
@@ -5942,19 +6011,6 @@ namespace IQMStarterKit.Controllers
             return personals;
         }
 
-        private string IsActivityLocked(string owner, byte activityID)
-        {
-            //check if config locked for student
-
-            var user = UserManager.FindById(owner);
-            var isLocked = _context.GroupActivityConfig.Where(m => m.TempActivityId == activityID && m.GroupId == user.GroupId).Select(m => m.IsLocked).FirstOrDefault();
-
-            if (isLocked) return "The activity you have selected is currently locked!";
-
-
-            return "";
-        }
-
         private ReviewQuizClass LoadQuizAnswers()
         {
             var retval = new ReviewQuizClass();
@@ -6140,6 +6196,8 @@ namespace IQMStarterKit.Controllers
             if (answer.Contains("black")) return true;
             return false;
         }
+
+        #endregion
 
 
 

@@ -1,12 +1,17 @@
 ﻿
 using IQMStarterKit.DAL;
 using IQMStarterKit.Models;
+using IQMStarterKit.Models.Alert;
+using IQMStarterKit.Models.Forms;
 using IQMStarterKit.Models.Report;
+using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,7 +19,7 @@ using System.Web.UI.WebControls;
 namespace IQMStarterKit.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class ReportController : Controller
+    public class ReportController : CommonController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
@@ -319,11 +324,11 @@ namespace IQMStarterKit.Controllers
 
                     GroupId = item["GroupId"].ToString(),
                     GroupName = item["GroupName"].ToString(),
-                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
-                    OverallRating = int.Parse(item["OverallRating"].ToString()),
-                    TimeAllocatedRating = int.Parse(item["TimeAllocatedRating"].ToString()),
-                    ClassSizeRating = int.Parse(item["ClassSizeRating"].ToString()),
-                    ClassRoomRating = int.Parse(item["ClassRoomRating"].ToString())
+                    GroupAveRating = float.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = float.Parse(item["OverallRating"].ToString()),
+                    TimeAllocatedRating = float.Parse(item["TimeAllocatedRating"].ToString()),
+                    ClassSizeRating = float.Parse(item["ClassSizeRating"].ToString()),
+                    ClassRoomRating = float.Parse(item["ClassRoomRating"].ToString())
                 };
 
                 modelList.Add(model);
@@ -357,6 +362,32 @@ namespace IQMStarterKit.Controllers
 
             return View(progmodel);
 
+        }
+
+        public JsonResult ProgrammeChart()
+        {
+            Session["email"] = null;
+
+            //get rating
+
+            var dt = DataLayer.GetGroupFeedbackProgramme();
+            var modelList = new List<GroupRatingJson>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new GroupRatingJson
+                {
+                    GroupName = item["GroupName"].ToString(),
+                    GroupAveRating = float.Parse(item["GroupAverageRating"].ToString())
+
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return Json(modelList, JsonRequestBehavior.AllowGet);
         }
 
         public GroupFeedbackProgramme ExportGroupFeedbackProgramme()
@@ -449,8 +480,8 @@ namespace IQMStarterKit.Controllers
                     GroupName = item["GroupName"].ToString(),
                     TutorId = item["TutorId"].ToString(),
                     FullName = item["FullName"].ToString(),
-                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
-                    OverallRating = int.Parse(item["OverallRating"].ToString()),
+                    GroupAveRating = float.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = float.Parse(item["OverallRating"].ToString()),
 
                 };
 
@@ -747,6 +778,42 @@ namespace IQMStarterKit.Controllers
 
 
             return gv;
+        }
+
+        #endregion
+
+        #region Generate Merged PDP pdf file
+
+        public ActionResult MergedPDPView(StudentBookViewModel model)
+        {
+
+            return View(model);
+        }
+
+        public ActionResult GeneratePDPMergedFile(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return View().WithError("No email parameter found!");
+
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = email + "_" + sffx + ".pdf";
+
+            var user = UserManager.FindByEmail(email);
+
+
+            //generate model here
+            var book = new StudentBookViewModel();
+            book.StudentName = user.FullName;
+            book.AboutMe = GetAboutMeModel(email);
+            book.VarkResult = GetVarkModel(email);
+            book.DopeResult = GetDopeModel(email);
+            book.DiscResult = GetDiscModel(email);
+
+
+
+
+
+            return new ViewAsPdf("MergedPDPView", book) { FileName = fileName };
         }
 
         #endregion
@@ -1078,6 +1145,67 @@ namespace IQMStarterKit.Controllers
 
 
         //helper
+
+        private AboutMeClass GetAboutMeModel(string email)
+        {
+            var model = new AboutMeClass();
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A03");
+            var user = UserManager.FindByEmail(email);
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user.Id);
+
+            // student activity record is not required in merging docs
+            if (rec != null) model = JsonConvert.DeserializeObject<AboutMeClass>(rec.Context);
+
+            return model;
+
+        }
+
+        private string GetVarkModel(string email)
+        {
+            var model = new VarkView();
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A05");
+            var user = UserManager.FindByEmail(email);
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user.Id);
+
+            return rec.VarkResult;
+
+        }
+
+        private string GetDopeModel(string email)
+        {
+            var model = new VarkView();
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A08");
+            var user = UserManager.FindByEmail(email);
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user.Id);
+
+            return rec.DopeResult;
+
+        }
+
+
+        private string GetDiscModel(string email)
+        {
+            var model = new VarkView();
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A09");
+            var user = UserManager.FindByEmail(email);
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user.Id);
+
+            return rec.DiscResult;
+
+        }
+
 
 
 
