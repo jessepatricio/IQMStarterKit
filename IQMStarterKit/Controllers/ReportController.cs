@@ -18,7 +18,7 @@ using System.Web.UI.WebControls;
 
 namespace IQMStarterKit.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator, Tutor")]
     public class ReportController : CommonController
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
@@ -302,6 +302,42 @@ namespace IQMStarterKit.Controllers
 
 
             return View(modelList);
+
+        }
+
+        public ActionResult PercentageExportToPDF(string reportName)
+        {
+
+            Session["email"] = null;
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = reportName + "_" + sffx + ".pdf";
+
+
+
+            var dt = DataLayer.GetActivityPercentage();
+            var modelList = new List<StudentActivityPercentage>();
+
+
+            foreach (DataRow item in dt.Rows)
+            {
+                var model = new StudentActivityPercentage
+                {
+
+                    UserId = item["UserId"].ToString(),
+                    FullName = item["StudentName"].ToString(),
+                    GroupName = item["GroupName"].ToString(),
+                    StudentTotalActivities = item["StudentTotalActivities"].ToString(),
+                    TotalActivities = item["TotalActivities"].ToString(),
+                    ProgressValue = item["PercentageCompletion"].ToString()
+
+                };
+
+                modelList.Add(model);
+
+            }
+
+            return new ViewAsPdf("StudentActivityPercentage", modelList) { FileName = fileName };
 
         }
 
@@ -593,7 +629,6 @@ namespace IQMStarterKit.Controllers
 
         #endregion
 
-
         #region Report Generation
 
         public ActionResult ExportToExcel(string reportName)
@@ -782,87 +817,8 @@ namespace IQMStarterKit.Controllers
 
         #endregion
 
-        #region Generate Merged PDP pdf file
+        #region Report Logic
 
-        public ActionResult MergedPDPView(StudentBookViewModel model)
-        {
-
-            return View(model);
-        }
-
-        public ActionResult GeneratePDPMergedFile(string email)
-        {
-            if (string.IsNullOrEmpty(email)) return View().WithError("No email parameter found!");
-
-
-            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
-            var fileName = email + "_" + sffx + ".pdf";
-
-            var user = UserManager.FindByEmail(email);
-
-
-            //generate model here
-            var book = new StudentBookViewModel();
-            book.StudentName = user.FullName;
-            book.AboutMe = GetAboutMeModel(email);
-            book.VarkResult = GetVarkModel(email);
-            book.DopeResult = GetDopeModel(email);
-            book.DiscResult = GetDiscModel(email);
-
-
-
-
-
-            return new ViewAsPdf("MergedPDPView", book) { FileName = fileName };
-        }
-
-        #endregion
-
-
-
-
-        public ActionResult PercentageExportToPDF(string reportName)
-        {
-
-            Session["email"] = null;
-
-            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
-            var fileName = reportName + "_" + sffx + ".pdf";
-
-
-
-            var dt = DataLayer.GetActivityPercentage();
-            var modelList = new List<StudentActivityPercentage>();
-
-
-            foreach (DataRow item in dt.Rows)
-            {
-                var model = new StudentActivityPercentage
-                {
-
-                    UserId = item["UserId"].ToString(),
-                    FullName = item["StudentName"].ToString(),
-                    GroupName = item["GroupName"].ToString(),
-                    StudentTotalActivities = item["StudentTotalActivities"].ToString(),
-                    TotalActivities = item["TotalActivities"].ToString(),
-                    ProgressValue = item["PercentageCompletion"].ToString()
-
-                };
-
-                modelList.Add(model);
-
-            }
-
-
-
-
-
-            return new ViewAsPdf("StudentActivityPercentage", modelList) { FileName = fileName };
-
-        }
-
-
-        // logic
         public List<VarkViewModel> GetVarkModelAsync()
         {
             // activity 5 is VARK
@@ -1143,8 +1099,47 @@ namespace IQMStarterKit.Controllers
             return modelList;
         }
 
+        #endregion
 
-        //helper
+        // Note: The code below is not yet fully functional but working for just demo purposes.
+
+        #region Generate Merged PDP pdf file
+
+
+        public ActionResult MergedPDPView(StudentBookViewModel model)
+        {
+
+            return View(model);
+        }
+
+
+        public ActionResult GeneratePDPMergedFile(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return View().WithError("No email parameter found!");
+
+
+            var sffx = DateTime.Now.ToString("ddMMyyyyHHmm");
+            var fileName = email + "_" + sffx + ".pdf";
+
+            var user = UserManager.FindByEmail(email);
+
+
+            //generate model here
+            var book = new StudentBookViewModel();
+            book.StudentName = user.FullName;
+            book.AboutMe = GetAboutMeModel(email);
+            book.VarkResult = GetVarkModel(email);
+            book.DopeResult = GetDopeModel(email);
+            book.DiscResult = GetDiscModel(email);
+            book.Kiwiana = GetKiwianaModel(email);
+
+
+            return new ViewAsPdf("MergedPDPView", book) { FileName = fileName };
+        }
+
+
+
+        // merge helper
 
         private AboutMeClass GetAboutMeModel(string email)
         {
@@ -1191,7 +1186,6 @@ namespace IQMStarterKit.Controllers
 
         }
 
-
         private string GetDiscModel(string email)
         {
             var model = new VarkView();
@@ -1206,8 +1200,24 @@ namespace IQMStarterKit.Controllers
 
         }
 
+        private KiwianaClass GetKiwianaModel(string email)
+        {
+            var model = new KiwianaClass();
+            //note: title should be the same with the search keyword when using lamda expression
+            byte activityId = GetTempActivityID("A10");
+            var user = UserManager.FindByEmail(email);
+
+            // validate if record already existed in student activity table
+            var rec = _context.StudentActivities.FirstOrDefault(m => m.TempActivityId == activityId && m.CreatedBy == user.Id);
+
+            // student activity record is not required in merging docs
+            if (rec != null) model = JsonConvert.DeserializeObject<KiwianaClass>(rec.Context);
+
+            return model;
+        }
 
 
+        #endregion
 
 
     }

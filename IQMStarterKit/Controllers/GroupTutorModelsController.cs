@@ -1,8 +1,6 @@
 ﻿using IQMStarterKit.Models;
 using IQMStarterKit.Models.Alert;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -68,7 +66,7 @@ namespace IQMStarterKit.Controllers
 
 
         // Utility
-      
+
 
         public ActionResult Delete(int id, string groupId)
         {

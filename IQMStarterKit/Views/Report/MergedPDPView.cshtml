@@ -9,8 +9,10 @@
     </STYLE>
 
     <div class="main_container">
-        <h2>Student Name: @Model.StudentName</h2>
-        <div style="text-align: center;">
+        <br />
+        <h2 style="color: dimgray;">Student Name: @Model.StudentName</h2>
+        <br /><br />
+        <div style="text-align: center; vertical-align:central;" >
             <h1 id="p1welcomeAspire">Welcome to the Personal Development Programme (PDP)</h1>
             <img id="p1handPlant" src="~/Content/img/hands-with-plant.jpg" alt="Holding a Plant Graphic">
             <h2>Effective Soft Skills</h2>
@@ -23,6 +25,7 @@
 
     <div class="main_container">
         <div style="text-align: center;">
+
             <h1 class="heading">Programme Objectives</h1>
 
             <ul class="p2objList">
@@ -35,11 +38,7 @@
             </div>
         </div>
     </div>
-
-    <hr />
-    <p class="breakhere" />
-
-
+    
     <div class="main_container">
         <div style="text-align: center;">
             <p id="p4preMind">Is yours a 'prepared mind?'</p>
@@ -66,10 +65,7 @@
         </ul>
         <br />
     </div>
-
-
-    <hr />
-    <p class="breakhere" />
+    
 
     <div class="main_container">
         <h1 class="heading">Course Requirements</h1>
@@ -98,10 +94,7 @@
         </ul>
 
     </div>
-
-    <hr />
-    <p class="breakhere" />
-
+    
     <div class="main_container">
         <h1 class="heading">Student Services Contact Details</h1>
 
@@ -112,11 +105,6 @@
         </ul>
 
     </div>
-
-    <hr />
-    <p class="breakhere" />
-
-
 
     <div class="main_container">
         <div style="text-align:center">
@@ -210,11 +198,6 @@
         </ul>
     </div>
 
-
-    <hr />
-    <p class="breakhere" />
-
-
     <div class="main_container">
         <h1 class="heading">You may be interested...</h1>
         <p class="p13"><u>Short Courses</u></p>
@@ -233,7 +216,7 @@
 
     //PageA03 About Me
 
-    if (Model.AboutMe != null)
+    @*if (Model.AboutMe != null)
     {
         <hr />
         <p class="breakhere" />
@@ -256,7 +239,7 @@
             </div>
         </div>
     }
-
+        *@
     <hr />
     <p class="breakhere" />
 
@@ -280,10 +263,6 @@
 
     </div>
 
-
-    <hr />
-    <p class="breakhere" />
-
     <div class="main_container">
         <h1 class="heading">Classroom Rules</h1>
         <br />
@@ -293,33 +272,12 @@
             <li>Great opportunity to improve English.</li>
             <li>Good spoken English helps in job search.</li>
         </ul>
-
-
-    </div>
-
-    <hr />
-    <p class="breakhere" />
-
-
-
-
-    <div class="main_container">
-        <h1 class="heading">Classroom Rules</h1>
         <br />
         <p class="p17-19List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Punctuality</p>
         <ul class="p17-19List">
             <li>Is respect for your tutor and your classmates.</li>
             <li>Shows that you are well disciplined and take what you are doing seriously.</li>
         </ul>
-
-
-    </div>
-
-    <hr />
-    <p class="breakhere" />
-
-    <div class="main_container">
-        <h1 class="heading">Classroom Rules</h1>
         <br />
         <p class="p17-19List"><span class="glyphicon glyphicon-ok"></span> &nbsp; Lanyards</p>
         <ul class="p17-19List">
@@ -327,12 +285,11 @@
             <li>When your permanent ID is issued insert it in your lanyard ID holder and use it at all times.</li>
         </ul>
 
-
     </div>
 
     <hr />
     <p class="breakhere" />
-
+    
 
     <div class="main_container">
         <h1 class="heading">Classroom Rules</h1>
@@ -347,9 +304,7 @@
 
     </div>
 
-    <hr />
-    <p class="breakhere" />
-
+   
     <div class="main_container">
         <h1 class="heading">Electronics Etiquette</h1>
         <br />
@@ -368,7 +323,6 @@
     <p class="breakhere" />
 
 
-
     <div class="main_container">
         <h1 class="heading">Classroom Rules</h1>
         <br />
@@ -381,14 +335,7 @@
             <img src="~/Content/img/spongebob.png" alt="Spongebob and Patrick graphic">
         </div>
 
-    </div>
-
-    <hr />
-    <p class="breakhere" />
-
-
-
-    <div class="main_container">
+    
         <h1 class="heading">Classroom Rules</h1>
         <br />
         <ul class="p20-22List">
@@ -508,8 +455,7 @@
                 break;
         }
 
-        <hr />
-        <p class="breakhere" />
+       
 
         <div class="main_container">
             <h1 class="heading"><u>DISC Personality Profiling</u></h1>
@@ -525,5 +471,84 @@
                 </div>
             </div>
     }
+
+
+    <hr />
+    <p class="breakhere" />
+
+
+    <div class="main_container">
+        <div style="text-align: center">
+            <h1 id="heading"><u>What do you know about these items of Kiwiana?</u></h1>
+
+            <div class="row">
+                <div class="col-md-3" style="margin-bottom: 5px">
+                    @Html.LabelFor(model => model.Kiwiana.Paua)
+                    @Html.TextAreaFor(model => model.Kiwiana.Paua, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "Paua", rows = "5", @maxlength = "70" })
+                </div>
+                <div class="col-md-3" style="margin-bottom: 5px">
+                    @Html.LabelFor(model => model.Kiwiana.Pavlova)
+                    @Html.TextAreaFor(model => model.Kiwiana.Pavlova, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "Pavlova", rows = "5", @maxlength = "70" })
+                </div>
+                <div class="col-md-3" style="margin-bottom: 5px">
+                    @Html.LabelFor(model => model.Kiwiana.HokeyPokey)
+                    @Html.TextAreaFor(model => model.Kiwiana.HokeyPokey, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "HokeyPokey", rows = "5", @maxlength = "70" })
+                </div>
+                <div class="col-md-3" style="margin-bottom: 5px">
+                    @Html.LabelFor(model => model.Kiwiana.FishNChips)
+                    @Html.TextAreaFor(model => model.Kiwiana.FishNChips, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "FishNChips", rows = "5", @maxlength = "70" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.Jandals)
+                        @Html.TextAreaFor(model => model.Kiwiana.Jandals, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "Jandals", rows = "5", @maxlength = "70" })
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.Swandri)
+                        @Html.TextAreaFor(model => model.Kiwiana.Swandri, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "Swandri", rows = "5", @maxlength = "70" })
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.BuzzyBee)
+                        @Html.TextAreaFor(model => model.Kiwiana.BuzzyBee, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "BuzzyBee", rows = "5", @maxlength = "70" })
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.BlackSinglet)
+                        @Html.TextAreaFor(model => model.Kiwiana.BlackSinglet, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "BlackSinglet", rows = "5", @maxlength = "70" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.Rugby)
+                        @Html.TextAreaFor(model => model.Kiwiana.Rugby, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "Rugby", rows = "5", @maxlength = "70" })
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.KiwiFruit)
+                        @Html.TextAreaFor(model => model.Kiwiana.KiwiFruit, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "KiwiFruit", rows = "5", @maxlength = "70" })
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        @Html.LabelFor(model => model.Kiwiana.PineappleLumps)
+                        @Html.TextAreaFor(model => model.Kiwiana.PineappleLumps, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "PineappleLumps", rows = "5", @maxlength = "70" })
+                    </div>
+                    <div class="col-md-3" style="margin-bottom: 5px">
+                        <strong>L&amp;P</strong>
+                        @Html.TextAreaFor(model => model.Kiwiana.LnP, new { @readonly = "readonly", @class = "p28textarea form-control", @name = "LnP", rows = "5", @maxlength = "70" })
+                    </div>
+                </div>
+            </div>
+
+         
+        </div>
+
+    </div>
+
+
+    <hr />
+    <p class="breakhere" />
 
 }

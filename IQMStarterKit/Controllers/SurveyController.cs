@@ -11,10 +11,7 @@ namespace IQMStarterKit.Controllers
 {
     public class SurveyController : CommonController
     {
-
         ApplicationDbContext _context = new ApplicationDbContext();
-
-
 
         //list of program survey
         public ActionResult ProgramSurveyList()
@@ -42,7 +39,6 @@ namespace IQMStarterKit.Controllers
 
             return View(model);
         }
-
 
         // GET: Survey Program
         public ActionResult ProgramSurvey()
@@ -139,6 +135,7 @@ namespace IQMStarterKit.Controllers
 
             return View(model);
         }
+
         // POST: Survey Tutor
         [HttpPost]
         public ActionResult TutorSurvey(FormCollection fc)

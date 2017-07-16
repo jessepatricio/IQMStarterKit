@@ -9,5 +9,6 @@ namespace IQMStarterKit.Models
         public string VarkResult { get; set; }
         public string DopeResult { get; set; }
         public string DiscResult { get; set; }
+        public KiwianaClass Kiwiana { get; set; }
     }
 }

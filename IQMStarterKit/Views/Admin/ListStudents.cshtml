@@ -39,13 +39,17 @@
 
 
                 <tr>
-                    <td style="width:150px;">@Html.ActionLink(item.FullName, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
+                    <td style="width:150px;" nowrap="nowrap" >@Html.ActionLink(item.FullName, "ViewStudentActivities", "Module", new { @email = item.Email }, null)</td>
                     <td style="width:150px;">@item.Email</td>
                     <td style="width:150px;"><text>@groupname.GroupName</text></td>
-                    <td nowrap="nowrap" style="width:400px;">
-                        <span class="progress-bar active" role="progressbar" aria-valuenow="@item.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @item.ProgressValue%">&nbsp;@item.ProgressValue%</span>
+                    <td nowrap="nowrap" style="width:400px;vertical-align:baseline;" >
+                        <span  class="progress-bar active" role="progressbar" aria-valuenow="@item.ProgressValue" aria-valuemin="0" aria-valuemax="100" style="width: @item.ProgressValue%">&nbsp;@item.ProgressValue%</span>
                     </td>
-                    <td>@Html.ActionLink("Generate Workbook", "GeneratePDPMergedFile", "Report", new { @email = item.Email }, new { @class = "btn btn-primary"})</td>
+                    <td>@if (item.ProgressValue == 100)
+                    {
+                        @Html.ActionLink("Generate Workbook", "GeneratePDPMergedFile", "Report",  new { @email = item.Email }, new {  @class = "btn btn-primary" })
+                    }
+                    </td>
                 </tr>
             }
         }

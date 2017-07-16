@@ -21,11 +21,16 @@ namespace IQMStarterKit.Controllers
             var groupId = byte.Parse(GroupId);
             var tempConfigs = new List<TempActivityConfig>();
             // load target group to configure
-            configModel.GroupModel = _context.GroupModels.Where(m => m.GroupId == groupId).FirstOrDefault();
+            configModel.GroupModel = _context.GroupModels
+                .Where(m => m.GroupId == groupId)
+                .FirstOrDefault();
             // load temp activities
-            var tempActivities = _context.TempActivities.Where(m => m.IsRemoved == false).OrderBy(m => m.SortOrder).ToList();
+            var tempActivities = _context.TempActivities
+                .Where(m => m.IsRemoved == false)
+                .OrderBy(m => m.SortOrder).ToList();
 
-            var groupConfig = _context.GroupActivityConfig.Where(m => m.GroupId == groupId).ToList();
+            var groupConfig = _context.GroupActivityConfig
+                .Where(m => m.GroupId == groupId).ToList();
 
 
             foreach (var item in tempActivities)
@@ -38,7 +43,9 @@ namespace IQMStarterKit.Controllers
                 newActivityConfig.Description = item.Description;
                 newActivityConfig.SortOrder = item.SortOrder;
 
-                var _config = groupConfig.Where(m => m.GroupId == groupId && m.TempActivityId == item.TempActivityId).FirstOrDefault();
+                var _config = groupConfig
+                    .Where(m => m.GroupId == groupId && m.TempActivityId == item.TempActivityId)
+                    .FirstOrDefault();
 
                 if (_config != null)
                 {
@@ -50,7 +57,6 @@ namespace IQMStarterKit.Controllers
                     newActivityConfig.CreatedDateTime = _config.CreatedDateTime;
                     newActivityConfig.ModifiedBy = GetFullName(_config.ModifiedBy);
                     newActivityConfig.ModifiedDateTime = _config.ModifiedDateTime;
-
 
                 }
 
