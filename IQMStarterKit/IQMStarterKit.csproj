@@ -470,6 +470,7 @@
     <Compile Include="Models\Alert\Alert.cs" />
     <Compile Include="Models\Alert\AlertDecoratorResult.cs" />
     <Compile Include="Models\Alert\AlertExtensions.cs" />
+    <Compile Include="Models\Chart\ProgramOverall.cs" />
     <Compile Include="Models\ConfigViewModel.cs" />
     <Compile Include="Models\Core\GroupActivityConfig.cs" />
     <Compile Include="Models\Core\TempActivityConfig.cs" />

@@ -53,7 +53,7 @@
 
         </table>
 
-      
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
 
         <h4>Comments</h4>
         <table id="activity" style="width:100%" class="display" cellspacing="0">
@@ -81,10 +81,16 @@
     </div>
 
 }
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 @section Scripts {
 
    <script type="text/javascript">
+
+       google.charts.load("current",  { packages: ["corechart"] });
+
+       var chartData;
+
        $(document).ready(function () {
            $('#activity').DataTable({
                "bLengthChange": false,
@@ -99,8 +105,65 @@
                "paging": true
 
            });
+
+           $.ajax({
+               url: "GetProgramOverallData",
+               data: "{}",
+               dataType: "json",
+               type: "POST",
+               contentType: "application/json; chartset=utf-8",
+               success: function (data) {
+                  // debugger;
+                   chartData = data;
+                   // Callback that creates and populates a data table,    
+                   // instantiates the pie chart, passes in the data and draws it. 
+                   //Creates a data table for storing the map data .chart api access this data for displaying
+                   var xdata = new google.visualization.DataTable();
+                   //Adding columns to data table to insert the chart data
+                   xdata.addColumn('string', 'Group Name');
+                   xdata.addColumn('number', 'Overall Rating');
+                   //bind the data to the data table using for loop
+                   //debugger;
+                   for (var i = 0; i < chartData.length; i++) {
+                       var rating = "";
+                       if (chartData[i].OverallRating == 5 && chartData[i].OverallRating > 4) {
+                           rating = "Excellent";
+                       }
+                       else if (chartData[i].OverallRating == 4 && chartData[i].OverallRating > 3) {
+                           rating = "Very Good";
+                       }
+                       else if (chartData[i].OverallRating == 3 && chartData[i].OverallRating > 2) {
+                           rating = "Good";
+                       }
+                       else if (chartData[i].OverallRating == 2 && chartData[i].OverallRating > 1) {
+                           rating = "Satisfactory";
+                       }
+                       else if (chartData[i].OverallRating == 1 && chartData[i].OverallRating < 1) {
+                           rating = "Below Satisfactory";
+                       }
+
+
+                       xdata.addRow([rating, chartData[i].OverallRating]);
+                   }
+                   // Instantiate and draw our chart, passing in some options    
+                   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                   chart.draw(xdata,
+                       {
+                           title: "Program Overall Rating", //title of the pie chart
+                           position: "left",
+                           fontsize: "14px",
+                           chartArea: { width: '50%' },
+                       });
+               },
+               // ajax error display 
+               error: function () {
+                   alert("Error loading data! Please try again.");
+               }
+           });
        });
 
+       
+       
        
     </script>
 

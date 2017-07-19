@@ -41,7 +41,8 @@ namespace IQMStarterKit
                 case 1: retval = "Below Satisfactory"; break;
                 case 2: retval = "Satisfactory"; break;
                 case 3: retval = "Good"; break;
-                case 4: retval = "Excellent"; break;
+                case 4: retval = "Very Good"; break;
+                case 5: retval = "Excellent"; break;
             }
 
             return retval;

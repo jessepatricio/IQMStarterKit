@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IQMStarterKit.Models.Chart;
+using System;
+using System.Collections;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,6 +11,41 @@ namespace IQMStarterKit.DAL
     public static class DataLayer
     {
         private static string connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        public static DataTable GetProgramOverallRating()
+        {
+            var retval = new DataTable();
+
+            try
+            {
+
+
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+
+                    DataSet dataset = new DataSet();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    using (SqlCommand cmd = new SqlCommand("usp_GetProgramOverallRating", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        adapter.SelectCommand = cmd;
+                        adapter.Fill(dataset);
+                    }
+
+                    return dataset.Tables[0];
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         public static DataTable GetActivityResult(int activityId)
         {
