@@ -443,11 +443,11 @@ namespace IQMStarterKit.Controllers
 
                     GroupId = item["GroupId"].ToString(),
                     GroupName = item["GroupName"].ToString(),
-                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
-                    OverallRating = int.Parse(item["OverallRating"].ToString()),
-                    TimeAllocatedRating = int.Parse(item["TimeAllocatedRating"].ToString()),
-                    ClassSizeRating = int.Parse(item["ClassSizeRating"].ToString()),
-                    ClassRoomRating = int.Parse(item["ClassRoomRating"].ToString())
+                    GroupAveRating = float.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = float.Parse(item["OverallRating"].ToString()),
+                    TimeAllocatedRating = float.Parse(item["TimeAllocatedRating"].ToString()),
+                    ClassSizeRating = float.Parse(item["ClassSizeRating"].ToString()),
+                    ClassRoomRating = float.Parse(item["ClassRoomRating"].ToString())
                 };
 
                 modelList.Add(model);
@@ -574,8 +574,8 @@ namespace IQMStarterKit.Controllers
                     GroupName = item["GroupName"].ToString(),
                     TutorId = item["TutorId"].ToString(),
                     FullName = item["FullName"].ToString(),
-                    GroupAveRating = int.Parse(item["GroupAverageRating"].ToString()),
-                    OverallRating = int.Parse(item["OverallRating"].ToString()),
+                    GroupAveRating = float.Parse(item["GroupAverageRating"].ToString()),
+                    OverallRating = float.Parse(item["OverallRating"].ToString()),
 
                 };
 
@@ -622,7 +622,12 @@ namespace IQMStarterKit.Controllers
             var fileName = reportName + "_" + sffx + ".pdf";
             var modelList = ExportGroupFeedbackTutor();
 
-            return new ViewAsPdf("GroupFeedbackTutor", modelList) { FileName = fileName };
+            return new ViewAsPdf("GroupFeedbackTutor", modelList)
+            {
+                FileName = fileName,
+                CustomSwitches = " --debug-javascript --no-stop-slow-scripts --javascript-delay 10000 "
+
+            };
 
         }
 
@@ -1221,6 +1226,13 @@ namespace IQMStarterKit.Controllers
 
 
         #region Charts
+        public JsonResult GetTutorOverallData()
+        {
+            var data = DataLayer.GetTutorOverallRating();
+            List<Dictionary<string, object>> model = GetTableRows(data);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetProgramOverallData()
         {
             var data = DataLayer.GetProgramOverallRating();

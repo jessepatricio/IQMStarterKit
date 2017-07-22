@@ -134,7 +134,7 @@
       <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+      <HintPath>..\packages\Rotativa.Core.2.0.2.1\lib\net45\Rotativa.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -471,6 +471,7 @@
     <Compile Include="Models\Alert\AlertDecoratorResult.cs" />
     <Compile Include="Models\Alert\AlertExtensions.cs" />
     <Compile Include="Models\Chart\ProgramOverall.cs" />
+    <Compile Include="Models\Chart\TutorOverall.cs" />
     <Compile Include="Models\ConfigViewModel.cs" />
     <Compile Include="Models\Core\GroupActivityConfig.cs" />
     <Compile Include="Models\Core\TempActivityConfig.cs" />

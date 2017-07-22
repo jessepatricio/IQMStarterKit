@@ -1,6 +1,4 @@
-﻿using IQMStarterKit.Models.Chart;
-using System;
-using System.Collections;
+﻿using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -28,6 +26,41 @@ namespace IQMStarterKit.DAL
                     SqlDataAdapter adapter = new SqlDataAdapter();
 
                     using (SqlCommand cmd = new SqlCommand("usp_GetProgramOverallRating", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        adapter.SelectCommand = cmd;
+                        adapter.Fill(dataset);
+                    }
+
+                    return dataset.Tables[0];
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public static DataTable GetTutorOverallRating()
+        {
+            var retval = new DataTable();
+
+            try
+            {
+
+
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+
+                    DataSet dataset = new DataSet();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    using (SqlCommand cmd = new SqlCommand("usp_GetTutorOverallRating", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         adapter.SelectCommand = cmd;

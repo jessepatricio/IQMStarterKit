@@ -50,6 +50,15 @@
 
         </table>
 
+        <br />
+        <table class="columns">
+            <tr>
+                <td><div id="piechart" style="border: 1px solid #ccc"></div></td>
+                <td><div id="barchart" style="border: 1px solid #ccc"></div></td>
+            </tr>
+        </table>
+        <br />
+
         <h4>Comments</h4>
         <table id="activity" style="width:100%" class="display" cellspacing="0">
             <thead>
@@ -81,23 +90,124 @@
 
 @section Scripts {
 
-    <script>
-        $(document).ready(function () {
-            $('#activity').DataTable({
-                "bLengthChange": false,
-                "bFilter": true,
-                "paging": true
 
-            });
 
-            $('#comments').DataTable({
-                "bLengthChange": false,
-                "bFilter": true,
-                "paging": true
+   
+    <script type="text/javascript">
+        
+         google.charts.load("45", { packages: ["corechart"] });
+         var chartData;
 
-            });
-        });
-    </script>
+         $(document).ready(function () {
+             $('#activity').DataTable({
+                 "bLengthChange": false,
+                 "bFilter": true,
+                 "paging": true
+
+             });
+
+             $('#comments').DataTable({
+                 "bLengthChange": false,
+                 "bFilter": true,
+                 "paging": true
+
+             });
+
+             $.ajax({
+                 url: "GetTutorOverallData",
+                 data: "{}",
+                 dataType: "json",
+                 type: "POST",
+                 contentType: "application/json; chartset=utf-8",
+                 success: function (data) {
+
+                     chartData = data;
+                     google.charts.setOnLoadCallback(pieChart);
+                     google.charts.setOnLoadCallback(barChart);
+
+
+
+                 },
+                 // ajax error display
+                 error: function () {
+                     alert("Error loading data! Please try again.");
+                 }
+             });
+
+
+             function pieChart() {
+                 // debugger;
+
+                 // Callback that creates and populates a data table,
+                 // instantiates the pie chart, passes in the data and draws it.
+                 //Creates a data table for storing the map data .chart api access this data for displaying
+                 var xdata = new google.visualization.DataTable();
+                 //Adding columns to data table to insert the chart data
+                 xdata.addColumn('string', 'Tutor');
+                 xdata.addColumn('number', 'Overall Rating');
+                
+                
+                
+                 //bind the data to the data table using for loop
+                 debugger;
+                 for (var i = 0; i < chartData.length; i++) {
+                     xdata.addRow([chartData[i].FullName, chartData[i].OverallRating]);
+                 }
+
+                
+                 var options = {
+                     title: "Tutor Overall Rating", //title of the pie chart
+                     position: "center",
+                     width: "485",
+                     heigth: "500",
+                     fontsize: "14px",
+                     chartArea: { width: '50%' }
+                    
+                 };
+
+                 var chart = new google.visualization.PieChart(document.getElementById("piechart"));
+                 chart.draw(xdata, options);
+
+             }
+
+             function barChart() {
+                 // debugger;
+
+                 // Callback that creates and populates a data table,
+                 // instantiates the pie chart, passes in the data and draws it.
+                 //Creates a data table for storing the map data .chart api access this data for displaying
+                 var xdata = new google.visualization.DataTable();
+                 //Adding columns to data table to insert the chart data
+                 xdata.addColumn('string', 'Tutor');
+                 xdata.addColumn('number', 'Overall Rating');
+
+
+
+                 //bind the data to the data table using for loop
+                 debugger;
+                 for (var i = 0; i < chartData.length; i++) {
+                     xdata.addRow([chartData[i].FullName, chartData[i].OverallRating]);
+                 }
+
+
+                 var options = {
+
+                     title: "Tutor Overall Rating", //title of the pie chart
+                     position: "center",
+                     width: "485",
+                     heigth: "500",
+                     fontsize: "14px",
+                     chartArea: { width: '50%' },
+                     legend: "none"
+
+                 };
+
+                 var chart = new google.visualization.BarChart(document.getElementById("barchart"));
+                 chart.draw(xdata, options);
+
+             }
+         });
+</script>
 
 }
 
